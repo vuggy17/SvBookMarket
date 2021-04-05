@@ -11,4 +11,7 @@
     <color name="primary_dark">#0f52ba</color>
     <color name="primary_light">#00a2ff</color>
 
+    <color name="gradient_start">#667EEA</color>
+    <color name="gradient_end">#64B6FF</color>
+
 </resources>
