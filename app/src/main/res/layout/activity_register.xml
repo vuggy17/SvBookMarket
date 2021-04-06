@@ -11,9 +11,10 @@
         android:id="@+id/include"
         layout="@layout/action_bar"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-40dp" />
+        tools:layout_editor_absoluteY="58dp" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/materialTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_bold"
@@ -24,10 +25,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.07"
-        >
+        app:layout_constraintVertical_bias="0.084" />
 
-    </com.google.android.material.textview.MaterialTextView>
+    <!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/text_input_user_name_layout"-->
+<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="@dimen/margin"-->
+<!--        android:layout_marginEnd="@dimen/margin"-->
+
+<!--        android:hint="Name"-->
+<!--        app:helperText="Require*"-->
+<!--        app:helperTextTextColor="@color/red"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent">-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/edt_user_name"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:inputType="text" />-->
+
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
     
 
 
