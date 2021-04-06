@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Book Market</string>
+    <string name="wellcome_slogan">Wellcome to bookmaket</string>
 </resources>

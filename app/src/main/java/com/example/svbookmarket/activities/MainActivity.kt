@@ -7,6 +7,7 @@ import com.example.svbookmarket.R
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        // set activity to display here
+        setContentView(R.layout.activity_login)
     }
 }
