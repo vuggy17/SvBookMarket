@@ -34,8 +34,5 @@ class SplashActivity : AppCompatActivity() {
                 },
                 3000 // set time
         )
-        val tvAppName: TextView=findViewById(R.id.tvAppName)
-        val typeFaceOfTvAppName: Typeface = Typeface.createFromAsset(assets,"Montserrat-SemiBold.ttf" )
-        tvAppName.typeface = typeFaceOfTvAppName
     }
 }

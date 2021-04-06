@@ -5,29 +5,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.WelcomeActivity">
-    <TextView android:layout_height="37sp"
+
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="322sp"
-        app:layout_editor_absoluteX="34sp"
-        app:layout_editor_absoluteY="173sp"
+        android:layout_height="37sp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/roboto_bold"
         android:text="Welcome to Book Market"
-        android:fontFamily="@font/roboto_medium"
-        android:textSize="28dp"></TextView>
-    <TextView android:layout_height="24sp"
+        android:textSize="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_editor_absoluteX="34sp"
+        app:layout_editor_absoluteY="173sp"> </TextView>
+
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="85sp"
-        app:layout_editor_absoluteX="153sp"
-        app:layout_editor_absoluteY="210sp"
-        android:text="Explore us"
+        android:layout_height="24sp"
+        android:layout_marginBottom="616dp"
         android:fontFamily="@font/roboto_medium"
-        android:textSize="18dp"></TextView>
+        android:text="Explore us"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_editor_absoluteX="153sp"
+        app:layout_editor_absoluteY="210sp"> </TextView>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="354.38sp"
+        android:layout_height="216.02sp"
+        android:layout_marginBottom="176dp"
+        android:background="@drawable/welcome"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="1.0"> </androidx.appcompat.widget.AppCompatImageView>
+
     <Button
+        android:id="@+id/button"
         android:layout_width="278.04sp"
-        android:layout_height="48sp"
-        app:layout_editor_absoluteX="55.98dp"
-        app:layout_editor_absoluteY="600sp"
-        android:text="Log in"
-        android:fontFamily="@font/roboto_regular"
-        android:textSize="16dp"
+        android:layout_height="60sp"
         android:background="@drawable/rounded_button_with_shadow"
-        >
-    </Button>
+        android:fontFamily="@font/roboto_regular"
+        android:text="Log in"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.906"
+        app:layout_editor_absoluteX="55.98dp"
+        app:layout_editor_absoluteY="600sp"> </Button>
 </androidx.constraintlayout.widget.ConstraintLayout>
