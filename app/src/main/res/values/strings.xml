@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">Book Market</string>
-<<<<<<< HEAD
+
     <string name="wellcome_slogan">Wellcome to bookmaket</string>
-=======
+
     <string name="register">Register</string>
     <string name="login">Login</string>
-    >>>>>>> 0351dc369aaa92bcac6d6a6026c38071a8527e52
 </resources>
