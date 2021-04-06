@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item >
         <layer-list>
-            <item android:right="2dp" android:top="5dp"
-                android:height="50sp">
-                <shape >
-                    <corners android:bottomRightRadius="16dp"
-                        android:bottomLeftRadius="16dp"
-                        android:topRightRadius="16dp"
-                        android:topLeftRadius="16dp"/>
-                    <solid android:color="#00A2FF" />
-                </shape>
-            </item>
-
+        <item android:top="40dp" android:height="60dp"
+            android:width="240dp" android:gravity="center">
+            <shape android:shape="oval" >
+                <corners android:radius="16sp"> </corners>
+                <gradient
+                    android:endColor="#FFFFFF"
+                    android:startColor="#A9E2F3"
+                    android:angle="90" />
+            </shape>
+        </item>
+        <item android:right="2dp" android:top="5dp"
+            android:height="50sp">
+            <shape >
+                <corners android:bottomRightRadius="14dp"
+                    android:bottomLeftRadius="14dp"
+                    android:topRightRadius="14dp"
+                    android:topLeftRadius="14dp"/>
+                <solid android:color="#00A2FF" />
+            </shape>
+        </item>
         </layer-list>
     </item>
-
 </selector>
