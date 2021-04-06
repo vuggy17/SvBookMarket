@@ -4,5 +4,6 @@
     <dimen name="text_big">30sp</dimen>
     <dimen name="text_medium">12sp</dimen>
     <dimen name="text_splash_layout">45sp</dimen>
+    <dimen name="margin">24dp</dimen>
     <!--    main-->
 </resources>
