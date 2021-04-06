@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"  >
+    <item android:drawable="@drawable/rounded_button_with_blur_shadow"/>
+    <item >
+        <layer-list>
+        <item android:right="2dp" android:top="5dp"
+            android:height="50sp">
+            <shape >
+                <corners android:bottomRightRadius="14dp"
+                    android:bottomLeftRadius="14dp"
+                    android:topRightRadius="14dp"
+                    android:topLeftRadius="14dp"/>
+                <solid android:color="#00A2FF" />
+            </shape>
+        </item>
+        </layer-list>
+    </item>
+</selector>
