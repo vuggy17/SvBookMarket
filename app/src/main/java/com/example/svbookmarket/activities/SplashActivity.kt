@@ -29,7 +29,7 @@ class SplashActivity : AppCompatActivity() {
         @Suppress("DEPRECATION")
         Handler().postDelayed(
                 {
-                    startActivity(Intent(baseContext,MainActivity::class.java))
+                    startActivity(Intent(baseContext,RegisterActivity::class.java))
                     finish()
                 },
                 3000 // set time
