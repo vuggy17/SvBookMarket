@@ -2,7 +2,6 @@
 <resources>
     <style name="AppTheme"
         parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/primary_light</item>
     </style>
     <!-- Style to turn off action bar in activity -->
     <style name="AppTheme.NoActionBar">
