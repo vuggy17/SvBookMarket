@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.WelcomeActivity">
+    <TextView android:layout_height="37sp"
+        android:layout_width="322sp"
+        app:layout_editor_absoluteX="34sp"
+        app:layout_editor_absoluteY="173sp"
+        android:text="Welcome to Book Market"
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="28dp"></TextView>
+    <TextView android:layout_height="24sp"
+        android:layout_width="85sp"
+        app:layout_editor_absoluteX="153sp"
+        app:layout_editor_absoluteY="210sp"
+        android:text="Explore us"
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="18dp"></TextView>
+    <Button
+        android:layout_width="278.04sp"
+        android:layout_height="48sp"
+        app:layout_editor_absoluteX="55.98dp"
+        app:layout_editor_absoluteY="600sp"
+        android:text="Log in"
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="16dp"
+        android:background="@drawable/rounded_button_with_shadow"
+        >
+    </Button>
+</androidx.constraintlayout.widget.ConstraintLayout>
