@@ -1,12 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme"
-        parent="Theme.AppCompat.Light.DarkActionBar">
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/blue_dark</item>
     </style>
     <!-- Style to turn off action bar in activity -->
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="tv_28_bold" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="tv_28_medium" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="tv_24_bold" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="tv_24_regular_disable" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/disable</item>
+
+    </style>
+
+    <style name="tv_14_regular" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="tv_14_blue" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/blue_dark</item>
+    </style>
+
+    <style name="tv_14_regular_disable" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="tv_14_regular_underline" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="tv_12_regular" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="tv_12_regular_blue" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/blue_dark</item>
+    </style>
+
+    <style name="tv_12_regular_light" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#342F2F</item>
+    </style>
+
 
 </resources>
