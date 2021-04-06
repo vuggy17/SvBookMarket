@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.WelcomeActivity">
+
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="322sp"
+        android:layout_height="37sp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Welcome to Book Market"
+        android:textSize="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvExplore"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_editor_absoluteX="34sp"
+        app:layout_editor_absoluteY="173sp"> </TextView>
+
+    <TextView
+        android:id="@+id/tvExplore"
+        android:layout_width="85sp"
+        android:layout_height="24sp"
+        android:layout_marginBottom="616dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Explore us"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_editor_absoluteX="153sp"
+        app:layout_editor_absoluteY="210sp"> </TextView>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="354.38sp"
+        android:layout_height="216.02sp"
+        android:layout_marginBottom="176dp"
+        android:background="@drawable/welcome"
+        app:layout_constraintBottom_toTopOf="@+id/btn_Login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvExplore"
+        app:layout_constraintVertical_bias="1.0"> </androidx.appcompat.widget.AppCompatImageView>
+
+    <Button
+        style="?android:attr/borderlessButtonStyle"
+        android:id="@+id/btn_Login"
+        android:layout_width="278.04sp"
+        android:layout_height="60sp"
+        android:background="@drawable/rounded_button_with_blur_shadow"
+        android:backgroundTint="#00A2FF"
+        android:fontFamily="@font/roboto_regular"
+        android:text="Log in"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.906"
+        app:layout_editor_absoluteX="55.98dp"
+        app:layout_editor_absoluteY="600sp">
+    </Button>
+</androidx.constraintlayout.widget.ConstraintLayout>
