@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:contentDescription="loginImage"
-        android:src="@drawable/login" />
+        android:src="@drawable/login1" />
 
     <Button
         style="@style/btn_blue"

@@ -8,6 +8,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // set activity to display here
-        setContentView(R.layout.activity_login1)
+        setContentView(R.layout.activity_login)
     }
 }
