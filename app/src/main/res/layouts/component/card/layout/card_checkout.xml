@@ -6,7 +6,7 @@
     android:checkable="true"
     android:clickable="true"
     android:focusable="true"
-
+android:id="@+id/card"
     >
 
     <LinearLayout
