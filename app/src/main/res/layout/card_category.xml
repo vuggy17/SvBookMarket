@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imgCategory"
             android:layout_width="114dp"
             android:layout_height="65dp"
             android:src=""
@@ -32,15 +32,16 @@
             app:layout_constraintTop_toTopOf="parent"> </ImageView>
 
         <TextView
+            android:id="@+id/tvCategory"
             android:layout_width="wrap_content"
             android:layout_height="19dp"
             android:fontFamily="@font/roboto_bold"
             android:text="@string/fiction"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView"> </TextView>
+            app:layout_constraintBottom_toBottomOf="@+id/imgCategory"
+            app:layout_constraintEnd_toEndOf="@+id/imgCategory"
+            app:layout_constraintStart_toStartOf="@+id/imgCategory"
+            app:layout_constraintTop_toTopOf="@+id/imgCategory"> </TextView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

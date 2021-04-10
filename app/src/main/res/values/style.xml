@@ -85,5 +85,6 @@
         <item name="colorControlNormal">@android:color/white</item>
         <item name="colorControlActivated">@android:color/holo_orange_light</item>
     </style>
-
+    <style name="customRatingBar"
+        parent="android:style/Widget.Material.RatingBar.Small"/>
 </resources>
