@@ -36,7 +36,7 @@ android {
     sourceSets {
         main {
             res.srcDirs = ['src/main/res','src/main/res/layouts/component/card',]
-            file('src/main/res/layouts') //'src/main/res/layouts/component', 'src/main/res/layouts/activity'
+            file('src/main/res/layouts')
                     .listFiles()
                     .each { res.srcDirs += it.path }
         }
