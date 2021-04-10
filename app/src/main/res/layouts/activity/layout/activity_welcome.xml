@@ -19,7 +19,7 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_editor_absoluteX="34sp"
-        app:layout_editor_absoluteY="173sp"></TextView>
+        app:layout_editor_absoluteY="173sp"/>
 
     <TextView
         android:id="@+id/tvExplore"
@@ -33,7 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_editor_absoluteX="153sp"
-        app:layout_editor_absoluteY="210sp"></TextView>
+        app:layout_editor_absoluteY="210sp"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/appCompatImageView"
@@ -43,7 +43,7 @@
         android:background="@drawable/welcome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvExplore"></androidx.appcompat.widget.AppCompatImageView>
+        app:layout_constraintTop_toBottomOf="@+id/tvExplore"/>
 
     <Button
         android:id="@+id/btn_Login"
@@ -63,5 +63,5 @@
         app:layout_constraintTop_toBottomOf="@+id/appCompatImageView"
         app:layout_constraintVertical_bias="0.409"
         app:layout_editor_absoluteX="55.98dp"
-        app:layout_editor_absoluteY="600sp"></Button>
+        app:layout_editor_absoluteY="600sp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

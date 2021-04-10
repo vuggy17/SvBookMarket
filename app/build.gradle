@@ -23,7 +23,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding true
     }
     compileOptions {
@@ -32,6 +32,15 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    sourceSets {
+        main {
+            res.srcDirs = ['src/main/res','src/main/res/layouts/component/card',]
+            file('src/main/res/layouts') //'src/main/res/layouts/component', 'src/main/res/layouts/activity'
+                    .listFiles()
+                    .each { res.srcDirs += it.path }
+        }
+
     }
 }
 
