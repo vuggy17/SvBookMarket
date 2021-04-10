@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card"
-    android:layout_width="342dp"
+    android:layout_width="346dp"
     android:layout_height="138dp"
+    android:layout_marginBottom="4dp"
     android:checkable="true"
     android:clickable="true"
-    android:focusable="true">
-
+    android:focusable="true"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="8dp"
+    app:strokeColor="#A4858C94">
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/linearLayout"
+        android:layout_width="342dp"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
@@ -21,7 +26,7 @@
             android:layout_marginLeft="24dp"
             android:layout_marginTop="14dp"
             android:contentDescription="book-cover"
-            android:src="@drawable/ripple" />
+            android:src="@drawable/ic_login_rafiki" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -58,13 +63,23 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:paddingVertical="4dp">
 
-                <Button
-                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                <com.google.android.material.button.MaterialButton
                     android:layout_width="26dp"
                     android:layout_height="26dp"
-                    app:icon="@drawable/ic_plus" />
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:backgroundTint="#E8E8E8"
+                    app:icon="@drawable/ic_subtract"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconTint="@color/black"
+                    app:strokeWidth="0dp" />
 
                 <TextView
                     android:id="@+id/tv_cartnumber"
@@ -75,11 +90,20 @@
                     android:layout_marginHorizontal="4dp"
                     android:text="99" />
 
-                <Button
-                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                <com.google.android.material.button.MaterialButton
                     android:layout_width="26dp"
                     android:layout_height="26dp"
-                    app:icon="@drawable/ic_subtract" />
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:backgroundTint="#E8E8E8"
+                    app:cornerRadius="4dp"
+                    app:icon="@drawable/ic_plus"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconTint="@color/black"
+                    app:strokeWidth="0dp" />
             </LinearLayout>
 
         </LinearLayout>

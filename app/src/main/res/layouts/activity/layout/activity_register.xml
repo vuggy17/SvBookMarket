@@ -62,7 +62,7 @@
         android:hint="@string/email"
         android:fontFamily="@font/roboto_regular"
         app:endIconMode="clear_text"
-        app:helperTextTextColor="@color/red"
+        app:helperTextTextColor="@color/danger"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -144,7 +144,8 @@
             android:id="@+id/cbAgreeTermAndConditions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
+            android:buttonTint="@color/blue_light"
+            android:checked="true" />
 
         <TextView
             android:layout_width="wrap_content"

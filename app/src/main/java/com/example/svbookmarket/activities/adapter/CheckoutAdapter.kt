@@ -27,14 +27,13 @@ class CheckoutAdapter(private val context: Context, private val items: MutableLi
         holder.bookname.text = context.resources.getString(item.name)
         holder.price.text = context.resources.getString(item.price)
         holder.cartNumber.text = context.resources.getString(item.number)
+
         //check option
-        // TODO: 10/04/2021 sủa lỗi bấm 2 lần mới nhận 
-        holder.itemView.setOnClickListener {
-            it.setOnClickListener {
+        holder.itemView.setOnLongClickListener() {
                 (it as MaterialCardView).setChecked(!it.isChecked)
+            true
             }
         }
-    }
 
     override fun getItemCount(): Int {
         return items.size
