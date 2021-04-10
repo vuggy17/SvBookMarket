@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="342dp"
+    android:layout_height="138dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:checkable="true"
+    android:clickable="true"
+    android:focusable="true"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+       >
+
+        <ImageView
+            android:layout_width="88dp"
+            android:layout_height="112dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="14dp"
+            android:contentDescription="book-cover"
+            android:src="@drawable/ripple" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginLeft="36dp"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                style="@style/tv_14_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="Sample text" />
+
+            <TextView
+                style="@style/tv_14_regular_disable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="Sample text" />
+
+            <TextView
+                style="@style/tv_14_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="Sample text" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    app:icon="@drawable/ic_plus"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                     />
+
+                <TextView
+                    style="@style/tv_14_regular"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="99"
+                    android:layout_gravity="center"/>
+
+                <Button
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    app:icon="@drawable/ic_subtract"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
