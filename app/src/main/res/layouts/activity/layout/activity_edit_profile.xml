@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toStartOf="@+id/tvEditProfile"
         app:layout_constraintHorizontal_bias="0.151"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
+        app:layout_constraintTop_toTopOf="parent"> </ImageView>
 
     <TextView
         android:id="@+id/tvEditProfile"
@@ -31,7 +31,7 @@
         android:textSize="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        app:layout_constraintTop_toTopOf="parent"> </TextView>
 
     <ImageView
         android:id="@+id/imgName"
@@ -42,7 +42,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.069"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEditProfile"></ImageView>
+        app:layout_constraintTop_toBottomOf="@+id/tvEditProfile"> </ImageView>
 
     <TextView
         android:id="@+id/tvName"
@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.024"
         app:layout_constraintStart_toEndOf="@+id/imgName"
-        app:layout_constraintTop_toBottomOf="@+id/tvEditProfile"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/tvEditProfile"> </TextView>
 
     <EditText
         android:id="@+id/edtName"
@@ -67,10 +67,11 @@
         android:textColor="@color/less_black"
         android:textSize="16dp"
         android:inputType="text"
+        android:autofillHints="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEditProfile"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/tvEditProfile"> </EditText>
 
     <TextView
         android:id="@+id/tvGender"
@@ -83,7 +84,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtName"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/edtName"> </TextView>
 
     <EditText
         android:id="@+id/edtGender"
@@ -94,9 +95,10 @@
         android:textColor="@color/less_black"
         android:textSize="16dp"
         android:inputType="text"
+        android:autofillHints="Gender"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvGender"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/tvGender"> </EditText>
 
     <TextView
         android:id="@+id/tvEmail"
@@ -108,7 +110,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtGender"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/edtGender"> </TextView>
 
     <EditText
         android:id="@+id/edtEmail"
@@ -118,10 +120,11 @@
         android:fontFamily="@font/roboto_regular"
         android:textColor="@color/less_black"
         android:textSize="16dp"
+        android:autofillHints="@string/email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmail"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail"> </EditText>
 
     <TextView
         android:id="@+id/tvPhoneNumber"
@@ -133,7 +136,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmail"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/edtEmail"> </TextView>
 
     <EditText
         android:id="@+id/edtPhoneNumber"
@@ -143,10 +146,11 @@
         android:fontFamily="@font/roboto_regular"
         android:textColor="@color/less_black"
         android:textSize="16dp"
+        android:autofillHints="Phone Number"
         android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber"> </EditText>
 
     <TextView
         android:id="@+id/tvAddressLane"
@@ -159,7 +163,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.077"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtPhoneNumber"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/edtPhoneNumber"> </TextView>
 
     <EditText
         android:id="@+id/edtAddressLane"
@@ -170,9 +174,10 @@
         android:textColor="@color/less_black"
         android:textSize="16dp"
         android:inputType="text"
+        android:autofillHints="Address Lane"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAddressLane"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/tvAddressLane"> </EditText>
 
     <TextView
         android:id="@+id/tvDistrict"
@@ -185,7 +190,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.068"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtAddressLane"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/edtAddressLane"> </TextView>
 
     <EditText
         android:id="@+id/edtDistrict"
@@ -195,10 +200,11 @@
         android:fontFamily="@font/roboto_regular"
         android:textColor="@color/less_black"
         android:textSize="16dp"
+        android:autofillHints="District"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDistrict"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/tvDistrict"> </EditText>
 
     <TextView
         android:id="@+id/tvCity"
@@ -210,7 +216,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.064"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtDistrict"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/edtDistrict"> </TextView>
 
     <EditText
         android:id="@+id/edtCity"
@@ -221,9 +227,10 @@
         android:inputType="text"
         android:textColor="@color/less_black"
         android:textSize="16dp"
+        android:autofillHints="City"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCity"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/tvCity"> </EditText>
 
     <Button
         android:id="@+id/btn_SaveProfile"
@@ -239,5 +246,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtCity"></Button>
+        app:layout_constraintTop_toBottomOf="@+id/edtCity"> </Button>
 </androidx.constraintlayout.widget.ConstraintLayout>
