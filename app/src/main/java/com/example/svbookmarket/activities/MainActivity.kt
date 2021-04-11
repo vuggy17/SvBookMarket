@@ -8,6 +8,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // set activity to display here
-        setContentView(R.layout.activity_profile)
+        setContentView(R.layout.activity_edit_profile)
     }
 }
