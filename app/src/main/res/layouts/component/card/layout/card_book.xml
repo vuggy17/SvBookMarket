@@ -27,7 +27,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.13">
+      app:layout_constraintVertical_bias="0.12">
 
    <androidx.appcompat.widget.AppCompatImageView
        android:layout_width="match_parent"
@@ -70,5 +70,55 @@
       android:textColor="@color/disable">
   </TextView>
 
+  <RatingBar
+      android:id="@+id/ratingBar"
+      style="@style/rating_bar"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="@dimen/margin"
+      android:isIndicator="true"
+      android:numStars="5"
+      android:rating="3.5"
+      android:stepSize="0.1"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/tvBookAuthor"
+      app:layout_constraintVertical_bias="0.07"
+      >
+  </RatingBar>
+
+  <TextView
+      android:id="@+id/tvRatesCount"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+      app:layout_constraintVertical_bias="0.05"
+      android:text="99 Reviews"
+      android:textSize="@dimen/text_super_small"
+      android:textColor="@color/disable"
+      android:layout_marginLeft="@dimen/margin"
+      android:layout_marginRight="@dimen/margin"/>
+
+  <TextView
+      android:id="@+id/tvCost"
+      android:textSize="@dimen/text_small"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/tvRatesCount"
+      app:layout_constraintVertical_bias="0.05"
+      android:layout_marginLeft="@dimen/margin"
+      android:layout_marginRight="@dimen/margin"
+      android:text="đ 99.000"
+      android:fontFamily="@font/roboto_regular"/>
+
  </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>
