@@ -5,5 +5,7 @@
     <dimen name="text_medium">12sp</dimen>
     <dimen name="text_splash_layout">45sp</dimen>
     <dimen name="margin">24dp</dimen>
+    <dimen name="card_view_radius">14dp</dimen>
+    <dimen name="text_super_small">11sp</dimen>
     <!--    main-->
 </resources>
