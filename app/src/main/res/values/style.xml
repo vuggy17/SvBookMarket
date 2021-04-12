@@ -47,6 +47,7 @@
     <style name="tv_14_regular_disable" parent="android:Widget.TextView">
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#919191</item>
     </style>
 
     <style name="tv_14_regular_underline" parent="android:Widget.TextView">
