@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // set activity to display here
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_checkout   )
 
         //tam thoi de funtion nay o day
 //        card.setOnClickListener{
@@ -19,5 +19,10 @@ class MainActivity : AppCompatActivity() {
 //            true
 //        }
 //
+
+        val myDataset =DataSource().loadCheckoutCard()
+        val recyclerView  = findViewById<RecyclerView>(R.id.rc_checkout)
+        recyclerView.adapter = CheckoutAdapter(this,myDataset)
+        recyclerView.setHasFixedSize(true)
     }
 }
