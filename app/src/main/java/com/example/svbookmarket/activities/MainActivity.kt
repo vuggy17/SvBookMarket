@@ -8,6 +8,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // set activity to display here
-        setContentView(R.layout.activity_profile)
+        setContentView(R.layout.activity_register)
+
+        //tam thoi de funtion nay o day
+//        card.setOnClickListener{
+//            card.setChecked(!card.isChecked)
+//            true
+//        }
+//
     }
 }

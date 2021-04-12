@@ -3,7 +3,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="disable">#696969</color>
-    <color name="red">#FF0000</color>
+    <color name="danger">#F40000</color>
+
 
     <color name="blue_dark">#0f52ba</color>
     <color name="blue_light">#00a2ff</color>
@@ -11,6 +12,11 @@
     <color name="gradient_start">#667EEA</color>
     <color name="gradient_end">#64B6FF</color>
     <color name="dark_pink">#B71B66</color>
+    <color name="light_gray">#F5F5F5</color>
+
+    <color name="yellow">#FBED67</color>
+
+
 
 
 </resources>

@@ -9,5 +9,11 @@
     <string name="don_t_have_account">Don\'t have account?</string>
     <string name="sign_up">Sign up</string>
     <string name="sign_in">Sign in</string>
+    <string name="cover">cover</string>
+    <string name="author">author</string>
+    <string name="price">price</string>
+    <string name="name">name</string>
+    <string name="number">100</string>
+
     <string name="fiction"> Fiction </string>
 </resources>
