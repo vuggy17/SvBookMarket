@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.CheckoutAdapter
 import com.example.svbookmarket.activities.data.DataSource
-import kotlinx.android.synthetic.main.card_checkout.*
+//import kotlinx.android.synthetic.main.card_checkout.*
 
 class CheckoutActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,11 +19,11 @@ class CheckoutActivity: AppCompatActivity() {
 //            card.setChecked(!card.isChecked)
 //            true
 //        }
-
-        val myDataset =DataSource().loadCheckoutCard()
-        val recyclerView  = findViewById<RecyclerView>(R.id.rc_checkout)
-        recyclerView.adapter = CheckoutAdapter(this,myDataset)
-        recyclerView.setHasFixedSize(true)
+//
+//        val myDataset =DataSource().loadCheckoutCard()
+//        val recyclerView  = findViewById<RecyclerView>(R.id.rc_checkout)
+//        recyclerView.adapter = CheckoutAdapter(this,myDataset)
+//        recyclerView.setHasFixedSize(true)
     }
 
 }
