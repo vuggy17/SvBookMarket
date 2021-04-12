@@ -10,7 +10,7 @@ import com.example.svbookmarket.R
 class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_profile)
 
 //        val imgBackArrow: AppCompatImageView = findViewById(R.id.imgBackArrow)
 //        imgBackArrow.setOnClickListener {
