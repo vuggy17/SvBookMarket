@@ -8,7 +8,7 @@
 
     <color name="blue_dark">#0f52ba</color>
     <color name="blue_light">#00a2ff</color>
-
+    <color name="green">#39B155</color>
     <color name="gradient_start">#667EEA</color>
     <color name="gradient_end">#64B6FF</color>
     <color name="dark_pink">#B71B66</color>
@@ -18,5 +18,7 @@
 
 
 
+    <color name="less_black">#434343</color>
+    <color name="litle_gray">#919191</color>
 
 </resources>

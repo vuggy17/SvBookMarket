@@ -16,4 +16,6 @@
     <string name="number">100</string>
 
     <string name="fiction"> Fiction </string>
+    <string name="profile">Profile</string>
+    <string name="editprofile">Edit Profile</string>
 </resources>
