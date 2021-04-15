@@ -25,7 +25,7 @@
             android:id="@+id/imgCategory"
             android:layout_width="114dp"
             android:layout_height="65dp"
-            android:src="@drawable/login1"
+            android:src="@drawable/gradient_splash_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
