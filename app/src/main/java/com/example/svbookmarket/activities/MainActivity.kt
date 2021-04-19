@@ -17,9 +17,9 @@ class MainActivity : AppCompatActivity() {
 //        }
 //
 
-        val myDataset =DataSource().loadCheckoutCard()
-        val recyclerView  = findViewById<RecyclerView>(R.id.rc_checkout)
-        recyclerView.adapter = CheckoutAdapter(this,myDataset)
-        recyclerView.setHasFixedSize(true)
+//        val myDataset =DataSource().loadCheckoutCard()
+//        val recyclerView  = findViewById<RecyclerView>(R.id.rc_checkout)
+//        recyclerView.adapter = CheckoutAdapter(this,myDataset)
+//        recyclerView.setHasFixedSize(true)
     }
 }
