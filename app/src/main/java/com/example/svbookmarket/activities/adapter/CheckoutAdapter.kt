@@ -45,7 +45,7 @@ class CheckoutAdapter(private val context: Context, private val items: MutableLi
 
         //    val cover:TextView = view.findViewById(R.id.img_cover)
         val bookname: TextView = view.findViewById(R.id.tv_bookname)
-        val cartNumber: TextView = view.findViewById(R.id.tv_cartnumber)
+        val cartNumber: TextView = view.findViewById(R.id.tv_numbers)
 
 
     }

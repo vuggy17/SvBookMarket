@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.svbookmarket"
-        minSdkVersion 24
+        minSdkVersion 28
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -18,7 +18,7 @@ android {
 
         apply plugin: 'com.android.application'
         apply plugin: 'kotlin-android'
-        apply plugin: 'kotlin-android-extensions'
+
     }
 
     buildTypes {
@@ -58,5 +58,14 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // mutti adapter
+    implementation 'dev.ahamed.mva2:adapter:2.0.0'
+    implementation 'dev.ahamed.mva2:ext-databinding:2.0.0'  // DataBinding
+    implementation 'dev.ahamed.mva2:ext-decorator:2.0.0'    // Decorators
+    implementation 'dev.ahamed.mva2:ext-diffutil-rx:2.0.0'  // RxDiffUtil
+
+    implementation 'com.google.android:flexbox:2.0.1' // flexbox layout manager
+
 
 }

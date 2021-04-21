@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="24dp">
-
+    android:layout_marginTop="25dp"
+    android:paddingHorizontal="24dp"
+    android:clipToPadding="false">
+    <!--    android:paddingHorizontal="24dp"-->
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
@@ -62,6 +64,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/blue_light"
                 android:textSize="12sp"
+                app:cornerRadius="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -71,13 +74,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="8dp"
             android:drawablePadding="6dp"
-            android:text="jaskfdjskalfjdklsafjk;fdwfdsafdsafdsafdsafdsafdsafdsafdsaffdsfdsafsdaflsda"
+            android:text="696 Hang Bai, khu pho 6, phuong Linh Trung, quan Thu Duc, thanh pho Ho Chi Minh"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="normal"
             app:drawableStartCompat="@drawable/ic_location_icon"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -103,19 +107,23 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
+        android:id="@+id/rc1"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/materialCheckBox"
-        tools:layout_editor_absoluteX="24dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCheckBox" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:layout_width="341dp"
         android:layout_height="55dp"
-        android:background="@drawable/bg_green_buton"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Save"
+        android:layout_marginBottom="25sp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Checkout"
         android:textAllCaps="false"
-        android:textSize="20sp"
+        android:textSize="18sp"
+        app:backgroundTint="@color/green"
+        app:cornerRadius="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
