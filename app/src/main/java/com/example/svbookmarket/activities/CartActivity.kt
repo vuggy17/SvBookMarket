@@ -6,8 +6,6 @@ import android.view.View
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.forEach
-import androidx.core.view.forEachIndexed
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +15,6 @@ import com.example.svbookmarket.activities.adapter.CartItemAdapter
 import com.example.svbookmarket.activities.data.DataSource
 import com.example.svbookmarket.activities.model.CartModel
 import com.example.svbookmarket.databinding.ActivityCartBinding
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
@@ -31,7 +28,7 @@ class CartActivity : AppCompatActivity() {
     var deleteItem: View? = null
     var deleteModel: CartModel = CartModel("cc", "cc", "cc", "cc", "Cc")
 
-    var touchHelper = ItemTouchHelper(
+    private var touchHelper = ItemTouchHelper(
         object : ItemTouchHelper.SimpleCallback(
             0,
             ItemTouchHelper.LEFT
@@ -116,7 +113,7 @@ class CartActivity : AppCompatActivity() {
         binding.rcCardList.layoutManager = LinearLayoutManager(this)
         binding.rcCardList.setHasFixedSize(true)
 
-        // swipte to delete
+        // swipe to delete
         touchHelper.attachToRecyclerView(binding.rcCardList)
 
         //select all
@@ -127,7 +124,7 @@ class CartActivity : AppCompatActivity() {
 
     }
 
-    fun onCheckedChange(checked: Boolean) {
+    private fun onCheckedChange(checked: Boolean) {
         if (checked) {
             for (it in 0..cartAdapter.itemCount) {
                 (binding.rcCardList.findViewHolderForLayoutPosition(it) as CartItemAdapter.VH).toggleChecked(checked)

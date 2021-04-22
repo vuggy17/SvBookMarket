@@ -10,7 +10,7 @@ import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.model.AddressModel
 import com.google.android.material.card.MaterialCardView
 
-class AddressAdapter(var context: Context, var dataset:MutableList<AddressModel>):RecyclerView.Adapter<AddressAdapter.VH>() {
+class AddressAdapter(var context: Context, private var dataset:MutableList<AddressModel>):RecyclerView.Adapter<AddressAdapter.VH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
        val adapterLayout  = LayoutInflater.from(parent.context).inflate(R.layout.card_address,parent,false)
@@ -25,15 +25,17 @@ class AddressAdapter(var context: Context, var dataset:MutableList<AddressModel>
         holder.thirdAddress.text = dataset[position].thirdAddress
         holder.fourthAddress.text = dataset[position].fourthAddress
 
+        // highlight current item
+        if(holder.adapterPosition == 1){
+            (holder.itemView as MaterialCardView).isChecked = true
+        }
     }
 
     override fun getItemCount(): Int {
        return dataset.size
     }
     class VH(view: View):RecyclerView.ViewHolder(view){
-        init {
 
-        }
         var name:TextView = view.findViewById(R.id.tvName)
         var phoneNumber:TextView = view.findViewById(R.id.tvPhoneNumber)
         var firstAddress:TextView = view.findViewById(R.id.tvAddress)

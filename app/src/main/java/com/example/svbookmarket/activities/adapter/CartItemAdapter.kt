@@ -9,10 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.model.CartModel
-import com.example.svbookmarket.databinding.CardCheckoutBinding
 import com.google.android.material.card.MaterialCardView
 
-class CartItemAdapter(val context: Context, val cartList:MutableList<CartModel>):RecyclerView.Adapter<CartItemAdapter.VH>(){
+class CartItemAdapter(val context: Context, private val cartList:MutableList<CartModel>):RecyclerView.Adapter<CartItemAdapter.VH>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val adapterLayout =
             LayoutInflater.from(parent.context).inflate(R.layout.card_checkout, parent, false)
@@ -20,11 +19,11 @@ class CartItemAdapter(val context: Context, val cartList:MutableList<CartModel>)
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        holder.name.setText(cartList[position].name)
-        holder.author.setText(cartList[position].author)
+        holder.name.text = cartList[position].name
+        holder.author.text = cartList[position].author
         holder.coverimg.setImageResource(R.drawable.welcome)
-        holder.price.setText(cartList[position].price)
-        holder.number.setText(cartList[position].numbers)
+        holder.price.text = cartList[position].price
+        holder.number.text = cartList[position].numbers
     }
 
     override fun getItemCount(): Int {
@@ -40,9 +39,8 @@ class CartItemAdapter(val context: Context, val cartList:MutableList<CartModel>)
     }
 
     class VH(view:View):RecyclerView.ViewHolder(view){
-        private var binding = CardCheckoutBinding.inflate(LayoutInflater.from(view.context))
-
         init {
+            // on selection -> highlight
             view.setOnClickListener{
                 (it as MaterialCardView).isChecked = !it.isChecked
             }

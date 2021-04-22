@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
+// this class for draw divider in recyclerview child
 class InsetDividerItemDecoration(
     context: Context,
     private val insetDividerLeft: Int) : RecyclerView.ItemDecoration() {
