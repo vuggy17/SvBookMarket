@@ -7,10 +7,8 @@
     android:layout_height="138dp"
     android:layout_marginBottom="8dp"
     android:checkable="true"
-    android:clickable="true"
     android:focusable="true"
     app:cardCornerRadius="14dp"
-    app:cardElevation="4dp"
     app:strokeColor="#A4858C94"
     android:layout_gravity="center_horizontal">
     <LinearLayout

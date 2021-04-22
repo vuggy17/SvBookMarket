@@ -18,7 +18,7 @@ class CheckoutActivity : AppCompatActivity() {
         setContentView(R.layout.activity_checkout)
 
 
-        val myDataset =DataSource().loadCheckoutCard()
+        val myDataset = DataSource().loadCheckoutCard()
         val recyclerView  = findViewById<RecyclerView>(R.id.rc_checkout)
         recyclerView.adapter = CheckoutAdapter(this,myDataset)
         recyclerView.setHasFixedSize(true)
