@@ -107,14 +107,18 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rc1"
+        android:id="@+id/rcCardList"
         android:layout_width="360dp"
-        android:layout_height="wrap_content"
+        android:layout_height="450dp"
+        android:paddingBottom="12dp"
+        android:fadeScrollbars="true"
+        app:flow_verticalAlign="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCheckBox" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton"
         android:layout_width="341dp"
         android:layout_height="55dp"
         android:layout_marginBottom="25sp"

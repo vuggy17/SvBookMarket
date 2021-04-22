@@ -7,30 +7,23 @@ import com.example.svbookmarket.activities.model.CheckoutCard
 class DataSource {
     fun loadCheckoutCard(): MutableList<CheckoutCard> {
         return mutableListOf(
-            CheckoutCard(R.string.cover,R.string.name,R.string.author,R.string.price,R.string.number),
-            CheckoutCard(R.string.cover,R.string.name,R.string.author,R.string.price,R.string.number),
-            CheckoutCard(R.string.cover,R.string.name,R.string.author,R.string.price,R.string.number),
-            CheckoutCard(R.string.cover,R.string.name,R.string.author,R.string.price,R.string.number),
-            CheckoutCard(R.string.cover,R.string.name,R.string.author,R.string.price,R.string.number),
-            CheckoutCard(R.string.cover,R.string.name,R.string.author,R.string.price,R.string.number),
-            CheckoutCard(R.string.cover,R.string.name,R.string.author,R.string.price,R.string.number),
-            CheckoutCard(R.string.cover,R.string.name,R.string.author,R.string.price,R.string.number),
+            CheckoutCard("dsadsa","casc","adr","100","123"),
+            CheckoutCard("dsadsa","casc","adr","100","123"),
+            CheckoutCard("dsadsa","casc","adr","100","123"),
+            CheckoutCard("dsadsa","casc","adr","100","123"),
+            CheckoutCard("dsadsa","casc","adr","100","123"),
+            CheckoutCard("dsadsa","casc","adr","100","123"),
+
         )
     }
-    fun loadCart():List<CartModel>{
-        return listOf(
-            CartModel("cc","cc","cc","cc","Cc" ),
-            CartModel("cc","cc","cc","cc","Cc" ),
-            CartModel("cc","cc","cc","cc","Cc" ),
-            CartModel("cc","cc","cc","cc","Cc" ),
-            CartModel("cc","cc","cc","cc","Cc" ),
-            CartModel("cc","cc","cc","cc","Cc" ),
-            CartModel("cc","cc","cc","cc","Cc" ),
-            CartModel("cc","cc","cc","cc","Cc" ),
-            CartModel("cc","cc","cc","cc","Cc" ),
-            CartModel("cc","cc","cc","cc","Cc" ),
-            CartModel("cc","cc","cc","cc","Cc" ),
-            CartModel("cc","cc","cc","cc","Cc" ),
+    fun loadCart():MutableList<CartModel>{
+        return mutableListOf(
+            CartModel("cc","cc","cc","cc","1000" ),
+            CartModel("cc","cc","cc","cc","200" ),
+            CartModel("cc","cc1","cc","cc","113" ),
+            CartModel("cc","cc","cc","cc","1997" ),
+            CartModel("cc","cc","cc","cc","2001" ),
+            CartModel("cc","cc1","cc","cc","99" ),
 
         )
     }

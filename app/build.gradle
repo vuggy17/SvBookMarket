@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.svbookmarket"
-        minSdkVersion 28
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -65,7 +65,7 @@ dependencies {
     implementation 'dev.ahamed.mva2:ext-decorator:2.0.0'    // Decorators
     implementation 'dev.ahamed.mva2:ext-diffutil-rx:2.0.0'  // RxDiffUtil
 
-    implementation 'com.google.android:flexbox:2.0.1' // flexbox layout manager
+    implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3' // decorator
 
 
 }

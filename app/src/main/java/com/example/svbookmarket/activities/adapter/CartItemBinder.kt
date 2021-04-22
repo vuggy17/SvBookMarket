@@ -36,13 +36,12 @@ class CartItemBinder : ItemBinder<CartModel, CartItemBinder.VH>() {
         var price :TextView = itemView.findViewById(R.id.tv_price)
 
         init {
-            itemView.setOnClickListener { toggleItemSelection() }
-            itemView.setOnLongClickListener() {
+//            itemView.setOnClickListener { toggleItemSelection() }
+            itemView.setOnClickListener() {
                 (it as MaterialCardView).isChecked = !it.isChecked
-                true
+
             }
         }
-
          override fun getSwipeDirections(): Int {
              return ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
          }
