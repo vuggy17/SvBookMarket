@@ -9,9 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SvBookMarket">
-        <activity android:name=".activities.HomeActivity"></activity>
-        <activity android:name=".activities.ProfileActivity" />
-        <activity android:name=".activities.EditProfileActivity" />
+        <activity android:name=".activities.ProfileActivity"></activity>
+        <activity android:name=".activities.EditProfileActivity"></activity>
         <activity
             android:name=".activities.WelcomeActivity"
             android:screenOrientation="portrait" />
@@ -20,7 +19,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.SplashActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

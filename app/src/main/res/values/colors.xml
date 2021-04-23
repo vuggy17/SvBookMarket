@@ -4,7 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="disable">#696969</color>
     <color name="danger">#F40000</color>
-
+    <color name="danger_light">#FF3333</color>
 
     <color name="blue_dark">#0f52ba</color>
     <color name="blue_light">#00a2ff</color>
@@ -17,7 +17,6 @@
     <color name="search_gray">#AFC1C4</color>
 
     <color name="yellow">#FBED67</color>
-
 
 
     <color name="less_black">#434343</color>
