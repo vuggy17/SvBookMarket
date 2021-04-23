@@ -1,83 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="@dimen/card_view_radius"
     android:checkable="true"
     android:clickable="true"
-    android:focusable="true"
-    app:cardElevation="8dp"
-    app:strokeColor="#A4858C94"
-    android:layout_gravity="center"
-    >
-        <LinearLayout
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="12dp"
+       android:paddingVertical="8dp">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="sampleName"
+            android:textSize="@dimen/text_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tvPhoneNumber"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="14dp"
-                android:layout_marginLeft="@dimen/margin"
-                android:layout_marginRight="@dimen/margin">
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:text="0123456789"
+            android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/tvAddress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="Shewrapara, Mirpur, Dhaka-1216"
-                    android:textSize="@dimen/text_small"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:text="920, ki tuc xa khu A, DH quoc gia hcm"
+            android:textSize="12sp" />
 
-                <CheckBox
-                    android:id="@+id/cbIsChoosen"
-                    android:layout_width="32dp"
-                    android:layout_height="31dp"
-                    android:textSize="@dimen/text_small"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.915"
-                    app:layout_constraintStart_toEndOf="@+id/tvAddress"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0">
+        <TextView
+            android:id="@+id/tvSecondAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phuong Linh Trung"
+            android:textSize="12sp" />
 
-                </CheckBox>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tvThirdAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quan Thu Duc"
+            android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/tvPhoneNumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="0123456789"
-                android:textSize="@dimen/text_small"
-                android:fontFamily="@font/roboto_regular"
-                android:layout_marginLeft="@dimen/margin"
-                android:layout_marginRight="@dimen/margin"/>
-            <TextView
-                android:id="@+id/tvHouseNo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="House no: 938"
-                android:textSize="@dimen/text_small"
-                android:fontFamily="@font/roboto_regular"
-                android:layout_marginLeft="@dimen/margin"
-                android:layout_marginRight="@dimen/margin"/>
-            <TextView
-                android:id="@+id/tvRoadNo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Road no: 9"
-                android:textSize="@dimen/text_small"
-                android:fontFamily="@font/roboto_regular"
-                android:layout_marginLeft="@dimen/margin"
-                android:layout_marginRight="@dimen/margin"
-                android:layout_marginBottom="24dp"/>
+        <TextView
+            android:id="@+id/tvFourthAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tp. Ho Chi Minh"
+            android:textSize="12sp" />
 
-        </LinearLayout>
-</androidx.cardview.widget.CardView>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

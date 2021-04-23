@@ -6,24 +6,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.CheckoutAdapter
 import com.example.svbookmarket.activities.data.DataSource
-//import kotlinx.android.synthetic.main.card_checkout.*
+import com.example.svbookmarket.databinding.ActivityCheckoutBinding
 
-class CheckoutActivity: AppCompatActivity() {
+class CheckoutActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCheckoutBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // set activity to display here
-        setContentView(R.layout.activity_checkout)
+        setContentView(binding.root)
 
-        //tam thoi de funtion nay o day
-//        card.setOnClickListener{
-//            card.setChecked(!card.isChecked)
-//            true
-//        }
-//
-//        val myDataset =DataSource().loadCheckoutCard()
-//        val recyclerView  = findViewById<RecyclerView>(R.id.rc_checkout)
-//        recyclerView.adapter = CheckoutAdapter(this,myDataset)
-//        recyclerView.setHasFixedSize(true)
+        val dataset = DataSource().loadCheckoutCard()
+        val recyclerView  = findViewById<RecyclerView>(R.id.rc_checkout)
+        recyclerView.adapter = CheckoutAdapter(this,dataset)
+        recyclerView.setHasFixedSize(true)
+
     }
+
 
 }

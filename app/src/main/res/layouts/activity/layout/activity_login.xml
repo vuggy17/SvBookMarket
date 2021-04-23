@@ -111,14 +111,14 @@
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/tv_password" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button"
         style="@style/btn_blue"
         android:layout_width="270dp"
-        android:layout_height="48dp"
+        android:layout_height="55dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="41dp"
-        android:background="@drawable/ripple"
+        android:backgroundTint="@color/blue_light"
         android:fontFamily="@font/roboto_medium"
         android:shadowRadius="8"
         android:text="@string/login"
