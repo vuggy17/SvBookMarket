@@ -8,7 +8,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // set activity to display here
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.search_bar)
 
         //tam thoi de funtion nay o day
 //        card.setOnClickListener{
