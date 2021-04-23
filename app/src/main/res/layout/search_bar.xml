@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:theme="@style/Theme.MaterialComponents.DayNight">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -11,8 +11,6 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin"
-        android:layout_marginEnd="@dimen/margin"
         android:fontFamily="@font/roboto_medium"
         app:boxBackgroundColor="@color/light_gray"
         app:boxCornerRadiusBottomEnd="@dimen/margin"
@@ -20,18 +18,27 @@
         app:boxCornerRadiusTopEnd="@dimen/margin"
         app:boxCornerRadiusTopStart="@dimen/margin"
         app:endIconMode="clear_text"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:startIconDrawable="@drawable/ic_baseline_search_24">
-
+        app:startIconDrawable="@drawable/ic_baseline_search_35"
+        android:elevation="@dimen/elevation_search"
+        >
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtUserName"
-            android:hint="Search books"
+            android:id="@+id/edtSearchText"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/search_gray"
+            android:hint="@string/search_book"
+            android:textSize="@dimen/search_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:lines="1"
+            android:inputType="textFilter"
+            android:textColorHint="@color/search_gray"
+
             />
     </com.google.android.material.textfield.TextInputLayout>
 
