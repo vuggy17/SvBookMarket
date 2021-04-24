@@ -22,11 +22,16 @@ class CheckoutAdapter(private val context: Context, private val items: MutableLi
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = items[position]
-        holder.author.text = context.resources.getString(item.author)
+//        holder.author.text = context.resources.getString(item.author)
+////        holder.cover.text = context.resources.getString(item.cover)
+//        holder.bookname.text = context.resources.getString(item.name)
+//        holder.price.text = context.resources.getString(item.price)
+//        holder.cartNumber.text = context.resources.getString(item.number)
+        holder.author.text = items[position].author
 //        holder.cover.text = context.resources.getString(item.cover)
-        holder.bookname.text = context.resources.getString(item.name)
-        holder.price.text = context.resources.getString(item.price)
-        holder.cartNumber.text = context.resources.getString(item.number)
+        holder.bookname.text = items[position].name
+        holder.price.text = items[position].price
+        holder.cartNumber.text = items[position].number
 
         //check option
         holder.itemView.setOnLongClickListener() {
@@ -45,7 +50,7 @@ class CheckoutAdapter(private val context: Context, private val items: MutableLi
 
         //    val cover:TextView = view.findViewById(R.id.img_cover)
         val bookname: TextView = view.findViewById(R.id.tv_bookname)
-        val cartNumber: TextView = view.findViewById(R.id.tv_cartnumber)
+        val cartNumber: TextView = view.findViewById(R.id.tv_numbers)
 
 
     }

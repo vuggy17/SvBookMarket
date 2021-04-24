@@ -1,14 +1,17 @@
 package com.example.svbookmarket.activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.FeatureAdapter
 import com.example.svbookmarket.activities.data.Feature_Item
-import kotlinx.android.synthetic.main.card_checkout.*
-import kotlinx.android.synthetic.main.card_checkout.view.*
+import com.example.svbookmarket.activities.adapter.CheckoutAdapter
+import com.example.svbookmarket.activities.data.DataSource
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var feature_recycler: RecyclerView

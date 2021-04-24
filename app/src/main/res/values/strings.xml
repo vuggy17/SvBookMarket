@@ -19,4 +19,5 @@
     <string name="profile">Profile</string>
     <string name="editprofile">Edit Profile</string>
     <string name="Feature">Feature</string>
+    <string name="your_location">Your location</string>
 </resources>
