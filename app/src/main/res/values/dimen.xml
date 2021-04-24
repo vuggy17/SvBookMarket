@@ -9,6 +9,8 @@
     <dimen name="text_super_small">11sp</dimen>
     <dimen name="search_text">17sp</dimen>
     <dimen name="elevation_search">30dp</dimen>
+    <dimen name="toolbar_margin">15dp</dimen>
+    <dimen name="text_normal">22sp</dimen>
 
     <!--    main-->
 </resources>

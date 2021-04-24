@@ -1,46 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/margin"
+    android:checkable="true"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardElevation="8dp"
+    android:backgroundTint="@color/search_fill"
+    app:strokeColor="#A4858C94"
     android:theme="@style/Theme.MaterialComponents.DayNight">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputTextUserNameLayout"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
-        app:boxBackgroundColor="@color/light_gray"
-        app:boxCornerRadiusBottomEnd="@dimen/margin"
-        app:boxCornerRadiusBottomStart="@dimen/margin"
-        app:boxCornerRadiusTopEnd="@dimen/margin"
-        app:boxCornerRadiusTopStart="@dimen/margin"
+        app:boxStrokeWidth="0dp"
+        app:boxBackgroundColor="@color/search_fill"
         app:endIconMode="clear_text"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:startIconDrawable="@drawable/ic_baseline_search_35"
-        android:elevation="@dimen/elevation_search"
+        app:hintEnabled="false"
+        app:boxStrokeWidthFocused="0dp"
         >
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edtSearchText"
-            android:fontFamily="@font/roboto_medium"
-            android:textColor="@color/search_gray"
-            android:hint="@string/search_book"
-            android:textSize="@dimen/search_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:lines="1"
+            android:fontFamily="@font/roboto_medium"
+            android:hint="@string/search_book"
             android:inputType="textFilter"
+            android:textColor="@color/search_gray"
             android:textColorHint="@color/search_gray"
-
+            android:textSize="@dimen/search_text"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
