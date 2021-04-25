@@ -29,13 +29,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/advertise"
                 android:layout_width="match_parent"
-                android:layout_height="175dp"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
                 android:layout_marginLeft="@dimen/margin"
                 android:layout_marginRight="@dimen/margin" />
 
@@ -67,18 +68,18 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-
+                android:id="@+id/bookCategory"
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginRight="@dimen/margin" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginRight="@dimen/margin"
                 android:orientation="horizontal">
 
@@ -102,8 +103,9 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/booksFeatured"
                 android:layout_width="match_parent"
-                android:layout_height="285dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="@dimen/margin" />
@@ -125,6 +127,7 @@
                     android:textSize="@dimen/home_title" />
             </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/bookCatalog"
                 android:layout_width="match_parent"
                 android:layout_height="600dp"
                 android:layout_marginLeft="@dimen/margin"

@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // set activity to display here
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.card_advertise)
 
         //tam thoi de funtion nay o day
 //        card.setOnClickListener{
