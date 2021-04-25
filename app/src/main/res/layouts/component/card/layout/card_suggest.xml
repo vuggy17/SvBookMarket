@@ -1,81 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_suggest"
         android:layout_width="320dp"
         android:layout_height="160dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:backgroundTint="@color/dark_pink"
-        app:cardCornerRadius="14dp">
-<androidx.appcompat.widget.LinearLayoutCompat
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
-    <ImageView
-        android:id="@+id/imgSuggest"
-        android:src="@drawable/login1"
-        android:layout_width="80dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/rounded_shape">
-    </ImageView>
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/tvBookSuggest"
-            android:text="Dinner Party: A laugh out loud ..."
-            android:textSize="15dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_bold"
-            android:layout_width="190dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="20dp">
-
-        </TextView>
-        <TextView
-            android:id="@+id/tvAuthorSuggest"
-            android:text="by Tracy Bloom"
-            android:textSize="12dp"
-            android:fontFamily="@font/roboto_bold"
-            android:textColor="#80FFFFFF"
-            android:layout_width="190dp"
-            android:layout_height="15dp"
-            android:layout_marginTop="4dp">
-
-        </TextView>
-        <RatingBar
-            android:id="@+id/rbSuggest"
+        app:cardCornerRadius="14dp"
+    app:layout_constraintCircleRadius="14dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="16dp"
-            android:numStars="5"
-            android:layout_marginTop="26dp"
-            style="@style/customRatingBar">
+            android:layout_height="wrap_content">
 
-        </RatingBar>
-        <TextView
-            android:id="@+id/tvNumReviews"
-            android:text="6 Reviews"
-            android:textColor="@color/white"
-            android:fontFamily="@font/roboto_regular"
-            android:textSize="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="20dp">
-        </TextView>
-    </androidx.appcompat.widget.LinearLayoutCompat>
-</androidx.appcompat.widget.LinearLayoutCompat>
-    </com.google.android.material.card.MaterialCardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imgSuggest"
+                    android:layout_width="80dp"
+                    android:layout_height="120dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/login1"> </ImageView>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvBookSuggest"
+                        android:layout_width="190dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="Dinner Party: A laugh out loud ..."
+                        android:textColor="@color/white"
+                        android:textSize="15dp">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/tvAuthorSuggest"
+                        android:layout_width="190dp"
+                        android:layout_height="15dp"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="by Tracy Bloom"
+                        android:textColor="#80FFFFFF"
+                        android:textSize="12dp">
+
+                    </TextView>
+
+                    <RatingBar
+                        android:id="@+id/rbSuggest"
+                        style="@style/customRatingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16dp"
+                        android:layout_marginTop="26dp"
+                        android:numStars="5">
+
+                    </RatingBar>
+
+                    <TextView
+                        android:id="@+id/tvNumReviews"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="20dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="6 Reviews"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"> </TextView>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

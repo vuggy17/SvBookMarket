@@ -32,7 +32,7 @@ class RecyclerViewItemMargin(margin: Int, row: Int): RecyclerView.ItemDecoration
 
         if (position == 0 )
         {
-            outRect.left = 0
+            outRect.left = 30
         }
     }
 }
