@@ -65,7 +65,20 @@
             android:layout_height="240dp"
             android:layout_marginTop="-200dp"
             android:orientation="vertical"
-            tools:listitem="@layout/card_feature"> </androidx.recyclerview.widget.RecyclerView>
+            tools:listitem="@layout/card_feature"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Bestselling"
+        android:fontFamily="@font/roboto_bold"
+        android:textSize="24dp"
+        android:textColor="@color/black_header"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rc_Bestselling"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/card_book"/>
 </LinearLayout>
     </ScrollView>
 </LinearLayout>
