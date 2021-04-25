@@ -39,4 +39,12 @@ class DataSource {
             AddressModel("Khuong Duy","0869256174","Ktx khu A, DHQG","Phuong Linh Trung", "Quan Thu Duc","Tp.Ho Chi Minh"),
         )
     }
+    fun loadFeatureCard(): MutableList<Feature_Item> {
+        return mutableListOf(
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang")
+        )
+    }
 }
