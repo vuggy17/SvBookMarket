@@ -9,11 +9,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.model.AddressModel
 import com.google.android.material.card.MaterialCardView
+import kotlin.properties.Delegates
 
-class AddressAdapter(var context: Context, private var dataset:MutableList<AddressModel>):RecyclerView.Adapter<AddressAdapter.VH>() {
+
+public class AddressAdapter(var context: Context, private var dataset: MutableList<AddressModel>) :
+    RecyclerView.Adapter<AddressAdapter.VH>() {
+
+    val defaultSelection = 0
+
+    // default position = 0
+    var selectedPosition by Delegates.observable(defaultSelection) { property, oldPos, newPos ->
+        if (newPos in dataset.indices) {
+            notifyItemChanged(oldPos)
+            notifyItemChanged(newPos)
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-       val adapterLayout  = LayoutInflater.from(parent.context).inflate(R.layout.card_address,parent,false)
+        val adapterLayout =
+            LayoutInflater.from(parent.context).inflate(R.layout.card_address, parent, false)
         return VH(adapterLayout)
     }
 
@@ -25,22 +39,36 @@ class AddressAdapter(var context: Context, private var dataset:MutableList<Addre
         holder.thirdAddress.text = dataset[position].thirdAddress
         holder.fourthAddress.text = dataset[position].fourthAddress
 
-        // highlight current item
-        if(holder.adapterPosition == 1){
-            (holder.itemView as MaterialCardView).isChecked = true
+        //default position
+
+        (holder.itemView as MaterialCardView).setOnClickListener {
+            (it as MaterialCardView).isChecked = !it.isChecked
+        }
+
+        if (position in dataset.indices) {
+            holder.bind()
+            holder.itemView.setOnClickListener { selectedPosition = position }
         }
     }
 
     override fun getItemCount(): Int {
-       return dataset.size
+        return dataset.size
     }
-    class VH(view: View):RecyclerView.ViewHolder(view){
 
-        var name:TextView = view.findViewById(R.id.tvName)
-        var phoneNumber:TextView = view.findViewById(R.id.tvPhoneNumber)
-        var firstAddress:TextView = view.findViewById(R.id.tvAddress)
-        var secondAddress:TextView = view.findViewById(R.id.tvSecondAddress)
-        var thirdAddress:TextView = view.findViewById(R.id.tvThirdAddress)
-        var fourthAddress:TextView = view.findViewById(R.id.tvFourthAddress)
+    inner class VH(view: View) : RecyclerView.ViewHolder(view) {
+
+        var name: TextView = view.findViewById(R.id.tvName)
+        var phoneNumber: TextView = view.findViewById(R.id.tvPhoneNumber)
+        var firstAddress: TextView = view.findViewById(R.id.tvAddress)
+        var secondAddress: TextView = view.findViewById(R.id.tvSecondAddress)
+        var thirdAddress: TextView = view.findViewById(R.id.tvThirdAddress)
+        var fourthAddress: TextView = view.findViewById(R.id.tvFourthAddress)
+        var vieww: View = view
+
+
+        fun bind() {
+            (vieww as MaterialCardView).isChecked = selectedPosition == adapterPosition
+        }
+
     }
 }
