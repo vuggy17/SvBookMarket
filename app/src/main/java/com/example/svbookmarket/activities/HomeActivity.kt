@@ -4,10 +4,7 @@ import android.graphics.drawable.ClipDrawable.HORIZONTAL
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.LinearLayout.HORIZONTAL
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SnapHelper
+import androidx.recyclerview.widget.*
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.AdvertiseAdapter
 import com.example.svbookmarket.activities.adapter.CategoryAdapter
@@ -51,9 +48,7 @@ class HomeActivity : AppCompatActivity() {
         recyclerAdvertise.adapter = AdvertiseAdapter(dataAdvertiseSet)
         val advertiseLayoutManagemer: LinearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerAdvertise.layoutManager = advertiseLayoutManagemer
-        val snapHelper: SnapHelper = SnapHelper()
+        val snapHelper: LinearSnapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(recyclerAdvertise)
-
-
     }
 }
