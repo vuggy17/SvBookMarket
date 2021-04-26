@@ -20,4 +20,12 @@
     <string name="editprofile">Edit Profile</string>
     <string name="Feature">Feature</string>
     <string name="your_location">Your location</string>
+    <string name="search_book">Search Books</string>
+
+    <string name="categories">Categories</string>
+    <string name="featured">Featured</string>
+    <string name="see_all">See all</string>
+    <string name="more">More</string>
+
+    <string name="shop_now">Shop now</string>
 </resources>

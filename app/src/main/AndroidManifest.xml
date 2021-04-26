@@ -10,10 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SvBookMarket">
         <activity android:name=".activities.FeatureActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.EditProfileActivity" />
@@ -25,15 +22,20 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.SplashActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity android:name=".activities.MainActivity">
 
         </activity>
         <activity android:name=".activities.CartActivity">
 
         </activity>
-        <activity android:name=".activities.AddressActivity">
+        <activity android:name=".activities.AddressActivity"/>
+        <activity android:name=".activities.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <meta-data
             android:name="preloaded_fonts"

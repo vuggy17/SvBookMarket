@@ -24,11 +24,11 @@ class MainActivity : AppCompatActivity() {
 //            card.setChecked(!card.isChecked)
 //            true
 //        }
+        //code ben duoi dung cho card view
+//        val myDataset = DataSource().loadCheckoutCard()
+//        val recyclerView  = findViewById<RecyclerView>(R.id.rc_checkout)
+//        recyclerView.adapter = CheckoutAdapter(this,myDataset)
+//        recyclerView.setHasFixedSize(true)
 
-
-     //   val myDataset =DataSource().loadCheckoutCard()
-       // val recyclerView  = findViewById<RecyclerView>(R.id.rc_checkout)
-       // recyclerView.adapter = CheckoutAdapter(this,myDataset)
-       // recyclerView.setHasFixedSize(true)
     }
 }
