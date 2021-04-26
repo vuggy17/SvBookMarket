@@ -39,4 +39,44 @@ class DataSource {
             AddressModel("Khuong Duy","0869256174","Ktx khu A, DHQG","Phuong Linh Trung", "Quan Thu Duc","Tp.Ho Chi Minh"),
         )
     }
+    fun loadFeatureCard(): MutableList<Feature_Item> {
+        return mutableListOf(
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang")
+        )
+    }
+    fun loadBestsellingCard(): MutableList<Feature_Item> {
+        return mutableListOf(
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 90000"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 12000"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 15000"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 20000"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 90000"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 12000"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 15000"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 20000")
+        )
+    }
+    fun loadSuggestCard(): MutableList<Feature_Item> {
+        return mutableListOf(
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 90000", "99 Reviews"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 12000",  "99 Reviews"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 15000",  "99 Reviews"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 20000", "99 Reviews"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 90000", "99 Reviews"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 12000", "99 Reviews"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 15000","99 Reviews"),
+            Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 20000","99 Reviews")
+        )
+    }
 }

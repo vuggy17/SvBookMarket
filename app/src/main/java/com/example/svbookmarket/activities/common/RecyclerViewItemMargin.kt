@@ -4,9 +4,9 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class RecycleViewItemMargin: RecyclerView.ItemDecoration() {
-    var row: Int = 0;
-    var margin: Int = 0;
+class RecyclerViewItemMargin(margin: Int, row: Int): RecyclerView.ItemDecoration() {
+    var row: Int = 0
+    var margin: Int = 0
 
     /**
      * constructor
@@ -14,13 +14,8 @@ class RecycleViewItemMargin: RecyclerView.ItemDecoration() {
      * @param columns number of columns of the RecyclerView
      */
     init {
-        fun RecyclerViewItemMargin(
-            margin: Int,
-            columns: Int
-        ) {
-            this.margin = margin;
-            this.row = row;
-        }
+            this.margin = margin
+            this.row = row
     }
 
 
@@ -31,17 +26,13 @@ class RecycleViewItemMargin: RecyclerView.ItemDecoration() {
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State): Unit{
 
         var position: Int = parent.getChildLayoutPosition(view);
-        //set right margin to all
-        outRect.right = margin;
-        //set bottom margin to all
-        outRect.bottom = margin;
-        //we only add top margin to the first row
-        if (position < row) {
-            outRect.top = margin;
-        }
-        //add left margin only to the first column
-        if(position%row==0){
-            outRect.left = margin;
+
+            outRect.right = margin
+            outRect.left = margin
+
+        if (position == 0 )
+        {
+            outRect.left = 30
         }
     }
 }
