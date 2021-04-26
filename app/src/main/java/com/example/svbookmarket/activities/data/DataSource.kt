@@ -19,12 +19,12 @@ class DataSource {
     }
     fun loadCart():MutableList<CartModel>{
         return mutableListOf(
-            CartModel("cc","cc","cc","cc","1000" ),
-            CartModel("cc","cc","cc","cc","200" ),
-            CartModel("cc","cc1","cc","cc","113" ),
-            CartModel("cc","cc","cc","cc","1997" ),
-            CartModel("cc","cc","cc","cc","2001" ),
-            CartModel("cc","cc1","cc","cc","99" ),
+            CartModel("cc","cc","cc",10,1000 ),
+            CartModel("cc","cc","cc",9,200 ),
+            CartModel("cc","cc1","cc",8,113 ),
+            CartModel("cc","cc","cc",12,1997 ),
+            CartModel("cc","cc","cc",3,2001 ),
+            CartModel("cc","cc1","cc",1,1000 ),
 
         )
     }

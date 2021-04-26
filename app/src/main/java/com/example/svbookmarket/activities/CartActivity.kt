@@ -4,6 +4,7 @@ import android.graphics.Canvas
 import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -26,7 +27,7 @@ class CartActivity : AppCompatActivity() {
     val cartAdapter = CartItemAdapter(this, cartData)
 
     var deleteItem: View? = null
-    var deleteModel: CartModel = CartModel("cc", "cc", "cc", "cc", "Cc")
+    var deleteModel: CartModel = CartModel("cc", "cc", "cc", 1, 2)
 
     private var touchHelper = ItemTouchHelper(
         object : ItemTouchHelper.SimpleCallback(
@@ -116,19 +117,22 @@ class CartActivity : AppCompatActivity() {
         // swipe to delete
         touchHelper.attachToRecyclerView(binding.rcCardList)
 
-        //select all
-        val checkButton: CompoundButton = binding.materialCheckBox
-        checkButton.isChecked = true
-//        checkButton.setOnCheckedChangeListener()
-        binding.materialButton.setOnClickListener { onCheckedChange(!checkButton.isChecked) }
+       // back button pressed
+        binding.backButton.setOnClickListener {
+            Toast.makeText(
+                this,
+                "Back button pressed",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
 
-    }
-
-    private fun onCheckedChange(checked: Boolean) {
-        if (checked) {
-            for (it in 0..cartAdapter.itemCount) {
-                (binding.rcCardList.findViewHolderForLayoutPosition(it) as CartItemAdapter.VH).toggleChecked(checked)
-            }
+        // edit button pressed
+        binding.editLocation.setOnClickListener {
+            Toast.makeText(
+                this,
+                "Edit button pressed",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }

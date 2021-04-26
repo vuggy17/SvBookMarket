@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.model.CartModel
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 
 class CartItemAdapter(val context: Context, private val cartList:MutableList<CartModel>):RecyclerView.Adapter<CartItemAdapter.VH>(){
@@ -22,8 +24,24 @@ class CartItemAdapter(val context: Context, private val cartList:MutableList<Car
         holder.name.text = cartList[position].name
         holder.author.text = cartList[position].author
         holder.coverimg.setImageResource(R.drawable.welcome)
-        holder.price.text = cartList[position].price
-        holder.number.text = cartList[position].numbers
+        holder.price.text = cartList[position].price.toString()
+        holder.number.text = cartList[position].numbers.toString()
+
+        // increase and decrease button listener
+        holder.increaseButton.setOnClickListener {
+            Toast.makeText(
+                context,
+                "+ pressed",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        holder.decreaseButton.setOnClickListener {
+            Toast.makeText(
+                context,
+                "- pressed",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     override fun getItemCount(): Int {
@@ -45,6 +63,8 @@ class CartItemAdapter(val context: Context, private val cartList:MutableList<Car
                 (it as MaterialCardView).isChecked = !it.isChecked
             }
         }
+        val increaseButton:MaterialButton = view.findViewById(R.id.increaseNumber)
+        val decreaseButton:MaterialButton = view.findViewById(R.id.decreaseNumber)
         var number : TextView = view.findViewById(R.id.tv_numbers)
         var name : TextView = view.findViewById(R.id.tv_bookname)
         var author : TextView = view.findViewById(R.id.tv_author)

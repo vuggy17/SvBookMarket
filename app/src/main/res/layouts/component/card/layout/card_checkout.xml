@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    android:id="@+id/card"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card"
     android:layout_width="346dp"
     android:layout_height="138dp"
     android:layout_marginBottom="8dp"
+    android:backgroundTint="@color/white"
     android:checkable="true"
     android:focusable="true"
     app:cardCornerRadius="14dp"
-    app:strokeColor="#A4858C94"
-    android:layout_gravity="center_horizontal">
+    app:strokeColor="#A4858C94">
+
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="342dp"
+        android:layout_width="346dp"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
@@ -37,7 +37,8 @@
 
             <TextView
                 android:id="@+id/tv_bookname"
-                style="@style/tv_14_regular"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
@@ -67,35 +68,42 @@
                 android:paddingVertical="4dp">
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/decreaseNumber"
                     android:layout_width="26dp"
                     android:layout_height="26dp"
+                    android:layout_marginRight="4dp"
+                    android:elevation="4dp"
                     android:insetLeft="0dp"
                     android:insetTop="0dp"
                     android:insetRight="0dp"
                     android:insetBottom="0dp"
+                    android:shadowRadius="3"
                     app:backgroundTint="#E8E8E8"
+                    app:cornerRadius="4dp"
                     app:icon="@drawable/ic_subtract"
                     app:iconGravity="textStart"
                     app:iconPadding="0dp"
                     app:iconTint="@color/black"
                     app:strokeWidth="0dp" />
 
-                 <TextView
+                <TextView
                     android:id="@+id/tv_numbers"
-                    style="@style/tv_14_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="4dp"
                     android:text="99" />
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/increaseNumber"
                     android:layout_width="26dp"
                     android:layout_height="26dp"
+                    android:layout_marginLeft="4dp"
+                    android:elevation="4dp"
                     android:insetLeft="0dp"
                     android:insetTop="0dp"
                     android:insetRight="0dp"
                     android:insetBottom="0dp"
+                    android:shadowRadius="3"
                     app:backgroundTint="#E8E8E8"
                     app:cornerRadius="4dp"
                     app:icon="@drawable/ic_plus"
@@ -106,9 +114,10 @@
             </LinearLayout>
 
         </LinearLayout>
+
         <TextView
+            android:id="@+id/cc"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/cc"/>
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
