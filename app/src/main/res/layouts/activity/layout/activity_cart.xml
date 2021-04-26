@@ -16,7 +16,7 @@ android:background="@color/background_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@android:color/transparent"
-        android:src="@drawable/ic_arrow_back"
+        android:src="@drawable/img_back_arrow"
         android:tint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +26,11 @@ android:background="@color/background_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_bold"
+<<<<<<< HEAD
         android:textStyle="bold"
+=======
+        android:layout_marginTop="@dimen/margin"
+>>>>>>> daea6b05fc881e618bf23676f6fd52d7b14e9dbf
         android:text="Your cart"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

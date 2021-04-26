@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/margin"
+    android:checkable="true"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardElevation="8dp"
+    android:backgroundTint="@color/search_fill"
+    app:strokeColor="#A4858C94"
+    android:theme="@style/Theme.MaterialComponents.DayNight">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputTextUserNameLayout"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        app:boxStrokeWidth="0dp"
+        app:boxBackgroundColor="@color/search_fill"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/ic_baseline_search_35"
+        app:hintEnabled="false"
+        app:boxStrokeWidthFocused="0dp"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtSearchText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:hint="@string/search_book"
+            android:inputType="textFilter"
+            android:textColor="@color/search_gray"
+            android:textColorHint="@color/search_gray"
+            android:textSize="@dimen/search_text"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+</androidx.cardview.widget.CardView>

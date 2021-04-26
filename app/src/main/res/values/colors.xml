@@ -14,10 +14,14 @@
     <color name="gradient_end">#64B6FF</color>
     <color name="dark_pink">#B71B66</color>
     <color name="light_gray">#F5F5F5</color>
+    <color name="home_gray">#EFEFEF</color>
+    <color name="search_gray">#AFC1C4</color>
+    <color name="search_fill">#EDEFF3</color>
 
+<color name="yellow_back">#E6E367</color>
     <color name="yellow">#FBED67</color>
 
-
+<color name="black_header">#242126</color>
     <color name="less_black">#434343</color>
     <color name="litle_gray">#919191</color>
 
