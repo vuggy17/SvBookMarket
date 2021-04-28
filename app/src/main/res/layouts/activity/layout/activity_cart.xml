@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="25dp"
-    android:paddingHorizontal="24dp"
-    android:clipToPadding="false">
+    android:layout_gravity="center_horizontal"
+   android:paddingTop="29dp"
+android:background="@color/background_white"
+    android:clipToPadding="false"
+
+    android:paddingHorizontal="24dp">
     <!--    android:paddingHorizontal="24dp"-->
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@android:color/transparent"
@@ -23,9 +26,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_bold"
+<<<<<<< HEAD
+        android:textStyle="bold"
+=======
         android:layout_marginTop="@dimen/margin"
+>>>>>>> daea6b05fc881e618bf23676f6fd52d7b14e9dbf
         android:text="Your cart"
-        android:textSize="28sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -57,13 +64,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/editLocation"
                 android:layout_width="58dp"
                 android:layout_height="40dp"
                 android:backgroundTint="@color/white"
                 android:text="Edit"
+                android:textStyle="bold"
                 android:textAlignment="center"
                 android:textAllCaps="false"
-                android:textColor="@color/blue_light"
+                android:textColor="#30A3E2"
                 android:textSize="12sp"
                 app:cornerRadius="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -87,46 +96,37 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/materialCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue_dark"
-        android:checked="true"
-        android:textColor="@color/blue_dark"
-        app:layout_constraintBottom_toBottomOf="@+id/checkbox_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/checkbox_title" />
-
     <TextView
-        android:id="@+id/checkbox_title"
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:text="Select all"
-        app:layout_constraintEnd_toStartOf="@+id/materialCheckBox"
+       android:layout_marginVertical="21dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Items"
+        android:textSize="20sp"
+
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcCardList"
-        android:layout_width="360dp"
+        android:layout_width="wrap_content"
         android:layout_height="450dp"
-        android:paddingBottom="12dp"
+        android:layout_gravity="center_horizontal"
         android:fadeScrollbars="true"
-        app:flow_verticalAlign="center"
+        android:paddingBottom="12dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCheckBox" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/materialButton"
         android:layout_width="341dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="25sp"
-        android:fontFamily="sans-serif-medium"
-        android:text="Checkout"
-        android:textAllCaps="false"
-        android:textSize="18sp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="24dp"
+        android:text="CHECKOUT"
+        android:textStyle="bold"
         app:backgroundTint="@color/green"
         app:cornerRadius="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
