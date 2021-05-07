@@ -26,11 +26,8 @@ android:background="@color/background_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_bold"
-<<<<<<< HEAD
         android:textStyle="bold"
-=======
         android:layout_marginTop="@dimen/margin"
->>>>>>> daea6b05fc881e618bf23676f6fd52d7b14e9dbf
         android:text="Your cart"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +48,9 @@ android:background="@color/background_white"
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/textView2"
@@ -69,11 +68,11 @@ android:background="@color/background_white"
                 android:layout_height="40dp"
                 android:backgroundTint="@color/white"
                 android:text="Edit"
-                android:textStyle="bold"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="#30A3E2"
                 android:textSize="12sp"
+                android:textStyle="bold"
                 app:cornerRadius="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
