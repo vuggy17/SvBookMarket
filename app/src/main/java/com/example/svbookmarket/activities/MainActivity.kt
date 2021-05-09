@@ -1,15 +1,8 @@
 package com.example.svbookmarket.activities
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
-import com.example.svbookmarket.activities.adapter.FeatureAdapter
-import com.example.svbookmarket.activities.data.Feature_Item
-import com.example.svbookmarket.activities.adapter.CheckoutAdapter
-import com.example.svbookmarket.activities.data.DataSource
 
 
 class MainActivity : AppCompatActivity() {

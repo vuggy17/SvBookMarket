@@ -1,7 +1,6 @@
 package com.example.svbookmarket.activities.data
 
 import android.net.Uri
-import android.renderscript.Sampler
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.model.*
 
@@ -177,6 +176,22 @@ class DataSource {
             Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 12000", "99 Reviews"),
             Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 15000","99 Reviews"),
             Feature_Item(R.drawable.img_book_card_example, "Khang", "Khang", "đ 20000","99 Reviews")
+        )
+    }
+    fun loadSearchItem(): MutableList<SearchResultItem> {
+        return mutableListOf(
+            SearchResultItem("Nguyễn Nhật Ánh", "21:00, May 8, 2021"),
+            SearchResultItem("Địa chính trị", "21:00, May 8, 2021"),
+            SearchResultItem("Địa Lý", "21:00, May 8, 2021"),
+            SearchResultItem("Lịch Sử", "21:00, May 8, 2021"),
+            SearchResultItem("OOP fundamentals", "21:00, May 8, 2021"),
+            SearchResultItem("Head of Design Pattern", "21:00, May 8, 2021"),
+            SearchResultItem("Toán", "21:00, May 8, 2021"),
+            SearchResultItem("Những tù nhân của địa lý", "21:00, May 8, 2021"),
+            SearchResultItem("Sinh viên", "21:00, May 8, 2021"),
+            SearchResultItem("ĐH CNTT", "21:00, May 8, 2021"),
+            SearchResultItem("Công nghệ phần mềm", "21:00, May 8, 2021"),
+            SearchResultItem("Kỹ thuật phần mềm", "21:00, May 8, 2021"),
         )
     }
 }

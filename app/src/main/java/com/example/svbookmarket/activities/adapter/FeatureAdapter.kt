@@ -1,7 +1,6 @@
 package com.example.svbookmarket.activities.adapter
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
-import com.example.svbookmarket.activities.common.RecyclerViewItemMargin
-import com.example.svbookmarket.activities.data.Feature_Item
+import com.example.svbookmarket.activities.model.Feature_Item
 
 
 class FeatureAdapter(
@@ -28,7 +26,6 @@ class FeatureAdapter(
         holder.imgBookCover.setImageResource(lstFeatureCard[position].imgBookCover)
         holder.tvAuthor.text = lstFeatureCard[position].textAuthor
         holder.tvBookName.text = lstFeatureCard[position].textBookName
-
     }
 
     override fun getItemCount() = lstFeatureCard.size

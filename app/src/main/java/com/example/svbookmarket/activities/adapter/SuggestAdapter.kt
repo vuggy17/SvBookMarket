@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
-import com.example.svbookmarket.activities.data.Feature_Item
+import com.example.svbookmarket.activities.model.Feature_Item
 
 class SuggestAdapter(context:Context, private val lstSuggestCard: MutableList<Feature_Item>): RecyclerView.Adapter<SuggestAdapter.SuggestViewHolder>() {
     class SuggestViewHolder(SuggestCard: View) : RecyclerView.ViewHolder(SuggestCard){
