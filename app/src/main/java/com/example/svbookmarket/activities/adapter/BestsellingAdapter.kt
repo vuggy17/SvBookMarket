@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
-import com.example.svbookmarket.activities.data.Feature_Item
+import com.example.svbookmarket.activities.model.Feature_Item
 
 class BestsellingAdapter(private val context: Context ,private val lstBookCard: MutableList<Feature_Item>) : RecyclerView.Adapter<BestsellingAdapter.BestsellingViewHolder>() {
     class BestsellingViewHolder(BestsellingCard: View) :RecyclerView.ViewHolder(BestsellingCard)

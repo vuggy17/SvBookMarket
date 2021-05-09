@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/white">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_search_35"
+        android:alpha="0.4"/>
+    <LinearLayout
+        android:layout_width="150dp"
+        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tvRecentSearchName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="recent search"
+        android:textSize="14dp"
+        android:layout_marginVertical="7dp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/roboto_bold"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tvRecentSearchTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="9dp"
+        android:layout_marginStart="50dp"
+        android:alpha="0.5"
+        android:fontFamily="@font/roboto_regular"
+        android:text="14:56, April 3, 2019"
+        android:textSize="12dp" />
+</LinearLayout>
+</androidx.cardview.widget.CardView>
