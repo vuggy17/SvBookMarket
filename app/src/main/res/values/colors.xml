@@ -6,7 +6,7 @@
     <color name="disable">#696969</color>
     <color name="danger">#dc3545</color>
     <color name="danger_light">#FF3333</color>
-
+<color name="search_screen_back">#F5F6F7</color>
     <color name="blue_dark">#0f52ba</color>
     <color name="blue_light">#00a2ff</color>
     <color name="green">#28A745</color>
