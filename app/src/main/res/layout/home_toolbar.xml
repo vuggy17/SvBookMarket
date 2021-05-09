@@ -24,7 +24,6 @@
             android:columnCount="3"
             android:layout_marginRight="@dimen/margin"
             android:rowCount="1">
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -32,15 +31,17 @@
                 android:layout_columnWeight="1"
                 android:layout_gravity="center"
                 android:src="@drawable/img_baseline_menu" />
-
             <SearchView
                 android:id="@+id/searchView"
                 android:layout_columnWeight="3"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_row="0"
+                android:touchscreenBlocksFocus="true"
+                android:elevation="8dp"
+                android:layout_margin="10dp"
                 android:layout_column="1"
-                android:background="@drawable/bg_search" />
+                android:background="@drawable/bg_home_search" />
 
             <ImageView
                 android:layout_columnWeight="1"

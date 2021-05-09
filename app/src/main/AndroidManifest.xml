@@ -10,11 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SvBookMarket">
         <activity android:name=".activities.SearchActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activities.FeatureActivity">
 
@@ -30,13 +26,18 @@
         <activity
             android:name=".activities.SplashActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activities.MainActivity"></activity>
-        <activity android:name=".activities.CartActivity"></activity>
-        <activity android:name=".activities.AddressActivity"></activity>
+        <activity android:name=".activities.MainActivity"/>
+        <activity android:name=".activities.CartActivity"/>
+        <activity android:name=".activities.AddressActivity"/>
         <activity
             android:name=".activities.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
