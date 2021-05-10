@@ -21,6 +21,7 @@
         android:fontFamily="@font/roboto_bold"
         android:text="@string/register"
         android:textColor="@color/black"
+        android:textStyle="bold"
         android:textSize="@dimen/text_big"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -142,7 +143,6 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
-
             <LinearLayout
                 android:id="@+id/layoutTermAndConditions"
                 android:layout_width="wrap_content"
@@ -175,6 +175,17 @@
                     android:textColor="@color/blue_dark" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/errorAgreeTermNotification"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*Please agree to term and conditions"
+                android:visibility="gone"
+                android:textColor="@color/danger"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutTermAndConditions"/>
+
             <Button
                 android:id="@+id/btn_Register"
                 style="@style/btn_blue"
@@ -191,13 +202,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/layoutTermAndConditions" />
 
             <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_Register"
-                app:layout_constraintVertical_bias="0.2">
+                app:layout_constraintTop_toBottomOf="@+id/btn_Register">
 
                 <TextView
                     android:layout_width="wrap_content"
