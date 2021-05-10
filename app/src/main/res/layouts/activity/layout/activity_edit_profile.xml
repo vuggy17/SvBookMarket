@@ -18,7 +18,8 @@
         app:layout_constraintEnd_toStartOf="@+id/tvEditProfile"
         app:layout_constraintHorizontal_bias="0.151"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"> </ImageView>
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="true"> </ImageView>
 
     <TextView
         android:id="@+id/tvEditProfile"
@@ -41,11 +42,11 @@
         android:fontFamily="@font/roboto_bold"
         android:text="Name"
         android:textSize="16dp"
-        android:textColor="@color/full_black"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEditProfile"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/tvEditProfile"/>
 
     <EditText
         android:id="@+id/edtName"
@@ -82,8 +83,8 @@
         android:layout_marginStart="28dp"
         android:fontFamily="@font/roboto_medium"
         android:text="Gender"
-        android:textColor="@color/full_black"
-        android:textSize="16dp"></TextView>
+        android:textColor="@color/black"
+        android:textSize="16dp"/>
 
     <EditText
         android:id="@+id/edtGender"
@@ -95,7 +96,7 @@
         android:layout_marginStart="28dp"
         android:inputType="text"
         android:textColor="@color/less_black"
-        android:textSize="16dp"></EditText>
+        android:textSize="16dp"/>
 </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -108,9 +109,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
                 android:text="Birthday"
-                android:textColor="@color/full_black"
+                android:textColor="@color/black"
                 android:textSize="16dp"
-                android:layout_marginLeft="25dp"></TextView>
+                android:layout_marginLeft="25dp"/>
 
             <EditText
                 android:id="@+id/edtBirthday"
@@ -121,7 +122,7 @@
                 android:fontFamily="@font/roboto_regular"
                 android:inputType="text"
                 android:textColor="@color/less_black"
-                android:textSize="16dp"></EditText>
+                android:textSize="16dp"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -132,12 +133,12 @@
         android:fontFamily="@font/roboto_bold"
         android:text="Email"
         android:layout_marginLeft="10dp"
-        android:textColor="@color/full_black"
+        android:textColor="@color/black"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llGenderAndBirth"> </TextView>
+        app:layout_constraintTop_toBottomOf="@+id/llGenderAndBirth"/>
 
     <EditText
         android:id="@+id/edtEmail"
@@ -151,8 +152,7 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmail"> </EditText>
-
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail"/>
     <TextView
         android:id="@+id/tvPhoneNumber"
         android:layout_width="wrap_content"
@@ -160,12 +160,12 @@
         android:fontFamily="@font/roboto_bold"
         android:textSize="16dp"
         android:text="Phone Number"
-        android:textColor="@color/full_black"
+        android:textColor="@color/black"
         android:layout_marginLeft="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmail"> </TextView>
+        app:layout_constraintTop_toBottomOf="@+id/edtEmail"/>
 
     <EditText
         android:id="@+id/edtPhoneNumber"
@@ -179,7 +179,7 @@
         android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber"> </EditText>
+        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber"/>
 
     <TextView
         android:id="@+id/tvAddressLane"
@@ -189,12 +189,12 @@
         android:fontFamily="@font/roboto_bold"
         android:textSize="16dp"
         android:text="Address Lane"
-        android:textColor="@color/full_black"
+        android:textColor="@color/black"
         android:layout_marginLeft="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.077"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtPhoneNumber"> </TextView>
+        app:layout_constraintTop_toBottomOf="@+id/edtPhoneNumber"/>
 
     <EditText
         android:id="@+id/edtAddressLane"
@@ -208,7 +208,7 @@
         android:autofillHints="Address Lane"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAddressLane"> </EditText>
+        app:layout_constraintTop_toBottomOf="@+id/tvAddressLane"/>
 <LinearLayout
     android:id="@+id/llDistrictAndCity"
     android:layout_width="wrap_content"
@@ -228,8 +228,8 @@
         android:fontFamily="@font/roboto_bold"
         android:text="City"
         android:layout_marginStart="32dp"
-        android:textColor="@color/full_black"
-        android:textSize="16dp"> </TextView>
+        android:textColor="@color/black"
+        android:textSize="16dp"/>
 
     <EditText
         android:id="@+id/edtCity"
@@ -241,7 +241,7 @@
         android:textColor="@color/less_black"
         android:textSize="16dp"
         android:layout_marginStart="32dp"
-        android:autofillHints="City"> </EditText>
+        android:autofillHints="City"/>
         </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -256,7 +256,7 @@
             android:textSize="16dp"
             android:inputType="text"
             android:layout_marginStart="32dp"
-            android:textColor="@color/full_black"> </TextView>
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/edtDistrict"

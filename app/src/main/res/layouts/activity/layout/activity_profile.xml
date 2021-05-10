@@ -4,20 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ProfileActivity">
+    tools:context=".activities.ProfileActivity"
+    android:layout_marginHorizontal="30dp">
     <ImageView
         android:id="@+id/imgBack"
         android:clickable="true"
         android:layout_width="44dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
-        android:src="@drawable/ic_baseline_arrow_back_black"
+        android:src="@drawable/ic_arrow_back"
         app:layout_constraintEnd_toStartOf="@+id/tvProfile"
-        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"> </ImageView>
 
     <TextView
+        android:textStyle="bold"
         android:id="@+id/tvProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,18 +40,18 @@
         android:layout_marginTop="36dp"
         android:fontFamily="@font/roboto_bold"
         android:text="Name"
-        android:textColor="@color/full_black"
+        android:textColor="@color/black"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvProfile"> </TextView>
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/tvProfile"/>
 
     <EditText
         android:id="@+id/edtName"
-        android:layout_width="342dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
         android:layout_marginTop="72dp"
         android:autofillHints="Name"
         android:enabled="false"
@@ -59,9 +61,8 @@
         android:textColor="@color/less_black"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.362"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvProfile"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/tvProfile"/>
 
     <TextView
         android:id="@+id/tvBirthday"
@@ -69,31 +70,31 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_bold"
+        android:textStyle="bold"
         android:text="Birthday"
-        android:textColor="@color/full_black"
+        android:textColor="@color/black"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtName"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/edtName"/>
 
     <EditText
         android:id="@+id/edtBirthday"
-        android:layout_width="342dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
         android:layout_marginTop="12dp"
         android:autofillHints="@string/email"
         android:enabled="false"
         android:fontFamily="@font/roboto_regular"
         android:inputType="textEmailAddress"
-        android:text="helo@gmail.com"
+        android:text="13/07/2001"
         android:textColor="@color/less_black"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBirthday"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/tvBirthday"/>
 
     <TextView
         android:id="@+id/tvEmail"
@@ -102,30 +103,29 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_bold"
         android:text="Email"
-        android:textColor="@color/full_black"
+        android:textColor="@color/black"
         android:textSize="16dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtBirthday"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/edtBirthday"/>
 
     <EditText
         android:id="@+id/edtEmail"
-        android:layout_width="342dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
         android:layout_marginTop="12dp"
         android:autofillHints="Phone Number"
         android:enabled="false"
         android:fontFamily="@font/roboto_regular"
         android:inputType="phone"
-        android:text="0922222222"
+        android:text="abc@gmail.com"
         android:textColor="@color/less_black"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmail"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail"/>
 
     <TextView
         android:id="@+id/tvPhoneNumber"
@@ -134,62 +134,62 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/roboto_bold"
         android:text="Phone number"
-        android:textColor="@color/full_black"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmail"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/edtEmail"/>
 
     <EditText
         android:id="@+id/edtPhoneNumber"
-        android:layout_width="342dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
         android:layout_marginTop="16dp"
         android:autofillHints="Address Lane"
         android:enabled="false"
         android:fontFamily="@font/roboto_regular"
-        android:inputType="text"
-        android:text="ktx khu B"
+        android:inputType="number"
+        android:text="0123456789"
         android:textColor="@color/less_black"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber"/>
 
     <TextView
         android:id="@+id/tvAddressLane"
         android:layout_width="wrap_content"
+        android:textStyle="bold"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_bold"
         android:text="Address lane"
-        android:textColor="@color/full_black"
+        android:textColor="@color/black"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.109"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtPhoneNumber"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/edtPhoneNumber"/>
 
     <EditText
         android:id="@+id/edtAddressLane"
-        android:layout_width="342dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
         android:layout_marginTop="16dp"
         android:autofillHints="District"
         android:enabled="false"
         android:fontFamily="@font/roboto_regular"
         android:inputType="text"
-        android:text="5"
+        android:text="KTX khu B ĐHQG"
         android:textColor="@color/less_black"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAddressLane"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/tvAddressLane"/>
 
     <TextView
         android:id="@+id/tvCity"
@@ -198,18 +198,18 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_bold"
         android:text="City"
-        android:textColor="@color/full_black"
+        android:textColor="@color/black"
         android:textSize="16dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.091"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtAddressLane"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/edtAddressLane"/>
 
     <EditText
         android:id="@+id/edtCity"
-        android:layout_width="342dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
         android:layout_marginTop="16dp"
         android:autofillHints="City"
         android:enabled="false"
@@ -221,13 +221,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCity"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/tvCity"/>
 
     <Button android:id="@+id/btnEdit"
         android:clickable="true"
         android:layout_height="52dp"
         android:layout_width="270dp"
-        app:backgroundTint="@color/edit_blue"
+        app:backgroundTint="@color/blue_light"
         android:text="Edit"
         android:textSize="20dp"
         android:textColor="@color/white"
@@ -236,5 +236,5 @@
         android:layout_marginTop="37dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtCity"></Button>
+        app:layout_constraintTop_toBottomOf="@+id/edtCity"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
