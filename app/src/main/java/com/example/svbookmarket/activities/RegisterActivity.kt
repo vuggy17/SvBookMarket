@@ -1,19 +1,57 @@
 package com.example.svbookmarket.activities
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.model.Account
+import com.example.svbookmarket.activities.model.User
+import com.example.svbookmarket.activities.model.UserDeliverAddress
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
+
+    //Init view
+    private lateinit var agreeTermAndCondition: CheckBox;
+    private lateinit var errorAgreeTermNotification: TextView
+    private lateinit var edtPassword: EditText
+    private lateinit var edtConfirmPasswordLayout: TextInputLayout
+    private lateinit var edtPasswordConfirm: EditText
+    private lateinit var edtPasswordLayout: TextInputLayout
+    private lateinit var edtName: EditText
+    private lateinit var edtNameLayout: TextInputLayout
+    private lateinit var edtEmail: EditText
+    private lateinit var edtEmailLayout: TextInputLayout
+
+    //Init Data
+    private lateinit var email: String
+    private lateinit var password: String
+    private lateinit var user: User
+    private lateinit var account: Account
+    private lateinit var listDeliverAddress: ArrayList<UserDeliverAddress>
+
+    //Init FireBase
+    private val db = Firebase.firestore
+    private val dbReference = db.collection("accounts")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        agreeTermAndCondition = findViewById(R.id.cbAgreeTermAndConditions)
+        errorAgreeTermNotification = findViewById(R.id.errorAgreeTermNotification)
+        edtPassword = findViewById(R.id.edtUserPassword)
+        edtConfirmPasswordLayout = findViewById(R.id.inputTextPasswordConfirmLayout)
+        edtPasswordConfirm = findViewById(R.id.edtUserPasswordConfirm)
+        edtPasswordLayout = findViewById(R.id.inputTextPasswordLayout)
+        edtName = findViewById(R.id.edtUserName)
+        edtNameLayout = findViewById(R.id.inputTextUserNameLayout)
+        edtEmail = findViewById(R.id.edtUserEmail)
+        edtEmailLayout = findViewById(R.id.inputTextEmailLayout)
 
         val imgBackArrow: AppCompatImageView = findViewById(R.id.imgBackArrow)
         imgBackArrow.setOnClickListener {
@@ -24,49 +62,79 @@ class RegisterActivity : AppCompatActivity() {
             signUpClick()
         }
 
+
     }
 
     private fun signUpClick() {
-
-        if(isValidName() && isValidEmail() && isValidPassword() && isValidConfirmPassword()&&isAgreeTermAndConditions()){
-            //put dữ liệu lên DB
-            Toast.makeText(this,"Register Success",Toast.LENGTH_LONG ).show()
+        if (isValidName() && isValidEmail() && isValidPassword() && isValidConfirmPassword() && isAgreeTermAndConditions()) {
+            if (!isEmailExist()) {
+                email = edtEmail.text.toString()
+                password = edtPassword.text.toString()
+                user = User(fullName = edtName.text.toString())
+                listDeliverAddress = ArrayList()
+                account = Account(email, password, user, listDeliverAddress)
+                val value = hashMapOf(
+                    "Email" to account.email,
+                    "Password" to account.password,
+                    "User" to account.user,
+                    "Delivery Addresses" to account.listDeliverAddress
+                )
+                dbReference.document(account.email).set(value).addOnSuccessListener {
+                    Toast.makeText(this, "Register Success", Toast.LENGTH_LONG).show()
+                }.addOnFailureListener { e ->
+                    Toast.makeText(this, "Register Fail$e", Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
-    private fun isAgreeTermAndConditions(): Boolean{
-        val agreeTermAndCondition: CheckBox = findViewById(R.id.cbAgreeTermAndConditions)
-        val errorAgreeTermNotification: TextView =findViewById(R.id.errorAgreeTermNotification)
-        return if(agreeTermAndCondition.isChecked) {
+
+    private fun isEmailExist(): Boolean {
+        var emailExist: Boolean = false
+        dbReference.document(account.email).get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    edtEmailLayout.error = "Email exist"
+                    emailExist = true
+                } else {
+                    edtEmailLayout.error = null
+                    emailExist = false
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Register Fail$e", Toast.LENGTH_LONG).show()
+            }
+        return emailExist
+    }
+
+    private fun isAgreeTermAndConditions(): Boolean {
+
+        return if (agreeTermAndCondition.isChecked) {
             errorAgreeTermNotification.visibility = View.INVISIBLE
             true
-        }else{
-            errorAgreeTermNotification.visibility =View.VISIBLE
+        } else {
+            errorAgreeTermNotification.visibility = View.VISIBLE
             false
         }
     }
 
     private fun isValidConfirmPassword(): Boolean {
-        val edtPassword: EditText = findViewById(R.id.edtUserPassword)
-        val edtConfirmPasswordLayout: TextInputLayout =
-            findViewById(R.id.inputTextPasswordConfirmLayout)
-        val edtPasswordConfirm: EditText = findViewById(R.id.edtUserPasswordConfirm)
+
         return if (edtPasswordConfirm.text.isEmpty()) {
-            edtConfirmPasswordLayout.error ="Confirm password can not empty"
+            edtConfirmPasswordLayout.error = "Confirm password can not empty"
             false
-        }else{
-            return if(edtPassword.text.toString() != edtPasswordConfirm.text.toString()){
-                edtConfirmPasswordLayout.error="Password and Confirm Password must be one"
+        } else {
+            return if (edtPassword.text.toString() != edtPasswordConfirm.text.toString()) {
+                edtConfirmPasswordLayout.error = "Password and Confirm Password must be one"
                 false
-            } else{
-                edtConfirmPasswordLayout.error =null
+            } else {
+                edtConfirmPasswordLayout.error = null
                 true
             }
         }
     }
 
     private fun isValidPassword(): Boolean {
-        val edtPassword: EditText = findViewById(R.id.edtUserPassword)
-        val edtPasswordLayout: TextInputLayout = findViewById(R.id.inputTextPasswordLayout)
+
         return if (edtPassword.text.isEmpty()) {
             edtPasswordLayout.error = "Password can not empty"
             false
@@ -82,8 +150,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun isValidName(): Boolean {
-        val edtName: EditText = findViewById(R.id.edtUserName)
-        val edtNameLayout: TextInputLayout = findViewById(R.id.inputTextUserNameLayout)
+
         return if (edtName.text.isEmpty()) {
             edtNameLayout.error = "Name can not empty"
             false
@@ -120,8 +187,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun isValidEmail(): Boolean {
-        val edtEmail: EditText = findViewById(R.id.edtUserEmail)
-        val edtEmailLayout: TextInputLayout = findViewById(R.id.inputTextEmailLayout)
+
         return if (edtEmail.text.isEmpty()) {
             edtEmailLayout.error = "Email can not empty"
             false
