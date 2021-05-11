@@ -14,7 +14,7 @@ import com.example.svbookmarket.activities.data.DataSource
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_adress)
+        setContentView(R.layout.activity_category)
         //Load data
 //        val dataBookSet = DataSource().loadBookFeature()
 //
