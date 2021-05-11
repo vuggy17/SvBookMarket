@@ -62,49 +62,29 @@ class RegisterActivity : AppCompatActivity() {
             signUpClick()
         }
 
-
     }
 
     private fun signUpClick() {
         if (isValidName() && isValidEmail() && isValidPassword() && isValidConfirmPassword() && isAgreeTermAndConditions()) {
-            if (!isEmailExist()) {
-                email = edtEmail.text.toString()
-                password = edtPassword.text.toString()
-                user = User(fullName = edtName.text.toString())
-                listDeliverAddress = ArrayList()
-                account = Account(email, password, user, listDeliverAddress)
-                val value = hashMapOf(
-                    "Email" to account.email,
-                    "Password" to account.password,
-                    "User" to account.user,
-                    "Delivery Addresses" to account.listDeliverAddress
-                )
-                dbReference.document(account.email).set(value).addOnSuccessListener {
-                    Toast.makeText(this, "Register Success", Toast.LENGTH_LONG).show()
-                }.addOnFailureListener { e ->
-                    Toast.makeText(this, "Register Fail$e", Toast.LENGTH_LONG).show()
-                }
+            email = edtEmail.text.toString()
+            password = edtPassword.text.toString()
+            user = User(fullName = edtName.text.toString())
+            listDeliverAddress = ArrayList()
+            account = Account(email, password, user, listDeliverAddress)
+            val value = hashMapOf(
+                "Email" to account.email,
+                "Password" to account.password,
+                "User" to account.user,
+                "Delivery Addresses" to account.listDeliverAddress
+            )
+            dbReference.document(account.email).set(value).addOnSuccessListener {
+                Toast.makeText(this, "Register Success", Toast.LENGTH_SHORT).show()
+            }.addOnFailureListener { e ->
+                Toast.makeText(this, "Register Fail$e", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun isEmailExist(): Boolean {
-        var emailExist: Boolean = false
-        dbReference.document(account.email).get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    edtEmailLayout.error = "Email exist"
-                    emailExist = true
-                } else {
-                    edtEmailLayout.error = null
-                    emailExist = false
-                }
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(this, "Register Fail$e", Toast.LENGTH_LONG).show()
-            }
-        return emailExist
-    }
 
     private fun isAgreeTermAndConditions(): Boolean {
 
@@ -150,7 +130,6 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun isValidName(): Boolean {
-
         return if (edtName.text.isEmpty()) {
             edtNameLayout.error = "Name can not empty"
             false
@@ -186,15 +165,23 @@ class RegisterActivity : AppCompatActivity() {
         ).matcher(email).matches()
     }
 
-    private fun isValidEmail(): Boolean {
+    private fun isEmailExist(): Boolean {
+        return dbReference.document(edtEmail.text.toString()).get().isSuccessful
+    }
 
+    private fun isValidEmail(): Boolean {
         return if (edtEmail.text.isEmpty()) {
             edtEmailLayout.error = "Email can not empty"
             false
         } else {
             if (isEmailRightFormat(edtEmail.text.toString().trim())) {
-                edtEmailLayout.error = null
-                true
+                if (isEmailExist()) {
+                    edtEmailLayout.error = "Email exist"
+                    false
+                } else {
+                    edtEmailLayout.error = null
+                    true
+                }
             } else {
                 edtEmailLayout.error = "Invalid email"
                 false
