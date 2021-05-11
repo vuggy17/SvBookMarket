@@ -224,10 +224,12 @@
         app:layout_constraintTop_toBottomOf="@+id/tvCity"/>
 
     <Button android:id="@+id/btnEdit"
+        style="@style/btn_blue"
         android:clickable="true"
-        android:layout_height="52dp"
-        android:layout_width="270dp"
-        app:backgroundTint="@color/blue_light"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        android:layout_width="match_parent"
+        android:background="@drawable/ripple"
         android:text="Edit"
         android:textSize="20dp"
         android:textColor="@color/white"

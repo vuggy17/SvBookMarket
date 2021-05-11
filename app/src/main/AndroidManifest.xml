@@ -9,27 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SvBookMarket">
-
-        <activity
-            android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.SearchActivity"/>
-        <activity android:name=".activities.FeatureActivity"/>
-        <activity android:name=".activities.ProfileActivity"/>
-        <activity android:name=".activities.EditProfileActivity"/>
-        <activity
-            android:name=".activities.WelcomeActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.RegisterActivity"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".activities.SplashActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".activities.CreateAddress">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.SearchActivity" />
+        <activity android:name=".activities.FeatureActivity" />
+        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.EditProfileActivity" />
+        <activity
+            android:name=".activities.WelcomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.SplashActivity"
+            android:screenOrientation="portrait">
+
         </activity>
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.CartActivity" />
@@ -37,7 +38,7 @@
         <activity
             android:name=".activities.HomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"/>
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
 
         <meta-data
             android:name="preloaded_fonts"
