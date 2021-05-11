@@ -66,21 +66,33 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun signUpClick() {
         if (isValidName() && isValidEmail() && isValidPassword() && isValidConfirmPassword() && isAgreeTermAndConditions()) {
-            email = edtEmail.text.toString()
-            password = edtPassword.text.toString()
-            user = User(fullName = edtName.text.toString())
-            listDeliverAddress = ArrayList()
-            account = Account(email, password, user, listDeliverAddress)
-            val value = hashMapOf(
-                "Email" to account.email,
-                "Password" to account.password,
-                "User" to account.user,
-                "Delivery Addresses" to account.listDeliverAddress
-            )
-            dbReference.document(account.email).set(value).addOnSuccessListener {
-                Toast.makeText(this, "Register Success", Toast.LENGTH_SHORT).show()
-            }.addOnFailureListener { e ->
-                Toast.makeText(this, "Register Fail$e", Toast.LENGTH_SHORT).show()
+            dbReference.get().addOnSuccessListener() { result ->
+                var emailExist: Boolean=false
+                for (document in result) {
+                    if (document.id == edtEmail.text.toString()) {
+                        emailExist = true
+                    }
+                }
+                if(emailExist){
+                    edtEmailLayout.error = "Email is exists"
+                }else {
+                    email = edtEmail.text.toString()
+                    password = edtPassword.text.toString()
+                    user = User(fullName = edtName.text.toString())
+                    listDeliverAddress = ArrayList()
+                    account = Account(email, password, user, listDeliverAddress)
+                    val value = hashMapOf(
+                        "Email" to account.email,
+                        "Password" to account.password,
+                        "User" to account.user,
+                        "Delivery Addresses" to account.listDeliverAddress
+                    )
+                    dbReference.document(account.email).set(value).addOnSuccessListener {
+                        Toast.makeText(this, "Register Success", Toast.LENGTH_SHORT).show()
+                    }.addOnFailureListener { e ->
+                        Toast.makeText(this, "Register Fail$e", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
     }
@@ -165,9 +177,6 @@ class RegisterActivity : AppCompatActivity() {
         ).matcher(email).matches()
     }
 
-    private fun isEmailExist(): Boolean {
-        return dbReference.document(edtEmail.text.toString()).get().isSuccessful
-    }
 
     private fun isValidEmail(): Boolean {
         return if (edtEmail.text.isEmpty()) {
@@ -175,13 +184,8 @@ class RegisterActivity : AppCompatActivity() {
             false
         } else {
             if (isEmailRightFormat(edtEmail.text.toString().trim())) {
-                if (isEmailExist()) {
-                    edtEmailLayout.error = "Email exist"
-                    false
-                } else {
-                    edtEmailLayout.error = null
-                    true
-                }
+                edtEmailLayout.error = null
+                true
             } else {
                 edtEmailLayout.error = "Invalid email"
                 false
