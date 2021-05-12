@@ -11,7 +11,7 @@ class CategoryActivity:AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_category)
+        setContentView(R.layout.menu)
 
 //        (appbar.layoutParams as CoordinatorLayout.LayoutParams).behavior = ToolbarBehavior()
 

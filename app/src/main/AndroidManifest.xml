@@ -15,9 +15,9 @@
         <activity android:name=".activities.FeatureActivity">
 
         </activity>
-        <activity android:name=".activities.ProfileActivity">
-
-        </activity>
+        <activity android:name=".activities.ProfileActivity"/>
+        <activity android:name=".activities.CreateAddress"/>
+        <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.EditProfileActivity" />
         <activity
             android:name=".activities.WelcomeActivity"
@@ -27,10 +27,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.SplashActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".activities.MainActivity"/>
-        <activity android:name=".activities.CartActivity"/>
-        <activity android:name=".activities.AddressActivity"/>
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.CartActivity" />
+        <activity android:name=".activities.AddressActivity" />
         <activity
             android:name=".activities.HomeActivity"
             android:screenOrientation="portrait"
