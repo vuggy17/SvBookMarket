@@ -1,55 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ImageButton
-        android:id="@+id/c_backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/transparent"
-        android:src="@drawable/img_back_arrow"
-        android:tint="@color/black"
-        android:layout_marginTop="29dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <TextView
-        android:id="@+id/c_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
-        android:text="Edit address"
-        android:textColor="@android:color/black"
-        android:textSize="21sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
 
-    <SearchView
-        android:id="@+id/c_edText"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:autofillHints="Search book"
-        android:background="@drawable/bg_home_search"
-        android:elevation="8dp"
-        android:layout_marginTop="8dp"
-        android:touchscreenBlocksFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/c_textView" />
+        <ImageButton
+            android:id="@+id/c_backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="29dp"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/img_back_arrow"
+            android:tint="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="550dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/c_edText">
+        <TextView
+            android:id="@+id/c_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="29dp"
+            android:text="Edit address"
+            android:textColor="@android:color/black"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <SearchView
+            android:id="@+id/c_edText"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:autofillHints="Search book"
+            android:background="@drawable/bg_home_search"
+            android:elevation="8dp"
+            android:padding="8dp"
+            android:touchscreenBlocksFocus="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/c_textView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,8 +68,8 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:backgroundTint="@color/yellow_back">
+                    android:layout_marginEnd="40dp"
+                    android:backgroundTint="@color/blue_dark">
 
                     <LinearLayout
                         android:layout_width="120dp"
@@ -77,6 +79,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:textColor="@color/white"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -130,8 +133,8 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:backgroundTint="@color/yellow_back">
+                    android:layout_marginEnd="40dp"
+                    android:backgroundTint="@android:color/holo_green_dark">
 
                     <LinearLayout
                         android:layout_width="120dp"
@@ -159,7 +162,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/yellow_back">
+                    android:backgroundTint="@android:color/holo_purple">
 
                     <LinearLayout
                         android:layout_width="120dp"
@@ -194,8 +197,8 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:backgroundTint="@color/yellow_back">
+                    android:layout_marginEnd="40dp"
+                    android:backgroundTint="@android:color/holo_red_light">
 
                     <LinearLayout
                         android:layout_width="120dp"
@@ -223,7 +226,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/yellow_back">
+                    android:backgroundTint="@android:color/holo_orange_dark">
 
                     <LinearLayout
                         android:layout_width="120dp"
@@ -315,5 +318,5 @@
             </LinearLayout>
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -35,6 +35,9 @@
             android:name=".activities.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+
+        </activity>
+        <activity android:name=".activities.CategoryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
