@@ -9,19 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SvBookMarket">
-        <activity android:name=".activities.CreateAddress">
-        <activity android:name=".activities.model.ItemDetialActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".activities.LoginActivity"/>
         <activity android:name=".activities.ProfileActivity"/>
-        <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.SearchActivity" />
         <activity android:name=".activities.FeatureActivity" />
         <activity android:name=".activities.EditProfileActivity" />
+        <activity android:name=".activities.ItemDetialActivity"/>
         <activity
             android:name=".activities.WelcomeActivity"
             android:screenOrientation="portrait" />
@@ -31,7 +25,11 @@
         <activity
             android:name=".activities.SplashActivity"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.CartActivity" />
@@ -42,13 +40,7 @@
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
 
         </activity>
-        <activity android:name=".activities.CategoryActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".activities.CategoryActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"

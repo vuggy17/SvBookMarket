@@ -29,22 +29,22 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <Button
                 android:id="@+id/shopNow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_button_gradient"
+                android:layout_marginStart="16dp"
                 android:fontFamily="@font/roboto_bold"
                 android:text="@string/shop_now"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="10dp"
+                android:textSize="10sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/advertiseImage"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.87" />
+                app:layout_constraintVertical_bias="0.75"
+                tools:ignore="SmallSp" />
 
             <TextView
                 android:id="@+id/advertiseDateTime"

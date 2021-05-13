@@ -1,12 +1,13 @@
 package com.example.svbookmarket.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.svbookmarket.R
-import com.example.svbookmarket.activities.model.Account
+import com.example.svbookmarket.activities.model.AppAccount
 import com.example.svbookmarket.activities.model.User
 import com.example.svbookmarket.activities.model.UserDeliverAddress
 import com.google.android.material.textfield.TextInputLayout
@@ -27,13 +28,13 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var edtNameLayout: TextInputLayout
     private lateinit var edtEmail: EditText
     private lateinit var edtEmailLayout: TextInputLayout
+    private lateinit var tvSignIn: TextView
 
     //Init Data
     private lateinit var email: String
     private lateinit var password: String
     private lateinit var user: User
-    private lateinit var account: Account
-    private lateinit var listDeliverAddress: ArrayList<UserDeliverAddress>
+    private lateinit var appAccount: AppAccount
 
     //Init FireBase
     private val db = Firebase.firestore
@@ -52,6 +53,11 @@ class RegisterActivity : AppCompatActivity() {
         edtNameLayout = findViewById(R.id.inputTextUserNameLayout)
         edtEmail = findViewById(R.id.edtUserEmail)
         edtEmailLayout = findViewById(R.id.inputTextEmailLayout)
+        tvSignIn = findViewById(R.id.tvSignIn)
+
+        tvSignIn.setOnClickListener{
+            startActivity(Intent(baseContext,LoginActivity::class.java))
+        }
 
         val imgBackArrow: AppCompatImageView = findViewById(R.id.imgBackArrow)
         imgBackArrow.setOnClickListener {
@@ -79,19 +85,15 @@ class RegisterActivity : AppCompatActivity() {
                     email = edtEmail.text.toString()
                     password = edtPassword.text.toString()
                     user = User(fullName = edtName.text.toString())
-                    listDeliverAddress = ArrayList()
-                    account = Account(email, password, user, listDeliverAddress)
-                    val value = hashMapOf(
-                        "Email" to account.email,
-                        "Password" to account.password,
-                        "User" to account.user,
-                        "Delivery Addresses" to account.listDeliverAddress
-                    )
-                    dbReference.document(account.email).set(value).addOnSuccessListener {
+                    appAccount = AppAccount(email, password, user)
+                    dbReference.document(appAccount.email).set(appAccount).addOnSuccessListener {
                         Toast.makeText(this, "Register Success", Toast.LENGTH_SHORT).show()
                     }.addOnFailureListener { e ->
                         Toast.makeText(this, "Register Fail$e", Toast.LENGTH_SHORT).show()
                     }
+                    val dbReferenceRecentAccountUserAddressAccount = dbReference.document(appAccount.email).collection("userDeliverAddresses")
+                    dbReferenceRecentAccountUserAddressAccount.document().set(UserDeliverAddress(user.regularAddress, user.fullName, user.phoneNumber))
+                    startActivity(Intent(baseContext,LoginActivity::class.java))
                 }
             }
         }

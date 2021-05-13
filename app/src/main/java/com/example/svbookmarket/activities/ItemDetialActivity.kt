@@ -1,4 +1,4 @@
-package com.example.svbookmarket.activities.model
+package com.example.svbookmarket.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
