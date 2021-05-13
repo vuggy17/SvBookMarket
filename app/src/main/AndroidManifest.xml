@@ -9,17 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SvBookMarket">
-        <activity android:name=".activities.CreateAddress">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".activities.SearchActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+        <activity android:name=".activities.FeatureActivity">
+
+        </activity>
+        <activity android:name=".activities.ProfileActivity"/>
+        <activity android:name=".activities.CreateAddress"/>
         <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.SearchActivity" />
-        <activity android:name=".activities.FeatureActivity" />
-        <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.EditProfileActivity" />
         <activity
             android:name=".activities.WelcomeActivity"
@@ -38,7 +36,16 @@
         <activity
             android:name=".activities.HomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+
+        </activity>
+        <activity android:name=".activities.CategoryActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="preloaded_fonts"
