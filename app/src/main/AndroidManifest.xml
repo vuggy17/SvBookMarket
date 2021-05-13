@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SvBookMarket">
         <activity android:name=".activities.CreateAddress">
+        <activity android:name=".activities.model.ItemDetialActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
