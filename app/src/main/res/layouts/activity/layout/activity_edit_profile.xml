@@ -288,7 +288,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_SaveProfile"
         android:layout_width="match_parent"
         android:layout_height="52dp"

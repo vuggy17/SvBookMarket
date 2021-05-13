@@ -83,8 +83,9 @@ class LoginActivity : AppCompatActivity() {
                                     regularAddress = userMap["regularAddress"].toString()
                                 )
                                 recentAccountLogin = AppAccount(result["email"].toString(), result["password"].toString(),recentUser)
-                                Log.d("0000000",recentAccountLogin.toString())
                                 startActivity(Intent(baseContext, HomeActivity::class.java))
+
+
                             } else {
                                 loginPasswordLayout.error = "Password is not true"
                             }
