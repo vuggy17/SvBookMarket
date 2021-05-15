@@ -197,6 +197,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
             <androidx.appcompat.widget.AppCompatButton
+                  android:id="@+id/id_cart"
                 android:layout_width="64dp"
                 android:layout_height="47dp"
                 android:paddingStart="20dp"

@@ -12,9 +12,11 @@ class ItemDetialActivity : AppCompatActivity() {
         setContentView(R.layout.activity_item_detial)
 
         findViewById<Button>(R.id.id_buy).setOnClickListener{startIntent("buy")}
+        findViewById<Button>(R.id.id_cart).setOnClickListener{startIntent("cart")}
     }
     private fun startIntent(type:String){
         val intent = when(type){
+            "cart"->Intent(this,CartActivity::class.java)
             else-> Intent(this, CheckoutActivity::class.java)
         }
         startActivity(intent)
