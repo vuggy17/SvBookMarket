@@ -13,7 +13,7 @@ class CheckoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // set activity to display here
-        setContentView(binding.root)
+        setContentView(R.layout.activity_checkout)
 
         val dataset = DataSource().loadCheckoutCard()
         val recyclerView  = findViewById<RecyclerView>(R.id.rc_checkout)

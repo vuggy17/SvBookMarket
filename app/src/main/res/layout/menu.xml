@@ -37,6 +37,13 @@
         android:layout_height="wrap_content"
         android:text="Item"/>
 
+    <TextView
+        android:id="@+id/m_checkout"
+        android:padding="5dp"
+        android:textSize="21sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Checkout"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 

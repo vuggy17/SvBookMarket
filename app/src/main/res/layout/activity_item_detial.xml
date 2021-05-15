@@ -204,6 +204,7 @@
                 android:background="@drawable/bg_blue_rounded_outline_btn"
                 android:drawableStart="@drawable/img_add_cart"/>
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/id_buy"
                 android:layout_marginStart="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
