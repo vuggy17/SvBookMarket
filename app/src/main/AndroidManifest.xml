@@ -11,7 +11,9 @@
         android:theme="@style/Theme.SvBookMarket">
 
         <activity android:name=".activities.LoginActivity"/>
-        <activity android:name=".activities.ProfileActivity"/>
+        <activity android:name=".activities.ProfileActivity">
+
+        </activity>
         <activity android:name=".activities.SearchActivity" />
         <activity android:name=".activities.FeatureActivity" />
         <activity android:name=".activities.EditProfileActivity" />
@@ -31,7 +33,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.MainActivity" >
+
+        </activity>
         <activity android:name=".activities.CartActivity" />
         <activity android:name=".activities.AddressActivity" />
         <activity
