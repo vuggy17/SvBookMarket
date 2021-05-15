@@ -21,12 +21,14 @@ class FeaturedAdapter(private val dataSet: ArrayList<Book>) :
         val bookPrice: TextView = view.findViewById(R.id.bookPrice)
         val bookRating: RatingBar = view.findViewById(R.id.bookRatingBar)
         val bookRatesCount: TextView = view.findViewById(R.id.bookRatesCount)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_book, parent, false)
 
+        view.findViewById<View>(R.layout.card_book)
         return ViewHolder(view)
     }
 

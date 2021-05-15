@@ -9,30 +9,33 @@
 >
 
     <TextView
+          android:id="@+id/m_home"
         android:textSize="21sp"
         android:padding="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Home"/>
     <TextView
+        android:id="@+id/m_profile"
         android:textSize="21sp"
         android:padding="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Profile"/>
     <TextView
+        android:id="@+id/m_cart"
         android:padding="5dp"
         android:textSize="21sp"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="My cart"/>
-    <TextView
-        android:padding="5dp"
-        android:textSize="21sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="My order"/>
+<!--    <TextView-->
+<!--        android:id="@+id/m_order"-->
+<!--        android:padding="5dp"-->
+<!--        android:textSize="21sp"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="My order"/>-->
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -8,7 +8,7 @@
     tools:context=".activities.HomeActivity">
 
     <include
-        android:id="@+id/homeToolBar"
+        android:id="@+id/tb_homeToolBar"
         layout="@layout/home_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeToolBar"
+        app:layout_constraintTop_toBottomOf="@+id/tb_homeToolBar"
         app:layout_constraintVertical_bias="0.322">
 
         <LinearLayout
@@ -58,6 +58,7 @@
                     android:textSize="@dimen/home_title" />
 
                 <TextView
+                    android:id="@+id/h_allCategory"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
@@ -94,6 +95,7 @@
                     android:textSize="@dimen/home_title" />
 
                 <TextView
+                    android:id="@+id/h_allFeature"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"

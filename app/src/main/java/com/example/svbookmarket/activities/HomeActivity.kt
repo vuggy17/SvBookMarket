@@ -1,9 +1,13 @@
 package com.example.svbookmarket.activities
 
+import android.content.Intent
 import android.graphics.drawable.ClipDrawable.HORIZONTAL
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.LinearLayout.HORIZONTAL
+import android.widget.SearchView
+import android.widget.TextView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.*
 import com.example.svbookmarket.R
@@ -12,16 +16,15 @@ import com.example.svbookmarket.activities.adapter.CategoryAdapter
 import com.example.svbookmarket.activities.adapter.FeaturedAdapter
 import com.example.svbookmarket.activities.data.DataSource
 import com.example.svbookmarket.databinding.ActivityCategoryBinding
+import com.example.svbookmarket.databinding.ActivityHomeBinding
+import com.example.svbookmarket.databinding.HomeToolbarBinding
 import com.google.android.material.appbar.AppBarLayout
 
 class HomeActivity : AppCompatActivity() {
-    lateinit var binding: ActivityCategoryBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        homeBinding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_home)
-        binding = ActivityCategoryBinding.inflate(layoutInflater)
-
 
 
 //        Load data
@@ -59,5 +62,24 @@ class HomeActivity : AppCompatActivity() {
         recyclerAdvertise.layoutManager = advertiseLayoutManagemer
         val snapHelper: LinearSnapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(recyclerAdvertise)
+
+
+        //binding for intent
+        findViewById<ImageView>(R.id.tb_menu).setOnClickListener { startIntent("menu") }
+        findViewById<SearchView>(R.id.tb_searchView).setOnClickListener { startIntent("search") }
+        findViewById<ImageView>(R.id.tb_cart).setOnClickListener{ startIntent("cart") }
+        findViewById<TextView>(R.id.h_allCategory).setOnClickListener{startIntent("category")}
+        findViewById<TextView>(R.id.h_allFeature).setOnClickListener{startIntent("feature")}
+    }
+
+    private fun startIntent(type:String){
+        val intent = when(type){
+            "menu"-> Intent(this, MenuActivity::class.java)
+            "search"-> Intent(this, SearchActivity::class.java)
+            "cart"-> Intent(this, CartActivity::class.java)
+            "category"-> Intent(this, CategoryActivity::class.java)
+            else-> Intent(this, FeatureActivity::class.java)
+        }
+        startActivity(intent)
     }
 }

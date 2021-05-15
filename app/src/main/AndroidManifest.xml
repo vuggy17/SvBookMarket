@@ -16,6 +16,7 @@
         <activity android:name=".activities.FeatureActivity" />
         <activity android:name=".activities.EditProfileActivity" />
         <activity android:name=".activities.ItemDetialActivity"/>
+        <activity android:name=".activities.CheckoutActivity"/>
         <activity
             android:name=".activities.WelcomeActivity"
             android:screenOrientation="portrait" />
@@ -32,6 +33,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.EditAdressActivity" />
+        <activity android:name=".activities.MenuActivity" />
+
         <activity android:name=".activities.CartActivity" />
         <activity android:name=".activities.AddressActivity" />
         <activity

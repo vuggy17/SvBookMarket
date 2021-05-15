@@ -1,5 +1,6 @@
 package com.example.svbookmarket.activities
 
+import android.content.Intent
 import android.graphics.Canvas
 import android.os.Bundle
 import android.view.View
@@ -127,13 +128,20 @@ class CartActivity : AppCompatActivity() {
         }
 
         // edit button pressed
-        binding.editLocation.setOnClickListener {
-            Toast.makeText(
-                this,
-                "Edit button pressed",
-                Toast.LENGTH_SHORT
-            ).show()
+        binding.ctEditLocation.setOnClickListener {
+          startIntent("editLocation")
         }
+        binding.backButton.setOnClickListener{startIntent("back")}
+
+        binding.ctCheckout.setOnClickListener({startIntent("checkout")})
+    }
+    private fun startIntent(type:String){
+        val intent = when(type){
+            "editLocation"-> Intent(this, EditAdressActivity::class.java)
+            "checkout"-> Intent(this, CheckoutActivity::class.java)
+            else-> Intent(this, HomeActivity::class.java)
+        }
+        startActivity(intent)
     }
 }
 
