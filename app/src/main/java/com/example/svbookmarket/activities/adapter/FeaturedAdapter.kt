@@ -28,7 +28,7 @@ class FeaturedAdapter(private val dataSet: ArrayList<Book>) :
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_book, parent, false)
 
-        view.findViewById<View>(R.layout.card_book)
+//        view.findViewById<View>(R.layout.card_book)
         return ViewHolder(view)
     }
 
