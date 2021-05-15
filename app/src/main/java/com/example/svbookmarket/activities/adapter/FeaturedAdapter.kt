@@ -1,6 +1,7 @@
 package com.example.svbookmarket.activities.adapter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.*
 import com.example.svbookmarket.activities.model.Book
 
 class FeaturedAdapter(private val dataSet: ArrayList<Book>) :
@@ -27,8 +29,8 @@ class FeaturedAdapter(private val dataSet: ArrayList<Book>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_book, parent, false)
-
 //        view.findViewById<View>(R.layout.card_book)
+        view.findViewById<View>(R.id.cb_card).setOnClickListener({})
         return ViewHolder(view)
     }
 
@@ -50,4 +52,14 @@ class FeaturedAdapter(private val dataSet: ArrayList<Book>) :
     override fun getItemCount(): Int {
         return dataSet.size
     }
+//    public  fun startIntent(type:String){
+//        val intent = when(type){
+//            "menu"-> Intent(this, MenuActivity::class.java)
+//            "search"-> Intent(this, SearchActivity::class.java)
+//            "cart"-> Intent(this, CartActivity::class.java)
+//            "category"-> Intent(this, CategoryActivity::class.java)
+//            else-> Intent(this, FeatureActivity::class.java)
+//        }
+//        startActivity(intent)
+//    }
 }

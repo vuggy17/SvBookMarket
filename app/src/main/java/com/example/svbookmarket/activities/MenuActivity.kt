@@ -20,17 +20,18 @@ class MenuActivity:AppCompatActivity() {
         findViewById<TextView>(R.id.m_home).setOnClickListener{startIntent("home")}
         findViewById<TextView>(R.id.m_profile).setOnClickListener{startIntent("profile")}
         findViewById<TextView>(R.id.m_cart).setOnClickListener{startIntent("cart")}
+        findViewById<TextView>(R.id.m_item).setOnClickListener{startIntent("item")}
 //        binding.mOrder.setOnClickListener{startIntent("order")}
 
     }
 
     private fun startIntent(type:String){
         val intent = when(type){
-            "home"-> Intent(this, MenuActivity::class.java)
-            "profile"-> Intent(this, SearchActivity::class.java)
+            "home"-> Intent(this, HomeActivity::class.java)
+            "profile"-> Intent(this, ProfileActivity::class.java)
             "cart"-> Intent(this, CartActivity::class.java)
 //            "order"-> Intent(this, ::class.java)
-            else-> Intent(this, HomeActivity::class.java)
+            else-> Intent(this, ItemDetialActivity::class.java)
         }
         startActivity(intent)
     }

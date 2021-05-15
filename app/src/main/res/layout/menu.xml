@@ -29,13 +29,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="My cart"/>
-<!--    <TextView-->
-<!--        android:id="@+id/m_order"-->
-<!--        android:padding="5dp"-->
-<!--        android:textSize="21sp"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="My order"/>-->
+    <TextView
+        android:id="@+id/m_item"
+        android:padding="5dp"
+        android:textSize="21sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Item"/>
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
