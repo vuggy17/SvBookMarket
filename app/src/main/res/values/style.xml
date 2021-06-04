@@ -91,7 +91,8 @@
         <item name="android:background">@color/white</item>
     </style>
     <style name="rating_bar" parent="@style/Widget.AppCompat.RatingBar.Small">
-<!--        Will custom later-->
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">#FFCC00</item>
     </style>
 
 
@@ -105,4 +106,6 @@
     </style>
     <style name="customRatingBar"
         parent="android:style/Widget.Material.RatingBar.Small"/>
+
+
 </resources>

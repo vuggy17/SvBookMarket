@@ -107,17 +107,29 @@ android:background="@color/background_white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcCardList"
+    <TextView
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/fade_gray"
+        android:textSize="12sp"
+        android:text="Tap to select item or swipe to delete"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:paddingHorizontal="24dp"
+        android:layout_marginTop="12dp"
+        android:id="@+id/rcCardList"
+        android:layout_width="400dp"
         android:layout_height="450dp"
         android:layout_gravity="center_horizontal"
         android:fadeScrollbars="true"
         android:paddingBottom="12dp"
-        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        tools:listitem="@layout/card_checkout" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/ct_checkout"

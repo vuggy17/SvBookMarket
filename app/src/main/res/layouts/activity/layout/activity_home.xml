@@ -7,38 +7,35 @@
     android:background="@color/home_gray"
     tools:context=".activities.HomeActivity">
 
-    <include
-        android:id="@+id/tb_homeToolBar"
-        layout="@layout/home_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tb_homeToolBar"
-        app:layout_constraintVertical_bias="0.322">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <include
+                android:id="@+id/htb_homeToolBar"
+                layout="@layout/home_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/advertise"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fitsSystemWindows="true"
                 android:layout_marginLeft="@dimen/margin"
-                android:layout_marginRight="@dimen/margin" />
+                android:layout_marginRight="@dimen/margin"
+                android:fitsSystemWindows="true" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,12 +46,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
                     android:gravity="center"
                     android:text="@string/categories"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/home_title" />
 
                 <TextView
@@ -86,12 +83,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
                     android:gravity="center"
                     android:text="@string/featured"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/home_title" />
 
                 <TextView
@@ -123,22 +120,23 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
                     android:gravity="center"
                     android:text="@string/more"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/home_title" />
             </LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/bookCatalog"
                 android:layout_width="match_parent"
                 android:layout_height="600dp"
+                android:nestedScrollingEnabled="false"
                 android:layout_marginLeft="@dimen/margin"
-                android:layout_marginRight="@dimen/margin"
                 android:layout_marginTop="10dp"
-                />
+                android:layout_marginRight="@dimen/margin" />
         </LinearLayout>
 
     </ScrollView>

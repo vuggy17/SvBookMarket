@@ -43,7 +43,7 @@
                 android:layout_toStartOf="@+id/tb_cart"
                 android:layout_toEndOf="@+id/tb_menu"
                 android:background="@drawable/bg_home_search"
-                android:elevation="8dp"
+                android:elevation="6dp"
                 android:touchscreenBlocksFocus="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/tb_cart"

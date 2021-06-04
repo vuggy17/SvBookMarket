@@ -9,13 +9,6 @@
 >
 
     <TextView
-          android:id="@+id/m_home"
-        android:textSize="21sp"
-        android:padding="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home"/>
-    <TextView
         android:id="@+id/m_profile"
         android:textSize="21sp"
         android:padding="5dp"
@@ -44,6 +37,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Checkout"/>
-
+    <TextView
+        android:id="@+id/m_home"
+        android:textSize="21sp"
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home"/>
+    <TextView
+        android:id="@+id/m_address"
+        android:textSize="21sp"
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address"/>
 </androidx.appcompat.widget.LinearLayoutCompat>
 

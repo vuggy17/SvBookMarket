@@ -22,6 +22,8 @@ class MenuActivity:AppCompatActivity() {
         findViewById<TextView>(R.id.m_cart).setOnClickListener{startIntent("cart")}
         findViewById<TextView>(R.id.m_item).setOnClickListener{startIntent("item")}
         findViewById<TextView>(R.id.m_checkout).setOnClickListener{startIntent("checkout")}
+    findViewById<TextView>(R.id.m_address).setOnClickListener{startIntent("address")}
+
 //        binding.mOrder.setOnClickListener{startIntent("order")}
 
     }
@@ -32,7 +34,7 @@ class MenuActivity:AppCompatActivity() {
             "profile"-> Intent(this, ProfileActivity::class.java)
             "cart"-> Intent(this, CartActivity::class.java)
             "checkout"-> Intent(this, CheckoutActivity::class.java)
-//            "order"-> Intent(this, ::class.java)
+            "address"-> Intent(this, AddressActivity::class.java)
             else-> Intent(this, ItemDetialActivity::class.java)
         }
         startActivity(intent)

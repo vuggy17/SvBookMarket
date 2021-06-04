@@ -1,8 +1,10 @@
 package com.example.svbookmarket.activities
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.AddressAdapter
 import com.example.svbookmarket.activities.common.InsetDividerItemDecoration
@@ -24,13 +26,27 @@ class AddressActivity : AppCompatActivity() {
         val myDataset = DataSource().loadAddressCard()
         val _layoutManager = LinearLayoutManager(this)
         val _adapter = AddressAdapter(this,myDataset)
+        val adRecyclerview = binding.adRecyclerview
+        val newAddressBtn = binding.adNewAddress
+        val editAddressBtn = binding.adEditAdress
 
-        binding.recyclerview.apply {
+        adRecyclerview.apply {
                 adapter = _adapter
            layoutManager = _layoutManager
             addItemDecoration(InsetDividerItemDecoration(context,138.toPx()))
             setHasFixedSize(true)
         }
+
+        newAddressBtn.setOnClickListener{
+            val newAddressDialog = CreateAddressDialog()
+            newAddressDialog.show(supportFragmentManager, "tag")
+        }
+
+        editAddressBtn.setOnClickListener{
+            val editAddressDialog = EditAddressDialog()
+            editAddressDialog.show(supportFragmentManager,"tag")
+        }
+
 
     }
 }

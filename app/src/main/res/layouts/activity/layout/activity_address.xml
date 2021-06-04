@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="24dp"
-    android:paddingTop="29dp">
+    android:paddingHorizontal="24dp">
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/a_imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
         android:backgroundTint="@android:color/transparent"
-        android:src="@drawable/ic_arrow_back"
+        android:src="@drawable/img_back_arrow"
         android:tint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,58 +27,61 @@
         android:textSize="21sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/a_imageButton" />
+
+    <TextView
+        android:id="@+id/ad_editAdress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:textColor="@color/blue_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Select your address"
-        android:textColor="@color/blue_dark"
+        android:text="Tap to select your address"
+        android:textColor="@color/fade_gray"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
+        android:id="@+id/ad_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="580dp"
+        android:layout_height="wrap_content"
+        android:maxHeight="500dp"
         android:layout_marginTop="16dp"
+        tools:itemCount="2"
         app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/card_address"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/select"
-        app:layout_goneMarginTop="22dp" />
+       />
 
-    <com.google.android.material.button.MaterialButton
-        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        android:layout_width="341dp"
-        android:layout_height="48dp"
-        android:text="Create new address"
-        android:textAllCaps="false"
-        android:textColor="#A4A4A4"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:backgroundTint="#D7D8D9"
-        app:cornerRadius="14dp"
-        app:icon="@drawable/ic_plus"
-        app:iconGravity="textStart"
-        app:iconSize="12dp"
-        app:iconTint="#A4A4A4"
+  <TextView
+      android:id="@+id/ad_newAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Press to add new address"
+        android:textColor="@color/blue_dark"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerview" />
+        app:layout_constraintTop_toBottomOf="@+id/ad_recyclerview" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/materialButton2"
-        android:layout_width="341dp"
-        android:layout_height="48dp"
+        android:layout_width="@dimen/btn_width"
+        android:layout_height="@dimen/btn_height"
         android:layout_marginBottom="25sp"
         android:text="Continue to payment"
         android:textAllCaps="true"
         android:textStyle="bold"
-        app:backgroundTint="@color/blue_light"
+        app:backgroundTint="@color/green"
         app:cornerRadius="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

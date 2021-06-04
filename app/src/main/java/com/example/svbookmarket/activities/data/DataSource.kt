@@ -55,38 +55,6 @@ class DataSource {
                 "Quan Thu Duc",
                 "Tp.Ho Chi Minh"
             ),
-            AddressModel(
-                "Khuong Duy",
-                "0869256174",
-                "Ktx khu A, DHQG",
-                "Phuong Linh Trung",
-                "Quan Thu Duc",
-                "Tp.Ho Chi Minh"
-            ),
-            AddressModel(
-                "Khuong Duy",
-                "0869256174",
-                "Ktx khu A, DHQG",
-                "Phuong Linh Trung",
-                "Quan Thu Duc",
-                "Tp.Ho Chi Minh"
-            ),
-            AddressModel(
-                "Khuong Duy",
-                "0869256174",
-                "Ktx khu A, DHQG",
-                "Phuong Linh Trung",
-                "Quan Thu Duc",
-                "Tp.Ho Chi Minh"
-            ),
-            AddressModel(
-                "Khuong Duy",
-                "0869256174",
-                "Ktx khu A, DHQG",
-                "Phuong Linh Trung",
-                "Quan Thu Duc",
-                "Tp.Ho Chi Minh"
-            ),
         )
     }
 

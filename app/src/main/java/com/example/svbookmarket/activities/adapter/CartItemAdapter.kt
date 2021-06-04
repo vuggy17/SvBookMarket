@@ -4,9 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.model.CartModel
@@ -27,7 +30,7 @@ class CartItemAdapter(val context: Context, private val cartList:MutableList<Car
         holder.price.text = cartList[position].price.toString()
         holder.number.text = cartList[position].numbers.toString()
 
-        // increase and decrease button listener
+        // increase and decrease button listenerc
         holder.increaseButton.setOnClickListener {
             Toast.makeText(
                 context,
@@ -63,8 +66,8 @@ class CartItemAdapter(val context: Context, private val cartList:MutableList<Car
                 (it as MaterialCardView).isChecked = !it.isChecked
             }
         }
-        val increaseButton:MaterialButton = view.findViewById(R.id.increaseNumber)
-        val decreaseButton:MaterialButton = view.findViewById(R.id.decreaseNumber)
+        val increaseButton:AppCompatImageButton = view.findViewById(R.id.increaseNumber)
+        val decreaseButton:AppCompatImageButton = view.findViewById(R.id.decreaseNumber)
         var number : TextView = view.findViewById(R.id.tv_numbers)
         var name : TextView = view.findViewById(R.id.tv_bookname)
         var author : TextView = view.findViewById(R.id.tv_author)
