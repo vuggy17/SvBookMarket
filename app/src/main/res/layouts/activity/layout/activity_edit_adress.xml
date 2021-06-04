@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_rounded"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingHorizontal="24dp"
-    tools:context=".activities.ProfileActivity">
-
+    android:orientation="vertical">
     <TextView
         android:id="@+id/ca_createAddress"
         android:layout_width="wrap_content"
@@ -57,7 +56,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="Name"
-            android:enabled="false"
             android:fontFamily="@font/roboto_regular"
             android:inputType="text"
             android:text="Nguyen Van A"
@@ -88,7 +86,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:autofillHints="Address Lane"
-            android:enabled="false"
             android:fontFamily="@font/roboto_regular"
             android:inputType="number"
             android:text="0123456789"
@@ -120,7 +117,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:autofillHints="District"
-            android:enabled="false"
             android:fontFamily="@font/roboto_regular"
             android:inputType="text"
             android:text="KTX khu B ĐHQG"
@@ -166,7 +162,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:autofillHints="City"
-                    android:enabled="false"
                     android:fontFamily="@font/roboto_regular"
                     android:inputType="text"
                     android:text="5"
@@ -207,7 +202,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:autofillHints="City"
-                    android:enabled="false"
                     android:fontFamily="@font/roboto_regular"
                     android:inputType="text"
                     android:text="TP.Thu Duc"
@@ -240,6 +234,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

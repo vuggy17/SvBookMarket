@@ -5,7 +5,7 @@
     <color name="white">#FFFFFF</color>
     <color name="disable">#696969</color>
     <color name="danger">#F40000</color>
-
+    <color name="trans">#00000000</color>
     <color name="danger_light">#FF3333</color>
 <color name="search_screen_back">#F5F6F7</color>
     <color name="blue_dark">#0f52ba</color>

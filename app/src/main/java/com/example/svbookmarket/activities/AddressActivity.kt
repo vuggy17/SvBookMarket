@@ -3,6 +3,7 @@ package com.example.svbookmarket.activities
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment.STYLE_NORMAL
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
@@ -12,7 +13,6 @@ import com.example.svbookmarket.activities.common.toPx
 import com.example.svbookmarket.activities.data.DataSource
 import com.example.svbookmarket.databinding.ActivityAddressBinding
 import com.google.android.material.card.MaterialCardView
-
 
 class AddressActivity : AppCompatActivity() {
     lateinit var binding: ActivityAddressBinding
@@ -44,6 +44,7 @@ class AddressActivity : AppCompatActivity() {
 
         editAddressBtn.setOnClickListener{
             val editAddressDialog = EditAddressDialog()
+            editAddressDialog.setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
             editAddressDialog.show(supportFragmentManager,"tag")
         }
 
