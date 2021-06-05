@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/home_gray"
-    tools:context=".activities.HomeActivity">
+    tools:context=".activities.HomeActivity"
+    tools:showIn="@layout/activity_home">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/homeToolBar"
+        android:id="@+id/tb_homeToolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/home_gray"
@@ -23,7 +24,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/tb_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -32,25 +33,25 @@
                 android:src="@drawable/img_baseline_menu" />
 
             <SearchView
-                android:id="@+id/searchView"
+                android:id="@+id/tb_searchView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="3"
                 android:layout_marginVertical="10dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
-                android:layout_toStartOf="@+id/imageView4"
-                android:layout_toEndOf="@+id/imageView5"
+                android:layout_toStartOf="@+id/tb_cart"
+                android:layout_toEndOf="@+id/tb_menu"
                 android:background="@drawable/bg_home_search"
-                android:elevation="8dp"
+                android:elevation="6dp"
                 android:touchscreenBlocksFocus="true"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/imageView4"
-                app:layout_constraintStart_toEndOf="@+id/imageView5"
+                app:layout_constraintEnd_toEndOf="@id/tb_cart"
+                app:layout_constraintStart_toEndOf="@+id/tb_menu"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/tb_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -60,7 +61,7 @@
                 android:layout_marginEnd="24dp"
                 android:src="@drawable/img_card"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/searchView" />
+                app:layout_constraintStart_toEndOf="@+id/tb_searchView" />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 </androidx.constraintlayout.widget.ConstraintLayout>

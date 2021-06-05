@@ -1,16 +1,42 @@
 package com.example.svbookmarket.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.svbookmarket.R
+import com.example.svbookmarket.databinding.MenuBinding
 
 class MenuActivity:AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+//    lateinit var binding: MenuBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+//        binding = MenuBinding.inflate(layoutInflater)
         setContentView(R.layout.menu)
 
-        Toast.makeText(this,"menu created",Toast.LENGTH_SHORT).show();
+
+        findViewById<TextView>(R.id.m_home).setOnClickListener{startIntent("home")}
+        findViewById<TextView>(R.id.m_profile).setOnClickListener{startIntent("profile")}
+        findViewById<TextView>(R.id.m_cart).setOnClickListener{startIntent("cart")}
+        findViewById<TextView>(R.id.m_item).setOnClickListener{startIntent("item")}
+        findViewById<TextView>(R.id.m_checkout).setOnClickListener{startIntent("checkout")}
+    findViewById<TextView>(R.id.m_address).setOnClickListener{startIntent("address")}
+
+//        binding.mOrder.setOnClickListener{startIntent("order")}
+
+    }
+
+    private fun startIntent(type:String){
+        val intent = when(type){
+            "home"-> Intent(this, HomeActivity::class.java)
+            "profile"-> Intent(this, ProfileActivity::class.java)
+            "cart"-> Intent(this, CartActivity::class.java)
+            "checkout"-> Intent(this, CheckoutActivity::class.java)
+            "address"-> Intent(this, AddressActivity::class.java)
+            else-> Intent(this, ItemDetialActivity::class.java)
+        }
+        startActivity(intent)
     }
 }

@@ -1,6 +1,7 @@
 package com.example.svbookmarket.activities.adapter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.*
 import com.example.svbookmarket.activities.model.Book
 
 class FeaturedAdapter(private val dataSet: ArrayList<Book>) :

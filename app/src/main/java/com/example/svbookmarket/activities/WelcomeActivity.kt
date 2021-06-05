@@ -21,5 +21,7 @@ class WelcomeActivity : AppCompatActivity() {
         login.setOnClickListener {
             startActivity(Intent(baseContext,LoginActivity::class.java))
         }
+        var guestLogin = findViewById<TextView>(R.id.tvContinueAsGuest)
+        guestLogin.setOnClickListener { startActivity(Intent(this, HomeActivity::class.java)) }
     }
 }

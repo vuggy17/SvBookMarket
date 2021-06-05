@@ -91,7 +91,8 @@
         <item name="android:background">@color/white</item>
     </style>
     <style name="rating_bar" parent="@style/Widget.AppCompat.RatingBar.Small">
-<!--        Will custom later-->
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">#FFCC00</item>
     </style>
 
 
@@ -108,5 +109,18 @@
     <style name="roundedImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar." parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@color/trans</item>
     </style>
 </resources>

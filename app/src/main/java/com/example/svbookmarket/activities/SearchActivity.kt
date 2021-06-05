@@ -23,7 +23,7 @@ class SearchActivity : AppCompatActivity() {
 
         suggestSearch = findViewById(R.id.rc_suggest_search)
         recentSearch = findViewById(R.id.rc_recent_search)
-        searchBar = findViewById(R.id.searchView)
+        searchBar = findViewById(R.id.tb_searchView)
         linearLayoutRecent = findViewById(R.id.ln_recent)
 
         // repair fix dataset for suggest

@@ -1,12 +1,12 @@
 package com.example.svbookmarket.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.svbookmarket.R
 
-class CreateAddress : AppCompatActivity() {
+class EditAdressActivity:AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.dialog_create_address)
+        setContentView(R.layout.activity_edit_adress)
     }
 }
