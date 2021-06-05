@@ -13,7 +13,7 @@ import com.example.svbookmarket.activities.model.Feature_Item
 class BestsellingAdapter(private val context: Context ,private val lstBookCard: MutableList<Feature_Item>) : RecyclerView.Adapter<BestsellingAdapter.BestsellingViewHolder>() {
     class BestsellingViewHolder(BestsellingCard: View) :RecyclerView.ViewHolder(BestsellingCard)
     {
-        val imgBookCover: ImageView = BestsellingCard.findViewById(R.id.bookImage)
+        val imgBookCover: ImageView = BestsellingCard.findViewById(R.id.BookImage)
         val tvBookAuthor: TextView = BestsellingCard.findViewById(R.id.bookAuthor)
         val tvBookTitle: TextView = BestsellingCard.findViewById(R.id.bookTitle)
         val tvPrice: TextView = BestsellingCard.findViewById(R.id.bookPrice)

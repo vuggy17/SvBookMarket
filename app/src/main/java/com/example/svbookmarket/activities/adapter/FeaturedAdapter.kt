@@ -15,18 +15,16 @@ import com.example.svbookmarket.activities.model.Book
 class FeaturedAdapter(private val dataSet: ArrayList<Book>) :
     RecyclerView.Adapter<FeaturedAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val bookImage: AppCompatImageView = view.findViewById(R.id.bookImage)
+        val bookImage: AppCompatImageView = view.findViewById(R.id.BookImage)
         val bookTitle: TextView = view.findViewById(R.id.bookTitle)
         val bookAuthor: TextView = view.findViewById(R.id.bookAuthor)
         val bookPrice: TextView = view.findViewById(R.id.bookPrice)
-        val bookRating: RatingBar = view.findViewById(R.id.bookRatingBar)
-        val bookRatesCount: TextView = view.findViewById(R.id.bookRatesCount)
+        val bookRatesCount: TextView = view.findViewById(R.id.tvRate)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.card_book, parent, false)
-
         return ViewHolder(view)
     }
 
@@ -38,9 +36,8 @@ class FeaturedAdapter(private val dataSet: ArrayList<Book>) :
                 // load image from database here!!!
                 bookTitle.text = bookItem.title
                 bookAuthor.text = bookItem.author
-                bookPrice.text = bookItem.price.toString() +" VNĐ"
-                bookRating.rating = bookItem.rating.toFloat()
-                bookRatesCount.text = bookItem.ratesCount.toString()+ " reviews"
+                bookPrice.text = "đ" + bookItem.price.toString()
+                bookRatesCount.text = bookItem.rating.toString()
             }
         }
     }
