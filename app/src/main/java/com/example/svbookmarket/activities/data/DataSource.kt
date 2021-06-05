@@ -66,27 +66,27 @@ class DataSource {
             ),
             Book(
                 Uri.parse("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.viator.com%2Fen-HK%2Ftours%2FParis%2FCity-of-Lights-Tour%2Fd479-48577P5&psig=AOvVaw2WXscYKUJtXfewcb0iNgfL&ust=1619418661896000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPi8q-LimPACFQAAAAAdAAAAABAN"),
-                "Sample", "Sample", 100000, 0.8, "none", 50
+                "Sample1", "Sample2", 110000, 0.8, "none", 50
             ),
             Book(
                 Uri.parse("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.viator.com%2Fen-HK%2Ftours%2FParis%2FCity-of-Lights-Tour%2Fd479-48577P5&psig=AOvVaw2WXscYKUJtXfewcb0iNgfL&ust=1619418661896000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPi8q-LimPACFQAAAAAdAAAAABAN"),
-                "Sample", "Sample", 100000, 2.0, "none", 50
+                "Sample2", "Sample2", 120000, 2.0, "none", 50
             ),
             Book(
                 Uri.parse("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.viator.com%2Fen-HK%2Ftours%2FParis%2FCity-of-Lights-Tour%2Fd479-48577P5&psig=AOvVaw2WXscYKUJtXfewcb0iNgfL&ust=1619418661896000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPi8q-LimPACFQAAAAAdAAAAABAN"),
-                "Sample", "Sample", 100000, 4.1, "none", 50
+                "Sample3", "Sample3", 130000, 4.1, "none", 50
             ),
             Book(
                 Uri.parse("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.viator.com%2Fen-HK%2Ftours%2FParis%2FCity-of-Lights-Tour%2Fd479-48577P5&psig=AOvVaw2WXscYKUJtXfewcb0iNgfL&ust=1619418661896000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPi8q-LimPACFQAAAAAdAAAAABAN"),
-                "Sample", "Sample", 100000, 5.0, "none", 50
+                "Sample4", "Sample4", 140000, 5.0, "none", 50
             ),
             Book(
                 Uri.parse("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.viator.com%2Fen-HK%2Ftours%2FParis%2FCity-of-Lights-Tour%2Fd479-48577P5&psig=AOvVaw2WXscYKUJtXfewcb0iNgfL&ust=1619418661896000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPi8q-LimPACFQAAAAAdAAAAABAN"),
-                "Sample", "Sample", 100000, 4.1, "none", 50
+                "Sample5", "Sample5", 150000, 4.1, "none", 50
             ),
             Book(
                 Uri.parse("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.viator.com%2Fen-HK%2Ftours%2FParis%2FCity-of-Lights-Tour%2Fd479-48577P5&psig=AOvVaw2WXscYKUJtXfewcb0iNgfL&ust=1619418661896000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPi8q-LimPACFQAAAAAdAAAAABAN"),
-                "Sample", "Sample", 100000, 4.1, "none", 50
+                "Sample6", "Sample6", 160000, 4.1, "none", 50
             )
         )
     }
