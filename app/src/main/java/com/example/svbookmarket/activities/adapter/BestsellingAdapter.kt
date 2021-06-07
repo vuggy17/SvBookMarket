@@ -9,11 +9,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.model.Feature_Item
+import com.makeramen.roundedimageview.RoundedImageView
 
 class BestsellingAdapter(private val context: Context ,private val lstBookCard: MutableList<Feature_Item>) : RecyclerView.Adapter<BestsellingAdapter.BestsellingViewHolder>() {
     class BestsellingViewHolder(BestsellingCard: View) :RecyclerView.ViewHolder(BestsellingCard)
     {
-        val imgBookCover: ImageView = BestsellingCard.findViewById(R.id.BookImage)
+        val imgBookCover: RoundedImageView = BestsellingCard.findViewById(R.id.BookImage)
         val tvBookAuthor: TextView = BestsellingCard.findViewById(R.id.bookAuthor)
         val tvBookTitle: TextView = BestsellingCard.findViewById(R.id.bookTitle)
         val tvPrice: TextView = BestsellingCard.findViewById(R.id.bookPrice)

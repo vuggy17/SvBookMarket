@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.model.Feature_Item
+import com.makeramen.roundedimageview.RoundedImageView
 
 
 class FeatureAdapter(
@@ -31,7 +32,7 @@ class FeatureAdapter(
     override fun getItemCount() = lstFeatureCard.size
 
     class FeatureViewHolder(FeatureCard: View) : RecyclerView.ViewHolder(FeatureCard) {
-        val imgBookCover: ImageView = FeatureCard.findViewById(R.id.imgFeatureCover)
+        val imgBookCover: RoundedImageView = FeatureCard.findViewById(R.id.imgFeatureCover)
         val tvAuthor: TextView = FeatureCard.findViewById(R.id.tvAuthor)
         val tvBookName: TextView = FeatureCard.findViewById(R.id.tvBookName)
     }
