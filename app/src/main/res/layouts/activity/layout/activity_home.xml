@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <include
                 android:id="@+id/htb_homeToolBar"
                 layout="@layout/home_toolbar"
@@ -132,11 +133,11 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/bookCatalog"
                 android:layout_width="match_parent"
-                android:layout_height="600dp"
-                android:nestedScrollingEnabled="false"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="@dimen/margin" />
+                android:layout_marginRight="@dimen/margin"
+                android:nestedScrollingEnabled="false" />
         </LinearLayout>
 
     </ScrollView>
