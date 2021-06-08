@@ -13,11 +13,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.*
 import com.example.svbookmarket.activities.model.Book
+import com.makeramen.roundedimageview.RoundedImageView
 
 class FeaturedAdapter(private val dataSet: ArrayList<Book>) :
     RecyclerView.Adapter<FeaturedAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val bookImage: AppCompatImageView = view.findViewById(R.id.BookImage)
+        val bookImage: RoundedImageView = view.findViewById(R.id.BookImage)
         val bookTitle: TextView = view.findViewById(R.id.bookTitle)
         val bookAuthor: TextView = view.findViewById(R.id.bookAuthor)
         val bookPrice: TextView = view.findViewById(R.id.bookPrice)
