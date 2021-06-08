@@ -36,7 +36,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin"
                 android:layout_marginRight="@dimen/margin"
-                android:fitsSystemWindows="true" />
+                android:fitsSystemWindows="true"
+                tools:itemCount="1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,9 +72,9 @@
                 android:id="@+id/bookCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin"
                 android:layout_marginTop="15dp"
-                android:layout_marginRight="@dimen/margin" />
+                tools:itemCount="1"
+                tools:listitem="@layout/card_category" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -108,9 +109,8 @@
                 android:id="@+id/booksFeatured"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="@dimen/margin" />
+                tools:listitem="@layout/card_book" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -132,12 +132,14 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/bookCatalog"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="@dimen/margin"
-                android:nestedScrollingEnabled="false" />
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                tools:listitem="@layout/card_book" />
         </LinearLayout>
 
     </ScrollView>

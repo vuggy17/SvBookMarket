@@ -13,12 +13,11 @@
         android:id="@+id/card_category"
         android:layout_width="114dp"
         android:layout_height="65dp"
-        android:layout_margin="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:cardElevation="12dp"
+        app:cardElevation="8dp"
         app:cardCornerRadius="14dp"
         android:backgroundTint="@color/blue_light">
         <androidx.constraintlayout.widget.ConstraintLayout
