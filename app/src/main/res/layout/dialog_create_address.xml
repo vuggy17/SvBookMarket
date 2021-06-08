@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-  android:background="@drawable/bg_linear_layout_item_info"
     android:layout_height="wrap_content"
+    android:background="@drawable/bg_linear_layout_item_info"
     android:paddingHorizontal="24dp"
     tools:context=".activities.ProfileActivity">
 
