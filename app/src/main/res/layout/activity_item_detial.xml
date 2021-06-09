@@ -24,8 +24,8 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_baseline_arrow_back_24"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/vector"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.075"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +35,8 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:scaleX="0.6"
+        android:scaleY="0.6"
         android:layout_marginTop="16dp"
         android:background="#00000000"
         android:src="@drawable/ic_outline_cart_white"

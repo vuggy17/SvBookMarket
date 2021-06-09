@@ -39,6 +39,7 @@ class AddressActivity : AppCompatActivity() {
 
         newAddressBtn.setOnClickListener{
             val newAddressDialog = CreateAddressDialog()
+            newAddressDialog.setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
             newAddressDialog.show(supportFragmentManager, "tag")
         }
 
