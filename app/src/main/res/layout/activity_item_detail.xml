@@ -46,6 +46,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/id_tnBackground"
         android:background="@drawable/bookimage"
         android:alpha="0.3"
         android:scaleX="1"
@@ -57,6 +58,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
     <ImageView
+        android:id="@+id/id_thumbnail"
         android:src="@drawable/bookimage"
         android:layout_width="180dp"
         android:layout_height="260dp"
