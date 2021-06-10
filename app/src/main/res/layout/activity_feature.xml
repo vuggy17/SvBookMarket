@@ -115,7 +115,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="31dp"
+        android:layout_marginLeft="24dp"
         android:text="Bestselling"
         android:fontFamily="@font/roboto_bold"
         android:textSize="24dp"
@@ -129,17 +129,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginLeft="31dp"
-        android:text="You may also like"
+        android:layout_marginLeft="24dp"
+        android:text="For you"
         android:fontFamily="@font/roboto_bold"
         android:textSize="24dp"
         android:textColor="@color/black_header"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_Suggest"
-        android:layout_marginTop="5dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/card_suggest" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
+        android:textSize="24dp"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@color/black_header"
+        android:text="Explore more"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/f_rcMore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:nestedScrollingEnabled="false"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        android:paddingBottom="24dp"
+        tools:listitem="@layout/card_book" />
 </LinearLayout>
     </ScrollView>
 </LinearLayout>

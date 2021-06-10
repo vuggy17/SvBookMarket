@@ -12,6 +12,7 @@ import com.example.svbookmarket.activities.common.InsetDividerItemDecoration
 import com.example.svbookmarket.activities.common.toPx
 import com.example.svbookmarket.activities.data.DataSource
 import com.example.svbookmarket.databinding.ActivityAddressBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
 
 class AddressActivity : AppCompatActivity() {
@@ -41,6 +42,7 @@ class AddressActivity : AppCompatActivity() {
             val newAddressDialog = CreateAddressDialog()
             newAddressDialog.setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
             newAddressDialog.show(supportFragmentManager, "tag")
+            newAddressDialog.setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
         }
 
         editAddressBtn.setOnClickListener{

@@ -58,18 +58,21 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/c_linlayout"
+                android:id="@+id/c_linearlayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="15dp"
                 android:gravity="center">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:clickable="true"
+                    android:id="@+id/c_art"
                     app:cardCornerRadius="8dp"
                     android:layout_width="160dp"
                     android:layout_height="200dp"
                     android:layout_marginEnd="22dp"
-                    android:backgroundTint="#A59286">
+                    android:backgroundTint="#A59286"
+                    android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -85,23 +88,26 @@
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/roboto_medium"
                             android:textStyle="bold"
-                            android:text="Commic" />
+                            android:text="Arts" />
 
                         <ImageView
                             android:layout_width="80dp"
                             android:layout_height="120dp"
-                            android:scaleType="center"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="8dp"
+                            android:scaleType="center"
                             android:src="@drawable/brown" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:clickable="true"
+                    android:id="@+id/c_comic"
                     android:layout_width="160dp"
                     app:cardCornerRadius="8dp"
                     android:layout_height="200dp"
-                    android:backgroundTint="#AAC3C1">
+                    android:backgroundTint="#AAC3C1"
+                    android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -117,7 +123,7 @@
                             android:layout_gravity="center_horizontal"
                             android:textStyle="bold"
                             android:fontFamily="@font/roboto_medium"
-                            android:text="Commic" />
+                            android:text="Comic" />
 
                         <ImageView
                             android:layout_width="80dp"
@@ -137,11 +143,14 @@
                 android:gravity="center">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:clickable="true"
+                    android:id="@+id/c_business"
                     android:layout_width="160dp"
                     app:cardCornerRadius="8dp"
                     android:layout_height="200dp"
                     android:layout_marginEnd="22dp"
-                    android:backgroundTint="#65D07D">
+                    android:backgroundTint="#65D07D"
+                    android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -157,7 +166,7 @@
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:fontFamily="@font/roboto_medium"
-                            android:text="Commic" />
+                            android:text="Business " />
 
                         <ImageView
                             android:layout_width="80dp"
@@ -170,10 +179,13 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:clickable="true"
+                    android:id="@+id/c_technology"
                     android:layout_width="160dp"
                     app:cardCornerRadius="8dp"
                     android:layout_height="200dp"
-                    android:backgroundTint="#4B4D5D">
+                    android:backgroundTint="#4B4D5D"
+                    android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -189,7 +201,7 @@
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:fontFamily="@font/roboto_medium"
-                            android:text="Commic" />
+                            android:text="Technology" />
 
                         <ImageView
                             android:layout_width="80dp"
@@ -209,11 +221,14 @@
                 android:gravity="center">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:clickable="true"
+                    android:id="@+id/c_fiction"
                     android:layout_width="160dp"
                     android:layout_height="200dp"
                     app:cardCornerRadius="8dp"
                     android:layout_marginEnd="22dp"
-                    android:backgroundTint="#24344B">
+                    android:backgroundTint="#24344B"
+                    android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -229,7 +244,7 @@
                             android:textStyle="bold"
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/roboto_medium"
-                            android:text="Commic" />
+                            android:text="Fiction" />
 
                         <ImageView
                             android:layout_width="80dp"
@@ -242,10 +257,13 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:clickable="true"
+                    android:id="@+id/c_novel"
                     android:layout_width="160dp"
                     android:layout_height="200dp"
                     app:cardCornerRadius="8dp"
-                    android:backgroundTint="#F83D47">
+                    android:backgroundTint="#F83D47"
+                    android:focusable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -261,7 +279,7 @@
                             android:textStyle="bold"
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/roboto_medium"
-                            android:text="Commic" />
+                            android:text="Novel" />
 
                         <ImageView
                             android:layout_width="80dp"

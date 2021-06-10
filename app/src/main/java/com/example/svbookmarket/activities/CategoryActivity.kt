@@ -1,38 +1,51 @@
 package com.example.svbookmarket.activities
 
 import android.content.Intent
-import android.media.Image
 import android.os.Bundle
-import android.widget.ImageButton
-import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.svbookmarket.R
+import com.example.svbookmarket.databinding.ActivityCategoryBinding
 
 
+class CategoryActivity : AppCompatActivity() {
+    companion object{
+        enum class CATEGORY{
+            COMIC, FICTION, NOVEL, BUSINESS, TECHNOLOGY, ART;
 
-class CategoryActivity:AppCompatActivity() {
-//    private val appbar: AppBarLayout by bindView(R.id.appbar)
-
+            override fun toString(): String {
+                return name.toLowerCase().capitalize()
+            }
+        }
+    }
+    lateinit var binding: ActivityCategoryBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_category)
+        binding = ActivityCategoryBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        findViewById<SearchView>(R.id.c_searchView).setOnClickListener{
-         startIntent("search")
+        // setup intent
+        binding.apply {
+            cSearchView.setOnClickListener { startIntent("search") }
+            cBackButton.setOnClickListener { startIntent("back") }
+            cArt.setOnClickListener { startIntent(CATEGORY.ART.toString())}
+            cComic.setOnClickListener { startIntent(CATEGORY.COMIC.toString())}
+            cFiction.setOnClickListener { startIntent(CATEGORY.FICTION.toString()) }
+            cNovel.setOnClickListener { startIntent(CATEGORY.NOVEL.toString()) }
+            cBusiness.setOnClickListener { startIntent(CATEGORY.BUSINESS.toString()) }
+            cTechnology.setOnClickListener { startIntent(CATEGORY.TECHNOLOGY.toString()) }
         }
-
-        findViewById<ImageButton>(R.id.c_backButton).setOnClickListener{
-            startIntent("back")
-        }
-//        (appbar.layoutParams as CoordinatorLayout.LayoutParams).behavior = ToolbarBehavior()
-
     }
-    private fun startIntent(type:String){
-        val intent = when(type){
-            "search"-> Intent(this, SearchActivity::class.java)
-//            "order"-> Intent(this, ::class.java)
-            else-> Intent(this, HomeActivity::class.java)
+
+    private fun startIntent(type: String){
+        val intent = if (type != "back" && type != "search") {
+            Intent(this, CategoryDetailActivity::class.java)
+                .putExtra(CategoryDetailActivity.CATEGORY_TYPE, type)
+        } else {
+            when (type) {
+                "search" -> Intent(this, SearchActivity::class.java)
+                else -> Intent(this, HomeActivity::class.java)
+            }
         }
+
         startActivity(intent)
     }
 }

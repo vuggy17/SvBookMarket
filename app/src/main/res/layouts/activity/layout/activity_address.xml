@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingHorizontal="24dp">
+    android:layout_height="match_parent">
 
     <ImageButton
+        android:layout_marginStart="24dp"
         android:id="@+id/a_imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,14 +29,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/a_imageButton" />
 
-    <TextView
+    <Button
+
         android:id="@+id/ad_editAdress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:elegantTextHeight="false"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:text="Edit"
+        android:textAllCaps="false"
         android:textColor="@color/blue_dark"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
+        app:layout_constraintTop_toTopOf="@+id/textView3"
+        app:rippleColor="#5a95f2" />
 
     <TextView
         android:id="@+id/select"
@@ -63,15 +72,19 @@
         app:layout_constraintTop_toBottomOf="@+id/select"
        />
 
-  <TextView
-      android:id="@+id/ad_newAddress"
+    <Button
+        android:id="@+id/ad_newAddress"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="Press to add new address"
+        android:textAllCaps="false"
         android:textColor="@color/blue_dark"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ad_recyclerview" />
+        app:layout_constraintTop_toBottomOf="@+id/ad_recyclerview"
+        app:rippleColor="#5a95f2" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/materialButton2"
