@@ -24,6 +24,7 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:padding="24dp"
                 android:id="@+id/tb_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="3"
                 android:layout_marginVertical="10dp"
-                android:layout_marginStart="24dp"
+
                 android:layout_marginEnd="24dp"
                 android:layout_toStartOf="@+id/tb_cart"
                 android:layout_toEndOf="@+id/tb_menu"

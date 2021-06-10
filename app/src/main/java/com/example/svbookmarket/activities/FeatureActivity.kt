@@ -2,14 +2,13 @@ package com.example.svbookmarket.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.*
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.BestsellingAdapter
 import com.example.svbookmarket.activities.adapter.FeatureAdapter
+import com.example.svbookmarket.activities.adapter.FeaturedAdapter
 import com.example.svbookmarket.activities.adapter.SuggestAdapter
+import com.example.svbookmarket.activities.common.MarginItemDecoration
 import com.example.svbookmarket.activities.common.RecyclerViewItemMargin
 import com.example.svbookmarket.activities.data.DataSource
 
@@ -18,6 +17,8 @@ class FeatureActivity : AppCompatActivity() {
     lateinit var featureRecycler: RecyclerView
     lateinit var bestsellingRecycler: RecyclerView
     lateinit var suggestRecycler: RecyclerView
+    lateinit var moreRecyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feature)
@@ -25,16 +26,31 @@ class FeatureActivity : AppCompatActivity() {
         featureRecycler = findViewById(R.id.feature_recycler)
         bestsellingRecycler = findViewById(R.id.rc_Bestselling)
         suggestRecycler = findViewById(R.id.rc_Suggest)
+        moreRecyclerView= findViewById(R.id.f_rcMore)
+
         fillInFetureRecycle()
         fillInBestRecycle()
         fillInSuggestRecycle()
+        fillInMoreRecylerView()
 
-        val snaphelperBest: LinearSnapHelper = LinearSnapHelper()
-        val snaphelperSuggest: LinearSnapHelper = LinearSnapHelper()
 
-        snaphelperSuggest.attachToRecyclerView(suggestRecycler)
-        snaphelperBest.attachToRecyclerView(bestsellingRecycler)
+        LinearSnapHelper().let {
+            it.attachToRecyclerView(suggestRecycler)
+            it.attachToRecyclerView(bestsellingRecycler)
+        }
+
     }
+
+    private fun fillInMoreRecylerView() {
+        val dataBookSet = DataSource().loadBookFeature()
+
+        moreRecyclerView.apply {
+            adapter = FeaturedAdapter(dataBookSet)
+            layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+            addItemDecoration(MarginItemDecoration(spaceSize = 24, spanCount = 2))
+        }
+    }
+
     fun fillInFetureRecycle()
     {
         val dataset = DataSource().loadFeatureCard()

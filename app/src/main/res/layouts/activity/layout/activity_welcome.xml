@@ -69,17 +69,25 @@
         app:layout_editor_absoluteY="600sp"/>
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="or"
+        android:textColor="@color/fade_gray"
+        app:layout_constraintBottom_toTopOf="@+id/tvContinueAsGuest"
+        app:layout_constraintEnd_toEndOf="@+id/btnLogin"
+        app:layout_constraintStart_toStartOf="@+id/btnLogin"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+    <TextView
+        android:layout_marginTop="32dp"
         android:id="@+id/tvContinueAsGuest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="120dp"
         android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
         android:text="Continue as guest"
         android:textColor="@color/blue_light"
-        android:textSize="14dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 </androidx.constraintlayout.widget.ConstraintLayout>

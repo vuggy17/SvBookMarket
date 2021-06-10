@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:checkable="true"
     android:clickable="true"
+    android:paddingHorizontal="24dp"
     android:focusable="true">
 
     <LinearLayout
@@ -15,12 +16,13 @@
         android:paddingStart="12dp">
 
         <TextView
+            android:textSize="16sp"
+           android:textStyle="bold"
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_medium"
-            android:text="sampleName"
-            android:textSize="@dimen/text_small"
+            android:text="Robin Food"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -35,7 +37,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
             android:text="0123456789"
-            android:textSize="12sp" />
+            />
 
         <TextView
             android:id="@+id/tvAddress"
@@ -43,28 +45,28 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
             android:text="920, ki tuc xa khu A, DH quoc gia hcm"
-            android:textSize="12sp" />
+            />
 
         <TextView
             android:id="@+id/tvSecondAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Phuong Linh Trung"
-            android:textSize="12sp" />
+            />
 
         <TextView
             android:id="@+id/tvThirdAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Quan Thu Duc"
-            android:textSize="12sp" />
+            />
 
         <TextView
             android:id="@+id/tvFourthAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tp. Ho Chi Minh"
-            android:textSize="12sp" />
+            />
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

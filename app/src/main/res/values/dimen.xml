@@ -6,7 +6,7 @@
     <dimen name="text_splash_layout">45sp</dimen>
     <dimen name="margin">24dp</dimen>
     <dimen name="card_view_radius">14dp</dimen>
-    <dimen name="text_super_small">11sp</dimen>
+    <dimen name="text_super_small">12sp</dimen>
     <dimen name="search_text">17sp</dimen>
     <dimen name="elevation_search">30dp</dimen>
     <dimen name="toolbar_margin">15dp</dimen>
