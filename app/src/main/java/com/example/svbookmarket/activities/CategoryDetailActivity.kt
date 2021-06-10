@@ -50,23 +50,6 @@ class CategoryDetailActivity : AppCompatActivity(), RecyclerViewClickListener {
 
     override fun recyclerViewListClicked(v: View?, position: Int) = navigate(items, position)
 
-    private fun navigate(items: MutableList<Book>, position: Int) {
-        val intent = Intent(this, ItemDetialActivity::class.java)
-        val bundle = Bundle()
-        with(items[position]) {
-            bundle.let {
-                it.putString(ItemDetialActivity.TITLE, this.title)
-                it.putString(ItemDetialActivity.AUTHOR, this.author)
-                it.putString(ItemDetialActivity.PRICE, this.price.toString())
-                it.putString(ItemDetialActivity.RATEPOINT, this.rating.toString())
-            }
-
-            intent.putExtra("Bundle", bundle)
-        }
-
-        startActivity(intent, bundle);
-    }
-
     @ExperimentalStdlibApi
     @SuppressLint("SetTextI18n")
     private fun setupView(binding: ActivityCategoryDetailBinding, items: MutableList<Book>) {
@@ -85,6 +68,25 @@ class CategoryDetailActivity : AppCompatActivity(), RecyclerViewClickListener {
         }
     }
 
+
+    private fun navigate(items: MutableList<Book>, position: Int) {
+        val intent = Intent(this, ItemDetialActivity::class.java)
+        val bundle = Bundle()
+        with(items[position]) {
+            bundle.let {
+                it.putString(ItemDetialActivity.TITLE, this.title)
+                it.putString(ItemDetialActivity.AUTHOR, this.author)
+                it.putString(ItemDetialActivity.PRICE, this.price.toString())
+                it.putString(ItemDetialActivity.RATEPOINT, this.rating.toString())
+            }
+
+            intent.putExtra("Bundle", bundle)
+        }
+
+        startActivity(intent, bundle);
+    }
+
+
     @DrawableRes
     private fun getCollectionImgSource(categoryName: String): Int {
         return when (categoryName) {
@@ -96,5 +98,7 @@ class CategoryDetailActivity : AppCompatActivity(), RecyclerViewClickListener {
             else -> R.drawable.img_art
         }
     }
+
+
 
 }

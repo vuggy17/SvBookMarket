@@ -31,7 +31,7 @@ class FeaturedAdapter(private val dataSet: ArrayList<Book>) :
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        with(dataSet[position]){
+        with(dataSet[holder.adapterPosition]){
              holder.let {
                  it.bookTitle.text =  title
                  it.bookAuthor.text =  author

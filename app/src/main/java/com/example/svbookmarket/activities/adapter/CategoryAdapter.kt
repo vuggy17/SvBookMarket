@@ -7,14 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.common.RecyclerViewClickListener
 import com.example.svbookmarket.activities.model.Category
 
-class CategoryAdapter(private val dataSet: ArrayList<Category>) :
+class CategoryAdapter(private val items: ArrayList<Category>, private val listener: RecyclerViewClickListener) :
     RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val categoryName: TextView = view.findViewById(R.id.categoryName)
-        val categoryImage: ImageView = view.findViewById(R.id.categoryImage)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -23,16 +20,25 @@ class CategoryAdapter(private val dataSet: ArrayList<Category>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val categoryItem: Category = dataSet[position]
-        holder.itemView.apply {
-            holder.apply {
-                //set img for category here!!!
-                categoryName.text = categoryItem.name
+        with(items[position]){
+            holder.let {
+                it.name.text = name
+
+                // TODO: 10/06/2021 set image for category
+                //it.background.setImageResource()
+
+                //setup listener
+                it.itemView.setOnClickListener { listener.recyclerViewListClicked(it, position) }
             }
         }
     }
 
-    override fun getItemCount(): Int {
-        return dataSet.size
+    override fun getItemCount(): Int = items.size
+
+
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val name: TextView = view.findViewById(R.id.categoryName)
+        val background: ImageView = view.findViewById(R.id.categoryImage)
     }
+
 }
