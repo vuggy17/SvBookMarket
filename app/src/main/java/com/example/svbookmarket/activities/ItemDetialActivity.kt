@@ -8,6 +8,12 @@ import android.widget.TextView
 import com.example.svbookmarket.R
 
 class ItemDetialActivity : AppCompatActivity() {
+    companion object{
+        const val TITLE = "TITLE"
+        const val PRICE = "PRICE"
+        const val AUTHOR = "AUTHOR"
+        const val RATEPOINT = "RATEPOINT"
+    }
 
     lateinit var tvBookCover: TextView
     lateinit var tvAuthor: TextView
@@ -30,10 +36,10 @@ class ItemDetialActivity : AppCompatActivity() {
         tvRate = findViewById(R.id.tvRate)
 
 
-        tvBookCover.text = bundle?.getString("title")
-        tvPrice.text = bundle?.getString("price")
-        tvAuthor.text = bundle?.getString("author")
-        tvRate.text = bundle?.getString("rate")
+        tvBookCover.text = bundle?.getString(TITLE)
+        tvPrice.text = bundle?.getString(PRICE)
+        tvAuthor.text = bundle?.getString(AUTHOR)
+        tvRate.text = bundle?.getString(RATEPOINT)
     }
     private fun startIntent(type:String){
         val intent = when(type){

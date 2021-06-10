@@ -23,7 +23,6 @@ class MarginItemDecoration(
         val marginLeft = 48
         val parentWidth = parent.measuredWidth
 
-
         with(outRect) {
             if (orientation == GridLayoutManager.VERTICAL && !isHorizontalLinearLayout) {
                 if (parent.getChildAdapterPosition(view) < spanCount) {
@@ -32,7 +31,7 @@ class MarginItemDecoration(
                 if (parent.getChildAdapterPosition(view) % spanCount == 0) {
                     left = marginLeft
                     right = spaceSize *3
-                    Log.d("margin", "$parentWidth,$right, ${outRect.width()}, ${parent.getChildAdapterPosition(view)} ")
+                  //  Log.d("margin", "$parentWidth,$right, ${outRect.width()}, ${parent.getChildAdapterPosition(view)} ")
                 }
             } else {
                 if (parent.getChildAdapterPosition(view) < spanCount) {
@@ -45,10 +44,14 @@ class MarginItemDecoration(
             if (isHorizontalLinearLayout) {
                 if (parent.getChildAdapterPosition(view) == 0) {
                     left = marginLeft
+                    bottom = spaceSize *4
+                    right  = spaceSize
+                    return
+
                 }
             }
-            right = spaceSize
             bottom = spaceSize
+            right = spaceSize
         }
     }
 }
