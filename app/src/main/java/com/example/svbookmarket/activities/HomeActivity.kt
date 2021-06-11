@@ -2,10 +2,12 @@ package com.example.svbookmarket.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +26,7 @@ import com.example.svbookmarket.activities.data.FullBookList
 
 class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
     lateinit var suggestRecycler: RecyclerView
+    var isBackPressedOnce = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,7 +97,7 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
     private fun setupIntent() {
         findViewById<ImageView>(R.id.tb_menu).setOnClickListener { startIntent("menu") }
         findViewById<SearchView>(R.id.tb_searchView).setOnClickListener { startIntent("search") }
-        findViewById<ImageView>(R.id.tb_cart).setOnClickListener { startIntent("cart") }
+//        findViewById<ImageView>(R.id.tb_cart).setOnClickListener { startIntent("cart") }
         findViewById<TextView>(R.id.h_allCategory).setOnClickListener { startIntent("category") }
         findViewById<TextView>(R.id.h_allFeature).setOnClickListener { startIntent("feature") }
 
@@ -120,5 +123,17 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
         val dataCategorySet = DataSource().loadCategory()
         val itemName = dataCategorySet[position].name
         startIntent(itemName)
+    }
+
+    override fun onBackPressed() {
+        if (isBackPressedOnce) {
+            super.onBackPressed()
+            return
+        }
+
+        this.isBackPressedOnce = true
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+
+        Handler().postDelayed(Runnable { isBackPressedOnce = false }, 2000)
     }
 }

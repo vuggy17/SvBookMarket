@@ -24,6 +24,8 @@ class CreateAddressDialog : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // TODO: 11/06/2021 validate input 
     }
 
 }

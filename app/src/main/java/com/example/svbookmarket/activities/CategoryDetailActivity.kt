@@ -7,6 +7,7 @@ import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.CategoryDetailAdapter
 import com.example.svbookmarket.activities.common.MarginItemDecoration
@@ -57,8 +58,14 @@ class CategoryDetailActivity : AppCompatActivity(), RecyclerViewClickListener {
 
         binding.cdClName.text = "$categoryName Collection"
         binding.cdTitle.text = categoryName
-        binding.cdCover.setImageResource(getCollectionImgSource(categoryName!!))
+        val backgroundResId = getCollectionImgSource(categoryName!!)
 
+        Glide
+            .with(baseContext)
+            .load(backgroundResId)
+            .centerCrop()
+            .placeholder(R.drawable.ic_launcher_background)
+            .into(binding.cdCover);
 
 
         binding.cdRc.apply {
@@ -70,14 +77,17 @@ class CategoryDetailActivity : AppCompatActivity(), RecyclerViewClickListener {
 
 
     private fun navigate(items: MutableList<Book>, position: Int) {
-        val intent = Intent(this, ItemDetialActivity::class.java)
+        val intent = Intent(this, ItemDetailActivity::class.java)
         val bundle = Bundle()
         with(items[position]) {
             bundle.let {
-                it.putString(ItemDetialActivity.TITLE, this.title)
-                it.putString(ItemDetialActivity.AUTHOR, this.author)
-                it.putString(ItemDetialActivity.PRICE, this.price.toString())
-                it.putString(ItemDetialActivity.RATEPOINT, this.rating.toString())
+                it.putString(ItemDetailActivity.TITLE, title)
+                it.putString(ItemDetailActivity.AUTHOR, author)
+                it.putString(ItemDetailActivity.PRICE, price.toString())
+                it.putString(ItemDetailActivity.RATEPOINT, rating.toString())
+                it.putString(ItemDetailActivity.THUMBNAIL_URL, imageURL.toString())
+                it.putString(ItemDetailActivity.DESCRIPTION, description)
+
             }
 
             intent.putExtra("Bundle", bundle)

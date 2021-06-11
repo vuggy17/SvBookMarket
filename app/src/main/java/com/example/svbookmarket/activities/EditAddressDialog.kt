@@ -38,5 +38,7 @@ class EditAddressDialog:BottomSheetDialogFragment() {
 
         behaviour.peekHeight = 1600
 
+
+        // TODO: 11/06/2021 vadilation input 
     }
 }
