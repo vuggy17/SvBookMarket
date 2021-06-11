@@ -1,11 +1,13 @@
 package com.example.svbookmarket.activities.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.common.RecyclerViewClickListener
 import com.example.svbookmarket.activities.model.Category
@@ -20,20 +22,26 @@ class CategoryAdapter(private val items: ArrayList<Category>, private val listen
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val startTime = System.currentTimeMillis()
         with(items[position]){
             holder.let {
                 it.name.text = name
-
-                // TODO: 10/06/2021 set image for category
-                //it.background.setImageResource()
+                Glide
+                    .with(holder.itemView)
+                    .load(backgroundResId)
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .into(it.background);
 
                 //setup listener
                 it.itemView.setOnClickListener { listener.recyclerViewListClicked(it, position) }
             }
         }
+        Log.i("TAG", "bindView time: " + (System.currentTimeMillis() - startTime));
     }
 
     override fun getItemCount(): Int = items.size
+
 
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

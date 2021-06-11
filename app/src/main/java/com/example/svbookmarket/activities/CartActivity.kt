@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Canvas
 import android.os.Bundle
 import android.view.View
-import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -29,6 +28,37 @@ class CartActivity : AppCompatActivity() {
 
     var deleteItem: View? = null
     var deleteModel: CartModel = CartModel("cc", "cc", "cc", 1, 2)
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityCartBinding.inflate(layoutInflater)
+        // set activity to display here
+        setContentView(binding.root)
+
+        binding.rcCardList.adapter = cartAdapter
+        binding.rcCardList.layoutManager = LinearLayoutManager(this)
+        binding.rcCardList.setHasFixedSize(true)
+
+        // swipe to delete
+        touchHelper.attachToRecyclerView(binding.rcCardList)
+
+        // TODO: 11/06/2021 xu li back ve dung man hinh truoc do
+        binding.backButton.setOnClickListener { onBackPressed() }
+
+        binding.ctCheckout.setOnClickListener { startIntent("checkout") }
+
+        binding.ctChangeLocation.setOnClickListener { startIntent(AddressActivity.CHANGE_ADDRESS) }
+    }
+
+    private fun startIntent(type: String) {
+        val intent = when (type) {
+            "checkout" -> Intent(this, CheckoutActivity::class.java)
+            AddressActivity.CHANGE_ADDRESS -> Intent(this, AddressActivity::class.java).putExtra(AddressActivity.FROM_CART, true)
+            else -> Intent(this, HomeActivity::class.java)
+        }
+        startActivity(intent)
+    }
 
     private var touchHelper = ItemTouchHelper(
         object : ItemTouchHelper.SimpleCallback(
@@ -105,44 +135,6 @@ class CartActivity : AppCompatActivity() {
             }
         })
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityCartBinding.inflate(layoutInflater)
-        // set activity to display here
-        setContentView(binding.root)
-
-        binding.rcCardList.adapter = cartAdapter
-        binding.rcCardList.layoutManager = LinearLayoutManager(this)
-        binding.rcCardList.setHasFixedSize(true)
-
-        // swipe to delete
-        touchHelper.attachToRecyclerView(binding.rcCardList)
-
-       // back button pressed
-        binding.backButton.setOnClickListener {
-            Toast.makeText(
-                this,
-                "Back button pressed",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-
-        // edit button pressed
-        binding.ctEditLocation.setOnClickListener {
-          startIntent("editLocation")
-        }
-        binding.backButton.setOnClickListener{startIntent("back")}
-
-        binding.ctCheckout.setOnClickListener({startIntent("checkout")})
-    }
-    private fun startIntent(type:String){
-        val intent = when(type){
-            "editLocation"-> Intent(this, EditAdressActivity::class.java)
-            "checkout"-> Intent(this, CheckoutActivity::class.java)
-            else-> Intent(this, HomeActivity::class.java)
-        }
-        startActivity(intent)
-    }
 }
 
 

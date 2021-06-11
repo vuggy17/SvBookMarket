@@ -15,7 +15,7 @@
         <activity android:name=".activities.SearchActivity" />
         <activity android:name=".activities.FeatureActivity" />
         <activity android:name=".activities.EditProfileActivity" />
-        <activity android:name=".activities.ItemDetialActivity" />
+        <activity android:name=".activities.ItemDetailActivity" />
         <activity android:name=".activities.CheckoutActivity" />
         <activity
             android:name=".activities.WelcomeActivity"

@@ -5,16 +5,15 @@
     android:layout_height="wrap_content"
     android:checkable="true"
     android:clickable="true"
-    android:paddingHorizontal="24dp"
     android:focusable="true">
 
     <LinearLayout
+        android:layout_marginHorizontal="24dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingVertical="8dp"
-        android:paddingStart="12dp">
-
+        android:paddingTop="12dp"
+        android:paddingBottom="6dp">
         <TextView
             android:textSize="16sp"
            android:textStyle="bold"

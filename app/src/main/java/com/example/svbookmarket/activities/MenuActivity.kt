@@ -2,18 +2,13 @@ package com.example.svbookmarket.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.svbookmarket.R
-import com.example.svbookmarket.databinding.MenuBinding
 
 class MenuActivity:AppCompatActivity() {
-//    lateinit var binding: MenuBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        binding = MenuBinding.inflate(layoutInflater)
         setContentView(R.layout.menu)
 
 
@@ -24,7 +19,6 @@ class MenuActivity:AppCompatActivity() {
         findViewById<TextView>(R.id.m_checkout).setOnClickListener{startIntent("checkout")}
     findViewById<TextView>(R.id.m_address).setOnClickListener{startIntent("address")}
 
-//        binding.mOrder.setOnClickListener{startIntent("order")}
 
     }
 
@@ -35,8 +29,9 @@ class MenuActivity:AppCompatActivity() {
             "cart"-> Intent(this, CartActivity::class.java)
             "checkout"-> Intent(this, CheckoutActivity::class.java)
             "address"-> Intent(this, AddressActivity::class.java)
-            else-> Intent(this, ItemDetialActivity::class.java)
+            else-> Intent(this, ItemDetailActivity::class.java)
         }
         startActivity(intent)
+        finish()
     }
 }
