@@ -6,4 +6,6 @@ import android.net.Uri
 import java.net.URL
 
 
-data class Book( var imageURL: Uri, var title: String, var author: String, var price: Long, var rating: Double, var kind: String, var ratesCount: Long, var description: String)
+
+data class Book( var id: String = "1",var imageURL: Uri, var title: String, var author: String, var price: Long, var rating: Double, var kind: String, var ratesCount: Long, var description: String )
+

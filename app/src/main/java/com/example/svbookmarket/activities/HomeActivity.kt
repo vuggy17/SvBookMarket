@@ -22,6 +22,7 @@ import com.example.svbookmarket.activities.common.MarginItemDecoration
 import com.example.svbookmarket.activities.common.RecyclerViewClickListener
 import com.example.svbookmarket.activities.common.RecyclerViewItemMargin
 import com.example.svbookmarket.activities.data.DataSource
+import com.example.svbookmarket.activities.data.FullBookList
 
 class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
     lateinit var suggestRecycler: RecyclerView
@@ -30,7 +31,6 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
 
 //        Load data
         val dataBookSet = DataSource().loadBookFeature()
