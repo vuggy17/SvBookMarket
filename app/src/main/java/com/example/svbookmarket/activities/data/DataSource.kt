@@ -58,6 +58,7 @@ class DataSource {
         )
     }
 
+    // moved to home viewmodel
     fun loadBookFeature(): ArrayList<Book> {
         val items = ArrayList<Book>()
         val des =

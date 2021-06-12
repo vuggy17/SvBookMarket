@@ -9,6 +9,8 @@ import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -22,53 +24,56 @@ import com.example.svbookmarket.activities.common.MarginItemDecoration
 import com.example.svbookmarket.activities.common.RecyclerViewClickListener
 import com.example.svbookmarket.activities.common.RecyclerViewItemMargin
 import com.example.svbookmarket.activities.data.DataSource
+import com.example.svbookmarket.activities.viewmodel.HomeViewModel
+import com.example.svbookmarket.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
     lateinit var suggestRecycler: RecyclerView
+    lateinit var viewModel: HomeViewModel
     var isBackPressedOnce = false
+    lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-
-//        Load data
-        val dataBookSet = DataSource().loadBookFeature()
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         //set up advertise recyclerview
-        val dataAdvertiseSet = DataSource().loadAdvertise()
-        val recyclerAdvertise: RecyclerView = findViewById(R.id.advertise)
-        recyclerAdvertise.adapter = AdvertiseAdapter(dataAdvertiseSet)
-        val advertiseLayoutManagemer: LinearLayoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        recyclerAdvertise.layoutManager = advertiseLayoutManagemer
-        val snapHelper: LinearSnapHelper = LinearSnapHelper()
-        snapHelper.attachToRecyclerView(recyclerAdvertise)
-
+        viewModel.ads.observe(this, Observer { newAds ->
+            binding.advertise.apply {
+                adapter = AdvertiseAdapter(newAds)
+                layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                LinearSnapHelper().attachToRecyclerView(this)
+            }
+        })
 
         //set up category recyclerview
-        val recyclerCategory: RecyclerView = findViewById(R.id.bookCategory)
-        recyclerCategory.apply {
-            val dataCategorySet = DataSource().loadCategory()
-            adapter = CategoryAdapter(dataCategorySet, this@HomeActivity)
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            addItemDecoration(MarginItemDecoration(spaceSize = 24, isVerticalLayout = true))
-
-        }
-
+        viewModel.category.observe(this, Observer {newCategory->
+            binding.bookCategory.apply {
+                adapter = CategoryAdapter(newCategory, this@HomeActivity)
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                addItemDecoration(MarginItemDecoration(spaceSize = 24, isVerticalLayout = true))
+            }
+        })
 
         //set up book feature recyclerview
         suggestRecycler = findViewById(R.id.rc_Suggest)
         fillInSuggestRecycle()
 
-
         //set up more recyclerview
-        val recyclerAllBook: RecyclerView = findViewById(R.id.h_rcMore)
-        recyclerAllBook.apply {
-            adapter = FeaturedAdapter(dataBookSet)
-            layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
-            addItemDecoration(MarginItemDecoration(spaceSize = 24, spanCount = 2))
-        }
+        viewModel.books.observe(this, Observer { newBooks ->
+            binding.hRcMore.apply {
+                adapter = FeaturedAdapter(newBooks)
+                layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+                addItemDecoration(MarginItemDecoration(spaceSize = 24, spanCount = 2))
+            }
+        })
+
+
+
 
 
         //setup intent
@@ -103,19 +108,20 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
 
     }
 
-    fun fillInSuggestRecycle() {
+    private fun fillInSuggestRecycle() {
         val dataset = DataSource().loadSuggestCard()
-        suggestRecycler.adapter = SuggestAdapter(this, dataset)
-        suggestRecycler.layoutManager = LinearLayoutManager(
-            this,
-            RecyclerView.HORIZONTAL,
-            false
-        )
-        val decoration = RecyclerViewItemMargin(8, dataset.size)
-        suggestRecycler.addItemDecoration(decoration)
-        suggestRecycler.setHasFixedSize(true)
+        binding.rcSuggest.apply {
+            adapter = SuggestAdapter(context, dataset)
+            layoutManager = LinearLayoutManager(
+                context,
+                RecyclerView.HORIZONTAL,
+                false
+            )
+            suggestRecycler.addItemDecoration(RecyclerViewItemMargin(8, dataset.size))
+            suggestRecycler.setHasFixedSize(true)
+            LinearSnapHelper().attachToRecyclerView(suggestRecycler)
 
-        LinearSnapHelper().attachToRecyclerView(suggestRecycler)
+        }
 
     }
 

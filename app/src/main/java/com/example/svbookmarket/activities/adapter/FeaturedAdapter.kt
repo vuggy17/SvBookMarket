@@ -13,9 +13,10 @@ import com.bumptech.glide.Glide
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.ItemDetailActivity
 import com.example.svbookmarket.activities.model.Book
+import com.google.common.io.Resources
 import com.makeramen.roundedimageview.RoundedImageView
 
-class FeaturedAdapter(private val dataSet: ArrayList<Book>) :
+class FeaturedAdapter(private val dataSet: MutableList<Book>) :
     RecyclerView.Adapter<FeaturedAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -29,7 +30,7 @@ class FeaturedAdapter(private val dataSet: ArrayList<Book>) :
             holder.let {
                 it.bookTitle.text = title
                 it.bookAuthor.text = author
-                it.bookPrice.text = "đ $price"
+                it.bookPrice.text = holder.itemView.context.getString(R.string.price_format_vn, price.toString())
                 it.bookRate.text = rating.toString()
 
                 Glide
@@ -45,10 +46,10 @@ class FeaturedAdapter(private val dataSet: ArrayList<Book>) :
                     var intentDetail =
                         Intent(holder.itemView.context, ItemDetailActivity::class.java)
                     var bundle = Bundle()
-                    bundle.putString(ItemDetailActivity.TITLE, holder.bookTitle.text.toString())
-                    bundle.putString(ItemDetailActivity.AUTHOR, holder.bookTitle.text.toString())
-                    bundle.putString(ItemDetailActivity.PRICE, holder.bookPrice.text.toString())
-                    bundle.putString(ItemDetailActivity.RATEPOINT, holder.bookRate.text.toString())
+                    bundle.putString(ItemDetailActivity.TITLE, title)
+                    bundle.putString(ItemDetailActivity.AUTHOR, author)
+                    bundle.putString(ItemDetailActivity.PRICE, price.toString())
+                    bundle.putString(ItemDetailActivity.RATEPOINT, rating.toString())
                     bundle.putString(ItemDetailActivity.THUMBNAIL_URL, imageURL.toString())
                     bundle.putString(ItemDetailActivity.DESCRIPTION, description)
 
@@ -70,6 +71,6 @@ class FeaturedAdapter(private val dataSet: ArrayList<Book>) :
         val bookTitle: TextView = view.findViewById(R.id.bookTitle)
         val bookAuthor: TextView = view.findViewById(R.id.bookAuthor)
         val bookPrice: TextView = view.findViewById(R.id.bookPrice)
-        val bookRate: TextView = view.findViewById(R.id.tvRate)
+        val bookRate: TextView = view.findViewById(R.id.bookRate)
     }
 }

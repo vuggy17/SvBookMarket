@@ -60,7 +60,7 @@ class CategoryDetailAdapter(
         var title = binding.bookTitle
         var author = binding.bookAuthor
         var price = binding.bookPrice
-        var rate = binding.tvRate
+        var rate = binding.bookRate
         var img = binding.BookImage
     }
 }

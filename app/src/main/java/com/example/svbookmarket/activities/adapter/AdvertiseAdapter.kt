@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.model.Advertise
 
-class AdvertiseAdapter(private val dataSet: ArrayList<Advertise>) : RecyclerView.Adapter<AdvertiseAdapter.ViewHolder>() {
+class AdvertiseAdapter(private val dataSet: MutableList<Advertise>) : RecyclerView.Adapter<AdvertiseAdapter.ViewHolder>() {
     class ViewHolder (view: View): RecyclerView.ViewHolder(view){
         val advertiseImage: ImageView = view.findViewById(R.id.advertiseImage)
         val advertiseInformation: TextView = view.findViewById(R.id.advertiseInformation)

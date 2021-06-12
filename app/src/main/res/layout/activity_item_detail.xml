@@ -86,7 +86,7 @@
                 android:padding="24dp">
 
                 <TextView
-                    android:id="@+id/tvBookCover"
+                    android:id="@+id/id_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -101,7 +101,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvAuthor"
+                    android:id="@+id/id_author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
@@ -111,7 +111,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvBookCover" />
+                    app:layout_constraintTop_toBottomOf="@+id/id_title" />
 
                 <TextView
                     android:id="@+id/id_tag"
@@ -125,10 +125,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvAuthor" />
+                    app:layout_constraintTop_toBottomOf="@+id/id_author" />
 
                 <TextView
-                    android:id="@+id/tvPrice"
+                    android:id="@+id/id_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
@@ -137,10 +137,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1"
                     app:layout_constraintStart_toEndOf="@+id/id_tag"
-                    app:layout_constraintTop_toBottomOf="@+id/tvAuthor" />
+                    app:layout_constraintTop_toBottomOf="@+id/id_author" />
 
                 <TextView
-                    android:id="@+id/tvReviews"
+                    android:id="@+id/id_review"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
@@ -158,11 +158,11 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1"
 
-                    app:layout_constraintStart_toEndOf="@+id/tvReviews"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPrice">
+                    app:layout_constraintStart_toEndOf="@+id/id_review"
+                    app:layout_constraintTop_toBottomOf="@+id/id_price">
 
                     <TextView
-                        android:id="@+id/tvRate"
+                        android:id="@+id/id_rate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
@@ -189,7 +189,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvReviews" />
+                    app:layout_constraintTop_toBottomOf="@+id/id_review" />
 
                 <TextView
                     android:id="@+id/id_description"

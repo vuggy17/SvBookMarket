@@ -12,7 +12,7 @@ import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.common.RecyclerViewClickListener
 import com.example.svbookmarket.activities.model.Category
 
-class CategoryAdapter(private val items: ArrayList<Category>, private val listener: RecyclerViewClickListener) :
+class CategoryAdapter(private val items: MutableList<Category>, private val listener: RecyclerViewClickListener) :
     RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
