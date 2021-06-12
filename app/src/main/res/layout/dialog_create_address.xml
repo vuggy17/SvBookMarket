@@ -39,7 +39,7 @@
             android:fontFamily="@font/roboto_bold"
             android:text="Name"
             android:textColor="@color/black"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -49,12 +49,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="Name"
-            android:enabled="false"
+
             android:fontFamily="@font/roboto_regular"
             android:inputType="text"
             android:text="Nguyen Van A"
             android:textColor="@color/less_black"
-            android:textSize="16dp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvReciverName" />
@@ -67,7 +67,7 @@
             android:fontFamily="@font/roboto_bold"
             android:text="Phone number"
             android:textColor="@color/black"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
@@ -78,16 +78,14 @@
             android:id="@+id/edtPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:autofillHints="Address Lane"
-            android:enabled="false"
+
             android:fontFamily="@font/roboto_regular"
             android:inputType="number"
             android:text="0123456789"
             android:textColor="@color/less_black"
-            android:textSize="16dp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber" />
 
@@ -99,7 +97,7 @@
             android:fontFamily="@font/roboto_bold"
             android:text="Address lane"
             android:textColor="@color/black"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
@@ -110,16 +108,13 @@
             android:id="@+id/edtAddressLane"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:autofillHints="District"
-            android:enabled="false"
             android:fontFamily="@font/roboto_regular"
             android:inputType="text"
             android:text="KTX khu B ĐHQG"
             android:textColor="@color/less_black"
-            android:textSize="16dp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.507"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvAddressLane" />
 
@@ -155,16 +150,14 @@
                     android:id="@+id/edtDistrict"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:autofillHints="City"
-                    android:enabled="false"
+
                     android:fontFamily="@font/roboto_regular"
                     android:inputType="text"
                     android:text="5"
                     android:textColor="@color/less_black"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.492"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvDistrict" />
             </LinearLayout>
@@ -185,7 +178,7 @@
                     android:fontFamily="@font/roboto_bold"
                     android:text="City"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0"
@@ -196,16 +189,14 @@
                     android:id="@+id/edtCity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:autofillHints="City"
-                    android:enabled="false"
+
                     android:fontFamily="@font/roboto_regular"
                     android:inputType="text"
                     android:text="TP.Thu Duc"
                     android:textColor="@color/less_black"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.492"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvCity" />
             </LinearLayout>
@@ -216,10 +207,14 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+    c
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAddAddress"
         android:layout_width="@dimen/btn_width"
         android:layout_height="@dimen/btn_height"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="@color/blue_dark"
         android:fontFamily="@font/roboto_bold"
         android:text="Add address"

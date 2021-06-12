@@ -13,56 +13,57 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/home_gray"
-        android:elevation="0dp"
+        app:contentInsetStart="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
-                android:padding="24dp"
                 android:id="@+id/tb_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:src="@drawable/img_baseline_menu" />
+                android:paddingVertical="20dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="20dp"
+                android:src="@drawable/img_baseline_menu"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <SearchView
                 android:id="@+id/tb_searchView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="3"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
                 android:layout_marginVertical="10dp"
-
                 android:layout_marginEnd="24dp"
-                android:layout_toStartOf="@+id/tb_cart"
-                android:layout_toEndOf="@+id/tb_menu"
                 android:background="@drawable/bg_home_search"
+                android:clickable="false"
                 android:elevation="6dp"
                 android:touchscreenBlocksFocus="true"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/tb_cart"
-                app:layout_constraintStart_toEndOf="@+id/tb_menu"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/tb_cart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:layout_marginStart="0dp"
-                android:layout_marginEnd="24dp"
-                android:src="@drawable/img_card"
+                app:iconifiedByDefault="false"
+                app:layout_constraintBottom_toBottomOf="@+id/tb_menu"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tb_searchView" />
-        </RelativeLayout>
+                app:layout_constraintStart_toEndOf="@+id/tb_menu"
+                app:layout_constraintTop_toTopOf="@+id/tb_menu"
+                app:queryBackground="@null" />
+<!--            app:layout_constraintEnd_toStartOf="@+id/tb_cart"-->
+<!--            android:layout_toStartOf="@+id/tb_cart"-->
+
+
+            <!--            <ImageView-->
+<!--                android:id="@+id/tb_cart"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="20dp"-->
+<!--                android:src="@drawable/img_card"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/tb_searchView"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/tb_searchView" />-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
 </androidx.constraintlayout.widget.ConstraintLayout>

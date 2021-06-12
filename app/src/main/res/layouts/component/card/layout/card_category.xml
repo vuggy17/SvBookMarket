@@ -20,6 +20,7 @@
             android:id="@+id/categoryImage"
             android:layout_width="114dp"
             android:layout_height="65dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/bg_gradient_splash"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -17,9 +17,9 @@ class CheckoutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCheckoutBinding.inflate(layoutInflater)
-
-        // set activity to display here
         setContentView(binding.root)
+
+
         val dataset = DataSource().loadCheckoutCard()
         val recyclerView = findViewById<RecyclerView>(id.rc_checkout)
         recyclerView.adapter = CheckoutAdapter(this, dataset)
@@ -27,10 +27,11 @@ class CheckoutActivity : AppCompatActivity() {
 
         val buyReviewDialog = CheckoutDialog()
         binding.coCheckout.setOnClickListener {
-            Toast.makeText(this, "cc", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show()
             buyReviewDialog.show(supportFragmentManager,"tag")
-
         }
+
+        binding.coBackButton.setOnClickListener{onBackPressed()}
     }
 
 

@@ -5,10 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_linear_layout_item_info"
-    android:paddingVertical="24dp"
-    android:clipToPadding="false"
-    android:id="@+id/bottomSheetEdit"
-    android:orientation="vertical">
+    android:paddingTop="24dp"
+    android:id="@+id/bottomSheetEdit">
 <!--    android:background="@drawable/bg_rounded"-->
     <TextView
         android:id="@+id/ca_createAddress"
@@ -80,7 +78,7 @@
             android:id="@+id/edtPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+
             android:autofillHints="Address Lane"
             android:fontFamily="@font/roboto_regular"
             android:inputType="number"
@@ -111,7 +109,7 @@
             android:id="@+id/edtAddressLane"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+
             android:autofillHints="District"
             android:fontFamily="@font/roboto_regular"
             android:inputType="text"
@@ -141,7 +139,6 @@
                     android:id="@+id/tvDistrict"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Disctrict"
                     android:textColor="@color/black"
@@ -156,7 +153,7 @@
                     android:id="@+id/edtDistrict"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+
                     android:autofillHints="City"
                     android:fontFamily="@font/roboto_regular"
                     android:inputType="text"
@@ -181,7 +178,7 @@
                     android:id="@+id/tvCity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+
                     android:fontFamily="@font/roboto_bold"
                     android:text="City"
                     android:textColor="@color/black"
@@ -196,7 +193,6 @@
                     android:id="@+id/edtCity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:autofillHints="City"
                     android:fontFamily="@font/roboto_regular"
                     android:inputType="text"
@@ -215,7 +211,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         style="@style/Widget.MaterialComponents.Button"
         android:id="@+id/btnEditAddress"
         android:layout_width="@dimen/btn_width"
@@ -240,7 +236,7 @@
         android:layout_width="@dimen/btn_width"
         android:layout_height="wrap_content"
         android:height="@dimen/btn_height"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="8dp"
         android:text="Delete this address"
         android:textColor="@color/danger"
         app:cornerRadius="12dp"

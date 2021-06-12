@@ -1,16 +1,23 @@
 package com.example.svbookmarket.activities
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.RecentSearchAdapter
 import com.example.svbookmarket.activities.data.DataSource
+import com.example.svbookmarket.activities.data.FullBookList
+import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.model.SearchResultItem
+import com.google.gson.internal.bind.ReflectiveTypeAdapterFactory
 
 class SearchActivity : AppCompatActivity() {
     lateinit var suggestSearch: ListView
@@ -27,17 +34,43 @@ class SearchActivity : AppCompatActivity() {
         linearLayoutRecent = findViewById(R.id.ln_recent)
 
         // repair fix dataset for suggest
-        var datasetFull: MutableList<SearchResultItem> = DataSource().loadSearchItem()
-        var dataset : MutableList<String> = arrayListOf()
-        for (i in 0..datasetFull.size-1)
+        var dataset : MutableList<String> = mutableListOf()
+        for (i in 0..FullBookList.getInstance().lstFullBook.size-1)
         {
-            dataset.add(datasetFull[i].result)
+            dataset.add(FullBookList.getInstance().lstFullBook[i].title)
         }
 
         //suggest adapter
         val adapter : ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_list_item_1, dataset)
         suggestSearch.adapter = adapter
-            fillInRecentSearch(recentSearch)
+        fillInRecentSearch(recentSearch)
+
+        //Click suggest search
+        suggestSearch.setOnItemClickListener(
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                for (book in FullBookList.getInstance().lstFullBook)
+                {
+                    if (book.title == suggestSearch.getItemAtPosition(position))
+                    {
+                        val intent = Intent(parent.context, ItemDetailActivity::class.java)
+                        var bundle = Bundle()
+
+                        bundle.putString(ItemDetailActivity.TITLE,book.title)
+                        bundle.putString(ItemDetailActivity.AUTHOR,book.author)
+                        bundle.putString(ItemDetailActivity.PRICE, book.price.toString())
+                        bundle.putString(ItemDetailActivity.RATEPOINT, book.rating.toString())
+                        bundle.putString(ItemDetailActivity.DESCRIPTION, book.description)
+                        bundle.putString(ItemDetailActivity.KIND, book.kind)
+                        bundle.putString(ItemDetailActivity.THUMBNAIL_URL,book.imageURL.toString())
+                        intent.putExtra("Bundle",bundle)
+                        ContextCompat.startActivity(parent.context, intent, bundle);
+                    }
+                }
+
+            }
+
+        )
+
 
         //searching
         searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener
@@ -83,12 +116,13 @@ class SearchActivity : AppCompatActivity() {
 
     fun fillInRecentSearch(suggestSearch: RecyclerView)
     {
-        val dataset = DataSource().loadSearchItem()
+        val dataset = FullBookList.getInstance().lstFullBook
         val snaphelperFeature: LinearSnapHelper = LinearSnapHelper()
         suggestSearch.adapter = RecentSearchAdapter(this, dataset)
         snaphelperFeature.attachToRecyclerView(suggestSearch)
         suggestSearch.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         suggestSearch.setHasFixedSize(true)
     }
+
 
 }
