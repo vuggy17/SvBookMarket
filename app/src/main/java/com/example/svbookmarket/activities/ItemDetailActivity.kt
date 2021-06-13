@@ -45,7 +45,6 @@ class ItemDetailActivity : AppCompatActivity() {
         binding.idDescription.text = bundle?.getString(DESCRIPTION)
         binding.idTag.text = "#" + bundle?.getString(KIND)
         val thumbnailUri = bundle?.getString(THUMBNAIL_URL)?.toUri()
-        Log.d("000000000", bundle?.getString(THUMBNAIL_URL)!!)
         Glide
             .with(baseContext)
             .load(thumbnailUri)

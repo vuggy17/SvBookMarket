@@ -3,6 +3,7 @@ package com.example.svbookmarket.activities
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.SearchView
@@ -23,18 +24,20 @@ import com.example.svbookmarket.activities.common.RecyclerViewClickListener
 import com.example.svbookmarket.activities.common.RecyclerViewItemMargin
 import com.example.svbookmarket.activities.data.DataSource
 import com.example.svbookmarket.activities.data.FullBookList
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.FirebaseFirestore
 
 class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
     lateinit var suggestRecycler: RecyclerView
     var isBackPressedOnce = false
-
+    lateinit var recyclerAllBook: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
 //        Load data
-        val dataBookSet = DataSource().loadBookFeature()
-        FullBookList.getInstance().lstFullBook
+//        val dataBookSet = DataSource().loadBookFeature()
+       val dataBookSet = FullBookList.getInstance().lstFullBook
 
         //set up advertise recyclerview
         val dataAdvertiseSet = DataSource().loadAdvertise()
@@ -54,7 +57,6 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
             adapter = CategoryAdapter(dataCategorySet, this@HomeActivity)
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             addItemDecoration(MarginItemDecoration(spaceSize = 24, isVerticalLayout = true))
-
         }
 
 
@@ -64,7 +66,7 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
 
 
         //set up more recyclerview
-        val recyclerAllBook: RecyclerView = findViewById(R.id.h_rcMore)
+        recyclerAllBook= findViewById(R.id.h_rcMore)
         recyclerAllBook.apply {
             adapter = FeaturedAdapter(dataBookSet)
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
@@ -136,5 +138,25 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
 
         Handler().postDelayed(Runnable { isBackPressedOnce = false }, 2000)
+    }
+
+    fun onListenToDb()
+    {
+        var ref= FirebaseFirestore.getInstance().collection("books")
+        ref.addSnapshotListener { snapshot, e ->
+            e?.let {
+                Log.d("000000000000000", e.message!!)
+            }
+
+            for(dc in snapshot!!.documentChanges)
+            {
+                when(dc.type)
+                {
+                    DocumentChange.Type.ADDED -> { recyclerAllBook.adapter = FeaturedAdapter(FullBookList.getInstance().lstFullBook)}
+                    DocumentChange.Type.MODIFIED -> { recyclerAllBook.adapter = FeaturedAdapter(FullBookList.getInstance().lstFullBook)}
+                    DocumentChange.Type.REMOVED -> { recyclerAllBook.adapter = FeaturedAdapter(FullBookList.getInstance().lstFullBook)}
+                }
+            }
+        }
     }
 }

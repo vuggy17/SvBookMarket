@@ -15,7 +15,7 @@ import com.example.svbookmarket.activities.ItemDetailActivity
 import com.example.svbookmarket.activities.model.Book
 import com.makeramen.roundedimageview.RoundedImageView
 
-class FeaturedAdapter(private val dataSet: ArrayList<Book>) :
+class FeaturedAdapter(private val dataSet: MutableList<Book>) :
     RecyclerView.Adapter<FeaturedAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)

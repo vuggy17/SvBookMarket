@@ -4,49 +4,111 @@ import android.net.Uri
 import android.util.Log
 import android.widget.Toast
 import com.example.svbookmarket.activities.model.Book
+import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.getField
+import java.util.*
+import kotlin.coroutines.coroutineContext
 
 public class FullBookList private constructor(var lstFullBook:MutableList<Book> = mutableListOf()) {
 
     init {
-        lstFullBook = getDataFromDb()
+        getDataBySnapshot()
     }
 
+    private fun getDataBySnapshot()
+    {
+        var ref= FirebaseFirestore.getInstance().collection("books")
+        ref.addSnapshotListener{snapshot, e ->
 
+            e?.let { Log.d("K-error", e.message!!)
+                return@addSnapshotListener
+            }
+            for(dc in snapshot!!.documentChanges)
+            {
+                when (dc.type) {
+                    DocumentChange.Type.ADDED -> {
+                        val data : MutableMap<String?, Any?> = dc.document.data;
+                        lstFullBook.add(Book(dc.document.id, Uri.parse(data["Image"].toString()), data["Name"].toString(),
+                            data["Author"].toString(), data["Price"].toString().toLong(), data["rate"].toString().toDouble(),
+                            data["Kind"].toString(), data["Counts"].toString().toLong(), data["Description"].toString()))
+                    }
+                    DocumentChange.Type.MODIFIED -> {
+                        val data: MutableMap<String?, Any?> = dc.document.data;
+                        Log.d("000000000000000000000", "dcm")
+                        for(i in 0 until lstFullBook.size)
+                        {
+                            if (lstFullBook[i].id == dc.document.id) {
+                                lstFullBook[i].title =  data["Name"].toString()
+                                lstFullBook[i].author =  data["Author"].toString()
+                                lstFullBook[i].kind =  data["Kind"].toString()
+                                lstFullBook[i].description = data["Description"].toString()
+                                lstFullBook[i].imageURL= Uri.parse(data["Image"].toString())
+                                lstFullBook[i].price = data["Price"].toString().toLong()
+                                lstFullBook[i].ratesCount = data["Counts"].toString().toLong()
+                                lstFullBook[i].rating = data["rate"].toString().toDouble()
+                                break;
+                            }
+                        }
+                    }
+                    DocumentChange.Type.REMOVED -> {
+                        val data: MutableMap<String?, Any?> = dc.document.data;
+                        for(i in 0 until lstFullBook.size-1)
+                        {
+                            if (lstFullBook[i].id == dc.document.id) {
+                                lstFullBook.removeAt(i)
+                                break;
+                            }
+                        }
+                    }
+                }
+
+            }
+
+        }
+    }
 
     private object Holder { val INSTANCE = FullBookList() }
 
     companion object {
 
-        fun getInstance(): FullBookList{
+        fun getInstance(): FullBookList {
             return Holder.INSTANCE
         }
 
-        fun getDataFromDb() : MutableList<Book>
-        {
+        private fun getDataFromDb(): MutableList<Book> {
             val lstFullBook: MutableList<Book> = mutableListOf()
-            val db:FirebaseFirestore = FirebaseFirestore.getInstance()
+            val db: FirebaseFirestore = FirebaseFirestore.getInstance()
             val ref = db.collection("books")
                 .get()
                 .addOnSuccessListener { result ->
-                    for (document in result)
-                    {
+                    for (document in result) {
                         val doc = document.data;
                         val authors: String = document.get("Author").toString();
                         val count: Long = document.get("Counts").toString().toLong();
-                        val description : String = document.get("Description").toString();
-                        val image: Uri= Uri.parse(document.get("Image").toString());
+                        val description: String = document.get("Description").toString();
+                        val image: Uri = Uri.parse(document.get("Image").toString());
                         val kind: String = document.get("Kind").toString();
                         val name: String = document.get("Name").toString();
                         val rate: Double = document.get("rate").toString().toDouble();
                         val price: Long = document.get("Price").toString().toLong();
-                        val book: Book = Book(document.id,image,name,authors,price, rate, kind, count, description)
+                        val book: Book = Book(
+                            document.id,
+                            image,
+                            name,
+                            authors,
+                            price,
+                            rate,
+                            kind,
+                            count,
+                            description
+                        )
                         lstFullBook.add(book)
                     }
-            }
+                }
 
-                return lstFullBook
+            return lstFullBook
         }
+
     }
 }
