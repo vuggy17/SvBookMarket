@@ -3,6 +3,7 @@ package com.example.svbookmarket.activities
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.SearchView
@@ -28,6 +29,17 @@ import com.example.svbookmarket.activities.viewmodel.HomeViewModel
 import com.example.svbookmarket.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
+    companion object {
+        enum class ACTIVITY {
+            MENU, SEARCH, CART, CATEGORY, FEATURE, CATEGORY_DETAIL;
+
+            override fun toString(): String {
+                return name.toLowerCase().capitalize()
+            }
+
+        }
+    }
+
     lateinit var suggestRecycler: RecyclerView
     lateinit var viewModel: HomeViewModel
     var isBackPressedOnce = false
@@ -51,7 +63,7 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
         })
 
         //set up category recyclerview
-        viewModel.category.observe(this, Observer {newCategory->
+        viewModel.category.observe(this, Observer { newCategory ->
             binding.bookCategory.apply {
                 adapter = CategoryAdapter(newCategory, this@HomeActivity)
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -73,38 +85,52 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
         })
 
 
-
-
-
         //setup intent
-        setupIntent()
+        setupNavigation()
 
 
     }
 
-    private fun startIntent(type: String) {
-
-        val intent = when (type) {
-            "menu" -> Intent(this, MenuActivity::class.java)
-            "search" -> Intent(this, SearchActivity::class.java)
-            "cart" -> Intent(this, CartActivity::class.java)
-            "category" -> Intent(this, CategoryActivity::class.java)
-            "feature" -> Intent(this, FeatureActivity::class.java)
-            else -> {
-                Intent(this, CategoryDetailActivity::class.java)
-                    .putExtra(CategoryDetailActivity.CATEGORY_TYPE, type)
+    private fun startIntent(name: ACTIVITY) {
+        val intent = when (name) {
+            ACTIVITY.MENU -> Intent(this, MenuActivity::class.java)
+            ACTIVITY.SEARCH -> Intent(this, SearchActivity::class.java)
+            ACTIVITY.CART -> Intent(this, CartActivity::class.java)
+            ACTIVITY.CATEGORY -> {
+                val bundle = Bundle()
+                bundle.putParcelableArrayList(
+                    CategoryActivity.ITEMS,
+                    ArrayList(viewModel.books.value)
+                )
+                Intent(this, CategoryActivity::class.java).putExtras(bundle)
             }
+            ACTIVITY.FEATURE -> Intent(this, FeatureActivity::class.java)
+            ACTIVITY.CATEGORY_DETAIL -> Intent(this, CategoryDetailActivity::class.java)
+                .putExtra(CategoryDetailActivity.CATEGORY_TYPE, name)
         }
-
         startActivity(intent)
     }
 
-    private fun setupIntent() {
-        findViewById<ImageView>(R.id.tb_menu).setOnClickListener { startIntent("menu") }
-        findViewById<SearchView>(R.id.tb_searchView).setOnClickListener { startIntent("search") }
+    private fun navigateToCategory(name: CategoryActivity.Companion.CATEGORY) {
+        var bundle = Bundle()
+        val i = viewModel.getBooksOfCategory(name.toString())
+
+        bundle.putParcelableArrayList(CategoryDetailActivity.ITEM, i)
+
+        val intent = Intent(this, CategoryDetailActivity::class.java)
+            .putExtras(bundle)
+            .putExtra(CategoryDetailActivity.CATEGORY_TYPE, name.toString())
+
+        binding.root.context.startActivity(intent)
+
+    }
+
+    private fun setupNavigation() {
+        findViewById<ImageView>(R.id.tb_menu).setOnClickListener { startIntent(ACTIVITY.MENU) }
+        findViewById<SearchView>(R.id.tb_searchView).setOnClickListener { startIntent(ACTIVITY.SEARCH) }
 //        findViewById<ImageView>(R.id.tb_cart).setOnClickListener { startIntent("cart") }
-        findViewById<TextView>(R.id.h_allCategory).setOnClickListener { startIntent("category") }
-        findViewById<TextView>(R.id.h_allFeature).setOnClickListener { startIntent("feature") }
+        findViewById<TextView>(R.id.h_allCategory).setOnClickListener { startIntent(ACTIVITY.CATEGORY) }
+        findViewById<TextView>(R.id.h_allFeature).setOnClickListener { startIntent(ACTIVITY.FEATURE) }
 
     }
 
@@ -126,9 +152,12 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
     }
 
     override fun recyclerViewListClicked(v: View?, position: Int) {
-        val dataCategorySet = DataSource().loadCategory()
-        val itemName = dataCategorySet[position].name
-        startIntent(itemName)
+        val itemName = viewModel.category.value?.get(position)?.name?.toUpperCase()?.trim()
+        try {
+            navigateToCategory(CategoryActivity.Companion.CATEGORY.valueOf(itemName!!))
+        } catch (e: IllegalArgumentException) {
+            Log.i("homea", "catch exception ${e.message}")
+        }
     }
 
     override fun onBackPressed() {

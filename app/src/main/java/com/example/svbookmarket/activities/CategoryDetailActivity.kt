@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.svbookmarket.R
@@ -13,52 +13,58 @@ import com.example.svbookmarket.activities.adapter.CategoryDetailAdapter
 import com.example.svbookmarket.activities.common.MarginItemDecoration
 import com.example.svbookmarket.activities.common.RecyclerViewClickListener
 import com.example.svbookmarket.activities.model.Book
+import com.example.svbookmarket.activities.viewmodel.SharedViewModel
 import com.example.svbookmarket.databinding.ActivityCategoryDetailBinding
 import java.util.*
+import kotlin.collections.ArrayList
 import com.example.svbookmarket.activities.data.DataSource as CategoryDetailDataSource
 
 class CategoryDetailActivity : AppCompatActivity(), RecyclerViewClickListener {
     companion object {
-        val CATEGORY_TYPE = "CATEGORY"
-        val CATEGORY_IMG = "CATEGORY_IMG"
+        const val CATEGORY_TYPE = "CATEGORY"
+        const val ITEM = "ITEMS"
     }
 
     lateinit var binding: ActivityCategoryDetailBinding
-    lateinit var items: MutableList<Book>
-
+    lateinit var viewmodel: SharedViewModel
+   lateinit var items:ArrayList<Book>
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoryDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // TODO: 09/06/2021 implement get data list from model
-        // TODO: 09/06/2021 nho filter item truoc khi truyen vao
-        // model.loadData(getExtras(categoryName)
+        viewmodel = ViewModelProvider(this).get(SharedViewModel::class.java)
 
         //temp data
-        items = intent.getStringExtra(CATEGORY_TYPE).let {
-            CategoryDetailDataSource().loadCategory(
-                it.toString()
-            )
-        }
+        val bundle = intent.extras
+        items = bundle?.getParcelableArrayList<Book>(ITEM) as ArrayList<Book>
 
         // setup view
-        items?.let { setupView(binding, it) }
+        items?.let { setupView(it) }
 
 
     }
 
     override fun recyclerViewListClicked(v: View?, position: Int) = navigate(items, position)
 
+    private fun navigate(items: MutableList<Book>, position: Int) {
+        val intent = Intent(this, ItemDetailActivity::class.java)
+        val bundle = Bundle()
+        bundle.putParcelable(ItemDetailActivity.ITEM, items[position])
+        intent.putExtras(bundle)
+        this.binding.root.context.startActivity(intent)
+
+    }
+
     @ExperimentalStdlibApi
     @SuppressLint("SetTextI18n")
-    private fun setupView(binding: ActivityCategoryDetailBinding, items: MutableList<Book>) {
+    private fun setupView(items: MutableList<Book>) {
         val categoryName = intent.getStringExtra(CATEGORY_TYPE)
 
         binding.cdClName.text = "$categoryName Collection"
         binding.cdTitle.text = categoryName
-        val backgroundResId = getCollectionImgSource(categoryName!!)
+        val backgroundResId = viewmodel.getCollectionImgSource(categoryName!!)
 
         Glide
             .with(baseContext)
@@ -76,39 +82,10 @@ class CategoryDetailActivity : AppCompatActivity(), RecyclerViewClickListener {
     }
 
 
-    private fun navigate(items: MutableList<Book>, position: Int) {
-        val intent = Intent(this, ItemDetailActivity::class.java)
-        val bundle = Bundle()
-        with(items[position]) {
-            bundle.let {
-                it.putString(ItemDetailActivity.TITLE, title)
-                it.putString(ItemDetailActivity.AUTHOR, author)
-                it.putString(ItemDetailActivity.PRICE, price.toString())
-                it.putString(ItemDetailActivity.RATEPOINT, rating.toString())
-                it.putString(ItemDetailActivity.THUMBNAIL_URL, imageURL.toString())
-                it.putString(ItemDetailActivity.DESCRIPTION, description)
-
-            }
-
-            intent.putExtra("Bundle", bundle)
-        }
-
-        startActivity(intent, bundle);
-    }
-
-
-    @DrawableRes
-    private fun getCollectionImgSource(categoryName: String): Int {
-        return when (categoryName) {
-            CategoryActivity.Companion.CATEGORY.COMIC.toString() -> R.drawable.img_comic
-            CategoryActivity.Companion.CATEGORY.FICTION.toString() -> R.drawable.img_fiction
-            CategoryActivity.Companion.CATEGORY.NOVEL.toString() -> R.drawable.img_novel
-            CategoryActivity.Companion.CATEGORY.BUSINESS.toString() -> R.drawable.img_business
-            CategoryActivity.Companion.CATEGORY.TECHNOLOGY.toString() -> R.drawable.img_tech
-            else -> R.drawable.img_art
-        }
-    }
-
-
-
 }
+
+
+
+
+
+

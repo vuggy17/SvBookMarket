@@ -13,94 +13,94 @@
     app:strokeColor="#A4858C94">
 
 <!--    168-->
-    <LinearLayout
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginStart="14dp"
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginRight="14dp"
-        android:layout_marginBottom="7dp"
-        android:orientation="vertical">
+<!--    <LinearLayout-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_marginStart="14dp"-->
+<!--        android:layout_marginLeft="14dp"-->
+<!--        android:layout_marginTop="14dp"-->
+<!--        android:layout_marginEnd="14dp"-->
+<!--        android:layout_marginRight="14dp"-->
+<!--        android:layout_marginBottom="7dp"-->
+<!--        android:orientation="vertical">-->
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:cardCornerRadius="6dp">
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            app:cardCornerRadius="6dp">-->
 
-            <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/BookImage"
-                android:layout_width="145dp"
-                android:layout_height="145dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/img_book_card_example"
-                app:riv_border_color="@color/white"
-                app:riv_border_width="0dip"
-                app:riv_corner_radius="6dp"
-                app:riv_mutate_background="true" />
-        </androidx.cardview.widget.CardView>
+<!--            <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--                android:id="@+id/BookImage"-->
+<!--                android:layout_width="145dp"-->
+<!--                android:layout_height="145dp"-->
+<!--                android:scaleType="centerCrop"-->
+<!--                android:src="@drawable/img_book_card_example"-->
+<!--                app:riv_border_color="@color/white"-->
+<!--                app:riv_border_width="0dip"-->
+<!--                app:riv_corner_radius="6dp"-->
+<!--                app:riv_mutate_background="true" />-->
+<!--        </androidx.cardview.widget.CardView>-->
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:layout_height="match_parent">
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_height="match_parent">-->
 
-            <TextView
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:id="@+id/bookTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/roboto_bold"
-                android:text="Eleanor and Park "
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="16sp" />
+<!--            <TextView-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                android:id="@+id/bookTitle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:fontFamily="@font/roboto_bold"-->
+<!--                android:text="Eleanor and Park "-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="16sp" />-->
 
-            <TextView
-                android:id="@+id/bookAuthor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:text="By rainbow rowell"
-                android:textColor="@color/disable"
-                android:textSize="@dimen/text_super_small"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bookTitle" />
-
-
-            <TextView
-                android:id="@+id/bookPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:text="đ 99.000"
-                android:textStyle="bold"
-                android:textSize="@dimen/text_small"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bookAuthor" />
-
-            <TextView
-                android:id="@+id/id_rate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="25dp"
-                android:drawableRight="@drawable/small_star"
-                android:fontFamily="@font/roboto_regular"
-                android:text="4.0"
-                android:textColor="@color/disable"
-                android:textSize="12dp"
-                app:layout_constraintBottom_toBottomOf="@+id/bookPrice"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/bookPrice" />
+<!--            <TextView-->
+<!--                android:id="@+id/bookAuthor"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/roboto_regular"-->
+<!--                android:text="By rainbow rowell"-->
+<!--                android:textColor="@color/disable"-->
+<!--                android:textSize="@dimen/text_super_small"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/bookTitle" />-->
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/bookPrice"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/roboto_regular"-->
+<!--                android:text="đ 99.000"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="@dimen/text_small"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/bookAuthor" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/id_rate"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginStart="25dp"-->
+<!--                android:drawableRight="@drawable/small_star"-->
+<!--                android:fontFamily="@font/roboto_regular"-->
+<!--                android:text="4.0"-->
+<!--                android:textColor="@color/disable"-->
+<!--                android:textSize="12dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/bookPrice"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toEndOf="@id/bookPrice" />-->
+
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--    </LinearLayout>-->
 </androidx.cardview.widget.CardView>

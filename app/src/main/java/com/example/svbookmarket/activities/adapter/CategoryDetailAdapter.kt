@@ -31,8 +31,6 @@ class CategoryDetailAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(items[position]) {
             holder.let { it ->
-                // TODO: 09/06/2021 fix image url mismatch
-
                 it.title.text = title
                 it.author.text = author
                 it.price.text = price.toString()

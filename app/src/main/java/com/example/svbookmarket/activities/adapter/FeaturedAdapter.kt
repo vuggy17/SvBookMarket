@@ -7,13 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.ItemDetailActivity
 import com.example.svbookmarket.activities.model.Book
-import com.google.common.io.Resources
 import com.makeramen.roundedimageview.RoundedImageView
 
 class FeaturedAdapter(private val dataSet: MutableList<Book>) :
@@ -30,7 +28,8 @@ class FeaturedAdapter(private val dataSet: MutableList<Book>) :
             holder.let {
                 it.bookTitle.text = title
                 it.bookAuthor.text = author
-                it.bookPrice.text = holder.itemView.context.getString(R.string.price_format_vn, price.toString())
+                it.bookPrice.text =
+                    holder.itemView.context.getString(R.string.price_format_vn, price.toString())
                 it.bookRate.text = rating.toString()
 
                 Glide
@@ -43,18 +42,12 @@ class FeaturedAdapter(private val dataSet: MutableList<Book>) :
 
                 //set click listener
                 it.itemView.setOnClickListener {
-                    var intentDetail =
+                    var intent =
                         Intent(holder.itemView.context, ItemDetailActivity::class.java)
                     var bundle = Bundle()
-                    bundle.putString(ItemDetailActivity.TITLE, title)
-                    bundle.putString(ItemDetailActivity.AUTHOR, author)
-                    bundle.putString(ItemDetailActivity.PRICE, price.toString())
-                    bundle.putString(ItemDetailActivity.RATEPOINT, rating.toString())
-                    bundle.putString(ItemDetailActivity.THUMBNAIL_URL, imageURL.toString())
-                    bundle.putString(ItemDetailActivity.DESCRIPTION, description)
-
-                    intentDetail.putExtra("Bundle", bundle)
-                    startActivity(holder.itemView.context, intentDetail, bundle);
+                    bundle.putParcelable(ItemDetailActivity.ITEM, this)
+                    intent.putExtras(bundle)
+                    holder.itemView.context.startActivity(intent);
                 }
             }
 

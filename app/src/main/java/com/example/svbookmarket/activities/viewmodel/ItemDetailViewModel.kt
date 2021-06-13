@@ -8,12 +8,14 @@ import androidx.lifecycle.ViewModel
 import com.example.svbookmarket.activities.ItemDetailActivity
 import com.example.svbookmarket.activities.model.Book
 
-class ItemDetailViewModel(private val args: Bundle) : ViewModel() {
+class ItemDetailViewModel(private val item: Book?) : ViewModel() {
     private var _books = MutableLiveData<MutableList<Book>>()
     val books get() = _books
 
     private var _itemToDisplay = MutableLiveData<Book>()
     val itemToDisplay get() = _itemToDisplay
+
+    fun addItemToCart() = itemToDisplay.value?.let { _books.value?.add(it) }
 
     private fun loadBooks() {
         val des =
@@ -41,15 +43,16 @@ class ItemDetailViewModel(private val args: Bundle) : ViewModel() {
     }
 
     private fun loadItem() {
-        _itemToDisplay.value = Book().apply {
-            title = args.get(ItemDetailActivity.TITLE).toString()
-            author = args.get(ItemDetailActivity.AUTHOR).toString()
-            price = args.get(ItemDetailActivity.PRICE).toString().toLong()
-            rating = args.get(ItemDetailActivity.RATEPOINT).toString().toDouble()
-            imageURL = args.get(ItemDetailActivity.THUMBNAIL_URL).toString().toUri()
-            description = args.get(ItemDetailActivity.DESCRIPTION).toString()
-
-        }
+//        _itemToDisplay.value = Book().apply {
+//            title = args.get(ItemDetailActivity.ITEM).toString()
+//            author = args.get(ItemDetailActivity.AUTHOR).toString()
+//            price = args.get(ItemDetailActivity.PRICE).toString().toLong()
+//            rating = args.get(ItemDetailActivity.RATEPOINT).toString().toDouble()
+//            imageURL = args.get(ItemDetailActivity.THUMBNAIL_URL).toString().toUri()
+//            description = args.get(ItemDetailActivity.DESCRIPTION).toString()
+//
+//        }
+            item?.let { _itemToDisplay.value = it }
     }
 
     init {
