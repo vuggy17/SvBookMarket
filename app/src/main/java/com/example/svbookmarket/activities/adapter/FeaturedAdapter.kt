@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.ItemDetailActivity
+import com.example.svbookmarket.activities.data.FullBookList
 import com.example.svbookmarket.activities.model.Book
+import com.google.firebase.firestore.DocumentChange
 import com.makeramen.roundedimageview.RoundedImageView
 
-class FeaturedAdapter(private val dataSet: MutableList<Book>) :
+class FeaturedAdapter(private var dataSet: MutableList<Book>) :
     RecyclerView.Adapter<FeaturedAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -46,11 +48,12 @@ class FeaturedAdapter(private val dataSet: MutableList<Book>) :
                         Intent(holder.itemView.context, ItemDetailActivity::class.java)
                     var bundle = Bundle()
                     bundle.putString(ItemDetailActivity.TITLE, holder.bookTitle.text.toString())
-                    bundle.putString(ItemDetailActivity.AUTHOR, holder.bookTitle.text.toString())
+                    bundle.putString(ItemDetailActivity.AUTHOR, holder.bookAuthor.text.toString())
                     bundle.putString(ItemDetailActivity.PRICE, holder.bookPrice.text.toString())
                     bundle.putString(ItemDetailActivity.RATEPOINT, holder.bookRate.text.toString())
                     bundle.putString(ItemDetailActivity.THUMBNAIL_URL, imageURL.toString())
                     bundle.putString(ItemDetailActivity.DESCRIPTION, description)
+                    bundle.putString(ItemDetailActivity.KIND, kind)
 
                     intentDetail.putExtra("Bundle", bundle)
                     startActivity(holder.itemView.context, intentDetail, bundle);
@@ -65,6 +68,9 @@ class FeaturedAdapter(private val dataSet: MutableList<Book>) :
         return dataSet.size
     }
 
+    fun onChange(){
+            dataSet = FullBookList.getInstance().lstFullBook
+    }
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val bookImage: RoundedImageView = view.findViewById(R.id.BookImage)
         val bookTitle: TextView = view.findViewById(R.id.bookTitle)

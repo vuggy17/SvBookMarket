@@ -1,3 +1,11 @@
 package com.example.svbookmarket.activities.model
 
-data class CartModel(var imgUrl:String, var name:String, var author:String, var numbers:Int, var price:Int )
+import android.net.Uri
+
+data class CartModel(var id: String = "",
+                     var imgUrl: Uri,
+                     var name:String,
+                     var author:String,
+                     var quantity:Int,
+                     var price:Long,
+                     var isChose:Boolean = false)

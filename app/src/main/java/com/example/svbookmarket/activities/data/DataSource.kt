@@ -19,12 +19,12 @@ class DataSource {
 
     fun loadCart(): MutableList<CartModel> {
         return mutableListOf(
-            CartModel("name", "name", "name", 10, 1000),
-            CartModel("name", "name", "name", 9, 200),
-            CartModel("name", "name1", "name", 8, 113),
-            CartModel("name", "name", "name", 12, 1997),
-            CartModel("name", "name", "name", 3, 2001),
-            CartModel("name", "name1", "name", 1, 1000),
+            CartModel(Uri.parse(""),"name", "name", 1, 10,true),
+            CartModel(Uri.parse(""),"name", "name", 1, 9, true),
+            CartModel(Uri.parse(""),"name", "name1",1, 8, true),
+            CartModel(Uri.parse(""),"name", "name", 1, 12,true),
+            CartModel(Uri.parse(""),"name", "name", 1, 3, true),
+            CartModel(Uri.parse(""),"name", "name1",1, 1, true),
 
             )
     }

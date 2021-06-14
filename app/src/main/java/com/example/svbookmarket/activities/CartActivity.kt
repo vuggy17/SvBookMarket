@@ -2,6 +2,7 @@ package com.example.svbookmarket.activities
 
 import android.content.Intent
 import android.graphics.Canvas
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -27,7 +28,7 @@ class CartActivity : AppCompatActivity() {
     val cartAdapter = CartItemAdapter(this, cartData)
 
     var deleteItem: View? = null
-    var deleteModel: CartModel = CartModel("cc", "cc", "cc", 1, 2)
+    var deleteModel: CartModel = CartModel("",Uri.parse("cc"),"", "cc", 10, 1, false)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

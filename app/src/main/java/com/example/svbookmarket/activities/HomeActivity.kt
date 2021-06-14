@@ -31,6 +31,7 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
     lateinit var suggestRecycler: RecyclerView
     var isBackPressedOnce = false
     lateinit var recyclerAllBook: RecyclerView
+    lateinit var feturedAdapter: FeaturedAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -64,11 +65,12 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
         suggestRecycler = findViewById(R.id.rc_Suggest)
         fillInSuggestRecycle()
 
-
+        //set adpter
+        feturedAdapter = FeaturedAdapter(dataBookSet)
         //set up more recyclerview
         recyclerAllBook= findViewById(R.id.h_rcMore)
         recyclerAllBook.apply {
-            adapter = FeaturedAdapter(dataBookSet)
+            adapter = feturedAdapter
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
             addItemDecoration(MarginItemDecoration(spaceSize = 24, spanCount = 2))
         }
@@ -76,7 +78,7 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
 
         //setup intent
         setupIntent()
-
+        onListenToDb()
 
     }
 
@@ -152,9 +154,12 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
             {
                 when(dc.type)
                 {
-                    DocumentChange.Type.ADDED -> { recyclerAllBook.adapter = FeaturedAdapter(FullBookList.getInstance().lstFullBook)}
-                    DocumentChange.Type.MODIFIED -> { recyclerAllBook.adapter = FeaturedAdapter(FullBookList.getInstance().lstFullBook)}
-                    DocumentChange.Type.REMOVED -> { recyclerAllBook.adapter = FeaturedAdapter(FullBookList.getInstance().lstFullBook)}
+                    DocumentChange.Type.ADDED -> { feturedAdapter.onChange()
+                    feturedAdapter.notifyDataSetChanged()}
+                    DocumentChange.Type.MODIFIED -> { feturedAdapter.onChange()
+                        feturedAdapter.notifyDataSetChanged()}
+                    DocumentChange.Type.REMOVED -> { feturedAdapter.onChange()
+                        feturedAdapter.notifyDataSetChanged()}
                 }
             }
         }
