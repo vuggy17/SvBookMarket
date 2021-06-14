@@ -10,11 +10,13 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.TextView
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.data.FullBookList
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+        FullBookList.getInstance().lstFullBook
         // set full screen
         @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

@@ -40,7 +40,7 @@
                         android:id="@+id/id_tnBackground"
                         android:layout_width="match_parent"
                         android:layout_height="380dp"
-                        android:alpha="0.3"
+                        android:alpha="0.5"
                         android:background="@drawable/bookimage"
                         android:scaleX="1"
                         android:scaleY="1" />
@@ -119,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="#education, self help"
+                    android:text=""
                     android:textColor="#0F52BA"
                     android:textSize="12dp"
                     app:layout_constraintEnd_toEndOf="parent"

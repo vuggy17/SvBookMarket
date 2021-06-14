@@ -32,7 +32,9 @@ class LoginActivity : AppCompatActivity() {
     private val dbAccountsReference = db.collection("accounts")
 
     // tạo biến account để lưu về thông tin khách hàng đã có
-    private lateinit var recentAccountLogin: AppAccount
+    companion object {
+        var recentAccountLogin: AppAccount = AppAccount("", "", User())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,9 +82,12 @@ class LoginActivity : AppCompatActivity() {
                                     gender = userMap["gender"].toString(),
                                     birthDay = userMap["birthDay"].toString(),
                                     phoneNumber = userMap["phoneNumber"].toString(),
-                                    regularAddress = userMap["regularAddress"].toString()
+                                    addressLane = userMap["addressLane"].toString(),
+                                    city = userMap["city"].toString(),
+                                    district = userMap["district"].toString(),
                                 )
                                 recentAccountLogin = AppAccount(result["email"].toString(), result["password"].toString(),recentUser)
+                                CurrentUserInfo.getInstance()
                                 startActivity(Intent(baseContext, HomeActivity::class.java))
 
 

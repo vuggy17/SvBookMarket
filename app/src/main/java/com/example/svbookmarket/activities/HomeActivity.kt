@@ -31,6 +31,9 @@ import com.example.svbookmarket.databinding.ActivityHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
 import dagger.hilt.android.qualifiers.ApplicationContext
+import com.example.svbookmarket.activities.data.FullBookList
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.FirebaseFirestore
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
@@ -55,6 +58,7 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+// FullBookList.getInstance().lstFullBook
         //set up advertise recyclerview
         viewModel.ads.observe(this, Observer { newAds ->
             binding.advertise.apply {
@@ -91,7 +95,7 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
         //setup intent
         setupNavigation()
 
-
+  onListenToDb()
     }
 
     private fun startIntent(name: ACTIVITY) {
@@ -173,5 +177,29 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
 
         Handler().postDelayed(Runnable { isBackPressedOnce = false }, 2000)
+    }
+
+    fun onListenToDb()
+    {
+        var ref= FirebaseFirestore.getInstance().collection("books")
+        ref.addSnapshotListener { snapshot, e ->
+            e?.let {
+                Log.d("000000000000000", e.message!!)
+                return@addSnapshotListener
+            }
+
+            for(dc in snapshot!!.documentChanges)
+            {
+                when(dc.type)
+                {
+                    DocumentChange.Type.ADDED -> { feturedAdapter.onChange()
+                    feturedAdapter.notifyDataSetChanged()}
+                    DocumentChange.Type.MODIFIED -> { feturedAdapter.onChange()
+                        feturedAdapter.notifyDataSetChanged()}
+                    DocumentChange.Type.REMOVED -> { feturedAdapter.onChange()
+                        feturedAdapter.notifyDataSetChanged()}
+                }
+            }
+        }
     }
 }

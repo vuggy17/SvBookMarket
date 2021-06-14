@@ -6,16 +6,17 @@ import android.os.Parcelable
 
 
 data class Book(
+    var id: String? = "1",
     var imageURL: Uri? = Uri.EMPTY,
-    var title: String? = "",
-    var author: String? = "",
+    var title: String? = "1",
+    var author: String? = "1",
     var price: Long = 1L,
     var rating: Double = 1.0,
-    var kind: String? = "",
+    var kind: String? ="1",
     var ratesCount: Long = 1L,
-    var description: String? = ""
-):Parcelable {
+    var description: String? = "1" ):Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readString(),
         parcel.readParcelable(Uri::class.java.classLoader),
         parcel.readString(),
         parcel.readString(),
@@ -28,6 +29,7 @@ data class Book(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(id)
         parcel.writeParcelable(imageURL, flags)
         parcel.writeString(title)
         parcel.writeString(author)
@@ -51,5 +53,5 @@ data class Book(
             return arrayOfNulls(size)
         }
     }
-
 }
+

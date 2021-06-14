@@ -1,11 +1,8 @@
 package com.example.svbookmarket.activities.viewmodel
 
 import android.net.Uri
-import android.os.Bundle
-import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.svbookmarket.activities.ItemDetailActivity
 import com.example.svbookmarket.activities.model.Book
 
 class ItemDetailViewModel(private val item: Book?) : ViewModel() {

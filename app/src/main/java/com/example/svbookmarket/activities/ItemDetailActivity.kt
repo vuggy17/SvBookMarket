@@ -23,7 +23,7 @@ class ItemDetailActivity : AppCompatActivity() {
         const val RATEPOINT = "RATEPOINT"
         const val THUMBNAIL_URL = "THUMBNAIL_URL"
         const val DESCRIPTION = "DESCRIPTION"
-
+        const val KIND = "KIND"
     }
 
     lateinit var binding: ActivityItemDetailBinding

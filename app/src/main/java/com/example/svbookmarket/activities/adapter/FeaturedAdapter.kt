@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.ItemDetailActivity
+import com.example.svbookmarket.activities.data.FullBookList
 import com.example.svbookmarket.activities.model.Book
+import com.google.firebase.firestore.DocumentChange
 import com.makeramen.roundedimageview.RoundedImageView
 
 class FeaturedAdapter(private val dataSet: MutableList<Book>) :
@@ -59,6 +61,9 @@ class FeaturedAdapter(private val dataSet: MutableList<Book>) :
         return dataSet.size
     }
 
+    fun onChange(){
+            dataSet = FullBookList.getInstance().lstFullBook
+    }
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val bookImage: RoundedImageView = view.findViewById(R.id.BookImage)
         val bookTitle: TextView = view.findViewById(R.id.bookTitle)
