@@ -4,19 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
-import com.example.svbookmarket.activities.model.CartModel
-import com.google.android.material.button.MaterialButton
+import com.example.svbookmarket.activities.model.Cart
 import com.google.android.material.card.MaterialCardView
 
-class CartItemAdapter(val context: Context, private val cartList:MutableList<CartModel>):RecyclerView.Adapter<CartItemAdapter.VH>(){
+class CartItemAdapter(val context: Context, private val cartList:MutableList<Cart>):RecyclerView.Adapter<CartItemAdapter.VH>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val adapterLayout =
             LayoutInflater.from(parent.context).inflate(R.layout.card_checkout, parent, false)
@@ -54,7 +51,7 @@ class CartItemAdapter(val context: Context, private val cartList:MutableList<Car
         cartList.removeAt(position)
         notifyItemRemoved(position)
     }
-    fun addItem(position: Int, model: CartModel){
+    fun addItem(position: Int, model: Cart){
         cartList.add(position,model )
        notifyItemInserted(position)
     }

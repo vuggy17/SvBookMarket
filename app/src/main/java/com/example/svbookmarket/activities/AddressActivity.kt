@@ -2,14 +2,17 @@ package com.example.svbookmarket.activities
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment.STYLE_NORMAL
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.AddressAdapter
 import com.example.svbookmarket.activities.common.InsetDividerItemDecoration
+import com.example.svbookmarket.activities.common.RecyclerViewClickListener
 import com.example.svbookmarket.activities.common.toPx
 import com.example.svbookmarket.activities.data.DataSource
+import com.example.svbookmarket.activities.viewmodel.AddressViewModel
 import com.example.svbookmarket.databinding.ActivityAddressBinding
 
 class AddressActivity : AppCompatActivity() {
@@ -20,6 +23,8 @@ class AddressActivity : AppCompatActivity() {
     }
 
     lateinit var binding: ActivityAddressBinding
+    val viewmodel: AddressViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddressBinding.inflate(layoutInflater)
@@ -27,19 +32,18 @@ class AddressActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val myDataset = DataSource().loadAddressCard()
-
         val adRecyclerview = binding.adRecyclerview
         val newAddressBtn = binding.adNewAddress
         val editAddressBtn = binding.adEditAdress
 
-
-        adRecyclerview.apply {
-            adapter = AddressAdapter(context, myDataset)
-            layoutManager = LinearLayoutManager(context)
-            addItemDecoration(InsetDividerItemDecoration(context, 138.toPx()))
-            setHasFixedSize(true)
-        }
+        viewmodel.address.observe(this, {data->
+            adRecyclerview.apply {
+                adapter = AddressAdapter(context, data)
+                layoutManager = LinearLayoutManager(context)
+                addItemDecoration(InsetDividerItemDecoration(context, 138.toPx()))
+                setHasFixedSize(true)
+            }
+        })
 
 
         // ẩn continue btn nêu activity trước đó không phải là cart
@@ -70,5 +74,15 @@ class AddressActivity : AppCompatActivity() {
 
 
     }
+
+    override fun onResume() {
+        viewmodel.let {
+//            it.updateCurrentAddress()
+        }
+
+        super.onResume()
+    }
+
+    fun getdata() = ""
 }
 

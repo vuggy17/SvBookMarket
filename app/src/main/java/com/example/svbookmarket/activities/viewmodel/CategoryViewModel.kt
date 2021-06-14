@@ -1,12 +1,9 @@
 package com.example.svbookmarket.activities.viewmodel
 
 import android.net.Uri
-import android.os.Parcelable
-import androidx.annotation.DrawableRes
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.svbookmarket.R
-import com.example.svbookmarket.activities.CategoryActivity
 import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.model.Category
 

@@ -8,11 +8,26 @@ import com.example.svbookmarket.activities.model.Category
 import javax.inject.Inject
 
 class CategoryRepository @Inject constructor( /*database */) {
-
+    /**
+     * get data from database then save it into _category
+     * now use temp data for test
+     */
     private var _category = MutableLiveData<MutableList<Category>>()
     val category get() = _category
 
+    /**
+     * retrieve data from db
+     */
+//    suspend fun load(){
+//        with(Dispatchers.IO){
+//       // do something with db
+//
+//        }
+//    }
 
+    /**
+     * bellow is test function region
+     */
     @DrawableRes
     fun getCollectionImgSource(categoryName: String): Int {
         return when (categoryName) {
@@ -25,7 +40,8 @@ class CategoryRepository @Inject constructor( /*database */) {
         }
     }
 
-    private fun loadCategory() {
+
+    private fun loadData() {
         _category.value = mutableListOf(
             Category(R.drawable.img_art, "Art"),
             Category(R.drawable.img_fiction, "Fiction"),
@@ -36,5 +52,8 @@ class CategoryRepository @Inject constructor( /*database */) {
         )
     }
 
+    init {
+        loadData()
+    }
 
 }

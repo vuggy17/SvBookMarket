@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.AddressActivity
 import com.example.svbookmarket.activities.model.AddressModel
 import com.google.android.material.card.MaterialCardView
 import kotlin.properties.Delegates
@@ -22,6 +23,11 @@ public class AddressAdapter(var context: Context, private var dataset: MutableLi
         if (newPos in dataset.indices) {
             notifyItemChanged(oldPos)
             notifyItemChanged(newPos)
+
+            if(context is AddressActivity){
+                // TODO: 14/06/2021 update selected address trong viewmodeld de goi ham update trong viewmodel  
+            }
+
         }
     }
 

@@ -1,32 +1,35 @@
 package com.example.svbookmarket.activities.data
 
 import android.net.Uri
-import android.util.Log
-import androidx.annotation.DrawableRes
 import androidx.lifecycle.MutableLiveData
-import com.example.svbookmarket.R
-import com.example.svbookmarket.activities.CategoryActivity
-import com.example.svbookmarket.activities.model.Advertise
 import com.example.svbookmarket.activities.model.Book
-import com.example.svbookmarket.activities.model.Category
 import javax.inject.Inject
 
 class BookRepository @Inject constructor( /*database */) {
+
+    /**
+     * get data from database then save it into _book
+     * now use temp data for test
+     */
     private var _books = MutableLiveData<MutableList<Book>>()
     val books get() = _books
 
 
 
+    /**
+     * retrieve data from db
+     */
+//    suspend fun load(){
+//        with(Dispatchers.IO){
+//            // do something with db
+//
+//        }
+//    }
 
-    //public function
-    fun getBooksOfCategory(category: String):ArrayList<Book> {
-        val booksOfCategory = _books.value?.filter { category == it.kind }
-        return ArrayList(booksOfCategory)
-    }
-
-
-    //retrieve data from db
-    private fun loadBooks() {
+    /**
+     * bellow is test function region
+     */
+    fun loadData() {
         val des =
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut egestas in ligula a maximus. Mauris venenatis, neque vitae sollicitudin dapibus, dolor lorem tempor orci, eget viverra ante eros non sem. Nam maximus dignissim purus, ac cursus felis. Duis maximus odio nunc, nec dapibus ligula ultricies non. Aliquam efficitur sapien ut nisl aliquet, eget malesuada urna egestas. Nullam sed orci urna. Praesent iaculis dapibus urna, at rutrum ipsum aliquet at. Pellentesque pellentesque augue vel tortor convallis aliquam. Etiam porttitor id urna at dictum. Donec scelerisque auctor quam, id varius ligula. Aliquam eget nibh et urna dapibus vestibulum. Donec mauris ipsum, aliquet ut risus ac, efficitur porta tortor. Donec ac libero ut leo lobortis elementum. Nunc commodo metus nunc.\nPhasellus iaculis nisi a leo vehicula sodales. Fusce hendrerit quam eget tortor semper ultrices. Vivamus rhoncus molestie massa et volutpat. Proin cursus ex ac diam ornare consectetur. Curabitur vitae congue lectus. Pellentesque a purus fermentum, varius est vel, faucibus risus. Nullam vitae massa vitae diam fermentum condimentum vitae a sem. Etiam eu lorem a libero sollicitudin placerat.\nDuis sodales imperdiet quam, vitae laoreet ex fermentum non. Vivamus convallis magna in justo laoreet, a ornare enim sollicitudin. Nam laoreet neque eu tempus commodo. In sollicitudin enim sit amet rutrum posuere. Integer mattis aliquet posuere. Integer blandit mauris vel erat molestie faucibus. Ut non urna in urna interdum venenatis non sit amet urna. In ornare posuere risus et vestibulum."
         val list = mutableListOf<Book>()
@@ -48,16 +51,15 @@ class BookRepository @Inject constructor( /*database */) {
             )
         }
         _books.value = list
-
     }
 
-
+    fun getBooksOfCategory(category: String): ArrayList<Book> {
+        val booksOfCategory = _books.value?.filter { category == it.kind }
+        return ArrayList(booksOfCategory)
+    }
 
 
     init {
-        Log.i("sharedvm", "sharedViewmodel created!")
-        loadBooks()
-        loadCategory()
+        loadData()
     }
-
 }

@@ -4,30 +4,33 @@ import android.content.Intent
 import android.graphics.Canvas
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.CartItemAdapter
-import com.example.svbookmarket.activities.data.DataSource
-import com.example.svbookmarket.activities.model.CartModel
+import com.example.svbookmarket.activities.data.CartViewModel
+import com.example.svbookmarket.activities.model.Cart
 import com.example.svbookmarket.databinding.ActivityCartBinding
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
-
+@AndroidEntryPoint
 class CartActivity : AppCompatActivity() {
     lateinit var binding: ActivityCartBinding
-
-    val cartData = DataSource().loadCart()
-    val cartAdapter = CartItemAdapter(this, cartData)
+    lateinit var cartData: MutableList<Cart>
+    lateinit var viewModel: CartViewModel
+    lateinit var cartAdapter: CartItemAdapter
 
     var deleteItem: View? = null
-    var deleteModel: CartModel = CartModel("cc", "cc", "cc", 1, 2)
+
+    //variable to save deleted item, later is used for redo action
+    lateinit var delete: Cart
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,25 +39,38 @@ class CartActivity : AppCompatActivity() {
         // set activity to display here
         setContentView(binding.root)
 
-        binding.rcCardList.adapter = cartAdapter
-        binding.rcCardList.layoutManager = LinearLayoutManager(this)
-        binding.rcCardList.setHasFixedSize(true)
+        viewModel = ViewModelProvider(this).get(CartViewModel::class.java)
 
-        // swipe to delete
-        touchHelper.attachToRecyclerView(binding.rcCardList)
+        viewModel.cart.observe(this, { datas ->
+            if (datas != null) {
+                cartAdapter = CartItemAdapter(this, datas)
+                cartData = datas
 
-        // TODO: 11/06/2021 xu li back ve dung man hinh truoc do
+                binding.rcCardList.apply {
+                    adapter = cartAdapter
+                    layoutManager = LinearLayoutManager(this@CartActivity)
+                    setHasFixedSize(true)
+
+                    // swipe to delete
+                    touchHelper.attachToRecyclerView(this)
+                }
+            }
+        })
+
+
         binding.backButton.setOnClickListener { onBackPressed() }
-
         binding.ctCheckout.setOnClickListener { startIntent("checkout") }
-
         binding.ctChangeLocation.setOnClickListener { startIntent(AddressActivity.CHANGE_ADDRESS) }
     }
+
 
     private fun startIntent(type: String) {
         val intent = when (type) {
             "checkout" -> Intent(this, CheckoutActivity::class.java)
-            AddressActivity.CHANGE_ADDRESS -> Intent(this, AddressActivity::class.java).putExtra(AddressActivity.FROM_CART, true)
+            AddressActivity.CHANGE_ADDRESS -> Intent(this, AddressActivity::class.java).putExtra(
+                AddressActivity.FROM_CART,
+                true
+            )
             else -> Intent(this, HomeActivity::class.java)
         }
         startActivity(intent)
@@ -78,7 +94,7 @@ class CartActivity : AppCompatActivity() {
             override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
                 // remove from adapter
                 val itemPos = viewHolder.adapterPosition
-                deleteModel = cartData[itemPos]
+                delete = cartData[itemPos]
                 deleteItem = viewHolder.itemView
 
                 cartAdapter.removeItem(itemPos)
@@ -131,10 +147,17 @@ class CartActivity : AppCompatActivity() {
                 }.show()
 
             fun undoDeletion(position: Int) {
-                cartAdapter.addItem(position, deleteModel)
+                cartAdapter.addItem(position, delete)
             }
         })
 
+    override fun onPause() {
+        super.onPause()
+        //save data to repository
+
+        viewModel.updateData(cartData)
+
+    }
 }
 
 

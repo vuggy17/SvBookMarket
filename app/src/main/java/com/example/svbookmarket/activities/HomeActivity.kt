@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -27,7 +28,11 @@ import com.example.svbookmarket.activities.common.RecyclerViewItemMargin
 import com.example.svbookmarket.activities.data.DataSource
 import com.example.svbookmarket.activities.viewmodel.HomeViewModel
 import com.example.svbookmarket.databinding.ActivityHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
+import dagger.hilt.android.qualifiers.ApplicationContext
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
     companion object {
         enum class ACTIVITY {
@@ -41,7 +46,7 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
     }
 
     lateinit var suggestRecycler: RecyclerView
-    lateinit var viewModel: HomeViewModel
+    val viewModel: HomeViewModel by viewModels()
     var isBackPressedOnce = false
     lateinit var binding: ActivityHomeBinding
 
@@ -49,8 +54,6 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         //set up advertise recyclerview
         viewModel.ads.observe(this, Observer { newAds ->
