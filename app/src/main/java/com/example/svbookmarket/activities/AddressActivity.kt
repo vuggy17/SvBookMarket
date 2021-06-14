@@ -1,6 +1,7 @@
 package com.example.svbookmarket.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment.STYLE_NORMAL
@@ -11,6 +12,8 @@ import com.example.svbookmarket.activities.common.InsetDividerItemDecoration
 import com.example.svbookmarket.activities.common.toPx
 import com.example.svbookmarket.activities.data.DataSource
 import com.example.svbookmarket.databinding.ActivityAddressBinding
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.FirebaseFirestore
 
 class AddressActivity : AppCompatActivity() {
     companion object {
@@ -20,6 +23,7 @@ class AddressActivity : AppCompatActivity() {
     }
 
     lateinit var binding: ActivityAddressBinding
+    lateinit var addressAdapter: AddressAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddressBinding.inflate(layoutInflater)
@@ -27,15 +31,15 @@ class AddressActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val myDataset = DataSource().loadAddressCard()
+        val myDataset = CurrentUserInfo.getInstance().lstUserDeliverAddress
 
         val adRecyclerview = binding.adRecyclerview
         val newAddressBtn = binding.adNewAddress
         val editAddressBtn = binding.adEditAdress
-
+        addressAdapter = AddressAdapter(this, myDataset)
 
         adRecyclerview.apply {
-            adapter = AddressAdapter(context, myDataset)
+            adapter = addressAdapter
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(InsetDividerItemDecoration(context, 138.toPx()))
             setHasFixedSize(true)
@@ -68,7 +72,31 @@ class AddressActivity : AppCompatActivity() {
             editAddressDialog.show(supportFragmentManager, "tag")
         }
 
+        onListenToDb()
+    }
 
+    fun onListenToDb()
+    {
+        val ref = FirebaseFirestore.getInstance().collection("accounts").document(CurrentUserInfo.getInstance().currentProfile.email).collection("userDeliverAddresses")
+        ref.addSnapshotListener { snapshot, e ->
+            e?.let {
+                Log.d("00000000000000000", e.message!!)
+                return@addSnapshotListener
+            }
+
+            for (dc in snapshot!!.documentChanges)
+            {
+                when(dc.type)
+                {
+                    DocumentChange.Type.ADDED -> { addressAdapter.onChange()
+                        addressAdapter.notifyDataSetChanged()}
+                    DocumentChange.Type.MODIFIED -> {addressAdapter.onChange()
+                        addressAdapter.notifyDataSetChanged()}
+                    DocumentChange.Type.REMOVED -> { addressAdapter.onChange()
+                        addressAdapter.notifyDataSetChanged()}
+                }
+            }
+        }
     }
 }
 

@@ -148,6 +148,7 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
         ref.addSnapshotListener { snapshot, e ->
             e?.let {
                 Log.d("000000000000000", e.message!!)
+                return@addSnapshotListener
             }
 
             for(dc in snapshot!!.documentChanges)
