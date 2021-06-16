@@ -59,6 +59,7 @@ class LoginActivity : AppCompatActivity() {
         }
         loginSignUp.setOnClickListener {
             startActivity(Intent(baseContext, RegisterActivity::class.java))
+            finish() //remove activity from backstack
         }
     }
 

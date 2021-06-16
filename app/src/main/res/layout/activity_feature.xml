@@ -108,8 +108,9 @@
             android:id="@+id/feature_recycler"
             android:layout_width="match_parent"
             android:layout_height="240dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_marginTop="-200dp"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             tools:listitem="@layout/card_feature" />
     <TextView
         android:layout_width="wrap_content"
@@ -123,6 +124,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_Bestselling"
         android:layout_width="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal"
         android:layout_height="wrap_content"
         tools:listitem="@layout/card_book"/>
     <TextView

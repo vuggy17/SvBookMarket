@@ -10,15 +10,14 @@ import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 
 @HiltViewModel
 class FeatureViewModel  @Inject constructor(
-     val bookRepository: BookRepository
+     private val bookRepository: BookRepository
 ) : ViewModel() {
 
-    private var _books = getBookFrom1()
+    private var _books = MutableLiveData<MutableList<Book>>()
     val books get() = _books
 
     //    fun getBookFrom() = liveData(Dispatchers.IO) {
@@ -27,7 +26,7 @@ class FeatureViewModel  @Inject constructor(
 //            emit(respone)
 //        }
 //    }
-    fun getBookFrom1(): MutableLiveData<MutableList<Book>> {
+    fun getBookFrom(): MutableLiveData<MutableList<Book>> {
         bookRepository.getBooksFromCloudFirestore1().addSnapshotListener(object :
             EventListener<QuerySnapshot> {
             override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
@@ -43,7 +42,7 @@ class FeatureViewModel  @Inject constructor(
 
                 }
                 books.value = bookList
-                Log.d(VMTAG, "Current cites in CA: $books")
+                Log.d(VMTAG, "book list fetched: $books")
             }
 
         })
@@ -51,5 +50,8 @@ class FeatureViewModel  @Inject constructor(
         Log.d(VMTAG, "feature called")
 
         return books
+    }
+    init {
+        getBookFrom()
     }
 }

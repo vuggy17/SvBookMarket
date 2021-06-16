@@ -1,19 +1,20 @@
 package com.example.svbookmarket.activities.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.model.Feature_Item
 import com.makeramen.roundedimageview.RoundedImageView
 
-class BestsellingAdapter(private val context: Context ,private val lstBookCard: MutableList<Feature_Item>) : RecyclerView.Adapter<BestsellingAdapter.BestsellingViewHolder>() {
-    class BestsellingViewHolder(BestsellingCard: View) :RecyclerView.ViewHolder(BestsellingCard)
-    {
+class BestsellingAdapter(
+    private val lstBookCard: MutableList<Feature_Item>,
+) :
+    RecyclerView.Adapter<BestsellingAdapter.BestsellingViewHolder>() {
+    class BestsellingViewHolder(BestsellingCard: View) : RecyclerView.ViewHolder(BestsellingCard) {
         val imgBookCover: RoundedImageView = BestsellingCard.findViewById(R.id.BookImage)
         val tvBookAuthor: TextView = BestsellingCard.findViewById(R.id.bookAuthor)
         val tvBookTitle: TextView = BestsellingCard.findViewById(R.id.bookTitle)
@@ -21,7 +22,8 @@ class BestsellingAdapter(private val context: Context ,private val lstBookCard: 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BestsellingViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.card_book, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.card_book, parent, false)
         return BestsellingViewHolder(itemView)
     }
 
@@ -33,4 +35,8 @@ class BestsellingAdapter(private val context: Context ,private val lstBookCard: 
     }
 
     override fun getItemCount() = lstBookCard.size
+
+    interface OnBestSellingItemClickListener {
+        fun onBestSellingItemClick(item: Book)
+    }
 }

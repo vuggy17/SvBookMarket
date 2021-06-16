@@ -5,22 +5,24 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.CategoryDetailAdapter
+import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.common.Constants.ACTIVITY.CATEGORY_DETAIL
+import com.example.svbookmarket.activities.common.Constants.ITEM
 import com.example.svbookmarket.activities.common.MarginItemDecoration
 import com.example.svbookmarket.activities.common.RecyclerViewClickListener
 import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.viewmodel.CategoryDetailViewModel
 import com.example.svbookmarket.databinding.ActivityCategoryDetailBinding
 
-class CategoryDetailActivity : AppCompatActivity(), RecyclerViewClickListener {
+class CategoryDetailActivity : AppCompatActivity(), CategoryDetailAdapter.OnCategoryClickListener {
     companion object {
         const val CATEGORY_TYPE = "CATEGORY"
-        const val ITEM = "ITEMS"
     }
 
     lateinit var binding: ActivityCategoryDetailBinding
@@ -34,20 +36,9 @@ class CategoryDetailActivity : AppCompatActivity(), RecyclerViewClickListener {
         binding = ActivityCategoryDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
-    }
-
-    override fun recyclerViewListClicked(v: View?, position: Int) = navigate(items, position)
-
-    private fun navigate(items: MutableList<Book>, position: Int) {
-        val intent = Intent(this, ItemDetailActivity::class.java)
-        val bundle = Bundle()
-        bundle.putParcelable(ITEM, items[position])
-        intent.putExtras(bundle)
-        this.binding.root.context.startActivity(intent)
-
         setupView()
+
+
     }
 
     private fun setupView() {
@@ -78,6 +69,7 @@ class CategoryDetailActivity : AppCompatActivity(), RecyclerViewClickListener {
 
     }
 
+    @DrawableRes
     private fun getCategorybg(categoryName: String): Int =
         viewmodel.getCollectionImgSource(categoryName)
 
@@ -94,7 +86,19 @@ class CategoryDetailActivity : AppCompatActivity(), RecyclerViewClickListener {
     private fun getCategoryNameFromIntent(): String = intent.getStringExtra(CATEGORY_TYPE)!!
 
 
+    override fun onCategoryItemClick(item: Book) {
+        val i = putBookIntoIntent(item)
+        navigate(i)
+    }
+    private fun navigate(mIntent:Intent)= this.binding.root.context.startActivity(mIntent)
 
+    private fun putBookIntoIntent(item:Book):Intent{
+        val bundle = Bundle()
+        bundle.putParcelable(ITEM, item)
+        val i = Intent(this, ItemDetailActivity::class.java)
+        i.putExtras(bundle)
+        return i
+    }
 }
 
 

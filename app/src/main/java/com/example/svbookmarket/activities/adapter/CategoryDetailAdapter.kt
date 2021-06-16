@@ -7,14 +7,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.svbookmarket.R
-import com.example.svbookmarket.activities.common.RecyclerViewClickListener
 import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.databinding.CardBookBinding
 
 
 class CategoryDetailAdapter(
-    var items: MutableList<Book>,
-    val listener: RecyclerViewClickListener
+    private var items: MutableList<Book>,
+    private val listener: OnCategoryClickListener
 ) : RecyclerView.Adapter<CategoryDetailAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -46,7 +45,7 @@ class CategoryDetailAdapter(
 
                 //set up position touch listener
                 it.itemView.setOnClickListener { itemView ->
-                    listener.recyclerViewListClicked(itemView, position)
+                    listener.onCategoryItemClick(this)
                 }
             }
         }
@@ -70,5 +69,9 @@ class CategoryDetailAdapter(
         var price = binding.bookPrice
         var rate = binding.bookRate
         var img = binding.BookImage
+    }
+
+    interface OnCategoryClickListener{
+        fun onCategoryItemClick(item:Book)
     }
 }
