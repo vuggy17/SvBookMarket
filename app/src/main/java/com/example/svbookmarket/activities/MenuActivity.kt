@@ -10,15 +10,12 @@ class MenuActivity:AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.menu)
-
-
         findViewById<TextView>(R.id.m_home).setOnClickListener{startIntent("home")}
         findViewById<TextView>(R.id.m_profile).setOnClickListener{startIntent("profile")}
         findViewById<TextView>(R.id.m_cart).setOnClickListener{startIntent("cart")}
         findViewById<TextView>(R.id.m_item).setOnClickListener{startIntent("item")}
         findViewById<TextView>(R.id.m_checkout).setOnClickListener{startIntent("checkout")}
     findViewById<TextView>(R.id.m_address).setOnClickListener{startIntent("address")}
-
 
     }
 

@@ -20,8 +20,10 @@ class WelcomeActivity : AppCompatActivity() {
         var login: Button = findViewById(R.id.btnLogin)
         login.setOnClickListener {
             startActivity(Intent(baseContext,LoginActivity::class.java))
+            finish();
         }
         var guestLogin = findViewById<TextView>(R.id.tvContinueAsGuest)
-        guestLogin.setOnClickListener { startActivity(Intent(this, HomeActivity::class.java)) }
+        guestLogin.setOnClickListener { startActivity(Intent(this, HomeActivity::class.java))
+            finish();}
     }
 }

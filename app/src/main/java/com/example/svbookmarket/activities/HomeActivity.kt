@@ -121,9 +121,9 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
      * navigate when click on screen
      */
     private fun setupNavigation() {
-        findViewById<ImageView>(R.id.tb_menu).setOnClickListener { startIntent(MENU) }
+//        findViewById<ImageView>(R.id.tb_menu).setOnClickListener { startIntent(MENU) }
         findViewById<SearchView>(R.id.tb_searchView).setOnClickListener { startIntent(SEARCH) }
-//        findViewById<ImageView>(R.id.tb_cart).setOnClickListener { startIntent("cart") }
+//       findViewById<ImageView>(R.id.tb_cart).setOnClickListener { startIntent("cart") }
         findViewById<TextView>(R.id.h_allCategory).setOnClickListener { startIntent(CATEGORY) }
         findViewById<TextView>(R.id.h_allFeature).setOnClickListener { startIntent(FEATURE) }
 
