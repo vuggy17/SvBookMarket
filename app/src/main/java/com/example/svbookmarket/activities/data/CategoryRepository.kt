@@ -4,6 +4,8 @@ import androidx.annotation.DrawableRes
 import androidx.lifecycle.MutableLiveData
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.CategoryActivity
+import com.example.svbookmarket.activities.common.Constants
+import com.example.svbookmarket.activities.common.Constants.CATEGORY.*
 import com.example.svbookmarket.activities.model.Category
 import javax.inject.Inject
 
@@ -31,11 +33,11 @@ class CategoryRepository @Inject constructor( /*database */) {
     @DrawableRes
     fun getCollectionImgSource(categoryName: String): Int {
         return when (categoryName) {
-            CategoryActivity.Companion.CATEGORY.COMIC.toString() -> R.drawable.img_comic
-            CategoryActivity.Companion.CATEGORY.FICTION.toString() -> R.drawable.img_fiction
-            CategoryActivity.Companion.CATEGORY.NOVEL.toString() -> R.drawable.img_novel
-            CategoryActivity.Companion.CATEGORY.BUSINESS.toString() -> R.drawable.img_business
-            CategoryActivity.Companion.CATEGORY.TECHNOLOGY.toString() -> R.drawable.img_tech
+            COMIC.toString() -> R.drawable.img_comic
+            FICTION.toString() -> R.drawable.img_fiction
+            NOVEL.toString() -> R.drawable.img_novel
+            BUSINESS.toString() -> R.drawable.img_business
+            TECHNOLOGY.toString() -> R.drawable.img_tech
             else -> R.drawable.img_art
         }
     }

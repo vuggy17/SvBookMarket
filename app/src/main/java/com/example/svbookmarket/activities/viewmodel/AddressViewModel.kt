@@ -7,7 +7,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.launch
 import java.lang.IllegalArgumentException
 import javax.inject.Inject
-import com.example.svbookmarket.activities.model.AddressModel as MyAddress
+import com.example.svbookmarket.activities.model.UserDeliverAddress as MyAddress
 
 @ViewModelScoped
 class AddressViewModel @Inject constructor(

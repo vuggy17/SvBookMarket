@@ -9,10 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.svbookmarket.R
-import com.example.svbookmarket.activities.common.RecyclerViewClickListener
 import com.example.svbookmarket.activities.model.Category
 
-class CategoryAdapter(private val items: MutableList<Category>, private val listener: RecyclerViewClickListener) :
+class CategoryAdapter(private val items: MutableList<Category>, private val listener: onCategoryItemClick) :
     RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,7 +33,7 @@ class CategoryAdapter(private val items: MutableList<Category>, private val list
                     .into(it.background);
 
                 //setup listener
-                it.itemView.setOnClickListener { listener.recyclerViewListClicked(it, position) }
+                it.itemView.setOnClickListener { listener.onCategoryItemClick(this.name) }
             }
         }
         Log.i("TAG", "bindView time: " + (System.currentTimeMillis() - startTime));
@@ -47,6 +46,10 @@ class CategoryAdapter(private val items: MutableList<Category>, private val list
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.categoryName)
         val background: ImageView = view.findViewById(R.id.categoryImage)
+    }
+
+    interface onCategoryItemClick {
+        fun onCategoryItemClick(categoryName:String)
     }
 
 }

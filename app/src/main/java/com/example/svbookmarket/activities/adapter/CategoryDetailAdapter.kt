@@ -31,15 +31,15 @@ class CategoryDetailAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(items[position]) {
             holder.let { it ->
-                it.title.text = title
-                it.author.text = author
-                it.price.text = price.toString()
-                it.rate.text = rating.toString()
+                it.title.text = Name
+                it.author.text = Author
+                it.price.text = Price.toString()
+                it.rate.text = rate.toString()
 
                 //load image from uri
                 Glide
                     .with(holder.itemView)
-                    .load(imageURL)
+                    .load(Image)
                     .centerCrop()
                     .placeholder(R.drawable.ic_launcher_background)
                     .into(it.img);
@@ -53,6 +53,16 @@ class CategoryDetailAdapter(
     }
 
     override fun getItemCount(): Int = items.size
+
+
+    fun addBooks(book: List<Book>) {
+        if (this.items.isNotEmpty()) {
+            this.items.clear()
+        }
+        this.items.addAll(book)
+        notifyDataSetChanged()
+    }
+
 
     inner class ViewHolder(binding: CardBookBinding) : RecyclerView.ViewHolder(binding.root) {
         var title = binding.bookTitle

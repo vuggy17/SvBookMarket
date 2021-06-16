@@ -1,11 +1,10 @@
 package com.example.svbookmarket.activities.data
 
 import android.util.Log
-import com.example.svbookmarket.activities.model.Cart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import com.example.svbookmarket.activities.model.AddressModel as MyAddress
+import com.example.svbookmarket.activities.model.UserDeliverAddress as MyAddress
 
 class AddressRepository @Inject constructor(/*database */) {
 
@@ -40,7 +39,7 @@ class AddressRepository @Inject constructor(/*database */) {
 
     suspend fun delete(item: MyAddress) {
         withContext(Dispatchers.IO) {
-            Log.i("my database", "Item deleted ${item.name}")
+            Log.i("my database", "Item deleted ${item.fullName}")
         }
     }
 

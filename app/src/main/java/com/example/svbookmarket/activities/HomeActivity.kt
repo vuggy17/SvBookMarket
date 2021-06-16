@@ -3,8 +3,6 @@ package com.example.svbookmarket.activities
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
-import android.view.View
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
@@ -12,7 +10,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -22,44 +19,74 @@ import com.example.svbookmarket.activities.adapter.AdvertiseAdapter
 import com.example.svbookmarket.activities.adapter.CategoryAdapter
 import com.example.svbookmarket.activities.adapter.FeaturedAdapter
 import com.example.svbookmarket.activities.adapter.SuggestAdapter
+import com.example.svbookmarket.activities.common.Constants.ACTIVITY
+import com.example.svbookmarket.activities.common.Constants.ACTIVITY.*
+import com.example.svbookmarket.activities.common.Constants.ITEM
 import com.example.svbookmarket.activities.common.MarginItemDecoration
-import com.example.svbookmarket.activities.common.RecyclerViewClickListener
 import com.example.svbookmarket.activities.common.RecyclerViewItemMargin
 import com.example.svbookmarket.activities.data.DataSource
+import com.example.svbookmarket.activities.data.Response.*
+import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.viewmodel.HomeViewModel
 import com.example.svbookmarket.databinding.ActivityHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
-import dagger.hilt.android.qualifiers.ApplicationContext
-import com.example.svbookmarket.activities.data.FullBookList
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.FirebaseFirestore
+
 
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
-    companion object {
-        enum class ACTIVITY {
-            MENU, SEARCH, CART, CATEGORY, FEATURE, CATEGORY_DETAIL;
-
-            override fun toString(): String {
-                return name.toLowerCase().capitalize()
-            }
-
-        }
-    }
-
-    lateinit var suggestRecycler: RecyclerView
-    val viewModel: HomeViewModel by viewModels()
-    var isBackPressedOnce = false
+class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
+    CategoryAdapter.onCategoryItemClick {
     lateinit var binding: ActivityHomeBinding
+
+    val viewModel: HomeViewModel by viewModels()
+
+    private var adsAdapter = AdvertiseAdapter(mutableListOf())
+    private var catgoryAdapter = CategoryAdapter(mutableListOf(), this@HomeActivity)
+    private var suggestAdapter = SuggestAdapter(mutableListOf())
+    private var moreAdapter = FeaturedAdapter(mutableListOf(), this)
+
+    var isBackPressedOnce = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-// FullBookList.getInstance().lstFullBook
-        //set up advertise recyclerview
+        // watch data change
+        getBooks()
+
+        setAdsAdapter()
+        setCategoryAdapter()
+        setSuggestAdapter()
+        setMoreAdapter()
+        setupNavigation()
+
+    }
+
+    private fun getBooks() {
+        viewModel.getBookFrom().observe(this, { changes ->
+            moreAdapter.addBooks(changes)
+        })
+
+        // TODO: 16/06/2021  ads, suggest se duoc implement khi db hoan thanh
+    }
+
+    private fun setSuggestAdapter() {
+        val dataset = DataSource().loadSuggestCard()
+        binding.rcSuggest.apply {
+            adapter = SuggestAdapter(dataset)
+            layoutManager = LinearLayoutManager(
+                context,
+                RecyclerView.HORIZONTAL,
+                false
+            )
+            addItemDecoration(RecyclerViewItemMargin(8, dataset.size))
+            setHasFixedSize(true)
+            LinearSnapHelper().attachToRecyclerView(this)
+
+        }
+    }
+
+    private fun setAdsAdapter() {
         viewModel.ads.observe(this, Observer { newAds ->
             binding.advertise.apply {
                 adapter = AdvertiseAdapter(newAds)
@@ -69,7 +96,9 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
             }
         })
 
-        //set up category recyclerview
+    }
+
+    private fun setCategoryAdapter() {
         viewModel.category.observe(this, Observer { newCategory ->
             binding.bookCategory.apply {
                 adapter = CategoryAdapter(newCategory, this@HomeActivity)
@@ -78,95 +107,82 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
             }
         })
 
-        //set up book feature recyclerview
-        suggestRecycler = findViewById(R.id.rc_Suggest)
-        fillInSuggestRecycle()
-
-        //set up more recyclerview
-        viewModel.books.observe(this, Observer { newBooks ->
-            binding.hRcMore.apply {
-                adapter = FeaturedAdapter(newBooks)
-                layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
-                addItemDecoration(MarginItemDecoration(spaceSize = 24, spanCount = 2))
-            }
-        })
-
-
-        //setup intent
-        setupNavigation()
-
-  onListenToDb()
     }
 
+    private fun setMoreAdapter() {
+        binding.hRcMore.apply {
+            adapter = moreAdapter
+            layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+            addItemDecoration(MarginItemDecoration(spaceSize = 24, spanCount = 2))
+        }
+    }
+
+    /**
+     * navigate when click on screen
+     */
+    private fun setupNavigation() {
+        findViewById<ImageView>(R.id.tb_menu).setOnClickListener { startIntent(MENU) }
+        findViewById<SearchView>(R.id.tb_searchView).setOnClickListener { startIntent(SEARCH) }
+//        findViewById<ImageView>(R.id.tb_cart).setOnClickListener { startIntent("cart") }
+        findViewById<TextView>(R.id.h_allCategory).setOnClickListener { startIntent(CATEGORY) }
+        findViewById<TextView>(R.id.h_allFeature).setOnClickListener { startIntent(FEATURE) }
+
+    }
+
+
+    /**
+     * start an intent for navigating
+     */
     private fun startIntent(name: ACTIVITY) {
         val intent = when (name) {
-            ACTIVITY.MENU -> Intent(this, MenuActivity::class.java)
-            ACTIVITY.SEARCH -> Intent(this, SearchActivity::class.java)
-            ACTIVITY.CART -> Intent(this, CartActivity::class.java)
-            ACTIVITY.CATEGORY -> {
-                val bundle = Bundle()
-                bundle.putParcelableArrayList(
-                    CategoryActivity.ITEMS,
-                    ArrayList(viewModel.books.value)
-                )
-                Intent(this, CategoryActivity::class.java).putExtras(bundle)
+            MENU -> Intent(this, MenuActivity::class.java)
+            SEARCH -> Intent(this, SearchActivity::class.java)
+            CART -> Intent(this, CartActivity::class.java)
+            CATEGORY -> {
+                Intent(this, CategoryActivity::class.java)
             }
-            ACTIVITY.FEATURE -> Intent(this, FeatureActivity::class.java)
-            ACTIVITY.CATEGORY_DETAIL -> Intent(this, CategoryDetailActivity::class.java)
+            FEATURE -> Intent(this, FeatureActivity::class.java)
+            CATEGORY_DETAIL -> Intent(this, CategoryDetailActivity::class.java)
                 .putExtra(CategoryDetailActivity.CATEGORY_TYPE, name)
         }
         startActivity(intent)
     }
 
-    private fun navigateToCategory(name: CategoryActivity.Companion.CATEGORY) {
-        var bundle = Bundle()
-        val i = viewModel.getBooksOfCategory(name.toString())
 
-        bundle.putParcelableArrayList(CategoryDetailActivity.ITEM, i)
+    /**
+     * put book to intent then start navigation
+     */
+    override fun onBookClick(book: Book) {
+        val intent =
+            Intent(binding.root.context, ItemDetailActivity::class.java)
+        val bundle = Bundle()
+        bundle.putParcelable(ITEM, book)
+        intent.putExtras(bundle)
+        binding.root.context.startActivity(intent)
+    }
+
+
+    /**
+     * put category name to intent then start navigation
+     */
+    override fun onCategoryItemClick(categoryName: String) {
+        var bundle = Bundle()
+        val i = viewModel.getBooksOfCategory(categoryName) as ArrayList<Book>
+
+        bundle.putParcelableArrayList(CATEGORY_DETAIL.toString(), i)
 
         val intent = Intent(this, CategoryDetailActivity::class.java)
             .putExtras(bundle)
-            .putExtra(CategoryDetailActivity.CATEGORY_TYPE, name.toString())
+            .putExtra(CategoryDetailActivity.CATEGORY_TYPE, categoryName)
 
         binding.root.context.startActivity(intent)
 
     }
 
-    private fun setupNavigation() {
-        findViewById<ImageView>(R.id.tb_menu).setOnClickListener { startIntent(ACTIVITY.MENU) }
-        findViewById<SearchView>(R.id.tb_searchView).setOnClickListener { startIntent(ACTIVITY.SEARCH) }
-//        findViewById<ImageView>(R.id.tb_cart).setOnClickListener { startIntent("cart") }
-        findViewById<TextView>(R.id.h_allCategory).setOnClickListener { startIntent(ACTIVITY.CATEGORY) }
-        findViewById<TextView>(R.id.h_allFeature).setOnClickListener { startIntent(ACTIVITY.FEATURE) }
 
-    }
-
-    private fun fillInSuggestRecycle() {
-        val dataset = DataSource().loadSuggestCard()
-        binding.rcSuggest.apply {
-            adapter = SuggestAdapter(context, dataset)
-            layoutManager = LinearLayoutManager(
-                context,
-                RecyclerView.HORIZONTAL,
-                false
-            )
-            suggestRecycler.addItemDecoration(RecyclerViewItemMargin(8, dataset.size))
-            suggestRecycler.setHasFixedSize(true)
-            LinearSnapHelper().attachToRecyclerView(suggestRecycler)
-
-        }
-
-    }
-
-    override fun recyclerViewListClicked(v: View?, position: Int) {
-        val itemName = viewModel.category.value?.get(position)?.name?.toUpperCase()?.trim()
-        try {
-            navigateToCategory(CategoryActivity.Companion.CATEGORY.valueOf(itemName!!))
-        } catch (e: IllegalArgumentException) {
-            Log.i("homea", "catch exception ${e.message}")
-        }
-    }
-
+    /**
+     * prevent instant exit
+     */
     override fun onBackPressed() {
         if (isBackPressedOnce) {
             super.onBackPressed()
@@ -177,29 +193,5 @@ class HomeActivity : AppCompatActivity(), RecyclerViewClickListener {
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
 
         Handler().postDelayed(Runnable { isBackPressedOnce = false }, 2000)
-    }
-
-    fun onListenToDb()
-    {
-        var ref= FirebaseFirestore.getInstance().collection("books")
-        ref.addSnapshotListener { snapshot, e ->
-            e?.let {
-                Log.d("000000000000000", e.message!!)
-                return@addSnapshotListener
-            }
-
-            for(dc in snapshot!!.documentChanges)
-            {
-                when(dc.type)
-                {
-                    DocumentChange.Type.ADDED -> { feturedAdapter.onChange()
-                    feturedAdapter.notifyDataSetChanged()}
-                    DocumentChange.Type.MODIFIED -> { feturedAdapter.onChange()
-                        feturedAdapter.notifyDataSetChanged()}
-                    DocumentChange.Type.REMOVED -> { feturedAdapter.onChange()
-                        feturedAdapter.notifyDataSetChanged()}
-                }
-            }
-        }
     }
 }

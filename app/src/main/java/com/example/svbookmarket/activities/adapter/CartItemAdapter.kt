@@ -25,7 +25,7 @@ class CartItemAdapter(val context: Context, private val cartList:MutableList<Car
         holder.author.text = cartList[position].author
         holder.coverimg.setImageResource(R.drawable.welcome)
         holder.price.text = cartList[position].price.toString()
-        holder.number.text = cartList[position].quantity.toString()
+//        holder.number.text = cartList[position].quantity.toString()
 
         // increase and decrease button listenerc
         holder.increaseButton.setOnClickListener {

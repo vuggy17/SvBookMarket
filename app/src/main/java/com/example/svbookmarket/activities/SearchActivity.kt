@@ -1,10 +1,8 @@
 package com.example.svbookmarket.activities
 
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.core.content.ContextCompat
@@ -13,11 +11,8 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.RecentSearchAdapter
-import com.example.svbookmarket.activities.data.DataSource
+import com.example.svbookmarket.activities.common.Constants.ITEM
 import com.example.svbookmarket.activities.data.FullBookList
-import com.example.svbookmarket.activities.model.Book
-import com.example.svbookmarket.activities.model.SearchResultItem
-import com.google.gson.internal.bind.ReflectiveTypeAdapterFactory
 
 class SearchActivity : AppCompatActivity() {
     lateinit var suggestSearch: ListView
@@ -37,7 +32,7 @@ class SearchActivity : AppCompatActivity() {
         var dataset : MutableList<String> = mutableListOf()
         for (i in 0..FullBookList.getInstance().lstFullBook.size-1)
         {
-            dataset.add(FullBookList.getInstance().lstFullBook[i].title)
+//            dataset.add(FullBookList.getInstance().lstFullBook[i].title)
         }
 
         //suggest adapter
@@ -50,18 +45,11 @@ class SearchActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 for (book in FullBookList.getInstance().lstFullBook)
                 {
-                    if (book.title == suggestSearch.getItemAtPosition(position))
+                    if (book.Name == suggestSearch.getItemAtPosition(position))
                     {
                         val intent = Intent(parent.context, ItemDetailActivity::class.java)
                         var bundle = Bundle()
-
-                        bundle.putString(ItemDetailActivity.TITLE,book.title)
-                        bundle.putString(ItemDetailActivity.AUTHOR,book.author)
-                        bundle.putString(ItemDetailActivity.PRICE, book.price.toString())
-                        bundle.putString(ItemDetailActivity.RATEPOINT, book.rating.toString())
-                        bundle.putString(ItemDetailActivity.DESCRIPTION, book.description)
-                        bundle.putString(ItemDetailActivity.KIND, book.kind)
-                        bundle.putString(ItemDetailActivity.THUMBNAIL_URL,book.imageURL.toString())
+                        bundle.putParcelable(ITEM,book)
                         intent.putExtra("Bundle",bundle)
                         ContextCompat.startActivity(parent.context, intent, bundle);
                     }

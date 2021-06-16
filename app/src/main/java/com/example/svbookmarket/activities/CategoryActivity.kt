@@ -2,50 +2,51 @@ package com.example.svbookmarket.activities
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
+import com.example.svbookmarket.activities.common.Constants.ACTIVITY.CATEGORY_DETAIL
+import com.example.svbookmarket.activities.common.Constants.CATEGORY.*
 import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.viewmodel.CategoryViewModel
-import com.example.svbookmarket.activities.viewmodel.CategoryViewModelFactory
 import com.example.svbookmarket.databinding.ActivityCategoryBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class CategoryActivity : AppCompatActivity() {
-    companion object{
-        enum class CATEGORY{
-            COMIC, FICTION, NOVEL, BUSINESS, TECHNOLOGY, ART;
 
-            override fun toString(): String {
-                return name.toLowerCase().capitalize()
-            }
-        }
-        const val ITEMS = "CATEGORY"
-    }
-    lateinit var viewModel: CategoryViewModel
     lateinit var binding: ActivityCategoryBinding
+    private val viewModel: CategoryViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val bundle= intent.extras
-        val item = bundle?.getParcelableArrayList<Book>(ITEMS)!!
-        val viewModelFactory = CategoryViewModelFactory(item)
-        viewModel = ViewModelProvider(this,viewModelFactory).get(CategoryViewModel::class.java)
-
-        setupIntent()
+        setupNavigation()
     }
 
-    private fun startIntent(type: String){
+    private fun setupNavigation() {
+        binding.apply {
+            cSearchView.setOnClickListener { startIntent("search") }
+            cBackButton.setOnClickListener { startIntent("back") }
+            cArt.setOnClickListener { startIntent(ART.toString()) }
+            cComic.setOnClickListener { startIntent(COMIC.toString()) }
+            cFiction.setOnClickListener { startIntent(FICTION.toString()) }
+            cNovel.setOnClickListener { startIntent(NOVEL.toString()) }
+            cBusiness.setOnClickListener { startIntent(BUSINESS.toString()) }
+            cTechnology.setOnClickListener { startIntent(TECHNOLOGY.toString()) }
+        }
+    }
+
+    private fun startIntent(type: String) {
         val intent = if (type != "back" && type != "search") {
-            var bundle = Bundle()
-            val i =  viewModel.getBooksOfCategory(type)
 
-            bundle.putParcelableArrayList(CategoryDetailActivity.ITEM, i)
+            // get data for intent
+            val filteredColl = viewModel.getBooksOfCategory(type)
+            val i = Intent(this, CategoryDetailActivity::class.java)
 
-            Intent(this, CategoryDetailActivity::class.java)
-                .putExtras(bundle)
-                .putExtra(CategoryDetailActivity.CATEGORY_TYPE, type)
+            putDataToIntent(i, filteredColl, type)
+
         } else {
             when (type) {
                 "search" -> Intent(this, SearchActivity::class.java)
@@ -55,16 +56,23 @@ class CategoryActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun setupIntent(){
-        binding.apply {
-            cSearchView.setOnClickListener { startIntent("search") }
-            cBackButton.setOnClickListener { startIntent("back") }
-            cArt.setOnClickListener { startIntent(CATEGORY.ART.toString())}
-            cComic.setOnClickListener { startIntent(CATEGORY.COMIC.toString())}
-            cFiction.setOnClickListener { startIntent(CATEGORY.FICTION.toString()) }
-            cNovel.setOnClickListener { startIntent(CATEGORY.NOVEL.toString()) }
-            cBusiness.setOnClickListener { startIntent(CATEGORY.BUSINESS.toString()) }
-            cTechnology.setOnClickListener { startIntent(CATEGORY.TECHNOLOGY.toString()) }
-        }
+    /**
+     * put into and return intent
+     */
+    private fun putDataToIntent(i: Intent, data: ArrayList<Book>?, type: String): Intent {
+        val bundle = putDataToBundle(data)
+        i.putExtras(bundle)
+            .putExtra(CategoryDetailActivity.CATEGORY_TYPE, type)
+        return i
     }
+
+    /**
+     * put into and return bunde
+     */
+    private fun putDataToBundle(data: ArrayList<Book>?): Bundle {
+        val bundle = Bundle()
+        bundle.putParcelableArrayList(CATEGORY_DETAIL.toString(), data)
+        return bundle
+    }
+
 }

@@ -1,8 +1,6 @@
 package com.example.svbookmarket.activities.adapter
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.svbookmarket.R
-import com.example.svbookmarket.activities.ItemDetailActivity
-import com.example.svbookmarket.activities.data.FullBookList
 import com.example.svbookmarket.activities.model.Book
-import com.google.firebase.firestore.DocumentChange
 import com.makeramen.roundedimageview.RoundedImageView
 
-class FeaturedAdapter(private val dataSet: MutableList<Book>) :
+class FeaturedAdapter(
+    private val dataSet: MutableList<Book>,
+    private val listener: OnBookClickLitener
+) :
     RecyclerView.Adapter<FeaturedAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -28,31 +26,21 @@ class FeaturedAdapter(private val dataSet: MutableList<Book>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(dataSet[holder.adapterPosition]) {
             holder.let {
-                it.bookTitle.text = title
-                it.bookAuthor.text = author
+                it.bookTitle.text = Name
+                it.bookAuthor.text = Author
                 it.bookPrice.text =
-                    holder.itemView.context.getString(R.string.price_format_vn, price.toString())
-                it.bookRate.text = rating.toString()
+                    holder.itemView.context.getString(R.string.price_format_vn, Price.toString())
+                it.bookRate.text = rate.toString()
 
                 Glide
                     .with(holder.itemView)
-                    .load(imageURL)
+                    .load(Image)
                     .centerCrop()
                     .placeholder(R.drawable.ic_launcher_background)
                     .into(it.bookImage);
 
-
-                //set click listener
-                it.itemView.setOnClickListener {
-                    var intent =
-                        Intent(holder.itemView.context, ItemDetailActivity::class.java)
-                    var bundle = Bundle()
-                    bundle.putParcelable(ItemDetailActivity.ITEM, this)
-                    intent.putExtras(bundle)
-                    holder.itemView.context.startActivity(intent);
-                }
+                it.itemView.setOnClickListener{listener.onBookClick(this)}
             }
-
         }
 
     }
@@ -61,14 +49,24 @@ class FeaturedAdapter(private val dataSet: MutableList<Book>) :
         return dataSet.size
     }
 
-    fun onChange(){
-            dataSet = FullBookList.getInstance().lstFullBook
+    fun addBooks(book: List<Book>) {
+        if (this.dataSet.isNotEmpty()) {
+            this.dataSet.clear()
+        }
+        this.dataSet.addAll(book)
+        notifyDataSetChanged()
     }
+
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val bookImage: RoundedImageView = view.findViewById(R.id.BookImage)
         val bookTitle: TextView = view.findViewById(R.id.bookTitle)
         val bookAuthor: TextView = view.findViewById(R.id.bookAuthor)
         val bookPrice: TextView = view.findViewById(R.id.bookPrice)
         val bookRate: TextView = view.findViewById(R.id.bookRate)
+    }
+
+    interface OnBookClickLitener {
+        fun onBookClick(book: Book)
     }
 }

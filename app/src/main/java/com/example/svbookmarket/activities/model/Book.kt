@@ -4,40 +4,39 @@ import android.net.Uri
 import android.os.Parcel
 import android.os.Parcelable
 
-
 data class Book(
     var id: String? = "1",
-    var imageURL: Uri? = Uri.EMPTY,
-    var title: String? = "1",
-    var author: String? = "1",
-    var price: Long = 1L,
-    var rating: Double = 1.0,
-    var kind: String? ="1",
-    var ratesCount: Long = 1L,
-    var description: String? = "1" ):Parcelable {
+    var Image: String? = "",
+    var Name: String? = "1",
+    var Author: String? = "1",
+    var Price: Int = 1,
+    var rate: Int = 10,
+    var Kind: String? ="1",
+    var Counts:Int = 1,
+    var Description: String? = "1" ):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
-        parcel.readParcelable(Uri::class.java.classLoader),
         parcel.readString(),
         parcel.readString(),
-        parcel.readLong(),
-        parcel.readDouble(),
         parcel.readString(),
-        parcel.readLong(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readString(),
+        parcel.readInt(),
         parcel.readString()
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
-        parcel.writeParcelable(imageURL, flags)
-        parcel.writeString(title)
-        parcel.writeString(author)
-        parcel.writeLong(price)
-        parcel.writeDouble(rating)
-        parcel.writeString(kind)
-        parcel.writeLong(ratesCount)
-        parcel.writeString(description)
+        parcel.writeString(Image)
+        parcel.writeString(Name)
+        parcel.writeString(Author)
+        parcel.writeInt(Price)
+        parcel.writeInt(rate)
+        parcel.writeString(Kind)
+        parcel.writeInt(Counts)
+        parcel.writeString(Description)
     }
 
     override fun describeContents(): Int {
@@ -54,4 +53,3 @@ data class Book(
         }
     }
 }
-

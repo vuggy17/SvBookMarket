@@ -11,9 +11,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.ItemDetailActivity
+import com.example.svbookmarket.activities.common.Constants.ITEM
 import com.example.svbookmarket.activities.data.FullBookList
 import com.example.svbookmarket.activities.model.Book
-import com.example.svbookmarket.activities.model.SearchResultItem
 
 class RecentSearchAdapter(context: Context, private val lstRecentSearch: MutableList<Book>): RecyclerView.Adapter<RecentSearchAdapter.RecentSearchViewHolder> (){
      class RecentSearchViewHolder(RecentSearchCard: View): RecyclerView.ViewHolder(RecentSearchCard)
@@ -28,22 +28,23 @@ class RecentSearchAdapter(context: Context, private val lstRecentSearch: Mutable
     }
 
     override fun onBindViewHolder(holder: RecentSearchViewHolder, position: Int) {
-               holder.recentSearchName.text = lstRecentSearch[position].title
-                holder.recentSearchTime.text = lstRecentSearch[position].kind
+               holder.recentSearchName.text = lstRecentSearch[position].Name
+                holder.recentSearchTime.text = lstRecentSearch[position].Kind
         holder.itemView.setOnClickListener {
             var intentDetail = Intent(holder.itemView.context, ItemDetailActivity::class.java)
             var bundle = Bundle()
             for(book in FullBookList.getInstance().lstFullBook)
             {
-                if (book.title == holder.recentSearchName.text)
+                if (book.Name == holder.recentSearchName.text)
                 {
-                    bundle.putString(ItemDetailActivity.TITLE,book.title)
-                    bundle.putString(ItemDetailActivity.AUTHOR,book.author)
-                    bundle.putString(ItemDetailActivity.PRICE, book.price.toString())
-                    bundle.putString(ItemDetailActivity.RATEPOINT, book.rating.toString())
-                    bundle.putString(ItemDetailActivity.DESCRIPTION, book.description)
-                    bundle.putString(ItemDetailActivity.KIND, book.kind)
-                    bundle.putString(ItemDetailActivity.THUMBNAIL_URL, book.imageURL.toString())
+//                    bundle.putString(ItemDetailActivity.TITLE,book.Name)
+//                    bundle.putString(ItemDetailActivity.AUTHOR,book.Author)
+//                    bundle.putString(ItemDetailActivity.PRICE, book.Price.toString())
+//                    bundle.putString(ItemDetailActivity.RATEPOINT, book.rate.toString())
+//                    bundle.putString(ItemDetailActivity.DESCRIPTION, book.Description)
+//                    bundle.putString(ItemDetailActivity.KIND, book.Kind)
+//                    bundle.putString(ItemDetailActivity.THUMBNAIL_URL, book.Image.toString())
+                    bundle.putParcelable(ITEM, book)
                 }
             }
             intentDetail.putExtra("Bundle",bundle)

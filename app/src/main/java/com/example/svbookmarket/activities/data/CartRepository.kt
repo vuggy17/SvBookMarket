@@ -7,7 +7,7 @@ import com.example.svbookmarket.activities.model.Cart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import com.example.svbookmarket.activities.model.AddressModel as MyAddress
+import com.example.svbookmarket.activities.model.UserDeliverAddress as MyAddress
 
 class CartRepository @Inject constructor( /*database */
     val cartCache: CartCache

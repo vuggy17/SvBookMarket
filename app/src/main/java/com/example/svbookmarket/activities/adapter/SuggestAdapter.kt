@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.model.Feature_Item
 
-class SuggestAdapter(context:Context, private val lstSuggestCard: MutableList<Feature_Item>): RecyclerView.Adapter<SuggestAdapter.SuggestViewHolder>() {
+class SuggestAdapter( private val lstSuggestCard: MutableList<Feature_Item>): RecyclerView.Adapter<SuggestAdapter.SuggestViewHolder>() {
     class SuggestViewHolder(SuggestCard: View) : RecyclerView.ViewHolder(SuggestCard){
         val imgBookCover: ImageView = SuggestCard.findViewById(R.id.imgSuggest)
         val tvBookName: TextView = SuggestCard.findViewById(R.id.tvBookSuggest)
