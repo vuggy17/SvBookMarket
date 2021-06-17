@@ -25,7 +25,14 @@ object FirebaseModule {
 
     @Provides
     @Named(BOOK_REF)
-    fun provideCloudFirestoreMoviesRef(rootRef: FirebaseFirestore): CollectionReference {
+    fun provideCloudFirestoreBooksRef(rootRef: FirebaseFirestore): CollectionReference {
         return rootRef.collection(BOOK_REF)
     }
+
+    @Provides
+    @Named(USERS_REF)
+    fun provideCloudFirestoreUsersRef(rootRef: FirebaseFirestore):CollectionReference{
+        return rootRef.collection(USERS_REF)
+    }
+
 }
