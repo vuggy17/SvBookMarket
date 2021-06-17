@@ -1,5 +1,6 @@
 package com.example.svbookmarket.activities
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -14,11 +15,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.AdvertiseAdapter
 import com.example.svbookmarket.activities.adapter.CategoryAdapter
 import com.example.svbookmarket.activities.adapter.FeaturedAdapter
 import com.example.svbookmarket.activities.adapter.SuggestAdapter
+import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.common.Constants.ACTIVITY
 import com.example.svbookmarket.activities.common.Constants.ACTIVITY.*
 import com.example.svbookmarket.activities.common.Constants.ITEM
@@ -30,6 +33,8 @@ import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.viewmodel.HomeViewModel
 import com.example.svbookmarket.databinding.ActivityHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import io.grpc.InternalChannelz.id
+import java.lang.Thread.sleep
 
 
 @AndroidEntryPoint
@@ -43,7 +48,6 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
     private var catgoryAdapter = CategoryAdapter(mutableListOf(), this@HomeActivity)
     private var suggestAdapter = SuggestAdapter(mutableListOf())
     private var moreAdapter = FeaturedAdapter(mutableListOf(), this)
-
     var isBackPressedOnce = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,14 +55,16 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         // watch data change
         getBooks()
-
         setAdsAdapter()
         setCategoryAdapter()
         setSuggestAdapter()
         setMoreAdapter()
         setupNavigation()
+        setUpBottomNavigationView()
+
 
     }
 
@@ -103,7 +109,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
             binding.bookCategory.apply {
                 adapter = CategoryAdapter(newCategory, this@HomeActivity)
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                addItemDecoration(MarginItemDecoration(spaceSize = 24, isVerticalLayout = true))
+                addItemDecoration(MarginItemDecoration(spaceSize = 20, isVerticalLayout = true))
             }
         })
 
@@ -113,7 +119,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
         binding.hRcMore.apply {
             adapter = moreAdapter
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
-            addItemDecoration(MarginItemDecoration(spaceSize = 24, spanCount = 2))
+            addItemDecoration(MarginItemDecoration(spaceSize = 15, spanCount = 2))
         }
     }
 
@@ -126,7 +132,6 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
 //       findViewById<ImageView>(R.id.tb_cart).setOnClickListener { startIntent("cart") }
         findViewById<TextView>(R.id.h_allCategory).setOnClickListener { startIntent(CATEGORY) }
         findViewById<TextView>(R.id.h_allFeature).setOnClickListener { startIntent(FEATURE) }
-
     }
 
 
@@ -194,4 +199,28 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
 
         Handler().postDelayed(Runnable { isBackPressedOnce = false }, 2000)
     }
+    private fun setUpBottomNavigationView(){
+
+        binding.bottomNavigation.add(MeowBottomNavigation.Model(id= 1, R.drawable.ic_baseline_person_24))
+        binding.bottomNavigation.add(MeowBottomNavigation.Model(id= 2, R.drawable.ic_home))
+        binding.bottomNavigation.add(MeowBottomNavigation.Model(id= 3, R.drawable.ic_baseline_shopping_cart_24))
+        binding.bottomNavigation.setCount( id=3, "3")
+        binding.bottomNavigation.show(id = 2,   true)
+        binding.bottomNavigation.setOnClickMenuListener {
+
+            if(it.id ==3){
+
+                startIntent(Constants.ACTIVITY.CART)
+            }
+
+
+        }
+        binding.bottomNavigation.setOnShowListener {
+            if(it.id ==3){
+               binding.bottomNavigation.show(2, true)
+            }
+        }
+    }
+
+
 }

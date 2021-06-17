@@ -9,6 +9,7 @@
 
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -105,15 +106,7 @@
                     android:textSize="@dimen/see_all_text_size" />
             </LinearLayout>
 
-            <!--            <androidx.recyclerview.widget.RecyclerView-->
-            <!--                android:id="@+id/booksFeatured"-->
-            <!--                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-            <!--                android:orientation="horizontal"-->
-            <!--                android:paddingBottom="24dp"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="10dp"-->
-            <!--                tools:listitem="@layout/card_book" />-->
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rc_Suggest"
@@ -156,6 +149,22 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
+        android:alpha="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomNavigation"
+        app:mbn_selectedIconColor="@color/white"
+        app:mbn_defaultIconColor="@color/white"
+        app:mbn_countTextColor="@color/white"
+        app:mbn_countBackgroundColor="#ff6f00"
+        app:mbn_backgroundBottomColor="@color/blue_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,7 +25,6 @@ class BookRepository @Inject constructor(
             Query.Direction.DESCENDING
         )
     }
-
     init {
         Log.i("WTF", "book repo created")
     }

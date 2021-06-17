@@ -58,7 +58,6 @@ android {
 dependencies {
     //Kotlin
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$coroutines_version"
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.5.0'
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -76,6 +75,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
+
+
 
 
     // glide
@@ -97,4 +98,8 @@ dependencies {
 //    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
     //
     implementation 'androidx.activity:activity-ktx:1.2.3'
+    dependencies {
+        implementation 'com.etebarian:meow-bottom-navigation:1.0.4'
+    }
+
 }
