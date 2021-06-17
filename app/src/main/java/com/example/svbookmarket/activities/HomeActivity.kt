@@ -42,15 +42,16 @@ import java.lang.Thread.sleep
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
-    CategoryAdapter.onCategoryItemClick {
+    CategoryAdapter.onCategoryItemClick, SuggestAdapter.OnSuggestClickListener {
     lateinit var binding: ActivityHomeBinding
 
     val viewModel: HomeViewModel by viewModels()
 
     private var adsAdapter = AdvertiseAdapter(mutableListOf())
     private var catgoryAdapter = CategoryAdapter(mutableListOf(), this@HomeActivity)
-    private var suggestAdapter = SuggestAdapter(mutableListOf())
+    private var suggestAdapter = SuggestAdapter(mutableListOf(), this)
     private var moreAdapter = FeaturedAdapter(mutableListOf(), this)
+
     var isBackPressedOnce = false
 
     @SuppressLint("ClickableViewAccessibility")
@@ -83,21 +84,21 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
     private fun getBooks() {
         viewModel.getBookFrom().observe(this, { changes ->
             moreAdapter.addBooks(changes)
+            suggestAdapter.addBooks(changes)
         })
 
         // TODO: 16/06/2021  ads, suggest se duoc implement khi db hoan thanh
     }
 
     private fun setSuggestAdapter() {
-        val dataset = DataSource().loadSuggestCard()
         binding.rcSuggest.apply {
-            adapter = SuggestAdapter(dataset)
+            adapter = suggestAdapter
             layoutManager = LinearLayoutManager(
                 context,
                 RecyclerView.HORIZONTAL,
                 false
             )
-            addItemDecoration(RecyclerViewItemMargin(8, dataset.size))
+            addItemDecoration(MarginItemDecoration(spaceSize = 24, isHorizontalLayout = true))
             setHasFixedSize(true)
             LinearSnapHelper().attachToRecyclerView(this)
 
@@ -108,8 +109,8 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
         viewModel.ads.observe(this, Observer { newAds ->
             binding.advertise.apply {
                 adapter = AdvertiseAdapter(newAds)
-                layoutManager =
-                    LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                addItemDecoration(MarginItemDecoration(spaceSize = 24, isHorizontalLayout = true))
+
                 LinearSnapHelper().attachToRecyclerView(this)
             }
         })
@@ -144,6 +145,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
 //       findViewById<ImageView>(R.id.tb_cart).setOnClickListener { startIntent("cart") }
         findViewById<TextView>(R.id.h_allCategory).setOnClickListener { startIntent(CATEGORY) }
         findViewById<TextView>(R.id.h_allFeature).setOnClickListener { startIntent(FEATURE) }
+
     }
 
 
@@ -165,6 +167,39 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
         startActivity(intent)
     }
 
+    /**
+     * put single book into intent
+     */
+    private fun putBookIntoIntent(item:Book):Intent{
+        val bundle = Bundle()
+        bundle.putParcelable(ITEM, item)
+        val i = Intent(this, ItemDetailActivity::class.java)
+        i.putExtras(bundle)
+        return i
+    }
+
+    /**
+     * put array of category into intent
+     */
+    private fun putBooksOfCategoryIntoIntent(categoryName: String): Intent {
+        val bundle = Bundle()
+        val i = viewModel.getBooksOfCategory(categoryName) as ArrayList<Book>
+
+        //put data into bundle
+        bundle.putParcelableArrayList(CATEGORY_DETAIL.toString(), i)
+
+        // put bundle into intent
+        return Intent(this, CategoryDetailActivity::class.java)
+            .putExtras(bundle)
+            .putExtra(CategoryDetailActivity.CATEGORY_TYPE, categoryName)
+    }
+
+    private fun navigate(mIntent: Intent) = this.binding.root.context.startActivity(mIntent)
+
+    override fun onSuggestClick(book: Book) {
+        val i = putBookIntoIntent(book)
+        navigate(i)
+    }
 
     /**
      * put book to intent then start navigation
@@ -183,17 +218,8 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
      * put category name to intent then start navigation
      */
     override fun onCategoryItemClick(categoryName: String) {
-        var bundle = Bundle()
-        val i = viewModel.getBooksOfCategory(categoryName) as ArrayList<Book>
-
-        bundle.putParcelableArrayList(CATEGORY_DETAIL.toString(), i)
-
-        val intent = Intent(this, CategoryDetailActivity::class.java)
-            .putExtras(bundle)
-            .putExtra(CategoryDetailActivity.CATEGORY_TYPE, categoryName)
-
-        binding.root.context.startActivity(intent)
-
+        val i = putBooksOfCategoryIntoIntent(categoryName)
+        navigate(i)
     }
 
 

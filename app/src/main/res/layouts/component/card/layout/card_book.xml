@@ -52,6 +52,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:id="@+id/bookTitle"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -63,6 +65,8 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:maxLines="2"
+                android:ellipsize="end"
                 android:id="@+id/bookAuthor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
