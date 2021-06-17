@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.view.marginTop
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
