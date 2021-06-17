@@ -23,6 +23,7 @@
             android:orientation="vertical">
 
             <include
+                android:layout_marginHorizontal="10dp"
                 android:id="@+id/htb_homeToolBar"
                 layout="@layout/home_toolbar"
                 android:layout_width="match_parent"

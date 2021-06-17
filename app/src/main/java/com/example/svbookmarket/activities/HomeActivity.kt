@@ -122,7 +122,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
             binding.bookCategory.apply {
                 adapter = CategoryAdapter(newCategory, this@HomeActivity)
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                addItemDecoration(MarginItemDecoration(spaceSize = 20, isVerticalLayout = true))
+                addItemDecoration(MarginItemDecoration(spaceSize = 20, isHorizontalLayout = true))
             }
         })
 
