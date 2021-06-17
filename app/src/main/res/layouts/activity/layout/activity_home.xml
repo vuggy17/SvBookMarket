@@ -34,17 +34,16 @@
                 android:id="@+id/advertise"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin"
-                android:layout_marginRight="@dimen/margin"
-                android:fitsSystemWindows="true"
+               android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/card_advertise"
                 tools:itemCount="1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="@dimen/margin"
+                android:layout_marginHorizontal="12dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -74,14 +73,14 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="16dp"
                 android:paddingBottom="24dp"
-                tools:itemCount="1"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
                 tools:listitem="@layout/card_category" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin"
-                android:layout_marginRight="@dimen/margin"
+               android:layout_marginHorizontal="12dp"
                 android:orientation="horizontal">
 
                 <TextView

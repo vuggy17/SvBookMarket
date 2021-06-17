@@ -10,14 +10,14 @@ class MarginItemDecoration(
     private val spaceSize: Int,
     private val spanCount: Int = 1,
     private val orientation: Int = GridLayoutManager.VERTICAL,
-    private val isVerticalLayout: Boolean = false
+    private val isHorizontalLayout: Boolean = false
 ) : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(
         outRect: Rect, view: View,
         parent: RecyclerView, state: RecyclerView.State
     ) {
         with(outRect) {
-            if (orientation == GridLayoutManager.VERTICAL && !isVerticalLayout) {
+            if (orientation == GridLayoutManager.VERTICAL && !isHorizontalLayout) {
                 if (parent.getChildAdapterPosition(view) < spanCount) {
                     top = spaceSize
                 }
@@ -35,7 +35,7 @@ class MarginItemDecoration(
 
             left = spaceSize
             right = spaceSize
-            if (!isVerticalLayout)
+            if (!isHorizontalLayout)
                 bottom = spaceSize
         }
     }

@@ -1,87 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_suggest"
-        android:layout_width="320dp"
-        android:layout_height="160dp"
-        android:backgroundTint="@color/dark_pink"
-        app:cardCornerRadius="14dp"
+    android:id="@+id/card_suggest"
+    android:layout_width="340dp"
+    android:layout_height="180dp"
+    app:cardCornerRadius="8dp"
     app:layout_constraintCircleRadius="14dp">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginVertical="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imgSuggest"
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="12dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_background"/>
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_gravity="center_vertical"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/imgSuggest"
-                    android:layout_width="80dp"
-                    android:layout_height="120dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:src="@drawable/login1"> </ImageView>
+                <TextView
+                    android:id="@+id/tvBookSuggest"
+                    android:layout_width="190dp"
+                    android:layout_height="40dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto_bold"
+                    android:maxLines="2"
+                    android:text="@string/textTest"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-                <androidx.appcompat.widget.LinearLayoutCompat
+                <TextView
+                    android:id="@+id/tvAuthorSuggest"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto_medium"
+                    android:maxLines="1"
+                    android:text="by Tracy Bloom"
+                    android:textColor="#80FFFFFF"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tvBookSuggest"
-                        android:layout_width="190dp"
-                        android:layout_height="40dp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="20dp"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="Dinner Party: A laugh out loud ..."
-                        android:textColor="@color/white"
-                        android:textSize="15dp">
+                <TextView
+                    android:id="@+id/sg_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="5"
+                    android:text="@string/textTest"
+                    android:textSize="13sp" />
 
-                    </TextView>
 
-                    <TextView
-                        android:id="@+id/tvAuthorSuggest"
-                        android:layout_width="190dp"
-                        android:layout_height="15dp"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="@font/roboto_medium"
-                        android:textStyle="bold"
-                        android:text="by Tracy Bloom"
-                        android:textColor="#80FFFFFF"
-                        android:textSize="12dp">
-
-                    </TextView>
-
-                    <RatingBar
-                        android:id="@+id/rbSuggest"
-                        style="@style/rating_bar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="16dp"
-                        android:layout_marginTop="26dp"
-                        android:numStars="5"
-                        android:rating="4">
-
-                    </RatingBar>
-
-                    <TextView
-                        android:id="@+id/tvNumReviews"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="20dp"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="6 Reviews"
-                        android:textColor="@color/white"
-                        android:textSize="12dp"> </TextView>
-                </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.appcompat.widget.LinearLayoutCompat>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

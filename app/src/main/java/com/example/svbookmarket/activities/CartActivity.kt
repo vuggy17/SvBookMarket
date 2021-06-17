@@ -2,7 +2,6 @@ package com.example.svbookmarket.activities
 
 import android.content.Intent
 import android.graphics.Canvas
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.CartItemAdapter
-import com.example.svbookmarket.activities.data.CartViewModel
+import com.example.svbookmarket.activities.viewmodel.CartViewModel
 import com.example.svbookmarket.activities.model.Cart
 import com.example.svbookmarket.databinding.ActivityCartBinding
 import com.google.android.material.snackbar.Snackbar
