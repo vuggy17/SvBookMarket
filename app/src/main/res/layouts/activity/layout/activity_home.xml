@@ -8,44 +8,65 @@
     tools:context=".activities.HomeActivity">
 
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/homeToolBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:background="@color/home_gray"
+        app:contentInsetStart="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:orientation="horizontal">
             <include
                 android:layout_marginHorizontal="10dp"
                 android:id="@+id/htb_homeToolBar"
-                layout="@layout/home_toolbar"
+
+                layout="@layout/search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeToolBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/advertise"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               android:orientation="horizontal"
+                android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/card_advertise"
-                tools:itemCount="1" />
+                tools:itemCount="1"
+                tools:listitem="@layout/card_advertise" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -73,16 +94,16 @@
                 android:id="@+id/bookCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:paddingTop="16dp"
                 android:paddingBottom="24dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:orientation="horizontal"
                 tools:listitem="@layout/card_category" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               android:layout_marginHorizontal="12dp"
+                android:layout_marginHorizontal="12dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -105,7 +126,6 @@
                     android:textColor="@color/disable"
                     android:textSize="@dimen/see_all_text_size" />
             </LinearLayout>
-
 
 
             <androidx.recyclerview.widget.RecyclerView

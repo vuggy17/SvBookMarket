@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginTop
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,6 +36,8 @@ import com.example.svbookmarket.activities.data.Response.*
 import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.viewmodel.HomeViewModel
 import com.example.svbookmarket.databinding.ActivityHomeBinding
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import io.grpc.InternalChannelz.id
 import java.lang.Thread.sleep
@@ -73,8 +76,12 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
        binding.nestedScrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
            if(scrollY - oldScrollY >0){
                binding.bottomNavigation.visibility = View.GONE
+
+
            }else{
+
                binding.bottomNavigation.visibility = View.VISIBLE
+
            }
        }
 
@@ -141,7 +148,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
      */
     private fun setupNavigation() {
 //        findViewById<ImageView>(R.id.tb_menu).setOnClickListener { startIntent(MENU) }
-        findViewById<SearchView>(R.id.tb_searchView).setOnClickListener { startIntent(SEARCH) }
+        findViewById<TextInputEditText>(R.id.edtSearchText).setOnClickListener { startIntent(SEARCH) }
 //       findViewById<ImageView>(R.id.tb_cart).setOnClickListener { startIntent("cart") }
         findViewById<TextView>(R.id.h_allCategory).setOnClickListener { startIntent(CATEGORY) }
         findViewById<TextView>(R.id.h_allFeature).setOnClickListener { startIntent(FEATURE) }

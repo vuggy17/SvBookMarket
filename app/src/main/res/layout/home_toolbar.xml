@@ -8,40 +8,5 @@
     tools:context=".activities.HomeActivity"
     tools:showIn="@layout/activity_home">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_homeToolBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/home_gray"
-        app:contentInsetStart="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-            <SearchView
-                android:id="@+id/tb_searchView"
-                android:layout_width="0dp"
-                android:layout_height="46dp"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/bg_home_search"
-                android:clickable="false"
-                android:elevation="6dp"
-                android:touchscreenBlocksFocus="true"
-                app:iconifiedByDefault="false"
-
-
-                app:layout_constraintEnd_toEndOf="parent"
-
-                app:layout_constraintStart_toStartOf="parent"
-
-                app:layout_constraintTop_toTopOf="parent"
-                app:queryBackground="@null" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.appcompat.widget.Toolbar>
 </androidx.constraintlayout.widget.ConstraintLayout>
