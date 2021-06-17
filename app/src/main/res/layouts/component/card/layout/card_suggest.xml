@@ -5,7 +5,7 @@
         android:id="@+id/card_suggest"
         android:layout_width="320dp"
         android:layout_height="160dp"
-        android:backgroundTint="@color/dark_pink"
+        android:backgroundTint="#1BB7AC"
         app:cardCornerRadius="14dp"
     app:layout_constraintCircleRadius="14dp">
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,7 +39,7 @@
                         android:layout_width="190dp"
                         android:layout_height="40dp"
                         android:textStyle="bold"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="25dp"
                         android:fontFamily="@font/roboto_bold"
                         android:text="Dinner Party: A laugh out loud ..."
                         android:textColor="@color/white"
@@ -51,7 +51,6 @@
                         android:id="@+id/tvAuthorSuggest"
                         android:layout_width="190dp"
                         android:layout_height="15dp"
-                        android:layout_marginTop="4dp"
                         android:fontFamily="@font/roboto_medium"
                         android:textStyle="bold"
                         android:text="by Tracy Bloom"
@@ -60,25 +59,25 @@
 
                     </TextView>
 
-                    <RatingBar
-                        android:id="@+id/rbSuggest"
-                        style="@style/rating_bar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="16dp"
-                        android:layout_marginTop="26dp"
-                        android:numStars="5"
-                        android:rating="4">
-
-                    </RatingBar>
+                    <TextView android:layout_height="40dp"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="3dp"
+                        android:text="Liệu bạn còn có thể tin tưởng vào tâm trí mình? Hãy cùng chúng tôi khám phá các nguyên lí khoa học của suy nghĩ, cảm giác và trí nhớ với cuốn sách “hại não” này. * Đánh lừa nhận thức giác quan của bạn * Trở thành bậc thầy đánh lạc hướng * Chơi trò đánh lừa bạn bè với những kí ức giả * Tìm hiểu thật nhiều thủ thuật tâm trí thú vị"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textSize="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="3"
+                        android:textColor="@color/white"
+                        android:alpha="0.8"
+                        />
 
                     <TextView
                         android:id="@+id/tvNumReviews"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="3dp"
                         android:layout_marginBottom="20dp"
                         android:fontFamily="@font/roboto_regular"
-                        android:text="6 Reviews"
+                        android:text="6 Purchases"
                         android:textColor="@color/white"
                         android:textSize="12dp"> </TextView>
                 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.example.svbookmarket.activities.common.Constants.BOOK_REF
 import com.example.svbookmarket.activities.model.Book
 import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
 import javax.inject.Inject
 import javax.inject.Named
@@ -25,6 +27,7 @@ class BookRepository @Inject constructor(
             Query.Direction.DESCENDING
         )
     }
+
 
     init {
         Log.i("WTF", "book repo created")

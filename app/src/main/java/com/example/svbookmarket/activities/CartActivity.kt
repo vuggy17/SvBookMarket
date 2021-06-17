@@ -5,16 +5,21 @@ import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.adapter.AdvertiseAdapter
 import com.example.svbookmarket.activities.adapter.CartItemAdapter
 import com.example.svbookmarket.activities.data.CartViewModel
+import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.model.Cart
 import com.example.svbookmarket.databinding.ActivityCartBinding
 import com.google.android.material.snackbar.Snackbar
@@ -24,10 +29,9 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 @AndroidEntryPoint
 class CartActivity : AppCompatActivity() {
     lateinit var binding: ActivityCartBinding
-    lateinit var cartData: MutableList<Cart>
-    lateinit var viewModel: CartViewModel
-    lateinit var cartAdapter: CartItemAdapter
-
+    private val viewModel: CartViewModel by viewModels()
+    var cartAdapter: CartItemAdapter = CartItemAdapter(this, mutableListOf())
+    lateinit var dataCart : MutableList<Cart>
     var deleteItem: View? = null
 
     //variable to save deleted item, later is used for redo action
@@ -40,30 +44,34 @@ class CartActivity : AppCompatActivity() {
         // set activity to display here
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this).get(CartViewModel::class.java)
+        binding.rcCardList.apply {
+            layoutManager =
+                LinearLayoutManager(this@CartActivity)
+            setHasFixedSize(true)
+            adapter = cartAdapter
+            touchHelper.attachToRecyclerView(this)
+        }
 
-        viewModel.cart.observe(this, { datas ->
-            if (datas != null) {
-                cartAdapter = CartItemAdapter(this, datas)
-                cartData = datas
-
-                binding.rcCardList.apply {
-                    adapter = cartAdapter
-                    layoutManager = LinearLayoutManager(this@CartActivity)
-                    setHasFixedSize(true)
-
-                    // swipe to delete
-                    touchHelper.attachToRecyclerView(this)
-                }
-            }
-        })
-
-
+        viewModel.cartItem.observe(this, changeObserver)
         binding.backButton.setOnClickListener { onBackPressed() }
         binding.ctCheckout.setOnClickListener { startIntent("checkout") }
         binding.ctChangeLocation.setOnClickListener { startIntent(AddressActivity.CHANGE_ADDRESS) }
     }
 
+    private val changeObserver = Observer<MutableList<Cart>> { value ->
+        value?.let {
+            dataCart = value
+            cartAdapter.onChange(value)
+            cartAdapter.notifyDataSetChanged()
+            binding.rcCardList.apply {
+                layoutManager =
+                    LinearLayoutManager(this@CartActivity)
+                setHasFixedSize(true)
+                adapter = cartAdapter
+                touchHelper.attachToRecyclerView(this)
+            }
+        }
+    }
 
     private fun startIntent(type: String) {
         val intent = when (type) {
@@ -95,7 +103,7 @@ class CartActivity : AppCompatActivity() {
             override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
                 // remove from adapter
                 val itemPos = viewHolder.adapterPosition
-                delete = cartData[itemPos]
+                delete = dataCart[itemPos]
                 deleteItem = viewHolder.itemView
 
                 cartAdapter.removeItem(itemPos)
@@ -156,7 +164,7 @@ class CartActivity : AppCompatActivity() {
         super.onPause()
         //save data to repository
 
-        viewModel.updateData(cartData)
+        viewModel.updateData(dataCart)
 
     }
 }

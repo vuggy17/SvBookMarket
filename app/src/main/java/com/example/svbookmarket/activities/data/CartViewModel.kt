@@ -12,21 +12,24 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CartViewModel @Inject constructor(private val cartRepository: CartRepository) :ViewModel() {
-    private var _cart = MutableLiveData<MutableList<Cart>>()
-    val cart get() = _cart
+    private var _cartItem = MutableLiveData<MutableList<Cart>>()
+    val cartItem get() = _cartItem
+
+
+    init{
+        loadCartItem()
+    }
+
+    private fun loadCartItem()
+    {
+            _cartItem.value = cartRepository.getCart(CurrentUserInfo.getInstance().currentProfile)
+
+    }
 
     fun updateData(list:MutableList<Cart>){
         viewModelScope.launch {
             cartRepository.updateData(list)
-            _cart.postValue(list)
+            _cartItem.postValue(list)
         }
     }
-
-    init {
-        viewModelScope.launch {
-            _cart.postValue(cartRepository.getCart())
-        }
-
-    }
-
 }

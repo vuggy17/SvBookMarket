@@ -50,6 +50,7 @@ class HomeViewModel @Inject constructor(
                val bookList: MutableList<Book> = ArrayList()
                for (doc in value!!) {
                    var bookItem = doc.toObject(Book::class.java)
+                   bookItem.id = doc.id
                    bookList.add(bookItem)
 
                }

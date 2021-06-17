@@ -99,7 +99,6 @@ public class CurrentUserInfo private constructor(var currentProfile: AppAccount 
                     Log.d("app-db-error", it.message!!)
                     return@addSnapshotListener
                 }
-
                 for (dc in snapshot!!.documentChanges)
                 {
                     when(dc.type)

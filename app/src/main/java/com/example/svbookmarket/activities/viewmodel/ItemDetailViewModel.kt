@@ -1,11 +1,27 @@
 package com.example.svbookmarket.activities.viewmodel
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.example.svbookmarket.activities.common.Constants
+import com.example.svbookmarket.activities.common.Constants.ITEM
+import com.example.svbookmarket.activities.data.BookRepository
+import com.example.svbookmarket.activities.data.CartRepository
 import com.example.svbookmarket.activities.model.Book
+import com.google.common.base.Objects
+import com.google.firebase.firestore.EventListener
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.QuerySnapshot
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.scopes.ViewModelScoped
+import javax.inject.Inject
 
-class ItemDetailViewModel(private val item: Book?) : ViewModel() {
+@HiltViewModel
+class ItemDetailViewModel @Inject constructor (private val savedStateHandle: SavedStateHandle,
+                                               private val cartRepository: CartRepository,
+                                               private  val bookRepository: BookRepository) : ViewModel() {
     private var _books = MutableLiveData<MutableList<Book>>()
     val books get() = _books
 
@@ -13,6 +29,11 @@ class ItemDetailViewModel(private val item: Book?) : ViewModel() {
     val itemToDisplay get() = _itemToDisplay
 
     fun addItemToCart() = itemToDisplay.value?.let { _books.value?.add(it) }
+
+    init {
+        loadBooks()
+        loadItem()
+    }
 
     private fun loadBooks() {
         val des =
@@ -49,11 +70,14 @@ class ItemDetailViewModel(private val item: Book?) : ViewModel() {
 //            description = args.get(ItemDetailActivity.DESCRIPTION).toString()
 //
 //        }
-            item?.let { _itemToDisplay.value = it }
+        //item?.let { _itemToDisplay.value = it}
+        // itemToDisplay?.let {
+        //    bookRepository.getBooksFromCloudFirestore1().
+        //}
+        _itemToDisplay = savedStateHandle.getLiveData<Book>(ITEM)
     }
 
-    init {
-        loadBooks()
-        loadItem()
+    fun addToCart() {
+        cartRepository.addCart(_itemToDisplay.value!!, CurrentUserInfo.getInstance().currentProfile)
     }
 }
