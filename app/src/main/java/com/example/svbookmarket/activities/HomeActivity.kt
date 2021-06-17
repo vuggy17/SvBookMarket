@@ -1,9 +1,11 @@
 package com.example.svbookmarket.activities
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.TextView
@@ -21,6 +23,7 @@ import com.example.svbookmarket.activities.adapter.AdvertiseAdapter
 import com.example.svbookmarket.activities.adapter.CategoryAdapter
 import com.example.svbookmarket.activities.adapter.FeaturedAdapter
 import com.example.svbookmarket.activities.adapter.SuggestAdapter
+import com.example.svbookmarket.activities.animation.TranslateAnimationUtil
 import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.common.Constants.ACTIVITY
 import com.example.svbookmarket.activities.common.Constants.ACTIVITY.*
@@ -50,6 +53,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
     private var moreAdapter = FeaturedAdapter(mutableListOf(), this)
     var isBackPressedOnce = false
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -64,6 +68,14 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
         setMoreAdapter()
         setupNavigation()
         setUpBottomNavigationView()
+
+       binding.nestedScrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+           if(scrollY - oldScrollY >0){
+               binding.bottomNavigation.visibility = View.GONE
+           }else{
+               binding.bottomNavigation.visibility = View.VISIBLE
+           }
+       }
 
 
     }
