@@ -21,10 +21,7 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.svbookmarket.R
-import com.example.svbookmarket.activities.adapter.AdvertiseAdapter
-import com.example.svbookmarket.activities.adapter.CategoryAdapter
-import com.example.svbookmarket.activities.adapter.FeaturedAdapter
-import com.example.svbookmarket.activities.adapter.SuggestAdapter
+import com.example.svbookmarket.activities.adapter.*
 import com.example.svbookmarket.activities.animation.TranslateAnimationUtil
 import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.common.Constants.ACTIVITY
@@ -79,9 +76,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
                binding.bottomNavigation.visibility = View.GONE
 
            }else{
-
                binding.bottomNavigation.visibility = View.VISIBLE
-
            }
        }
 
@@ -111,7 +106,6 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
 
         }
     }
-
     private fun setAdsAdapter() {
         viewModel.ads.observe(this, Observer { newAds ->
             binding.advertise.apply {

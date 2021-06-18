@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SvBookMarket">
-        <activity android:name=".activities.UserManageActivity"></activity>
+
+        <activity android:name=".activities.UserManageActivity" />
         <activity android:name=".activities.CategoryDetailActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.ProfileActivity" />
@@ -42,7 +43,7 @@
         <activity
             android:name=".activities.HomeActivity"
             android:screenOrientation="fullSensor"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
         <activity android:name=".activities.CategoryActivity" />
 
         <meta-data

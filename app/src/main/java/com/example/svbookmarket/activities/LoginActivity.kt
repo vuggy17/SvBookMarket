@@ -1,18 +1,21 @@
 package com.example.svbookmarket.activities
 
+import CurrentUserInfo
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.model.AppAccount
 import com.example.svbookmarket.activities.model.User
+import com.example.svbookmarket.activities.viewmodel.LoadDialog
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.regex.Pattern
@@ -26,10 +29,13 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginPassword: EditText
     private lateinit var loginSignUp: TextView
     private lateinit var loginButton: Button
+    private val TAG = "LOGIN"
 
     //init database reference
     private val db = Firebase.firestore
     private val dbAccountsReference = db.collection("accounts")
+    private lateinit var auth: FirebaseAuth
+    private lateinit var loadDialog: LoadDialog
 
     // tạo biến account để lưu về thông tin khách hàng đã có
     companion object {
@@ -39,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
+        auth = Firebase.auth
         loginEmailLayout = findViewById(R.id.LoginEmailLayout)
         loginEmail = findViewById(R.id.LoginEmail)
         loginPasswordLayout = findViewById(R.id.LoginPasswordLayout)
@@ -64,6 +70,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun onButtonLoginClick() {
+        loadDialog= LoadDialog(this)
+        loadDialog.startLoading()
         if (isValidEmail() && isValidPassword()) {
             dbAccountsReference.get().addOnSuccessListener { result ->
                 var emailExist: Boolean = false
@@ -73,35 +81,65 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
                 if (emailExist) {
-                    dbAccountsReference.document(loginEmail.text.toString()).get()
-                        .addOnSuccessListener { result ->
-                            if (result["password"] == loginPassword.text.toString()) {
-                                Toast.makeText(this, "Login success", Toast.LENGTH_SHORT).show()
-                                val userMap = result["user"] as HashMap<*, *>
-                                val recentUser: User = User(
-                                    fullName = userMap["fullName"].toString(),
-                                    gender = userMap["gender"].toString(),
-                                    birthDay = userMap["birthDay"].toString(),
-                                    phoneNumber = userMap["phoneNumber"].toString(),
-                                    addressLane = userMap["addressLane"].toString(),
-                                    city = userMap["city"].toString(),
-                                    district = userMap["district"].toString(),
-                                )
-                                recentAccountLogin = AppAccount(result["email"].toString(), result["password"].toString(),recentUser)
-                                CurrentUserInfo.getInstance()
-                                startActivity(Intent(baseContext, HomeActivity::class.java))
-
-
+                    val email = loginEmail.text.toString()
+                    val password = loginPassword.text.toString()
+                    auth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this) { task ->
+                            if (task.isSuccessful) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInWithEmail:success")
+                                val user = auth.currentUser
+                                loadData(email)
+                                loadDialog.dismissDialog()
                             } else {
-                                loginPasswordLayout.error = "Password is not true"
+                                checkPassword(email, password)
+
                             }
                         }
+
                 } else {
                     loginEmailLayout.error = "Email is not exist, sign up now?"
+                    loadDialog.dismissDialog()
                 }
             }
         }
     }
+
+    private fun checkPassword(email: String, password: String) {
+        dbAccountsReference.document(email).get()
+            .addOnSuccessListener { result ->
+                if (result["password"] != password) {
+                    loginPasswordLayout.error = "Wrong password!!"
+                    loadDialog.dismissDialog()
+                }
+            }
+    }
+
+    private fun loadData(email: String) {
+        dbAccountsReference.document(email).get()
+            .addOnSuccessListener { result ->
+
+                val userMap = result["user"] as HashMap<*, *>
+                val recentUser: User = User(
+                    fullName = userMap["fullName"].toString(),
+                    gender = userMap["gender"].toString(),
+                    birthDay = userMap["birthDay"].toString(),
+                    phoneNumber = userMap["phoneNumber"].toString(),
+                    addressLane = userMap["addressLane"].toString(),
+                    city = userMap["city"].toString(),
+                    district = userMap["district"].toString(),
+                )
+                LoginActivity.recentAccountLogin = AppAccount(
+                    result["email"].toString(),
+                    result["password"].toString(),
+                    recentUser
+                )
+                CurrentUserInfo.getInstance()
+                startActivity(Intent(baseContext, HomeActivity::class.java))
+                finish()
+            }
+    }
+
 
     private fun isEmailRightFormat(email: String): Boolean {
         return Pattern.compile(

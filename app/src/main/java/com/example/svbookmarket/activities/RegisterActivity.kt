@@ -2,6 +2,7 @@ package com.example.svbookmarket.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,8 @@ import com.example.svbookmarket.activities.model.AppAccount
 import com.example.svbookmarket.activities.model.User
 import com.example.svbookmarket.activities.model.UserDeliverAddress
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.regex.Pattern
@@ -29,12 +32,16 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var edtEmail: EditText
     private lateinit var edtEmailLayout: TextInputLayout
     private lateinit var tvSignIn: TextView
+    private val TAG = "REGISTER";
 
     //Init Data
     private lateinit var email: String
     private lateinit var password: String
     private lateinit var user: User
     private lateinit var appAccount: AppAccount
+    private lateinit var auth: FirebaseAuth
+// ...
+// Initialize Firebase Auth
 
     //Init FireBase
     private val db = Firebase.firestore
@@ -54,6 +61,7 @@ class RegisterActivity : AppCompatActivity() {
         edtEmail = findViewById(R.id.edtUserEmail)
         edtEmailLayout = findViewById(R.id.inputTextEmailLayout)
         tvSignIn = findViewById(R.id.tvSignIn)
+        auth = Firebase.auth
 
         tvSignIn.setOnClickListener{
             startActivity(Intent(baseContext,LoginActivity::class.java))
@@ -84,19 +92,35 @@ class RegisterActivity : AppCompatActivity() {
                 }else {
                     email = edtEmail.text.toString()
                     password = edtPassword.text.toString()
-                    user = User(fullName = edtName.text.toString())
-                    appAccount = AppAccount(email, password, user)
-                    dbReference.document(appAccount.email).set(appAccount).addOnSuccessListener {
-                        Toast.makeText(this, "Register Success", Toast.LENGTH_SHORT).show()
-                    }.addOnFailureListener { e ->
-                        Toast.makeText(this, "Register Fail$e", Toast.LENGTH_SHORT).show()
-                    }
-                    val dbReferenceRecentAccountUserAddressAccount = dbReference.document(appAccount.email).collection("userDeliverAddresses")
-                    dbReferenceRecentAccountUserAddressAccount.document().set(UserDeliverAddress("",user.fullName, user.phoneNumber, user.addressLane, user.district,user.city, true))
-                    startActivity(Intent(baseContext,LoginActivity::class.java))
+                    auth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this) { task ->
+                            if (task.isSuccessful) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "createUserWithEmail:success")
+                                val user = auth.currentUser
+                                updateData()
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                                Toast.makeText(baseContext, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show()
+                            }
+                        }
                 }
             }
         }
+    }
+    private fun updateData(){
+        user = User(fullName = edtName.text.toString())
+        appAccount = AppAccount(email, password, user)
+        dbReference.document(appAccount.email).set(appAccount).addOnSuccessListener {
+            Toast.makeText(this, "Register Success", Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener { e ->
+            Toast.makeText(this, "Register Fail$e", Toast.LENGTH_SHORT).show()
+        }
+        val dbReferenceRecentAccountUserAddressAccount = dbReference.document(appAccount.email).collection("userDeliverAddresses")
+        dbReferenceRecentAccountUserAddressAccount.document().set(UserDeliverAddress("",user.fullName, user.phoneNumber, user.addressLane, user.district,user.city, true))
+        startActivity(Intent(baseContext,LoginActivity::class.java))
     }
 
 
