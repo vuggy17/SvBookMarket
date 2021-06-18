@@ -42,7 +42,6 @@ class FeaturedAdapter(
                 it.itemView.setOnClickListener{listener.onBookClick(this)}
             }
         }
-
     }
 
     override fun getItemCount(): Int {

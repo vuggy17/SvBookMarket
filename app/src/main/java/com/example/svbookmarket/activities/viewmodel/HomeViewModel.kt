@@ -40,10 +40,11 @@ class HomeViewModel @Inject constructor(
                     return
                 }
 
-                val bookList: MutableList<Book> = ArrayList()
-                for (doc in value!!) {
-                    var bookItem = doc.toObject(Book::class.java)
-                    bookList.add(bookItem)
+               val bookList: MutableList<Book> = ArrayList()
+               for (doc in value!!) {
+                   var bookItem = doc.toObject(Book::class.java)
+                   bookItem.id = doc.id
+                   bookList.add(bookItem)
 
                 }
                 books.value = bookList

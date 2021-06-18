@@ -132,7 +132,6 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
                 addItemDecoration(MarginItemDecoration(spaceSize = 20, isHorizontalLayout = true))
             }
         })
-
     }
 
     private fun setMoreAdapter() {
@@ -146,6 +145,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
     /**
      * navigate when click on screen
      */
+
     private fun setupNavigation() {
 //        findViewById<ImageView>(R.id.tb_menu).setOnClickListener { startIntent(MENU) }
         findViewById<TextInputEditText>(R.id.edtSearchText).setOnClickListener { startIntent(SEARCH) }

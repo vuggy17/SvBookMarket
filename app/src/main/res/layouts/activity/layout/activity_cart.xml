@@ -44,77 +44,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="22dp"
-                android:background="@drawable/bg_location"
-                android:padding="24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        style="@style/tv_14_regular_white"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/your_location"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/ct_changeLocation"
-                        android:layout_width="35dp"
-                        android:layout_height="25dp"
-                        android:backgroundTint="@color/white"
-                        android:elevation="4dp"
-                        android:insetLeft="0dp"
-                        android:insetTop="0dp"
-                        android:insetRight="0dp"
-                        android:insetBottom="0dp"
-                        android:textAlignment="center"
-                        android:textAllCaps="false"
-                        android:textColor="#30A3E2"
-                        android:textStyle="bold"
-                        app:icon="@drawable/ic_change"
-                        app:iconGravity="textStart"
-                        app:iconPadding="0dp"
-                        app:iconSize="14dp"
-                        app:iconTint="#2973bc"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:drawablePadding="6dp"
-                    android:text="696 Hang Bai, khu pho 6, phuong Linh Trung, quan Thu Duc, thanh pho Ho Chi Minh"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:textStyle="normal"
-                    app:drawableStartCompat="@drawable/ic_location_icon"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
-
+                android:layout_marginLeft="24dp"
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -122,9 +55,8 @@
                 android:fontFamily="@font/roboto_medium"
                 android:text="Items"
                 android:textSize="20sp"
-
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <TextView
                 android:id="@+id/textView6"
