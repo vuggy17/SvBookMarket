@@ -15,7 +15,7 @@ import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.model.Cart
 import com.google.android.material.card.MaterialCardView
 
-class CartItemAdapter(val context: Context, private var cartList:MutableList<Cart>):RecyclerView.Adapter<CartItemAdapter.VH>(){
+class CartItemAdapter(val listener: OnButtonClickListener, private var cartList:MutableList<Cart>):RecyclerView.Adapter<CartItemAdapter.VH>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         val adapterLayout =
             LayoutInflater.from(parent.context).inflate(R.layout.card_checkout, parent, false)
@@ -39,10 +39,20 @@ class CartItemAdapter(val context: Context, private var cartList:MutableList<Car
         // increase and decrease button listenerc
         holder.increaseButton.setOnClickListener {
             holder.number.text = (holder.number.text.toString().toInt() + 1).toString()
+            // TODO: may need reset cardList
+            listener.onButtonClick(cartList[position].id, true)
         }
         holder.decreaseButton.setOnClickListener {
-            holder.number.text = (holder.number.text.toString().toInt() + 1).toString()
+            if (cartList[position].numbers > 0) {
+                holder.number.text = (holder.number.text.toString().toInt() - 1).toString()
+                listener.onButtonClick(cartList[position].id, false)
+            }
         }
+        holder.itemView.setOnClickListener {
+            (it as MaterialCardView).isChecked = !it.isChecked
+            listener.onItemClick(cartList[position].id, it.isChecked)
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -65,9 +75,9 @@ class CartItemAdapter(val context: Context, private var cartList:MutableList<Car
     class VH(view:View):RecyclerView.ViewHolder(view){
         init {
             // on selection -> highlight
-            view.setOnClickListener{
-                (it as MaterialCardView).isChecked = !it.isChecked
-            }
+//            view.setOnClickListener{
+//                (it as MaterialCardView).isChecked = !it.isChecked
+//            }
         }
         val increaseButton:AppCompatImageButton = view.findViewById(R.id.increaseNumber)
         val decreaseButton:AppCompatImageButton = view.findViewById(R.id.decreaseNumber)
@@ -81,4 +91,11 @@ class CartItemAdapter(val context: Context, private var cartList:MutableList<Car
             (this.itemView as MaterialCardView).isChecked = isChecked
         }
     }
+
+    interface OnButtonClickListener
+    {
+        fun onButtonClick(id: String, plusOrMinus: Boolean)
+        fun onItemClick(id: String, isChose: Boolean)
+    }
+
 }

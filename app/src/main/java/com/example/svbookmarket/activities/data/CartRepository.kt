@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.concurrent.thread
 import com.example.svbookmarket.activities.model.UserDeliverAddress as MyAddress
 
 
@@ -87,56 +88,23 @@ class CartRepository @Inject constructor( /*database */
         }
     }
 
-    fun getCart(user: AppAccount): MutableList<Cart> {
-        val lstUserCart: MutableList<Cart> = mutableListOf()
-        FirebaseFirestore.getInstance().collection("accounts").document(user.email)
-            .collection("userCart").addSnapshotListener { snapshot, e ->
-                e?.let {
-                    Log.d("error", e.message!!)
-                }
-                for (dc in snapshot!!.documentChanges)
-                {
-                    when(dc.type)
-                    {
-                        DocumentChange.Type.ADDED -> {
-                            var data:MutableMap<String?, Any?> = dc.document.data
-                            var bool = data["isChose"].toString() == "true"
-                            lstUserCart.add(
-                                Cart(dc.document.id, data["image"].toString(),data["title"].toString(), data["author"].toString(),
-                                    data["Quantity"].toString().toInt(), data["price"].toString().toLong(), bool)
-                            )
-                        }
-                        DocumentChange.Type.MODIFIED -> {
-                            var data:MutableMap<String?, Any?> = dc.document.data
-                            var bool = data["isChose"].toString() == "true"
-                            for(i in 0 until lstUserCart.size)
-                            {
-                                if (lstUserCart[i].id == dc.document.id)
-                                {
-                                    lstUserCart[i].name =  data["title"].toString()
-                                    lstUserCart[i].author =  data["author"].toString()
-                                    lstUserCart[i].numbers =  data["Quantity"].toString().toInt()
-                                    lstUserCart[i].imgUrl = data["image"].toString()
-                                    lstUserCart[i].price= data["price"].toString().toLong()
-                                    lstUserCart[i].isChose = bool
-                                    break;
-                                }
-                            }
-                        }
-                        DocumentChange.Type.REMOVED -> {
-                            var data:MutableMap<String?, Any?> = dc.document.data
-                            for(i in 0 until lstUserCart.size)
-                            {
-                                if (lstUserCart[i].id == dc.document.id)
-                                {
-                                    lstUserCart.removeAt(i)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        return lstUserCart
+   fun getCart(user: AppAccount) : Query{
+           return FirebaseFirestore.getInstance().collection("accounts").document(user.email)
+                .collection("userCart")
+    }
+
+    fun newQuantityForItem(id: String, plusOrMinus: Boolean, user: AppAccount)
+    {
+        if (plusOrMinus)
+        {
+            FirebaseFirestore.getInstance().collection("accounts").document(user.email)
+                .collection("userCart").document(id).update("Quantity", FieldValue.increment(1))
+        }
+        else
+        {
+            FirebaseFirestore.getInstance().collection("accounts").document(user.email)
+                .collection("userCart").document(id).update("Quantity", FieldValue.increment(-1))
+        }
     }
 
     suspend fun updateData(list: MutableList<Cart>) {
@@ -145,6 +113,16 @@ class CartRepository @Inject constructor( /*database */
            cartCache.set(list)
             Log.i("repository", "${list.size}")
         }
+    }
+
+    fun deleteCart(user:AppAccount, id: String)
+    {
+        FirebaseFirestore.getInstance().collection("accounts").document(user.email).collection("userCart").document(id).delete()
+    }
+
+    fun isChoseChange(user:AppAccount, id: String, isChose: Boolean)
+    {
+        FirebaseFirestore.getInstance().collection("accounts").document(user.email).collection("userCart").document(id).update("isChose", isChose)
     }
 
     init {

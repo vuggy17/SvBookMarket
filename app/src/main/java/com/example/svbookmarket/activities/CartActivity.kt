@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -18,16 +19,16 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.AdvertiseAdapter
 import com.example.svbookmarket.activities.adapter.CartItemAdapter
-import com.example.svbookmarket.activities.data.CartViewModel
 import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.model.Cart
+import com.example.svbookmarket.activities.viewmodel.CartViewModel
 import com.example.svbookmarket.databinding.ActivityCartBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 @AndroidEntryPoint
-class CartActivity : AppCompatActivity() {
+class CartActivity : AppCompatActivity(), CartItemAdapter.OnButtonClickListener {
     lateinit var binding: ActivityCartBinding
     private val viewModel: CartViewModel by viewModels()
     var cartAdapter: CartItemAdapter = CartItemAdapter(this, mutableListOf())
@@ -44,6 +45,8 @@ class CartActivity : AppCompatActivity() {
         // set activity to display here
         setContentView(binding.root)
 
+        viewModel.cartItem.observe(this, changeObserver)
+
         binding.rcCardList.apply {
             layoutManager =
                 LinearLayoutManager(this@CartActivity)
@@ -51,11 +54,9 @@ class CartActivity : AppCompatActivity() {
             adapter = cartAdapter
             touchHelper.attachToRecyclerView(this)
         }
-
-        viewModel.cartItem.observe(this, changeObserver)
         binding.backButton.setOnClickListener { onBackPressed() }
         binding.ctCheckout.setOnClickListener { startIntent("checkout") }
-        binding.ctChangeLocation.setOnClickListener { startIntent(AddressActivity.CHANGE_ADDRESS) }
+//        binding.ctChangeLocation.setOnClickListener { startIntent(AddressActivity.CHANGE_ADDRESS) }
     }
 
     private val changeObserver = Observer<MutableList<Cart>> { value ->
@@ -63,13 +64,7 @@ class CartActivity : AppCompatActivity() {
             dataCart = value
             cartAdapter.onChange(value)
             cartAdapter.notifyDataSetChanged()
-            binding.rcCardList.apply {
-                layoutManager =
-                    LinearLayoutManager(this@CartActivity)
-                setHasFixedSize(true)
-                adapter = cartAdapter
-                touchHelper.attachToRecyclerView(this)
-            }
+            Log.d("0000000000000", value.toString())
         }
     }
 
@@ -105,10 +100,8 @@ class CartActivity : AppCompatActivity() {
                 val itemPos = viewHolder.adapterPosition
                 delete = dataCart[itemPos]
                 deleteItem = viewHolder.itemView
-
-                cartAdapter.removeItem(itemPos)
-
-                showSnackBar(itemPos)
+                // TODO: add delete on db
+                viewModel.deleteCart(dataCart[itemPos].id)
             }
 
             override fun onChildDraw(
@@ -149,24 +142,23 @@ class CartActivity : AppCompatActivity() {
                     .create()
                     .decorate()
             }
-
-            fun showSnackBar(itemPos: Int) =
-                Snackbar.make(binding.rcCardList, "Item deleted", 2000).setAction("Undo") {
-                    undoDeletion(itemPos)
-                }.show()
-
-            fun undoDeletion(position: Int) {
-                cartAdapter.addItem(position, delete)
-            }
         })
 
-    override fun onPause() {
-        super.onPause()
-        //save data to repository
-
-        viewModel.updateData(dataCart)
-
+    override fun onButtonClick(id: String, plusOrMinus: Boolean) {
+            viewModel.updateQuantity(id, plusOrMinus)
     }
+
+    override fun onItemClick(id: String, isChose: Boolean) {
+        viewModel.isChoseChange(id, isChose)
+    }
+
+//    override fun onPause() {
+//      super.onPause()
+//        //save data to repository
+//
+//       viewModel.updateData(dataCart)
+//
+//    }
 }
 
 

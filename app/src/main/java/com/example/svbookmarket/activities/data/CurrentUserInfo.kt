@@ -1,16 +1,13 @@
 import android.net.Uri
 import android.util.Log
 import com.example.svbookmarket.activities.LoginActivity
-import com.example.svbookmarket.activities.model.AppAccount
-import com.example.svbookmarket.activities.model.CartModel
-import com.example.svbookmarket.activities.model.User
-import com.example.svbookmarket.activities.model.UserDeliverAddress
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.FirebaseFirestore
+import com.example.svbookmarket.activities.common.Constants
+import com.example.svbookmarket.activities.model.*
+import com.google.firebase.firestore.*
 import com.google.firebase.ktx.Firebase
 
 public class CurrentUserInfo private constructor(var currentProfile: AppAccount = AppAccount(),
-                                                 var lstUserCart: MutableList<CartModel> = mutableListOf(),
+                                                 var lstUserCart: MutableList<Cart> = mutableListOf(),
                                                  var lstUserDeliverAddress: MutableList<UserDeliverAddress> = mutableListOf())
 {
     init {
@@ -94,53 +91,26 @@ public class CurrentUserInfo private constructor(var currentProfile: AppAccount 
 
             //snap for user current cart list
             var refToUserCart = ref.collection("userCart")
-            refToUserCart.addSnapshotListener { snapshot, e ->
-                e?.let {
-                    Log.d("app-db-error", it.message!!)
-                    return@addSnapshotListener
-                }
-                for (dc in snapshot!!.documentChanges)
-                {
-                    when(dc.type)
-                    {
-                        DocumentChange.Type.ADDED -> {
-                            var data:MutableMap<String?, Any?> = dc.document.data
-                            var bool = data["isChose"].toString() == "true"
-                            lstUserCart.add(
-                                CartModel(dc.document.id, Uri.parse(data["image"].toString()),data["title"].toString(), data["author"].toString(),
-                                data["Quantity"].toString().toInt(), data["price"].toString().toLong(), bool)
-                            )
-                        }
-                        DocumentChange.Type.MODIFIED -> {
-                            var data:MutableMap<String?, Any?> = dc.document.data
-                            var bool = data["isChose"].toString() == "true"
-                            for(i in 0 until lstUserCart.size)
-                            {
-                                if (lstUserCart[i].id == dc.document.id)
-                                {
-                                    lstUserCart[i].name =  data["title"].toString()
-                                    lstUserCart[i].author =  data["author"].toString()
-                                    lstUserCart[i].quantity =  data["Quantity"].toString().toInt()
-                                    lstUserCart[i].imgUrl = Uri.parse(data["image"].toString())
-                                    lstUserCart[i].price= data["price"].toString().toLong()
-                                    lstUserCart[i].isChose = bool
-                                    break;
-                                }
-                            }
-                        }
-                        DocumentChange.Type.REMOVED -> {
-                            var data:MutableMap<String?, Any?> = dc.document.data
-                            for(i in 0 until lstUserCart.size)
-                            {
-                                if (lstUserCart[i].id == dc.document.id)
-                                {
-                                    lstUserCart.removeAt(i)
-                                }
-                            }
-                        }
+            refToUserCart.addSnapshotListener  (object :
+                EventListener<QuerySnapshot> {
+                override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                    if (error != null) {
+                        Log.w(Constants.VMTAG, "Listen failed.", error)
+                        return
                     }
+
+                    val cartList: MutableList<Cart> = ArrayList()
+                    for (doc in value!!) {
+                        var bool = doc.data["isChose"].toString() == "true"
+                        var item = Cart("", doc.data["image"].toString(),doc.data["title"].toString(), doc.data["author"].toString(),
+                            doc.data["Quantity"].toString().toInt(), doc.data["price"].toString().toLong(), bool)
+                        item.id = doc.id
+                        cartList.add(item)
+                    }
+                    lstUserCart = cartList
                 }
-            }
+
+            })
         }
     }
 
