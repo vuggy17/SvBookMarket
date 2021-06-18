@@ -78,7 +78,6 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
            if(scrollY - oldScrollY >0){
                binding.bottomNavigation.visibility = View.GONE
 
-
            }else{
 
                binding.bottomNavigation.visibility = View.VISIBLE
@@ -162,6 +161,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
      */
     private fun startIntent(name: ACTIVITY) {
         val intent = when (name) {
+            PROFILE -> Intent(this, UserManageActivity::class.java)
             MENU -> Intent(this, MenuActivity::class.java)
             SEARCH -> Intent(this, SearchActivity::class.java)
             CART -> Intent(this, CartActivity::class.java)
@@ -253,17 +253,20 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
         binding.bottomNavigation.setCount( id=3, "3")
         binding.bottomNavigation.show(id = 2,   true)
         binding.bottomNavigation.setOnClickMenuListener {
-
             if(it.id ==3){
-
                 startIntent(Constants.ACTIVITY.CART)
             }
-
+            if(it.id ==1){
+                startIntent(Constants.ACTIVITY.PROFILE)
+            }
 
         }
         binding.bottomNavigation.setOnShowListener {
             if(it.id ==3){
                binding.bottomNavigation.show(2, true)
+            }
+            if(it.id ==1){
+                binding.bottomNavigation.show(2, true)
             }
         }
     }

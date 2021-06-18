@@ -34,7 +34,7 @@ object Constants {
     const val PRODUCT_LOGO = "productLogo"
 
     enum class ACTIVITY {
-        MENU, SEARCH, CART, CATEGORY, FEATURE, CATEGORY_DETAIL;
+       PROFILE, MENU, SEARCH, CART, CATEGORY, FEATURE, CATEGORY_DETAIL;
 
         override fun toString(): String {
             return name.toLowerCase().capitalize()

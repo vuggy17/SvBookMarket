@@ -10,9 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SvBookMarket">
-        <activity android:name=".activities.CategoryDetailActivity"></activity>
+        <activity android:name=".activities.UserManageActivity"></activity>
+        <activity android:name=".activities.CategoryDetailActivity" />
         <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.ProfileActivity"></activity>
+        <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.SearchActivity" />
         <activity android:name=".activities.FeatureActivity" />
         <activity android:name=".activities.EditProfileActivity" />
@@ -32,7 +33,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.EditAdressActivity" />
@@ -42,10 +42,7 @@
         <activity
             android:name=".activities.HomeActivity"
             android:screenOrientation="fullSensor"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
-
-
-        </activity>
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"></activity>
         <activity android:name=".activities.CategoryActivity" />
 
         <meta-data
