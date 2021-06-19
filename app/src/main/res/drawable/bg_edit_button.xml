@@ -10,5 +10,5 @@
         android:angle="0"
         android:type="linear">
     </gradient>
-
+    <corners android:radius="36dp"/>
 </shape>

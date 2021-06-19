@@ -20,6 +20,7 @@
     <color name="home_gray">#E9E9F4</color>
     <color name="search_gray">#AFC1C4</color>
     <color name="search_fill">#EDEFF3</color>
+    <color name="info_gray">#a9a9a9</color>
 
 <color name="yellow_back">#E6E367</color>
     <color name="yellow">#FBED67</color>

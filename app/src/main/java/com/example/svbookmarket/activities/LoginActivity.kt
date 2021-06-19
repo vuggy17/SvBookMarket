@@ -61,12 +61,16 @@ class LoginActivity : AppCompatActivity() {
 
         val imgBackArrow: AppCompatImageView = findViewById(R.id.imgBackArrow)
         imgBackArrow.setOnClickListener {
-            onBackPressed()
+            startActivity(Intent(baseContext, WelcomeActivity::class.java))
         }
         loginSignUp.setOnClickListener {
             startActivity(Intent(baseContext, RegisterActivity::class.java))
             finish() //remove activity from backstack
         }
+    }
+
+    override fun onBackPressed() {
+        startActivity(Intent(baseContext, WelcomeActivity::class.java))
     }
 
     private fun onButtonLoginClick() {

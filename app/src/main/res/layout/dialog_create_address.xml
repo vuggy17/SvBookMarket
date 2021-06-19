@@ -215,7 +215,7 @@
         android:layout_height="@dimen/btn_height"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/blue_dark"
+        android:backgroundTint="@color/blue_light"
         android:fontFamily="@font/roboto_bold"
         android:text="Add address"
         android:textAllCaps="true"

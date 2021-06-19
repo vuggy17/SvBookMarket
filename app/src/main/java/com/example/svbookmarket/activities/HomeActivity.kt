@@ -155,7 +155,10 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
      */
     private fun startIntent(name: ACTIVITY) {
         val intent = when (name) {
-            PROFILE -> Intent(this, UserManageActivity::class.java)
+            PROFILE -> {
+                Intent(this, UserManageActivity::class.java)
+
+            }
             MENU -> Intent(this, MenuActivity::class.java)
             SEARCH -> Intent(this, SearchActivity::class.java)
             CART -> Intent(this, CartActivity::class.java)
@@ -252,6 +255,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
             }
             if(it.id ==1){
                 startIntent(Constants.ACTIVITY.PROFILE)
+
             }
 
         }

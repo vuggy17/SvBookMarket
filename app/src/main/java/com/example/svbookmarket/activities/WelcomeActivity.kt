@@ -3,9 +3,11 @@ package com.example.svbookmarket.activities
 import CurrentUserInfo
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.model.AppAccount
@@ -15,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlin.system.exitProcess
 
 class WelcomeActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -37,7 +40,20 @@ class WelcomeActivity : AppCompatActivity() {
             finish();
         }
     }
+    var isBackPressedOnce = false
 
+
+    public override fun onBackPressed() {
+        if (isBackPressedOnce) {
+            super.onBackPressed()
+            return
+        }
+
+        this.isBackPressedOnce = true
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
+
+        Handler().postDelayed(Runnable { isBackPressedOnce = false }, 2000)
+    }
     public override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.

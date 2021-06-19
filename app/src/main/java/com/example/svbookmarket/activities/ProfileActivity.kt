@@ -1,6 +1,7 @@
 package com.example.svbookmarket.activities
 
 import android.accounts.Account
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,7 +23,11 @@ class ProfileActivity() : AppCompatActivity() {
 
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
+        setBackButtonClick()
+    }
+    private  fun setBackButtonClick(){
+        binding.imgBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 }

@@ -21,7 +21,7 @@ class UserManageActivity : AppCompatActivity() {
 
     private fun setButtonBack() {
         binding.backButton.setOnClickListener {
-            onBackPressed()
+           onBackPressed()
         }
     }
     private fun setYourProfile(){
@@ -35,6 +35,7 @@ class UserManageActivity : AppCompatActivity() {
         binding.logout.setOnClickListener {
             Firebase.auth.signOut()
             startActivity(Intent(baseContext, WelcomeActivity::class.java))
+            finish()
         }
 
     }
