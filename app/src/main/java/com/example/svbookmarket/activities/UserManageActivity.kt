@@ -16,11 +16,17 @@ class UserManageActivity : AppCompatActivity() {
         setContentView(binding.root)
         setButtonBack()
         setLogout()
+        setYourProfile()
     }
 
     private fun setButtonBack() {
         binding.backButton.setOnClickListener {
             onBackPressed()
+        }
+    }
+    private fun setYourProfile(){
+        binding.yourInfo.setOnClickListener {
+            startActivity(Intent(baseContext, ProfileActivity::class.java))
         }
     }
 

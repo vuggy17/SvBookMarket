@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/home_gray"
+    android:orientation="horizontal"
+    android:alpha="0.9"
     tools:context=".activities.HomeActivity">
 
 
@@ -12,7 +14,7 @@
         android:id="@+id/homeToolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/home_gray"
+        android:background="@android:color/transparent"
         app:contentInsetStart="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -169,6 +171,7 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
         android:alpha="1"
         android:layout_width="match_parent"
@@ -178,11 +181,12 @@
         app:mbn_defaultIconColor="@color/white"
         app:mbn_countTextColor="@color/white"
         app:mbn_countBackgroundColor="#ff6f00"
-        app:mbn_backgroundBottomColor="@color/blue_light"
+        app:mbn_backgroundBottomColor="@color/gradient_end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
+
 
 
 
