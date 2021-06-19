@@ -19,7 +19,7 @@ object Constants {
     const val REALTIME_DATABASE = "Realtime Database"
 
     //References
-    const val USERS_REF = "users"
+    const val USERS_REF = "accounts"
     const val BOOK_REF = "books"
 
     //Fields

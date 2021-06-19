@@ -33,6 +33,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="104dp"
+        android:layout_height="104dp"
+        android:layout_marginTop="18dp"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvProfile"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -46,6 +55,8 @@
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:layout_width="match_parent"
+            android:id="@+id/avatar"
+            android:src="@drawable/ic_male"
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
     </androidx.cardview.widget.CardView>
@@ -71,6 +82,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="tan.lk16.cla@gmail.com"
@@ -136,6 +148,7 @@
                     android:textColor="@color/blue_light"
                     android:textSize="16sp" />
                 <TextView
+                    android:id="@+id/phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -164,6 +177,7 @@
                     android:textColor="@color/blue_light"
                     android:textSize="16sp" />
                 <TextView
+                    android:id="@+id/gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -192,6 +206,7 @@
                     android:textColor="@color/blue_light"
                     android:textSize="16sp" />
                 <TextView
+                    android:id="@+id/birthday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
@@ -220,6 +235,7 @@
                     android:textColor="@color/blue_light"
                     android:textSize="16sp" />
                 <TextView
+                    android:id="@+id/addressLane"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
@@ -248,6 +264,7 @@
                     android:textColor="@color/blue_light"
                     android:textSize="16sp" />
                 <TextView
+                    android:id="@+id/city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"

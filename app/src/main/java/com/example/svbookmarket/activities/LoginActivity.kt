@@ -122,7 +122,6 @@ class LoginActivity : AppCompatActivity() {
     private fun loadData(email: String) {
         dbAccountsReference.document(email).get()
             .addOnSuccessListener { result ->
-
                 val userMap = result["user"] as HashMap<*, *>
                 val recentUser: User = User(
                     fullName = userMap["fullName"].toString(),
