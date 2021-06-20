@@ -27,14 +27,20 @@ public class FullBookList private constructor(var lstFullBook: MutableList<Book>
                 val bookList: MutableList<Book> = ArrayList()
                 for (doc in value!!) {
                     val data: MutableMap<String?, Any?> = doc.data;
+                    var price = data["Price"].toString()
+                    price = price.dropLast(2)
+                    var rate = data["Price"].toString()
+                    rate = rate.dropLast(2)
+                    var Counts = data["Price"].toString()
+                    Counts = Counts.dropLast(2)
                         var item = Book(doc.id,
                                         data["Image"].toString(),
                                         data["Name"].toString(),
                                         data["Author"].toString(),
-                                        data["Price"].toString().toInt(),
-                                        data["rate"].toString().toInt(),
+                                        price.toInt(),
+                                        rate.toInt(),
                                         data["Kind"].toString(),
-                                        data["Counts"].toString().toInt(),
+                                        Counts.toInt(),
                                         data["Description"].toString()
                         )
                     bookList.add(item)
