@@ -24,6 +24,7 @@ class UserManageActivity : AppCompatActivity() {
         setLogout()
         setYourProfile()
         setUpUserInfoView()
+        setDeliveryAddress()
     }
 
     fun setDeliveryAddress(){

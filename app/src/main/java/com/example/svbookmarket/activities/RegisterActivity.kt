@@ -78,6 +78,10 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        startActivity(Intent(baseContext,LoginActivity::class.java))
+    }
+
     private fun signUpClick() {
         if (isValidName() && isValidEmail() && isValidPassword() && isValidConfirmPassword() && isAgreeTermAndConditions()) {
             dbReference.get().addOnSuccessListener() { result ->
