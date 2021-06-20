@@ -42,52 +42,34 @@ public class CurrentUserInfo private constructor(var currentProfile: AppAccount 
 
             // Snap for Delivery Address
             var refToDeliveryAddress = ref.collection("userDeliverAddresses")
-            refToDeliveryAddress.addSnapshotListener { snapshot, e ->
-                e?.let {
+            refToDeliveryAddress.addSnapshotListener (object :
+                EventListener<QuerySnapshot> {
+                override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                error?.let {
                     Log.d("app-db-error", it.message!!)
-                    return@addSnapshotListener
+                    return
                 }
 
-                for (dc in snapshot!!.documentChanges)
-                {
-                    when(dc.type)
-                    {
-                        DocumentChange.Type.ADDED -> {
-                            var data:MutableMap<String?, Any?> = dc.document.data
-                            var bool = data["isChose"].toString() == "true"
-                            lstUserDeliverAddress.add(UserDeliverAddress(dc.document.id, data["fullName"].toString(), data["phoneNumber"].toString(),
-                            data["AddressLane"].toString(), data["District"].toString(), data["City"].toString(), bool))
+                    val addressList: MutableList<UserDeliverAddress> = ArrayList()
+                for (dc in value!!) {
+                            var data: MutableMap<String?, Any?> = dc.data
+                            var bool = data["chose"].toString() == "true"
+                            addressList.add(
+                                UserDeliverAddress(
+                                    dc.id,
+                                    data["fullName"].toString(),
+                                    data["phoneNumber"].toString(),
+                                    data["addressLane"].toString(),
+                                    data["district"].toString(),
+                                    data["city"].toString(),
+                                    bool
+                                )
+                            )
                         }
-                        DocumentChange.Type.MODIFIED -> {
-                            var data:MutableMap<String?, Any?> = dc.document.data
-                            var bool = data["isChose"].toString() == "true"
-                            for(i in 0 until lstUserDeliverAddress.size)
-                            {
-                                if (lstUserDeliverAddress[i].id == dc.document.id)
-                                {
-                                    lstUserDeliverAddress[i].fullName =  data["fullName"].toString()
-                                    lstUserDeliverAddress[i].addressLane =  data["AddressLane"].toString()
-                                    lstUserDeliverAddress[i].phoneNumber =  data["phoneNumber"].toString()
-                                    lstUserDeliverAddress[i].city = data["City"].toString()
-                                    lstUserDeliverAddress[i].district= data["District"].toString()
-                                    lstUserDeliverAddress[i].isChose = bool
-                                    break;
-                                }
-                            }
-                        }
-                        DocumentChange.Type.REMOVED -> {
-                            var data:MutableMap<String?, Any?> = dc.document.data
-                            for(i in 0 until lstUserDeliverAddress.size)
-                            {
-                                if (lstUserDeliverAddress[i].id == dc.document.id)
-                                {
-                                    lstUserDeliverAddress.removeAt(i)
-                                }
-                            }
-                        }
+                    lstUserDeliverAddress =addressList
                     }
                 }
-            }
+            )
 
             //snap for user current cart list
             var refToUserCart = ref.collection("userCart")

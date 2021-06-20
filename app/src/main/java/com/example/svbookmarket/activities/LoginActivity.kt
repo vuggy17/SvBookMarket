@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.data.FullBookList
 import com.example.svbookmarket.activities.model.AppAccount
 import com.example.svbookmarket.activities.model.User
 import com.google.android.material.textfield.TextInputLayout
@@ -89,6 +90,7 @@ class LoginActivity : AppCompatActivity() {
                                 )
                                 recentAccountLogin = AppAccount(result["email"].toString(), result["password"].toString(),recentUser)
                                 CurrentUserInfo.getInstance()
+                                FullBookList.getInstance()
                                 startActivity(Intent(baseContext, HomeActivity::class.java))
 
 
