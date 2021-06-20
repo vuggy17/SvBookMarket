@@ -26,6 +26,11 @@ class UserManageActivity : AppCompatActivity() {
         setUpUserInfoView()
     }
 
+    fun setDeliveryAddress(){
+        binding.address.setOnClickListener {
+            startActivity(Intent(baseContext, AddressActivity::class.java))
+        }
+    }
     override fun onBackPressed() {
         startActivity(Intent(baseContext, HomeActivity::class.java))
     }
