@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="30dp"
+    android:background="@drawable/profile_background"
+
     android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
     tools:context=".activities.EditProfileActivity">
 
@@ -12,10 +13,11 @@
         android:id="@+id/imgBack"
         android:layout_width="44dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/img_back_arrow"
+        android:src="@drawable/ic_baseline_arrow_back_24"
         app:layout_constraintEnd_toStartOf="@+id/tvEditProfile"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,279 +30,300 @@
         android:layout_marginTop="54dp"
         android:fontFamily="@font/roboto_bold"
         android:text="@string/editprofile"
-        android:textColor="@color/less_black"
+        android:textColor="@color/white"
         android:textSize="28dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Name"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEditProfile" />
-
-    <EditText
-        android:id="@+id/edtName"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:autofillHints="Name"
-        android:fontFamily="@font/roboto_regular"
-        android:inputType="text"
-        android:textColor="@color/less_black"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEditProfile" />
+        android:layout_marginHorizontal="30dp"
+        android:elevation="8dp"
+        app:cardCornerRadius="36dp"
+        app:cardElevation="8sp"
 
-    <LinearLayout
-        android:id="@+id/llGenderAndBirth"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtName"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_column="0"
-            android:layout_width="170dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_marginHorizontal="20dp">
 
             <TextView
-                android:textStyle="bold"
-                android:id="@+id/tvGender"
+                android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:text="Gender"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Name"
                 android:textColor="@color/black"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-                android:id="@+id/genderLayout"
+            <EditText
+                android:id="@+id/edtName"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:autofillHints="Gender"
+                android:layout_height="wrap_content"
+
+                android:autofillHints="Name"
                 android:fontFamily="@font/roboto_regular"
+                android:inputType="text"
                 android:textColor="@color/less_black"
-                android:textSize="16sp">
-                <AutoCompleteTextView
-                    android:id="@+id/gender"
-                    android:textSize="16sp"
-                    android:background="@color/white"
-                    android:textColor="@color/black"
-                    android:padding="0dp"
-                    android:layout_marginBottom="7dp"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.507"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+            <LinearLayout
+                android:id="@+id/llGenderAndBirth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtName">
+
+                <LinearLayout
+                    android:layout_width="110dp"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvGender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Gender"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/genderLayout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:autofillHints="Gender"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textColor="@color/less_black"
+                        android:textSize="16sp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/gender"
+                            android:paddingStart="2dp"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="7dp"
+                            android:background="@color/white"
+                            android:padding="0dp"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tvBirthday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="Birthday"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
 
-            <TextView
-                android:textStyle="bold"
-                android:id="@+id/tvBirthday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:fontFamily="@font/roboto_bold"
-                android:text="Birthday"
-                android:textColor="@color/black"
-                android:textSize="16dp" />
-            <EditText
-                android:id="@+id/edtBirthday"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="25dp"
-                android:autofillHints="Gender"
-                android:fontFamily="@font/roboto_regular"
-                android:inputType="text"
-                android:textColor="@color/less_black"
-                android:textSize="16dp" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tvEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Email"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llGenderAndBirth" />
-
-    <EditText
-        android:id="@+id/edtEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:autofillHints="@string/email"
-        android:fontFamily="@font/roboto_regular"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/less_black"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
-
-    <TextView
-        android:textStyle="bold"
-        android:id="@+id/tvPhoneNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Phone Number"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmail" />
-
-    <EditText
-        android:id="@+id/edtPhoneNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:autofillHints="Phone Number"
-        android:fontFamily="@font/roboto_regular"
-        android:inputType="phone"
-        android:textColor="@color/less_black"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber" />
-
-    <TextView
-        android:textStyle="bold"
-        android:id="@+id/tvAddressLane"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Address Lane"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtPhoneNumber" />
-
-    <EditText
-        android:id="@+id/edtAddressLane"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:autofillHints="Address Lane"
-        android:fontFamily="@font/roboto_regular"
-        android:inputType="text"
-        android:textColor="@color/less_black"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAddressLane" />
-
-    <LinearLayout
-        android:id="@+id/llDistrictAndCity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.068"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtAddressLane">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                    <EditText
+                        android:id="@+id/edtBirthday"
+                        android:editable="false"
+                        android:focusedByDefault="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:autofillHints="Gender"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textColor="@color/less_black"
+                        android:textSize="16dp"
+                        tools:ignore="Deprecated" />
+                </LinearLayout>
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tvCity"
-                android:textStyle="bold"
+                android:id="@+id/tvPhoneNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
-                android:text="City"
+                android:text="Phone Number"
                 android:textColor="@color/black"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llGenderAndBirth" />
 
             <EditText
-                android:id="@+id/edtCity"
-                android:layout_width="150dp"
+                android:id="@+id/edtPhoneNumber"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="City"
+                android:autofillHints="Phone Number"
                 android:fontFamily="@font/roboto_regular"
-                android:inputType="text"
+                android:inputType="phone"
                 android:textColor="@color/less_black"
-                android:textSize="16dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber" />
 
             <TextView
-                android:textStyle="bold"
-                android:id="@+id/tvDistrict"
-                android:layout_width="match_parent"
+                android:id="@+id/tvAddressLane"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/roboto_bold"
-                android:inputType="text"
-                android:text="District"
+                android:text="Address Lane"
                 android:textColor="@color/black"
-                android:textSize="16dp" />
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtPhoneNumber" />
 
             <EditText
-                android:id="@+id/edtDistrict"
+                android:id="@+id/edtAddressLane"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="25dp"
-                android:layout_marginStart="32dp"
-                android:autofillHints="District"
+                android:layout_height="wrap_content"
+                android:autofillHints="Address Lane"
                 android:fontFamily="@font/roboto_regular"
                 android:inputType="text"
                 android:textColor="@color/less_black"
-                android:textSize="16dp"/>
-        </LinearLayout>
-    </LinearLayout>
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvAddressLane" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_SaveProfile"
+            <LinearLayout
+                android:id="@+id/llDistrictAndCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.068"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtAddressLane">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="City"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edtCity"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:autofillHints="City"
+                        android:fontFamily="@font/roboto_regular"
+                        android:inputType="text"
+                        android:textColor="@color/less_black"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvDistrict"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:inputType="text"
+                        android:text="District"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edtDistrict"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="25dp"
+                        android:layout_marginStart="32dp"
+                        android:autofillHints="District"
+                        android:fontFamily="@font/roboto_regular"
+                        android:inputType="text"
+
+                        android:textColor="@color/less_black"
+                        android:textSize="16dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="28dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="Save"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/green"
-        android:background="@drawable/ripple"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llDistrictAndCity"/>
+        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSaveProfile"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="5dp"
+            android:layout_height="50dp"
+
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/ripple"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

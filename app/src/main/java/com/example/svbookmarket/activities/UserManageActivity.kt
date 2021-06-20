@@ -2,13 +2,19 @@ package com.example.svbookmarket.activities
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.viewmodel.UserViewModel
 import com.example.svbookmarket.databinding.ActivityUserManageBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class UserManageActivity : AppCompatActivity() {
+    private val userViewModel: UserViewModel by viewModels()
     private lateinit var binding: ActivityUserManageBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +23,11 @@ class UserManageActivity : AppCompatActivity() {
         setButtonBack()
         setLogout()
         setYourProfile()
+        setUpUserInfoView()
+    }
+
+    override fun onBackPressed() {
+        startActivity(Intent(baseContext, HomeActivity::class.java))
     }
 
     private fun setButtonBack() {
@@ -37,6 +48,14 @@ class UserManageActivity : AppCompatActivity() {
             startActivity(Intent(baseContext, WelcomeActivity::class.java))
             finish()
         }
-
+    }
+    private fun setUpUserInfoView(){
+        if(userViewModel.getUserInfo().gender == "Male"){
+            binding.avatar.setImageResource(R.drawable.ic_male)
+        }else{
+            binding.avatar.setImageResource(R.drawable.ic_female)
+        }
+        binding.userName.text = userViewModel.getUserInfo().fullName
+        binding.userEmail.text = userViewModel.getAccountInfo().email
     }
 }

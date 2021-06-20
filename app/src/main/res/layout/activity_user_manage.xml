@@ -74,6 +74,7 @@
 
                 <androidx.constraintlayout.utils.widget.ImageFilterView
                     android:layout_width="match_parent"
+                    android:id="@+id/avatar"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop" />
             </androidx.cardview.widget.CardView>
@@ -98,6 +99,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/userEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="tan.lk16.cla@gmail.com"

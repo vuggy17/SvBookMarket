@@ -38,7 +38,13 @@ class ProfileActivity() : AppCompatActivity() {
         setBackButtonClick()
 
         setInfoView()
+        setButtonEdit()
 
+    }
+
+    override fun onBackPressed() {
+        startActivity(Intent(baseContext, UserManageActivity::class.java))
+        finish()
     }
 
     @SuppressLint("SetTextI18n")
@@ -61,7 +67,16 @@ class ProfileActivity() : AppCompatActivity() {
 
     private  fun setBackButtonClick(){
         binding.imgBack.setOnClickListener {
-            onBackPressed()
+            startActivity(Intent(baseContext, UserManageActivity::class.java))
+            finish()
         }
     }
+    private fun setButtonEdit(){
+        binding.btnEdit.setOnClickListener {
+            startActivity(Intent(baseContext, EditProfileActivity::class.java))
+            finish()
+        }
+    }
+
+
 }

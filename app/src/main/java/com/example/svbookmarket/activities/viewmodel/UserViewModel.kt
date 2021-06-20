@@ -6,6 +6,7 @@ import com.example.svbookmarket.activities.ProfileActivity
 import com.example.svbookmarket.activities.data.AccountRepository
 import com.example.svbookmarket.activities.data.UserRepository
 import com.example.svbookmarket.activities.model.AppAccount
+import com.example.svbookmarket.activities.model.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlin.reflect.KProperty
@@ -24,6 +25,9 @@ class UserViewModel @Inject constructor(
     fun getAccountInfo(): AppAccount{
         accountRepository.loadData()
         return  accountRepository.account
+    }
+    fun updateUserInfo(user: User){
+        userRepository.updateUserData(user)
     }
 
 

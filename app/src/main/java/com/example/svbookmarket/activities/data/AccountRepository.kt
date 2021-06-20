@@ -1,6 +1,7 @@
 package com.example.svbookmarket.activities.data
 
 import com.example.svbookmarket.activities.LoginActivity
+import com.example.svbookmarket.activities.common.AppUtil
 import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.model.AppAccount
 import com.example.svbookmarket.activities.model.User
@@ -14,6 +15,7 @@ class AccountRepository@Inject constructor(
     var account = AppAccount()
 
     fun loadData() {
-        account = LoginActivity.recentAccountLogin
+        account = AppUtil.currentAccount
     }
+
 }

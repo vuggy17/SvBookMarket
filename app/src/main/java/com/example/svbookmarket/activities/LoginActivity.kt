@@ -7,9 +7,11 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.common.AppUtil
 import com.example.svbookmarket.activities.model.AppAccount
 import com.example.svbookmarket.activities.model.User
 import com.example.svbookmarket.activities.viewmodel.LoadDialog
@@ -18,8 +20,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
     //init view
@@ -31,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginButton: Button
     private val TAG = "LOGIN"
 
+
     //init database reference
     private val db = Firebase.firestore
     private val dbAccountsReference = db.collection("accounts")
@@ -38,9 +43,9 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loadDialog: LoadDialog
 
     // tạo biến account để lưu về thông tin khách hàng đã có
-    companion object {
-        var recentAccountLogin: AppAccount = AppAccount("", "", User())
-    }
+//    companion object {
+//        var recentAccountLogin: AppAccount = AppAccount("", "", User())
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -132,11 +137,17 @@ class LoginActivity : AppCompatActivity() {
                     city = userMap["city"].toString(),
                     district = userMap["district"].toString(),
                 )
-                LoginActivity.recentAccountLogin = AppAccount(
+                AppUtil.currentUser = recentUser
+                AppUtil.currentAccount = AppAccount(
                     result["email"].toString(),
                     result["password"].toString(),
                     recentUser
                 )
+//                LoginActivity.recentAccountLogin = AppAccount(
+//                    result["email"].toString(),
+//                    result["password"].toString(),
+//                    recentUser
+//                )
                 CurrentUserInfo.getInstance()
                 startActivity(Intent(baseContext, HomeActivity::class.java))
                 finish()

@@ -1,6 +1,7 @@
 import android.net.Uri
 import android.util.Log
 import com.example.svbookmarket.activities.LoginActivity
+import com.example.svbookmarket.activities.common.AppUtil
 import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.model.*
 import com.google.firebase.firestore.*
@@ -17,7 +18,7 @@ public class CurrentUserInfo private constructor(var currentProfile: AppAccount 
     private fun getDataFromDb()
     {
         // snap for Profile
-        var ref = FirebaseFirestore.getInstance().collection("accounts").document(LoginActivity.recentAccountLogin.email)
+        var ref = FirebaseFirestore.getInstance().collection("accounts").document(AppUtil.currentAccount.email)
         ref.addSnapshotListener { snapshot, e ->
             e?.let {
                 Log.d("app-db-error", it.message!!)
