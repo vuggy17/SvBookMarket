@@ -116,7 +116,7 @@ class RegisterActivity : AppCompatActivity() {
     }
     private fun updateData(){
         user = User(fullName = edtName.text.toString())
-        appAccount = AppAccount(email, password, user)
+        appAccount = AppAccount(email, "", user)
         dbReference.document(appAccount.email).set(appAccount).addOnSuccessListener {
             Toast.makeText(this, "Register Success", Toast.LENGTH_SHORT).show()
         }.addOnFailureListener { e ->

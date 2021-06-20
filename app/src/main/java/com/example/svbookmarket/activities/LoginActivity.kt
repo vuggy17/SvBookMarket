@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
@@ -84,9 +85,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun onButtonLoginClick() {
-        loadDialog= LoadDialog(this)
-        loadDialog.startLoading()
+
         if (isValidEmail() && isValidPassword()) {
+            loadDialog= LoadDialog(this)
+            loadDialog.startLoading()
             dbAccountsReference.get().addOnSuccessListener { result ->
                 var emailExist: Boolean = false
                 for (document in result) {
@@ -100,14 +102,11 @@ class LoginActivity : AppCompatActivity() {
                     auth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this) { task ->
                             if (task.isSuccessful) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "signInWithEmail:success")
-                                val user = auth.currentUser
                                 loadData(email)
                                 loadDialog.dismissDialog()
                             } else {
-                                checkPassword(email, password)
-
+                                loginPasswordLayout.error = task.exception!!.message.toString()
+                                loadDialog.dismissDialog()
                             }
                         }
 
@@ -119,15 +118,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkPassword(email: String, password: String) {
-        dbAccountsReference.document(email).get()
-            .addOnSuccessListener { result ->
-                if (result["password"] != password) {
-                    loginPasswordLayout.error = "Wrong password!!"
-                    loadDialog.dismissDialog()
-                }
-            }
-    }
 
     private fun loadData(email: String) {
         dbAccountsReference.document(email).get()
