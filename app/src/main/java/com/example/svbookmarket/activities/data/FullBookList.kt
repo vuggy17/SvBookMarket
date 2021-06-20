@@ -1,8 +1,11 @@
 package com.example.svbookmarket.activities.data
 
 import android.util.Log
+import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.model.Book
-import com.google.firebase.firestore.FirebaseFirestore
+import com.example.svbookmarket.activities.model.Cart
+import com.google.firebase.firestore.*
+import com.google.firebase.firestore.EventListener
 import java.util.*
 
 public class FullBookList private constructor(var lstFullBook: MutableList<Book> = mutableListOf()) {
@@ -13,54 +16,33 @@ public class FullBookList private constructor(var lstFullBook: MutableList<Book>
 
     private fun getDataBySnapshot() {
         var ref = FirebaseFirestore.getInstance().collection("books")
-        ref.addSnapshotListener { snapshot, e ->
+        ref.addSnapshotListener (object :
+            EventListener<QuerySnapshot> {
+            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                if (error != null) {
+                    Log.w(Constants.VMTAG, "Listen failed.", error)
+                    return
+                }
 
-            e?.let {
-                Log.d("K-error", e.message!!)
-                return@addSnapshotListener
+                val bookList: MutableList<Book> = ArrayList()
+                for (doc in value!!) {
+                    val data: MutableMap<String?, Any?> = doc.data;
+                        var item = Book(doc.id,
+                                        data["Image"].toString(),
+                                        data["Name"].toString(),
+                                        data["Author"].toString(),
+                                        data["Price"].toString().toInt(),
+                                        data["rate"].toString().toInt(),
+                                        data["Kind"].toString(),
+                                        data["Counts"].toString().toInt(),
+                                        data["Description"].toString()
+                        )
+                    bookList.add(item)
+                }
+                lstFullBook = bookList
             }
-//            for (dc in snapshot!!.documentChanges)
-//            {
-//                when (dc.type) {
-//                    DocumentChange.Type.ADDED -> {
-//                        val data : MutableMap<String?, Any?> = dc.document.data;
-//                        lstFullBook.add(Book(dc.document.id, Uri.parse(data["Image"].toString()), data["Name"].toString(),
-//                            data["Author"].toString(), data["Price"].toString().toLong(), data["rate"].toString().toDouble(),
-//                            data["Kind"].toString(), data["Counts"].toString().toLong(), data["Description"].toString()))
-//                    }
-//                    DocumentChange.Type.MODIFIED -> {
-//                        val data: MutableMap<String?, Any?> = dc.document.data;
-//                        Log.d("000000000000000000000", "dcm")
-//                        for(i in 0 until lstFullBook.size)
-//                        {
-//                            if (lstFullBook[i].id == dc.document.id) {
-//                                lstFullBook[i].Name =  data["Name"].toString()
-//                                lstFullBook[i].Author =  data["Author"].toString()
-//                                lstFullBook[i].Kind =  data["Kind"].toString()
-//                                lstFullBook[i].Description = data["Description"].toString()
-//                                lstFullBook[i].Image= Uri.parse(data["Image"].toString())
-//                                lstFullBook[i].Price = data["Price"].toString().toLong()
-//                                lstFullBook[i].Counts = data["Counts"].toString().toLong()
-//                                lstFullBook[i].rate = data["rate"].toString().toDouble()
-//                                break;
-//                            }
-//                        }
-//                    }
-//                    DocumentChange.Type.REMOVED -> {
-//                        val data: MutableMap<String?, Any?> = dc.document.data;
-//                        for(i in 0 until lstFullBook.size-1)
-//                        {
-//                            if (lstFullBook[i].id == dc.document.id) {
-//                                lstFullBook.removeAt(i)
-//                                break;
-//                            }
-//                        }
-//                    }
-//                }
-//
-//            }
 
-        }
+        })
 
     }
 

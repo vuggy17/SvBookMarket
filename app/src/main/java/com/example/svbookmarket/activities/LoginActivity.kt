@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.common.AppUtil
+import com.example.svbookmarket.activities.data.FullBookList
 import com.example.svbookmarket.activities.model.AppAccount
 import com.example.svbookmarket.activities.model.User
 import com.example.svbookmarket.activities.viewmodel.LoadDialog
@@ -147,7 +148,8 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(Intent(baseContext, HomeActivity::class.java))
                 finish()
             }
-    }
+        }
+
 
 
     private fun isEmailRightFormat(email: String): Boolean {

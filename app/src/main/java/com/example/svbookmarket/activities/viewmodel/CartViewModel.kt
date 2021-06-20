@@ -53,7 +53,13 @@ class CartViewModel @Inject constructor(private val cartRepository: CartReposito
 
     fun updateQuantity(id: String, plusOrMinus:Boolean)
     {
-        cartRepository.newQuantityForItem(id, plusOrMinus, CurrentUserInfo.getInstance().currentProfile)
+        viewModelScope.launch {
+            cartRepository.newQuantityForItem(
+                id,
+                plusOrMinus,
+                CurrentUserInfo.getInstance().currentProfile
+            )
+        }
     }
 
     fun updateData(list:MutableList<Cart>){

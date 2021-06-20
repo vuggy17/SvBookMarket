@@ -33,17 +33,19 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="19dp"
-
+            android:layout_marginRight="20dp"
             android:orientation="vertical">
 
             <TextView
-                android:maxLines="2"
                 android:id="@+id/tv_bookname"
                 android:layout_width="wrap_content"
                 android:maxWidth="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
                 android:text="The Case for Trump"
+                android:layout_marginRight="20dp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -56,19 +58,11 @@
                 android:maxWidth="250dp"
                 android:textColor="@color/fade_gray" />
 
-            <TextView
-                android:id="@+id/tv_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="165dp"
-                android:layout_marginBottom="2dp"
-                android:text="200.000đ"
-                android:textColor="#0F52BA"
-                android:textFontWeight="600"
-                android:textSize="16dp" />
+
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <ImageButton
@@ -97,6 +91,21 @@
                     android:elevation="4dp"
                     android:src="@drawable/ic_plus" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_marginRight="20dp">
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20000đ"
+                    android:textColor="#0F52BA"
+                    android:textFontWeight="600"
+                    android:textSize="16dp" />
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>

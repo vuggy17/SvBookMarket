@@ -33,18 +33,19 @@ class CartItemAdapter(val listener: OnButtonClickListener, private var cartList:
             .placeholder(R.drawable.ic_launcher_background)
             .into(holder.coverimg);
 
-        holder.price.text = cartList[position].price.toString()
+        holder.price.text = cartList[position].price.toString() + " đ"
         holder.number.text = cartList[position].numbers.toString()
 
+        (holder.itemView as MaterialCardView).isChecked = cartList[position].isChose
         // increase and decrease button listenerc
         holder.increaseButton.setOnClickListener {
-            holder.number.text = (holder.number.text.toString().toInt() + 1).toString()
+//            holder.number.text = (holder.number.text.toString().toInt() + 1).toString()
             // TODO: may need reset cardList
             listener.onButtonClick(cartList[position].id, true)
         }
         holder.decreaseButton.setOnClickListener {
             if (cartList[position].numbers > 0) {
-                holder.number.text = (holder.number.text.toString().toInt() - 1).toString()
+//                holder.number.text = (holder.number.text.toString().toInt() - 1).toString()
                 listener.onButtonClick(cartList[position].id, false)
             }
         }

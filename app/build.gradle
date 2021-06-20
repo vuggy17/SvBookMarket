@@ -89,8 +89,8 @@ dependencies {
     // optional - ProcessLifecycleOwner provides a lifecycle for the whole application process
     implementation("androidx.lifecycle:lifecycle-process:2.3.1")
     // Hilt dependencies
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    implementation "com.google.dagger:hilt-android:2.35"
+    kapt "com.google.dagger:hilt-android-compiler:2.35"
     // coroutines
 //    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core: "
 //    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"

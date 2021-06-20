@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.common.Constants.ITEM
 import com.example.svbookmarket.activities.data.BookRepository
@@ -16,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -78,6 +80,11 @@ class ItemDetailViewModel @Inject constructor (private val savedStateHandle: Sav
     }
 
     fun addToCart() {
-        cartRepository.addCart(_itemToDisplay.value!!, CurrentUserInfo.getInstance().currentProfile)
+        viewModelScope.launch {
+            cartRepository.addCart(
+                _itemToDisplay.value!!,
+                CurrentUserInfo.getInstance().currentProfile
+            )
+        }
     }
 }
