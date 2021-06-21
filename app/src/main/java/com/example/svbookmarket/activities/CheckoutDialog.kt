@@ -30,6 +30,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 @AndroidEntryPoint
 class CheckoutDialog : BottomSheetDialogFragment(){
@@ -47,38 +48,93 @@ class CheckoutDialog : BottomSheetDialogFragment(){
     private var sum: Long = 0
     private var itemAdapter: ItemAdapter = ItemAdapter(items)
     lateinit var tvSum:TextView
+    lateinit var tvName:TextView
+    lateinit var tvAddress:TextView
+    lateinit var tvPhonenumber:TextView
     lateinit var billingItemList: RecyclerView
     lateinit var btn_buy: MaterialButton
-    private var lstOverMount: MutableList<String> = mutableListOf()
+    private var deliverAddress: UserDeliverAddress = UserDeliverAddress()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
         btn_buy = view.findViewById(R.id.mdco_checkout)
         tvSum = view.findViewById(R.id.tv_sum)
+        tvName = view.findViewById(R.id.tv_Name)
+        tvAddress = view.findViewById(R.id.tv_address)
+        tvPhonenumber = view.findViewById(R.id.tv_phonenumber)
+
         tvSum.text = sum.toString() + " đ"
         billingItemList = view.findViewById(R.id.mdco_itemBill)
         billingItemList.layoutManager = LinearLayoutManager(context)
         billingItemList.adapter = itemAdapter
 
-        btn_buy.setOnClickListener{
-            if(checkIfComeFirst()) {
-                moveToOrder(
-                    CurrentUserInfo.getInstance().currentProfile,
-                    CurrentUserInfo.getInstance().lstUserCart,
-                    CurrentUserInfo.getInstance().lstUserDeliverAddress
-                )
+        btn_buy.setOnClickListener {
+            var num: Int = 0
+            for (i in 0 until CurrentUserInfo.getInstance().lstUserCart.size) {
+                if (CurrentUserInfo.getInstance().lstUserCart[i].isChose == true) {
+                    num += 1
+                }
+            }
+            if (num != 0) {
+                if (checkIfComeFirst()) {
+                    moveToOrder(
+                        CurrentUserInfo.getInstance().currentProfile,
+                        CurrentUserInfo.getInstance().lstUserCart,
+                        CurrentUserInfo.getInstance().lstUserDeliverAddress
+                    )
+                } else {
+                    Toast.makeText(context, "Not enough quantity in store", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
             else
             {
-                Toast.makeText(context, "0000000", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Have nothing in Checkout", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
-        loadData()
-
+        loadCheckoutData()
+        loadDeliverAddress()
     }
 
+
+    private fun loadDeliverAddress()
+    {
+        FirebaseFirestore.getInstance().collection("accounts").document(CurrentUserInfo.getInstance().currentProfile.email).collection("userDeliverAddresses").addSnapshotListener(object :
+            EventListener<QuerySnapshot> {
+            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                if (error != null) {
+                    Log.w(Constants.VMTAG, "Listen failed.", error)
+                    return
+                }
+
+                val itemDeliverAddress: UserDeliverAddress
+                for (doc in value!!) {
+                    if (doc.data["chose"].toString() == "true") {
+                        var item = UserDeliverAddress(
+                            doc.id,
+                            doc.data["fullName"].toString(),
+                            doc.data["phoneNumber"].toString(),
+                            doc.data["addressLane"].toString(),
+                            doc.data["district"].toString(),
+                            doc.data["city"].toString(),
+                            true
+                        )
+                        itemDeliverAddress = item
+                        deliverAddress=  itemDeliverAddress
+                        tvName.text = deliverAddress.fullName
+                        tvPhonenumber.text = deliverAddress.phoneNumber
+                        tvAddress.text = deliverAddress.addressLane + ", " + deliverAddress.district + ", " + deliverAddress.city
+                        break
+                    }
+                }
+
+            }
+
+        })
+    }
     fun moveToOrder(user: AppAccount, lstCheckout: MutableList<Cart>, lstAddress: MutableList<UserDeliverAddress>) {
         for (i in 0 until lstAddress.size) {
             if (lstAddress[i].isChose) {
@@ -102,7 +158,7 @@ class CheckoutDialog : BottomSheetDialogFragment(){
         var lstIdOnMove: MutableList<String> = mutableListOf()
         var lstNumOnMove: MutableList<Int> = mutableListOf()
         for (i in 0 until listNeedToMove.size) {
-            if (listNeedToMove[i].isChose == true) {
+            if (listNeedToMove[i].isChose) {
                 lstIdOnMove.add(listNeedToMove[i].id)
                 lstNumOnMove.add(listNeedToMove[i].numbers)
                 val mapOfOrder = hashMapOf<String, Any>(
@@ -143,7 +199,7 @@ class CheckoutDialog : BottomSheetDialogFragment(){
         return true
     }
 
-    private fun loadData()
+    private fun loadCheckoutData()
     {
         FirebaseFirestore.getInstance().collection("accounts").document(CurrentUserInfo.getInstance().currentProfile.email).collection("userCart")
             .addSnapshotListener(object :
@@ -162,7 +218,7 @@ class CheckoutDialog : BottomSheetDialogFragment(){
                             doc.data["image"].toString(),
                             doc.data["title"].toString(),
                             doc.data["author"].toString(),
-                            doc.data["Quantity"].toString().toInt(),
+                            doc.data["Quantity"].toString().toDouble().roundToInt(),
                             doc.data["price"].toString().toLong(),
                             true
                         )

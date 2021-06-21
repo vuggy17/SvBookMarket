@@ -6,6 +6,7 @@ import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.model.*
 import com.google.firebase.firestore.*
 import com.google.firebase.ktx.Firebase
+import kotlin.math.roundToInt
 
 public class CurrentUserInfo private constructor(var currentProfile: AppAccount = AppAccount(),
                                                  var lstUserCart: MutableList<Cart> = mutableListOf(),
@@ -86,7 +87,7 @@ public class CurrentUserInfo private constructor(var currentProfile: AppAccount 
                     for (doc in value!!) {
                         var bool = doc.data["isChose"].toString() == "true"
                         var item = Cart("", doc.data["image"].toString(),doc.data["title"].toString(), doc.data["author"].toString(),
-                            doc.data["Quantity"].toString().toInt(), doc.data["price"].toString().toLong(), bool)
+                            (doc.data["Quantity"].toString().toDouble()).roundToInt(), doc.data["price"].toString().toLong(), bool)
                         item.id = doc.id
                         cartList.add(item)
                     }

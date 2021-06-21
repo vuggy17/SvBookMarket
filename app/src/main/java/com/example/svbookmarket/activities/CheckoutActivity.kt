@@ -15,6 +15,7 @@ import com.example.svbookmarket.activities.adapter.CartItemAdapter
 import com.example.svbookmarket.activities.adapter.CheckoutAdapter
 import com.example.svbookmarket.activities.data.DataSource
 import com.example.svbookmarket.activities.model.Cart
+import com.example.svbookmarket.activities.model.UserDeliverAddress
 import com.example.svbookmarket.activities.viewmodel.CheckoutViewModel
 import com.example.svbookmarket.databinding.ActivityCartBinding
 import com.example.svbookmarket.databinding.ActivityCheckoutBinding
@@ -30,10 +31,12 @@ class CheckoutActivity : AppCompatActivity() {
     var checkoutAdapter: CheckoutAdapter = CheckoutAdapter(this, mutableListOf())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityCheckoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
+        binding.tvAddress.text = viewModel.deliverAddress.value?.fullName + ", " + viewModel.deliverAddress.value?.phoneNumber +  ", " + viewModel.deliverAddress.value?.addressLane + ", " + viewModel.deliverAddress.value?.district + ", " + viewModel.deliverAddress.value?.city
         binding.rcCheckout.apply {
             layoutManager =
                 LinearLayoutManager(this@CheckoutActivity)
@@ -49,6 +52,7 @@ class CheckoutActivity : AppCompatActivity() {
         binding.coBackButton.setOnClickListener{onBackPressed()}
 
         viewModel.checkoutItem.observe(this, changeObserver)
+        viewModel.deliverAddress.observe(this, changeAddress)
     }
     private val changeObserver = Observer<MutableList<Cart>> { value ->
         value?.let {
@@ -56,6 +60,12 @@ class CheckoutActivity : AppCompatActivity() {
              checkoutAdapter.onChange(value)
             checkoutAdapter.notifyDataSetChanged()
             Log.d("0000000000000", value.toString())
+        }
+    }
+
+    private val changeAddress = Observer<UserDeliverAddress> { value ->
+        value?.let {
+            binding.tvAddress.text = value.fullName + ", " + value.phoneNumber + "/n" + value.addressLane + ", " + value.district + ", " + value.city
         }
     }
 }

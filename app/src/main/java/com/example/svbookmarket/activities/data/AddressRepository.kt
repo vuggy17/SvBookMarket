@@ -1,6 +1,9 @@
 package com.example.svbookmarket.activities.data
 
 import android.util.Log
+import com.example.svbookmarket.activities.model.AppAccount
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -66,6 +69,11 @@ class AddressRepository @Inject constructor(/*database */) {
         return freshAdds
 
 
+    }
+
+    fun getChosenAddress(user: AppAccount) : Query
+    {
+       return FirebaseFirestore.getInstance().collection("accounts").document(user.email).collection("userDeliverAddresses")
     }
 
     suspend fun update(item: MyAddress) {

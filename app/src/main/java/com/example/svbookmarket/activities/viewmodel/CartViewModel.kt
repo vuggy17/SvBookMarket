@@ -15,6 +15,7 @@ import com.google.firebase.firestore.QuerySnapshot
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 @HiltViewModel
 class CartViewModel @Inject constructor(private val cartRepository: CartRepository) :ViewModel() {
@@ -40,7 +41,7 @@ class CartViewModel @Inject constructor(private val cartRepository: CartReposito
                 for (doc in value!!) {
                     var bool = doc.data["isChose"].toString() == "true"
                     var item = Cart("", doc.data["image"].toString(),doc.data["title"].toString(), doc.data["author"].toString(),
-                        doc.data["Quantity"].toString().toInt(), doc.data["price"].toString().toLong(), bool)
+                        doc.data["Quantity"].toString().toDouble().roundToInt(), doc.data["price"].toString().toLong(), bool)
                     item.id = doc.id
                     cartList.add(item)
                 }

@@ -18,6 +18,7 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.concurrent.thread
+import kotlin.math.roundToInt
 import com.example.svbookmarket.activities.model.UserDeliverAddress as MyAddress
 
 
@@ -83,16 +84,16 @@ class CartRepository @Inject constructor( /*database */ @ApplicationContext val 
     }
 
     private suspend fun addOldCart(book: Book, user: AppAccount) {
-        var avaiBook: Int = -1
-        var currenOnCart: Int = -1
+        var avaiBook: Double = -1.0
+        var currenOnCart: Double = -1.0
         var bookData: DocumentSnapshot = FirebaseFirestore.getInstance().collection("books").document(book.id!!).get().await()
         var currentNumInCart: DocumentSnapshot = FirebaseFirestore.getInstance().collection("accounts")
             .document(user.email).collection("userCart").document(book.id!!).get().await()
 
-        avaiBook = bookData.data?.get("Counts").toString().toInt()
-        currenOnCart = currentNumInCart.data?.get("Quantity").toString().toInt()
+        avaiBook = bookData.data?.get("Counts").toString().toDouble()
+        currenOnCart = currentNumInCart.data?.get("Quantity").toString().toDouble()
 
-        if (avaiBook > currenOnCart && avaiBook != -1 && currenOnCart != -1 && avaiBook != 0) {
+        if (avaiBook > currenOnCart && avaiBook != -1.0 && currenOnCart != -1.0 && avaiBook != 0.0) {
             FirebaseFirestore.getInstance().collection("accounts").document(user.email)
                 .collection("userCart").document(book.id!!)
                 .update("Quantity", FieldValue.increment(1))
@@ -108,10 +109,10 @@ class CartRepository @Inject constructor( /*database */ @ApplicationContext val 
     }
 
     private suspend fun addNewCart(book: Book, user: AppAccount) {
-        var avaiBook: Int = -1
+        var avaiBook: Double = -1.0
         var dataBook: DocumentSnapshot = FirebaseFirestore.getInstance().collection("books").document(book.id!!).get().await()
-        avaiBook = dataBook.data?.get("Counts").toString().toInt()
-        if (avaiBook != -1 && avaiBook != 0) {
+        avaiBook = dataBook.data?.get("Counts").toString().toDouble()
+        if (avaiBook != -1.0 && avaiBook != 0.0) {
             var newCart: MutableMap<String, *> = mutableMapOf(
                 "Quantity" to 1,
                 "author" to book.Author,
@@ -148,34 +149,39 @@ class CartRepository @Inject constructor( /*database */ @ApplicationContext val 
 
     suspend fun newQuantityForItem(id: String, plusOrMinus: Boolean, user: AppAccount) {
 
-        var avaiBook: Int = -1
-        var currenOnCart: Int = -1
+        var avaiBook: Double = -1.0
+        var currenOnCart: Double = -1.0
         var bookData: DocumentSnapshot = FirebaseFirestore.getInstance().collection("books").document(id).get().await()
         var currentNumInCart: DocumentSnapshot = FirebaseFirestore.getInstance().collection("accounts")
             .document(user.email).collection("userCart").document(id).get().await()
 
         if (bookData.exists() && currentNumInCart.exists()) {
-            avaiBook = bookData.data?.get("Counts").toString().toInt()
-            currenOnCart = currentNumInCart.data?.get("Quantity").toString().toInt()
+            avaiBook = bookData.data?.get("Counts").toString().toDouble()
+            currenOnCart = currentNumInCart.data?.get("Quantity").toString().toDouble()
 
-            if (currenOnCart < avaiBook && plusOrMinus && avaiBook != -1 && currenOnCart != -1) {
+            if (currenOnCart < avaiBook && plusOrMinus && avaiBook != -1.0 && currenOnCart != -1.0) {
                 FirebaseFirestore.getInstance().collection("accounts").document(user.email)
                     .collection("userCart").document(id).update("Quantity", FieldValue.increment(1))
             }
-            else if (currenOnCart > 0 && !plusOrMinus && avaiBook != -1 && currenOnCart != -1) {
+            else if (currenOnCart > 0 && !plusOrMinus && avaiBook != -1.0 && currenOnCart != -1.0 && currenOnCart<= avaiBook) {
                 FirebaseFirestore.getInstance().collection("accounts").document(user.email)
                     .collection("userCart").document(id)
                     .update("Quantity", FieldValue.increment(-1))
-                currenOnCart = currentNumInCart.data?.get("Quantity").toString().toInt() - 1
-                if (currenOnCart == 0) {
+                currenOnCart = currentNumInCart.data?.get("Quantity").toString().toDouble().roundToInt() - 1.0
+                if (currenOnCart == 0.0) {
                     deleteCart(user, id)
                 }
-            } else
-            {
+            } else if (currenOnCart == avaiBook && avaiBook != -1.0 && currenOnCart != -1.0) {
                 Handler(Looper.getMainLooper()).post {
                     Toast.makeText(context, "At max in store", Toast.LENGTH_SHORT).show()
                 }
             }
+                else if (currenOnCart > avaiBook && avaiBook != -1.0 && currenOnCart != -1.0)
+            {
+                FirebaseFirestore.getInstance().collection("accounts").document(user.email)
+                    .collection("userCart").document(id)
+                    .update("Quantity", avaiBook)
+                }
         }
     }
 
@@ -218,9 +224,6 @@ class CartRepository @Inject constructor( /*database */ @ApplicationContext val 
 
     }
 
-
-
     init {
     }
-
 }
