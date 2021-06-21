@@ -5,14 +5,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.model.Cart
-import com.example.svbookmarket.activities.model.CheckoutCard
 import com.google.android.material.card.MaterialCardView
 
 class CheckoutAdapter(private val context: Context, private var items: MutableList<Cart>) :
@@ -20,7 +18,7 @@ class CheckoutAdapter(private val context: Context, private var items: MutableLi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val adapterLayout =
-            LayoutInflater.from(parent.context).inflate(R.layout.card_checkout, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.card_checkout2, parent, false)
         return ItemViewHolder(adapterLayout)
     }
 

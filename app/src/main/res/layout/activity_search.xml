@@ -36,34 +36,4 @@
             tools:listitem="@layout/card_suggest_search" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ln_recent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:backgroundTint="@color/search_screen_back"
-        android:orientation="vertical"
-        android:visibility="visible"
-        android:layout_marginTop="94dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="0.5"
-            android:fontFamily="@font/roboto_bold"
-            android:text="Recent Searches"
-            android:textSize="12dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rc_recent_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/search_screen_back"
-            android:orientation="vertical"
-            android:visibility="visible"
-            tools:listitem="@layout/card_recent_search" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
