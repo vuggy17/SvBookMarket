@@ -40,6 +40,12 @@ object Constants {
             return name.toLowerCase().capitalize()
         }
     }
+    enum class TRANSACTION{
+        RECEIVED, COMPLETE,DELIVERING,CANCEL;
+        override fun toString(): String {
+            return name.toLowerCase().capitalize()
+        }
+    }
 
     enum class CATEGORY{
         COMIC, FICTION, NOVEL, BUSINESS, TECHNOLOGY, ART;

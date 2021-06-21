@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SvBookMarket">
-        <activity android:name=".activities.ForgotPassword"></activity>
+        <activity android:name=".activities.UserOrder"></activity>
+        <activity android:name=".activities.ForgotPassword" />
         <activity android:name=".activities.UserManageActivity" />
         <activity android:name=".activities.CategoryDetailActivity" />
         <activity android:name=".activities.LoginActivity" />

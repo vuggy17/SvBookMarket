@@ -31,17 +31,13 @@ class CategoryAdapter(private val items: MutableList<Category>, private val list
                     .centerCrop()
                     .placeholder(R.drawable.ic_launcher_background)
                     .into(it.background);
-
                 //setup listener
                 it.itemView.setOnClickListener { listener.onCategoryItemClick(this.name) }
             }
         }
         Log.i("TAG", "bindView time: " + (System.currentTimeMillis() - startTime));
     }
-
     override fun getItemCount(): Int = items.size
-
-
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.categoryName)

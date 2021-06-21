@@ -23,22 +23,16 @@ public class FullBookList private constructor(var lstFullBook: MutableList<Book>
                     Log.w(Constants.VMTAG, "Listen failed.", error)
                     return
                 }
-
                 val bookList: MutableList<Book> = ArrayList()
                 for (doc in value!!) {
                     var bookItem = doc.toObject(Book::class.java)
                     bookItem.id = doc.id
                     bookList.add(bookItem)
-
                 }
                 lstFullBook = bookList
             }
-
         })
-
     }
-
-
     private object Holder {
         val INSTANCE = FullBookList()
     }

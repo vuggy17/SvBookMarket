@@ -25,8 +25,13 @@ class UserManageActivity : AppCompatActivity() {
         setYourProfile()
         setUpUserInfoView()
         setDeliveryAddress()
+        setAllOrderClick()
     }
-
+     private fun setAllOrderClick(){
+        binding.allOrders.setOnClickListener{
+            startActivity(Intent(baseContext, UserOrder::class.java))
+        }
+    }
     fun setDeliveryAddress(){
         binding.address.setOnClickListener {
             startActivity(Intent(baseContext, AddressActivity::class.java))
