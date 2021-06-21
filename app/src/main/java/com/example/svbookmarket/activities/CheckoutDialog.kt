@@ -1,57 +1,59 @@
 package com.example.svbookmarket.activities
 
+import CurrentUserInfo
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import androidx.activity.ComponentActivity
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.common.Constants
-import com.example.svbookmarket.activities.data.CartRepository
 import com.example.svbookmarket.activities.data.FullBookList
 import com.example.svbookmarket.activities.model.AppAccount
 import com.example.svbookmarket.activities.model.Cart
 import com.example.svbookmarket.activities.model.UserDeliverAddress
-import com.example.svbookmarket.activities.viewmodel.CheckoutDialogViewModel
 import com.example.svbookmarket.databinding.ItemBillingBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.*
+import com.google.firebase.firestore.EventListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
-class CheckoutDialog : BottomSheetDialogFragment(){
+class CheckoutDialog : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.dialog_checkout, container, false)
-    return view
+        return view
     }
 
 
     private var items: MutableList<Cart> = mutableListOf()
     private var sum: Long = 0
     private var itemAdapter: ItemAdapter = ItemAdapter(items)
-    lateinit var tvSum:TextView
-    lateinit var tvName:TextView
-    lateinit var tvAddress:TextView
-    lateinit var tvPhonenumber:TextView
+    lateinit var tvSum: TextView
+    lateinit var tvName: TextView
+    lateinit var tvAddress: TextView
+    lateinit var tvPhonenumber: TextView
     lateinit var billingItemList: RecyclerView
     lateinit var btn_buy: MaterialButton
     private var deliverAddress: UserDeliverAddress = UserDeliverAddress()
@@ -89,9 +91,7 @@ class CheckoutDialog : BottomSheetDialogFragment(){
                     Toast.makeText(context, "Not enough quantity in store", Toast.LENGTH_SHORT)
                         .show()
                 }
-            }
-            else
-            {
+            } else {
                 Toast.makeText(context, "Have nothing in Checkout", Toast.LENGTH_SHORT)
                     .show()
             }
@@ -102,42 +102,49 @@ class CheckoutDialog : BottomSheetDialogFragment(){
     }
 
 
-    private fun loadDeliverAddress()
-    {
-        FirebaseFirestore.getInstance().collection("accounts").document(CurrentUserInfo.getInstance().currentProfile.email).collection("userDeliverAddresses").addSnapshotListener(object :
-            EventListener<QuerySnapshot> {
-            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                if (error != null) {
-                    Log.w(Constants.VMTAG, "Listen failed.", error)
-                    return
-                }
-
-                val itemDeliverAddress: UserDeliverAddress
-                for (doc in value!!) {
-                    if (doc.data["chose"].toString() == "true") {
-                        var item = UserDeliverAddress(
-                            doc.id,
-                            doc.data["fullName"].toString(),
-                            doc.data["phoneNumber"].toString(),
-                            doc.data["addressLane"].toString(),
-                            doc.data["district"].toString(),
-                            doc.data["city"].toString(),
-                            true
-                        )
-                        itemDeliverAddress = item
-                        deliverAddress=  itemDeliverAddress
-                        tvName.text = deliverAddress.fullName
-                        tvPhonenumber.text = deliverAddress.phoneNumber
-                        tvAddress.text = deliverAddress.addressLane + ", " + deliverAddress.district + ", " + deliverAddress.city
-                        break
+    private fun loadDeliverAddress() {
+        FirebaseFirestore.getInstance().collection("accounts")
+            .document(CurrentUserInfo.getInstance().currentProfile.email)
+            .collection("userDeliverAddresses").addSnapshotListener(object :
+                EventListener<QuerySnapshot> {
+                override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                    if (error != null) {
+                        Log.w(Constants.VMTAG, "Listen failed.", error)
+                        return
                     }
+
+                    val itemDeliverAddress: UserDeliverAddress
+                    for (doc in value!!) {
+                        if (doc.data["chose"].toString() == "true") {
+                            var item = UserDeliverAddress(
+                                doc.id,
+                                doc.data["fullName"].toString(),
+                                doc.data["phoneNumber"].toString(),
+                                doc.data["addressLane"].toString(),
+                                doc.data["district"].toString(),
+                                doc.data["city"].toString(),
+                                true
+                            )
+                            itemDeliverAddress = item
+                            deliverAddress = itemDeliverAddress
+                            tvName.text = deliverAddress.fullName
+                            tvPhonenumber.text = deliverAddress.phoneNumber
+                            tvAddress.text =
+                                deliverAddress.addressLane + ", " + deliverAddress.district + ", " + deliverAddress.city
+                            break
+                        }
+                    }
+
                 }
 
-            }
-
-        })
+            })
     }
-    fun moveToOrder(user: AppAccount, lstCheckout: MutableList<Cart>, lstAddress: MutableList<UserDeliverAddress>) {
+
+    fun moveToOrder(
+        user: AppAccount,
+        lstCheckout: MutableList<Cart>,
+        lstAddress: MutableList<UserDeliverAddress>
+    ) {
         for (i in 0 until lstAddress.size) {
             if (lstAddress[i].isChose) {
                 GlobalScope.launch {
@@ -149,13 +156,34 @@ class CheckoutDialog : BottomSheetDialogFragment(){
             }
         }
     }
-    suspend fun moveToUserOrDer(user: AppAccount, listNeedToMove: MutableList<Cart>, deliverAddress: UserDeliverAddress)
-    {
-        val mapOfAddress = hashMapOf<String, Any>("addressId" to deliverAddress.id, "addressLane" to deliverAddress.addressLane, "city" to deliverAddress.city,
-            "district" to deliverAddress.district,"fullName" to deliverAddress.fullName,"phoneNumber" to deliverAddress.phoneNumber, "userId" to user.email)
+    fun getCurrentDate():String{
+        val sdf = SimpleDateFormat("HH:mm:ss dd-MM-yyyy ")
+        return sdf.format(Date())
+    }
 
-        val newOrderId : String = FirebaseFirestore.getInstance().collection("accounts").document(user.email)
-            .collection("userOrder").add(mapOfAddress).await().get().await().id
+    suspend fun moveToUserOrDer(
+
+        user: AppAccount,
+        listNeedToMove: MutableList<Cart>,
+        deliverAddress: UserDeliverAddress
+    ) {
+        val time = getCurrentDate()
+        val mapOfAddress = hashMapOf<String, Any>(
+            "addressId" to deliverAddress.id,
+            "addressLane" to deliverAddress.addressLane,
+            "city" to deliverAddress.city,
+            "district" to deliverAddress.district,
+            "fullName" to deliverAddress.fullName,
+            "phoneNumber" to deliverAddress.phoneNumber,
+            "userId" to user.email,
+            "status" to Constants.TRANSACTION.RECEIVED,
+            "dateTime" to time,
+            "totalPrince" to sum
+        )
+
+        val newOrderId: String =
+            FirebaseFirestore.getInstance().collection("accounts").document(user.email)
+                .collection("userOrder").add(mapOfAddress).await().get().await().id
 
         var lstIdOnMove: MutableList<String> = mutableListOf()
         var lstNumOnMove: MutableList<Int> = mutableListOf()
@@ -176,24 +204,22 @@ class CheckoutDialog : BottomSheetDialogFragment(){
             }
         }
 
-        for (i in 0 until lstIdOnMove.size)
-        {
+        for (i in 0 until lstIdOnMove.size) {
             FirebaseFirestore.getInstance().collection("accounts").document(user.email)
                 .collection("userCart").document(lstIdOnMove[i]).delete()
-            FirebaseFirestore.getInstance().collection("books").document(lstIdOnMove[i]).update("rate", FieldValue.increment(lstNumOnMove[i].toDouble()))
-            FirebaseFirestore.getInstance().collection("books").document(lstIdOnMove[i]).update("Counts", FieldValue.increment(-lstNumOnMove[i].toDouble()))
+            FirebaseFirestore.getInstance().collection("books").document(lstIdOnMove[i])
+                .update("rate", FieldValue.increment(lstNumOnMove[i].toDouble()))
+            FirebaseFirestore.getInstance().collection("books").document(lstIdOnMove[i])
+                .update("Counts", FieldValue.increment(-lstNumOnMove[i].toDouble()))
         }
     }
 
-    fun checkIfComeFirst(): Boolean
-    {
-        for (i in 0 until CurrentUserInfo.getInstance().lstUserCart.size)
-        {
-            for (j in 0 until FullBookList.getInstance().lstFullBook.size)
-            {
+    fun checkIfComeFirst(): Boolean {
+        for (i in 0 until CurrentUserInfo.getInstance().lstUserCart.size) {
+            for (j in 0 until FullBookList.getInstance().lstFullBook.size) {
                 if (CurrentUserInfo.getInstance().lstUserCart[i].id == FullBookList.getInstance().lstFullBook[j].id &&
-                    FullBookList.getInstance().lstFullBook[j].Counts < CurrentUserInfo.getInstance().lstUserCart[i].numbers)
-                {
+                    FullBookList.getInstance().lstFullBook[j].Counts < CurrentUserInfo.getInstance().lstUserCart[i].numbers
+                ) {
                     return false
                 }
             }
@@ -201,45 +227,44 @@ class CheckoutDialog : BottomSheetDialogFragment(){
         return true
     }
 
-    private fun loadCheckoutData()
-    {
-        FirebaseFirestore.getInstance().collection("accounts").document(CurrentUserInfo.getInstance().currentProfile.email).collection("userCart")
+    private fun loadCheckoutData() {
+        FirebaseFirestore.getInstance().collection("accounts")
+            .document(CurrentUserInfo.getInstance().currentProfile.email).collection("userCart")
             .addSnapshotListener(object :
-            EventListener<QuerySnapshot> {
-            override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
-                if (error != null) {
-                    Log.w(Constants.VMTAG, "Listen failed.", error)
-                    return
-                }
-
-                val checkoutList: MutableList<Cart> = ArrayList()
-                for (doc in value!!) {
-                    if (doc.data["isChose"].toString() == "true") {
-                        var item = Cart(
-                            "",
-                            doc.data["image"].toString(),
-                            doc.data["title"].toString(),
-                            doc.data["author"].toString(),
-                            doc.data["Quantity"].toString().toDouble().roundToInt(),
-                            doc.data["price"].toString().toLong(),
-                            true
-                        )
-                        item.id = doc.id
-                        checkoutList.add(item)
+                EventListener<QuerySnapshot> {
+                override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                    if (error != null) {
+                        Log.w(Constants.VMTAG, "Listen failed.", error)
+                        return
                     }
-                }
-                items= checkoutList
-                sum = 0
-                for (item in items)
-                {
-                    sum += item.price * item.numbers
-                }
-                tvSum.text = sum.toString() + " đ"
-                itemAdapter.onChange(items)
-                itemAdapter.notifyDataSetChanged()
-            }
 
-        })
+                    val checkoutList: MutableList<Cart> = ArrayList()
+                    for (doc in value!!) {
+                        if (doc.data["isChose"].toString() == "true") {
+                            var item = Cart(
+                                "",
+                                doc.data["image"].toString(),
+                                doc.data["title"].toString(),
+                                doc.data["author"].toString(),
+                                doc.data["Quantity"].toString().toDouble().roundToInt(),
+                                doc.data["price"].toString().toLong(),
+                                true
+                            )
+                            item.id = doc.id
+                            checkoutList.add(item)
+                        }
+                    }
+                    items = checkoutList
+                    sum = 0
+                    for (item in items) {
+                        sum += item.price * item.numbers
+                    }
+                    tvSum.text = sum.toString() + " đ"
+                    itemAdapter.onChange(items)
+                    itemAdapter.notifyDataSetChanged()
+                }
+
+            })
     }
 
     private inner class ViewHolder internal constructor(binding: ItemBillingBinding) :
@@ -263,14 +288,15 @@ class CheckoutDialog : BottomSheetDialogFragment(){
 
         }
 
-        fun onChange(newItems: MutableList<Cart>)
-        {
+        fun onChange(newItems: MutableList<Cart>) {
             billingItem = newItems
         }
+
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-          holder.itemPrice.text = (billingItem[position].price * billingItem[position].numbers).toString() + " đ"
+            holder.itemPrice.text =
+                (billingItem[position].price * billingItem[position].numbers).toString() + " đ"
             holder.itemName.text = billingItem[position].name
-            Log.d("modal","created")
+            Log.d("modal", "created")
 
         }
 
