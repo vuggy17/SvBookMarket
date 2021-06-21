@@ -71,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/bg_decreasebtn"
                     android:text="Amount: "
+                    android:textSize="14dp"
                     android:layout_gravity="center"/>
 
                 <TextView
