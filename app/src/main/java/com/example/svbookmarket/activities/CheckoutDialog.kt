@@ -1,5 +1,6 @@
 package com.example.svbookmarket.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -83,6 +84,7 @@ class CheckoutDialog : BottomSheetDialogFragment(){
                         CurrentUserInfo.getInstance().lstUserCart,
                         CurrentUserInfo.getInstance().lstUserDeliverAddress
                     )
+                    startActivity(Intent(context,ConfirmationActivity::class.java))
                 } else {
                     Toast.makeText(context, "Not enough quantity in store", Toast.LENGTH_SHORT)
                         .show()

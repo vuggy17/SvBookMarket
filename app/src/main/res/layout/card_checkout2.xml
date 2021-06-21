@@ -11,7 +11,7 @@
     app:cardCornerRadius="14dp"
     android:layout_marginHorizontal="24dp"
     app:strokeColor="#A4858C94">
-<!--//346-->
+    <!--//346-->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -65,13 +65,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <ImageButton
+                <TextView
                     android:id="@+id/decreaseNumber"
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/bg_decreasebtn"
-                    android:elevation="4dp"
-                    android:src="@drawable/ic_subtract" />
+                    android:text="Số lượng: "
+                    android:layout_gravity="center"/>
 
                 <TextView
                     android:id="@+id/tv_numbers"
@@ -82,29 +82,21 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="99" />
-                <ImageButton
-                    android:id="@+id/increaseNumber"
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:background="@drawable/bg_increasebtn"
-                    android:backgroundTintMode="add"
-                    android:elevation="4dp"
-                    android:src="@drawable/ic_plus" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:layout_marginRight="20dp">
-                <TextView
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/tv_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="20000đ"
-                    android:textColor="#0F52BA"
-                    android:textFontWeight="600"
-                    android:textSize="16dp" />
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/tv_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="20000đ"
+                        android:textColor="#0F52BA"
+                        android:textFontWeight="600"
+                        android:textSize="16dp" />
                 </LinearLayout>
             </LinearLayout>
 
