@@ -48,16 +48,9 @@ class AddressActivity : AppCompatActivity() {
                 setHasFixedSize(true)
             }
         })
-       // val myDataset = CurrentUserInfo.getInstance().lstUserDeliverAddress
-       
-
-
-        // ẩn continue btn nêu activity trước đó không phải là cart
-        // nểu lấy được giá trị trừ intent thì thiển thị lên
 
         if (intent.extras?.getBoolean(FROM_CART) != null)
             binding.adContinue.visibility = View.VISIBLE
-
 
         //on click
         binding.adBack.setOnClickListener { onBackPressed() }

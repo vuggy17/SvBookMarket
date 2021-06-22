@@ -34,7 +34,7 @@
             android:textFontWeight="600" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/tv_Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -42,7 +42,7 @@
             android:textColor="#434343" />
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/tv_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxWidth="350dp"
@@ -52,7 +52,7 @@
             />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/tv_phonenumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0123456789"
@@ -87,6 +87,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tv_sum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="100.000đ"

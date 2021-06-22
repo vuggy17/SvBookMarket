@@ -1,10 +1,12 @@
 import android.net.Uri
 import android.util.Log
 import com.example.svbookmarket.activities.LoginActivity
+import com.example.svbookmarket.activities.common.AppUtil
 import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.model.*
 import com.google.firebase.firestore.*
 import com.google.firebase.ktx.Firebase
+import kotlin.math.roundToInt
 
 public class CurrentUserInfo private constructor(var currentProfile: AppAccount = AppAccount(),
                                                  var lstUserCart: MutableList<Cart> = mutableListOf(),
@@ -17,7 +19,7 @@ public class CurrentUserInfo private constructor(var currentProfile: AppAccount 
     private fun getDataFromDb()
     {
         // snap for Profile
-        var ref = FirebaseFirestore.getInstance().collection("accounts").document(LoginActivity.recentAccountLogin.email)
+        var ref = FirebaseFirestore.getInstance().collection("accounts").document(AppUtil.currentAccount.email)
         ref.addSnapshotListener { snapshot, e ->
             e?.let {
                 Log.d("app-db-error", it.message!!)
@@ -42,52 +44,34 @@ public class CurrentUserInfo private constructor(var currentProfile: AppAccount 
 
             // Snap for Delivery Address
             var refToDeliveryAddress = ref.collection("userDeliverAddresses")
-            refToDeliveryAddress.addSnapshotListener { snapshot, e ->
-                e?.let {
+            refToDeliveryAddress.addSnapshotListener (object :
+                EventListener<QuerySnapshot> {
+                override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                error?.let {
                     Log.d("app-db-error", it.message!!)
-                    return@addSnapshotListener
+                    return
                 }
 
-                for (dc in snapshot!!.documentChanges)
-                {
-                    when(dc.type)
-                    {
-                        DocumentChange.Type.ADDED -> {
-                            var data:MutableMap<String?, Any?> = dc.document.data
-                            var bool = data["isChose"].toString() == "true"
-                            lstUserDeliverAddress.add(UserDeliverAddress(dc.document.id, data["fullName"].toString(), data["phoneNumber"].toString(),
-                            data["AddressLane"].toString(), data["District"].toString(), data["City"].toString(), bool))
+                    val addressList: MutableList<UserDeliverAddress> = ArrayList()
+                for (dc in value!!) {
+                            var data: MutableMap<String?, Any?> = dc.data
+                            var bool = data["chose"].toString() == "true"
+                            addressList.add(
+                                UserDeliverAddress(
+                                    dc.id,
+                                    data["fullName"].toString(),
+                                    data["phoneNumber"].toString(),
+                                    data["addressLane"].toString(),
+                                    data["district"].toString(),
+                                    data["city"].toString(),
+                                    bool
+                                )
+                            )
                         }
-                        DocumentChange.Type.MODIFIED -> {
-                            var data:MutableMap<String?, Any?> = dc.document.data
-                            var bool = data["isChose"].toString() == "true"
-                            for(i in 0 until lstUserDeliverAddress.size)
-                            {
-                                if (lstUserDeliverAddress[i].id == dc.document.id)
-                                {
-                                    lstUserDeliverAddress[i].fullName =  data["fullName"].toString()
-                                    lstUserDeliverAddress[i].addressLane =  data["AddressLane"].toString()
-                                    lstUserDeliverAddress[i].phoneNumber =  data["phoneNumber"].toString()
-                                    lstUserDeliverAddress[i].city = data["City"].toString()
-                                    lstUserDeliverAddress[i].district= data["District"].toString()
-                                    lstUserDeliverAddress[i].isChose = bool
-                                    break;
-                                }
-                            }
-                        }
-                        DocumentChange.Type.REMOVED -> {
-                            var data:MutableMap<String?, Any?> = dc.document.data
-                            for(i in 0 until lstUserDeliverAddress.size)
-                            {
-                                if (lstUserDeliverAddress[i].id == dc.document.id)
-                                {
-                                    lstUserDeliverAddress.removeAt(i)
-                                }
-                            }
-                        }
+                    lstUserDeliverAddress =addressList
                     }
                 }
-            }
+            )
 
             //snap for user current cart list
             var refToUserCart = ref.collection("userCart")
@@ -103,7 +87,7 @@ public class CurrentUserInfo private constructor(var currentProfile: AppAccount 
                     for (doc in value!!) {
                         var bool = doc.data["isChose"].toString() == "true"
                         var item = Cart("", doc.data["image"].toString(),doc.data["title"].toString(), doc.data["author"].toString(),
-                            doc.data["Quantity"].toString().toInt(), doc.data["price"].toString().toLong(), bool)
+                            (doc.data["Quantity"].toString().toDouble()).roundToInt(), doc.data["price"].toString().toLong(), bool)
                         item.id = doc.id
                         cartList.add(item)
                     }

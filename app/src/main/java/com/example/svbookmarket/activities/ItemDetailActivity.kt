@@ -53,7 +53,6 @@ class ItemDetailActivity : AppCompatActivity() {
 
     private fun addItemToCart() {
         viewModel.addToCart()
-        Toast.makeText(applicationContext, "Item added to cart", Toast.LENGTH_SHORT).show()
     }
 
     fun setupOnlickListener(){

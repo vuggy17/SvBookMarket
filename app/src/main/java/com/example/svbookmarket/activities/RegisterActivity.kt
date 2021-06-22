@@ -78,6 +78,10 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+        startActivity(Intent(baseContext,LoginActivity::class.java))
+    }
+
     private fun signUpClick() {
         if (isValidName() && isValidEmail() && isValidPassword() && isValidConfirmPassword() && isAgreeTermAndConditions()) {
             dbReference.get().addOnSuccessListener() { result ->
@@ -112,7 +116,7 @@ class RegisterActivity : AppCompatActivity() {
     }
     private fun updateData(){
         user = User(fullName = edtName.text.toString())
-        appAccount = AppAccount(email, password, user)
+        appAccount = AppAccount(email, "", user)
         dbReference.document(appAccount.email).set(appAccount).addOnSuccessListener {
             Toast.makeText(this, "Register Success", Toast.LENGTH_SHORT).show()
         }.addOnFailureListener { e ->
@@ -120,6 +124,7 @@ class RegisterActivity : AppCompatActivity() {
         }
         val dbReferenceRecentAccountUserAddressAccount = dbReference.document(appAccount.email).collection("userDeliverAddresses")
         dbReferenceRecentAccountUserAddressAccount.document().set(UserDeliverAddress("",user.fullName, user.phoneNumber, user.addressLane, user.district,user.city, true))
+        finish()
         startActivity(Intent(baseContext,LoginActivity::class.java))
     }
 

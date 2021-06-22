@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.common.AppUtil
 import com.example.svbookmarket.activities.model.AppAccount
 import com.example.svbookmarket.activities.model.User
 import com.example.svbookmarket.activities.viewmodel.LoadDialog
@@ -78,7 +79,8 @@ class WelcomeActivity : AppCompatActivity() {
                     city = userMap["city"].toString(),
                     district = userMap["district"].toString(),
                 )
-                LoginActivity.recentAccountLogin = AppAccount(
+                AppUtil.currentUser = recentUser
+                AppUtil.currentAccount = AppAccount(
                     result["email"].toString(),
                     result["password"].toString(),
                     recentUser

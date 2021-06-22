@@ -7,9 +7,13 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.common.AppUtil
+import com.example.svbookmarket.activities.data.FullBookList
 import com.example.svbookmarket.activities.model.AppAccount
 import com.example.svbookmarket.activities.model.User
 import com.example.svbookmarket.activities.viewmodel.LoadDialog
@@ -18,8 +22,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
     //init view
@@ -31,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginButton: Button
     private val TAG = "LOGIN"
 
+
     //init database reference
     private val db = Firebase.firestore
     private val dbAccountsReference = db.collection("accounts")
@@ -38,9 +45,9 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loadDialog: LoadDialog
 
     // tạo biến account để lưu về thông tin khách hàng đã có
-    companion object {
-        var recentAccountLogin: AppAccount = AppAccount("", "", User())
-    }
+//    companion object {
+//        var recentAccountLogin: AppAccount = AppAccount("", "", User())
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +59,12 @@ class LoginActivity : AppCompatActivity() {
         loginPassword = findViewById(R.id.LoginPassword)
         loginSignUp = findViewById(R.id.LoginSignUp)
         loginButton = findViewById(R.id.loginButton)
+        val forgotPassword: TextView = findViewById(R.id.forgotPassword)
 
+        forgotPassword.setOnClickListener {
+            startActivity(Intent(baseContext, ForgotPassword::class.java))
+            finish()
+        }
 
 
         loginButton.setOnClickListener {
@@ -74,9 +86,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun onButtonLoginClick() {
-        loadDialog= LoadDialog(this)
-        loadDialog.startLoading()
+
         if (isValidEmail() && isValidPassword()) {
+            loadDialog= LoadDialog(this)
+            loadDialog.startLoading()
             dbAccountsReference.get().addOnSuccessListener { result ->
                 var emailExist: Boolean = false
                 for (document in result) {
@@ -90,14 +103,11 @@ class LoginActivity : AppCompatActivity() {
                     auth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this) { task ->
                             if (task.isSuccessful) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "signInWithEmail:success")
-                                val user = auth.currentUser
                                 loadData(email)
                                 loadDialog.dismissDialog()
                             } else {
-                                checkPassword(email, password)
-
+                                loginPasswordLayout.error = task.exception!!.message.toString()
+                                loadDialog.dismissDialog()
                             }
                         }
 
@@ -109,20 +119,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkPassword(email: String, password: String) {
-        dbAccountsReference.document(email).get()
-            .addOnSuccessListener { result ->
-                if (result["password"] != password) {
-                    loginPasswordLayout.error = "Wrong password!!"
-                    loadDialog.dismissDialog()
-                }
-            }
-    }
 
     private fun loadData(email: String) {
         dbAccountsReference.document(email).get()
             .addOnSuccessListener { result ->
-
                 val userMap = result["user"] as HashMap<*, *>
                 val recentUser: User = User(
                     fullName = userMap["fullName"].toString(),
@@ -133,16 +133,23 @@ class LoginActivity : AppCompatActivity() {
                     city = userMap["city"].toString(),
                     district = userMap["district"].toString(),
                 )
-                LoginActivity.recentAccountLogin = AppAccount(
+                AppUtil.currentUser = recentUser
+                AppUtil.currentAccount = AppAccount(
                     result["email"].toString(),
                     result["password"].toString(),
                     recentUser
                 )
+//                LoginActivity.recentAccountLogin = AppAccount(
+//                    result["email"].toString(),
+//                    result["password"].toString(),
+//                    recentUser
+//                )
                 CurrentUserInfo.getInstance()
                 startActivity(Intent(baseContext, HomeActivity::class.java))
                 finish()
             }
-    }
+        }
+
 
 
     private fun isEmailRightFormat(email: String): Boolean {

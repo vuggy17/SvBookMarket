@@ -19,7 +19,7 @@ object Constants {
     const val REALTIME_DATABASE = "Realtime Database"
 
     //References
-    const val USERS_REF = "users"
+    const val USERS_REF = "accounts"
     const val BOOK_REF = "books"
 
     //Fields
@@ -36,6 +36,12 @@ object Constants {
     enum class ACTIVITY {
        PROFILE, MENU, SEARCH, CART, CATEGORY, FEATURE, CATEGORY_DETAIL;
 
+        override fun toString(): String {
+            return name.toLowerCase().capitalize()
+        }
+    }
+    enum class TRANSACTION{
+        RECEIVED, COMPLETE,DELIVERING,CANCEL;
         override fun toString(): String {
             return name.toLowerCase().capitalize()
         }
