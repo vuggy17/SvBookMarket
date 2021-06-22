@@ -5,12 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CursorAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.AddressActivity
-import com.example.svbookmarket.activities.model.AddressModel
 import com.example.svbookmarket.activities.model.UserDeliverAddress
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.FirebaseFirestore
@@ -58,13 +56,13 @@ public class AddressAdapter(var context: Context, private var dataset: MutableLi
         if (position in dataset.indices) {
             holder.bind()
             holder.itemView.setOnClickListener { selectedPosition = position
-                CurrentUserInfo.getInstance().lstUserDeliverAddress[position].isChose = true
+                CurrentUserInfo.getInstance().lstUserDeliverAddress[position].chose = true
                 val ref = FirebaseFirestore.getInstance().collection("accounts").document(CurrentUserInfo.getInstance().currentProfile.email).collection("userDeliverAddresses")
                 for (i in 0 until CurrentUserInfo.getInstance().lstUserDeliverAddress.size)
                 {
-                    if ( CurrentUserInfo.getInstance().lstUserDeliverAddress[i].isChose)
+                    if ( CurrentUserInfo.getInstance().lstUserDeliverAddress[i].chose)
                     {
-                        CurrentUserInfo.getInstance().lstUserDeliverAddress[i].isChose = false
+                        CurrentUserInfo.getInstance().lstUserDeliverAddress[i].chose = false
                         ref.document(CurrentUserInfo.getInstance().lstUserDeliverAddress[i].id).update("isChose", false).addOnCompleteListener {
                             Log.d("000000000000000", "dcm1")
                         }

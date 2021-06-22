@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
+import com.example.svbookmarket.activities.adapter.AnotherFeaturedAdapter
 import com.example.svbookmarket.activities.adapter.FeaturedAdapter
 import com.example.svbookmarket.activities.adapter.MyViewPagerAdapter
 import com.example.svbookmarket.activities.adapter.SuggestAdapter
@@ -24,12 +25,13 @@ import kotlin.math.abs
 
 @AndroidEntryPoint
 class FeatureActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
-    SuggestAdapter.OnSuggestClickListener, MyViewPagerAdapter.OnViewPagerClickListener {
+    SuggestAdapter.OnSuggestClickListener, MyViewPagerAdapter.OnViewPagerClickListener,
+    AnotherFeaturedAdapter.OnAnotherBookClickLitener {
 
     lateinit var binding: ActivityFeatureBinding
 
     private var featuredAdapter = MyViewPagerAdapter(mutableListOf(), this)
-    private var bestSellAdapter = FeaturedAdapter(mutableListOf(), this)
+    private var bestSellAdapter = AnotherFeaturedAdapter(mutableListOf(), this)
     private var suggestAdapter = SuggestAdapter(mutableListOf(), this)
     private var moreAdapter = FeaturedAdapter(mutableListOf(), this)
 
@@ -45,6 +47,8 @@ class FeatureActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
             it.attachToRecyclerView(binding.rcSuggest)
 //            it.attachToRecyclerView(binding.featureRecycler)
         }
+
+        binding.fBackButton.setOnClickListener{this.onBackPressed()}
 
         watchChanges()
 
@@ -76,17 +80,8 @@ class FeatureActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
     }
 
     private fun setFeatureRecyclerView() {
-//        binding.featureRecycler.let {
-//            it.addItemDecoration(
-//                MarginItemDecoration(
-//                    spaceSize = 64,
-//                    orientation = LinearLayoutManager.HORIZONTAL
-//                )
-//            )
-//            it.layoutManager?.scrollToPosition(1)
-//            it.adapter = featuredAdapter
-//        }
 
+        // set featured item animation
         val transformer = CompositePageTransformer()
         transformer.addTransformer(MarginPageTransformer(8))
         transformer.addTransformer { page, position ->
@@ -113,6 +108,8 @@ class FeatureActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
                 }
             }
         }
+
+        // attach adapter animation
         binding.fVp2.apply {
             adapter = featuredAdapter
             setPageTransformer(transformer)
@@ -121,11 +118,12 @@ class FeatureActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
 
     private fun setBestsellingRecyclerView() {
         binding.rcBestselling.let {
-            it.layoutManager = LinearLayoutManager(binding.root.context,
+            it.layoutManager = LinearLayoutManager(
+                binding.root.context,
                 RecyclerView.HORIZONTAL,
                 false
             )
-            it.addItemDecoration(MarginItemDecoration(spaceSize = 48, isHorizontalLayout = true))
+            it.addItemDecoration(MarginItemDecoration(spaceSize = 48, leftSpaceSize = 12, isHorizontalLayout = true))
             it.adapter = bestSellAdapter
         }
 
@@ -178,6 +176,12 @@ class FeatureActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
     }
 
     override fun onViewPagerClick(book: Book) {
-        TODO("Not yet implemented")
+        val i = putBookIntoIntent(book)
+        navigate(i)
+    }
+
+    override fun onAnotherBookClick(book: Book) {
+        val i = putBookIntoIntent(book)
+        navigate(i)
     }
 }

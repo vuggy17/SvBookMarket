@@ -64,17 +64,20 @@
             android:layout_gravity="center"
             android:layout_marginStart="14dp"
             android:layout_marginLeft="14dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="13dp"
             android:layout_marginEnd="14dp"
             android:layout_marginRight="14dp"
-            android:layout_marginBottom="7dp"
+            android:layout_marginBottom="10dp"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_book"
+                android:clickable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:cardCornerRadius="6dp">
+                android:layout_gravity="center_horizontal"
+                app:cardCornerRadius="6dp"
+                android:focusable="true">
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/page_bookThumbnail"
@@ -88,16 +91,11 @@
                     app:riv_mutate_background="true" />
             </androidx.cardview.widget.CardView>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="left">
-
                 <TextView
                     android:id="@+id/page_bookTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="5dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/roboto_bold"
@@ -110,21 +108,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/page_bookAuthor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/roboto_regular"
-                    android:maxWidth="145dp"
-                    android:maxLines="2"
-                    android:text="By rainbow rowell"
-                    android:textColor="@color/disable"
-                    android:textSize="@dimen/text_super_small"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/page_bookTitle" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

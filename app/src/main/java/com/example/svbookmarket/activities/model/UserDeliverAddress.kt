@@ -6,4 +6,4 @@ data class UserDeliverAddress(var id:String = "",
                               var addressLane: String="",
                               var district: String="",
                               var city: String= "",
-                              var isChose: Boolean = false)
+                              var chose: Boolean = false)

@@ -3,24 +3,21 @@ package com.example.svbookmarket.activities.common
 
 object Constants {
     //App
-    const val TAG = "FireAppTag"
+    const val VMTAG = "VMTAG"
+
 
     //Intents
     const val SPLASH_INTENT = "splashIntent"
-    const val AUTH_INTENT = "authIntent"
-    const val MAIN_INTENT = "mainIntent"
 
     //Bundles
-    const val MOVIE = "movie"
+    const val ITEM = "ITEM_TO_DISPLAY"
 
-    //Database Types
-    const val PRODUCT_NAME = "productName"
-    const val CLOUD_FIRESTORE = "Cloud Firestore"
-    const val REALTIME_DATABASE = "Realtime Database"
 
     //References
     const val USERS_REF = "accounts"
     const val BOOK_REF = "books"
+    const val ADDRESS_REF = "userDeliverAddresses"
+
 
     //Fields
     const val NAME = "name"
@@ -54,12 +51,4 @@ object Constants {
             return name.toLowerCase().capitalize()
         }
     }
-
-    // activity detail
-    const val ITEM = "ITEM_TO_DISPLAY"
-
-
-    //Tags
-    const val VMTAG = "VMTAG"
-
 }

@@ -63,12 +63,6 @@ class CartViewModel @Inject constructor(private val cartRepository: CartReposito
         }
     }
 
-    fun updateData(list:MutableList<Cart>){
-        viewModelScope.launch {
-            cartRepository.updateData(list)
-            _cartItem.postValue(list)
-        }
-    }
     fun deleteCart(id: String)
     {
         cartRepository.deleteCart(CurrentUserInfo.getInstance().currentProfile, id)

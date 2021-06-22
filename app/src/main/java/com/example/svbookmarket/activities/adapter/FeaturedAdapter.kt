@@ -9,17 +9,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.model.Book
+import com.example.svbookmarket.databinding.CardBook2Binding
+import com.example.svbookmarket.databinding.CardBookBinding
 import com.makeramen.roundedimageview.RoundedImageView
 
+/**
+ * for gridview
+ */
 class FeaturedAdapter(
     private val dataSet: MutableList<Book>,
     private val listener: OnBookClickLitener
 ) :
     RecyclerView.Adapter<FeaturedAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.card_book, parent, false)
-        return ViewHolder(view)
+       val binding = CardBookBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     @SuppressLint("SetTextI18n")
@@ -57,12 +61,12 @@ class FeaturedAdapter(
     }
 
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val bookImage: RoundedImageView = view.findViewById(R.id.BookImage)
-        val bookTitle: TextView = view.findViewById(R.id.bookTitle)
-        val bookAuthor: TextView = view.findViewById(R.id.bookAuthor)
-        val bookPrice: TextView = view.findViewById(R.id.bookPrice)
-        val bookRate: TextView = view.findViewById(R.id.bookRate)
+    class ViewHolder(binding: CardBookBinding) : RecyclerView.ViewHolder(binding.root) {
+        val bookImage: RoundedImageView = binding.BookImage
+        val bookTitle: TextView =binding.bookTitle
+        val bookAuthor: TextView = binding.bookAuthor
+        val bookPrice: TextView = binding.bookPrice
+        val bookRate: TextView = binding.bookRate
     }
 
     interface OnBookClickLitener {

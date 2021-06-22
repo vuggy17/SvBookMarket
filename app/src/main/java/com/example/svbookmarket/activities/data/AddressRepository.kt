@@ -1,82 +1,51 @@
 package com.example.svbookmarket.activities.data
 
 import android.util.Log
+import com.example.svbookmarket.activities.common.Constants.ADDRESS_REF
+import com.example.svbookmarket.activities.common.Constants.USERS_REF
+import com.example.svbookmarket.activities.common.Constants.VMTAG
 import com.example.svbookmarket.activities.model.AppAccount
+import com.example.svbookmarket.activities.model.UserDeliverAddress
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import com.example.svbookmarket.activities.model.UserDeliverAddress as MyAddress
-
-class AddressRepository @Inject constructor(/*database */) {
+import javax.inject.Named
 
 
-    /**
-     * get data from database then save it into _book
-     * now use temp data for test
-     */
-//    private var _cart = MutableLiveData<MutableList<Cart>>()
-//    val cart get() = _cart
+class AddressRepository @Inject constructor(
+    @Named(USERS_REF) private val accountColRef: CollectionReference
+) {
 
-    /**
-     * retrieve data from db
-     */
-//    suspend fun load(){
-//        with(Dispatchers.IO){
-//            // do something with db
-//
-//        }
-//    }
+    private val testAddress = UserDeliverAddress(
+        "",
+        "khuong duy",
+        "012321322",
+        "lams son",
+        "cam thanh bac",
+        "khanh hoa",
+        false
+    )
 
 
-    /**
-     * bellow is test function region
-     */
-
-    /**
-     * to update value of variable in background thread, use postValue
-     */
-
-
-
-    suspend fun delete(item: MyAddress) {
-        withContext(Dispatchers.IO) {
-            Log.i("my database", "Item deleted ${item.fullName}")
-        }
+    fun setNewAddress(user: AppAccount, address: UserDeliverAddress) {
+        accountColRef.document(user.email).collection(ADDRESS_REF).document().set(testAddress)
+        Log.i(VMTAG, "$address")
     }
 
-    suspend fun getAddress(): MutableList<MyAddress> {
-        val COUNT = 4 // for fake data generation
-
-        // fetch data
-        val freshAdds = withContext(Dispatchers.IO) {
-            var item = mutableListOf<MyAddress>()
-            for (i in 1..COUNT) {
-                item.add(
-                   MyAddress(
-                        "Khuong Duy",
-                        "0869256174",
-                        "Ktx khu A, DHQG",
-                        "Phuong Linh Trung",
-                        "Quan Thu Duc",
-                        "Tp.Ho Chi Minh"
-                    ),
-                )
-            }
-            item
-        }
-        return freshAdds
-
-
+    fun getAddress(user: AppAccount) {
+        accountColRef.document(user.email).collection(ADDRESS_REF).document().get()
+            .addOnSuccessListener { }
     }
 
-    fun getChosenAddress(user: AppAccount) : Query
-    {
-       return FirebaseFirestore.getInstance().collection("accounts").document(user.email).collection("userDeliverAddresses")
+    fun getChosenAddress(user: AppAccount): Query {
+        return FirebaseFirestore.getInstance().collection("accounts").document(user.email)
+            .collection("userDeliverAddresses")
     }
 
-    suspend fun update(item: MyAddress) {
+    suspend fun update(item: UserDeliverAddress) {
         withContext(Dispatchers.IO) {
             // TODO: 13/06/2021 update data to db
         }

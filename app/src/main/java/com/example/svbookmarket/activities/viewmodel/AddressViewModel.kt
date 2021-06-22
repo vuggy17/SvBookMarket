@@ -2,17 +2,14 @@ package com.example.svbookmarket.activities.viewmodel
 
 import androidx.lifecycle.*
 import com.example.svbookmarket.activities.data.AddressRepository
-import com.example.svbookmarket.activities.data.CartRepository
-import dagger.hilt.android.scopes.ViewModelScoped
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 import com.example.svbookmarket.activities.model.UserDeliverAddress as MyAddress
 
-@ViewModelScoped
+@HiltViewModel
 class AddressViewModel @Inject constructor(
     private val addressRepository: AddressRepository,
-    private val cartRepository: CartRepository
 ) : ViewModel() {
 
     private val _address = MutableLiveData<MutableList<MyAddress>>()
@@ -24,6 +21,10 @@ class AddressViewModel @Inject constructor(
         set(value) {
             _selectedItem = value
         }
+
+     fun getAddress(){
+        addressRepository.getAddress(CurrentUserInfo.getInstance().currentProfile).
+    }
 
 
     fun updateCurrentAddress(oldAddress: MyAddress,newAddress: MyAddress ) {
