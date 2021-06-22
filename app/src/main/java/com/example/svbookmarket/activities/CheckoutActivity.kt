@@ -1,6 +1,7 @@
 package com.example.svbookmarket.activities
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -56,7 +57,11 @@ class CheckoutActivity : AppCompatActivity() {
             }
             else
             {
-                Toast.makeText(this, "You must have an address", Toast.LENGTH_SHORT).show()
+                val toast: Toast = Toast(this)
+                toast.setText("You must have an address")
+                toast.show()
+                val handler = Handler()
+                handler.postDelayed({ toast.cancel() }, 500)
             }
         }
 
