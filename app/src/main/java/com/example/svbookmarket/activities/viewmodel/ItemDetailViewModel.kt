@@ -12,13 +12,12 @@ import com.example.svbookmarket.activities.data.BookRepository
 import com.example.svbookmarket.activities.data.CartRepository
 import com.example.svbookmarket.activities.model.Book
 import com.google.common.base.Objects
-import com.google.firebase.firestore.EventListener
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 @HiltViewModel
 class ItemDetailViewModel @Inject constructor (private val savedStateHandle: SavedStateHandle,
@@ -77,8 +76,27 @@ class ItemDetailViewModel @Inject constructor (private val savedStateHandle: Sav
         //    bookRepository.getBooksFromCloudFirestore1().
         //}
         _itemToDisplay = savedStateHandle.getLiveData<Book>(ITEM)
-    }
+        FirebaseFirestore.getInstance().collection("books").document(_itemToDisplay.value?.id!!).addSnapshotListener(object :
+            EventListener<DocumentSnapshot> {
+            override fun onEvent(value: DocumentSnapshot?, error: FirebaseFirestoreException?) {
+                if (error != null) {
+                    Log.w(Constants.VMTAG, "Listen failed.", error)
+                    return
+                }
 
+                var book: Book = Book(_itemToDisplay.value?.id!!,
+                value?.data?.get("Image").toString(),
+                    value?.data?.get("Name").toString(),
+                    value?.data?.get("Author").toString(),
+                    value?.data?.get("Price").toString().toDouble().roundToInt(),
+                    value?.data?.get("rate").toString().toDouble().roundToInt(),
+                    value?.data?.get("Kind").toString(),
+                    value?.data?.get("Counts").toString().toDouble().roundToInt(),
+                    value?.data?.get("Description").toString())
+                itemToDisplay.value = book
+            }
+        })
+    }
     fun addToCart() {
         viewModelScope.launch {
             cartRepository.addCart(
