@@ -15,17 +15,13 @@ import kotlin.math.roundToInt
 class UserOrderViewModel @Inject constructor(private val orderRepository: OrderRepository) :
     ViewModel() {
     private var _order = MutableLiveData<MutableList<Order>>()
-
-
     val orders get() = _order
-
-
     init {
         _order = getAllOrder()
     }
 
 
-    fun setBillingItem(docID: String) {
+    private fun setBillingItem(docID: String) {
         orderRepository.getAllBillingIem(docID).addSnapshotListener { value, error ->
             if (error != null) {
                 Log.w(Constants.VMTAG, "Listen failed.", error)

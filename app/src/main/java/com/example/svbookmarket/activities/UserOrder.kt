@@ -24,8 +24,12 @@ class UserOrder : AppCompatActivity() {
         setContentView(binding.root)
         getOrder()
         setUpView()
+        binding.backButton.setOnClickListener {
+            onBackPressed()
+        }
 
     }
+
     private fun getOrder() {
         viewModel.orders.observe(this, { changes ->
             orderListAdapter.addOrder(changes)

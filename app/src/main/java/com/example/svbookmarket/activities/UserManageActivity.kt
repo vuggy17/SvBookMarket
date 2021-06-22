@@ -26,13 +26,21 @@ class UserManageActivity : AppCompatActivity() {
         setUpUserInfoView()
         setDeliveryAddress()
         setAllOrderClick()
+        setWaitingForDeliverRy()
     }
+
      private fun setAllOrderClick(){
         binding.allOrders.setOnClickListener{
             startActivity(Intent(baseContext, UserOrder::class.java))
         }
     }
-    fun setDeliveryAddress(){
+    private fun setWaitingForDeliverRy(){
+        binding.waitingForDelivery.setOnClickListener {
+            startActivity(Intent(baseContext, DeliveringActivity::class.java))
+        }
+    }
+
+    private fun setDeliveryAddress(){
         binding.address.setOnClickListener {
             startActivity(Intent(baseContext, AddressActivity::class.java))
         }

@@ -23,12 +23,7 @@ class OrderRepository @Inject constructor(
             Query.Direction.ASCENDING
         )
     }
-    fun getReceiverOrderFromCloudFireStore(): Query{
-        return userCollRef.document(Firebase.auth.currentUser?.email.toString()).collection(TAG).orderBy(
-            "dateTime",
-            Query.Direction.DESCENDING
-        )
-    }
+
     fun getAllBillingIem(docId: String): Query{
         return userCollRef.document(Firebase.auth.currentUser?.email.toString()).collection(TAG).document(docId).collection("books").orderBy(
             "price",

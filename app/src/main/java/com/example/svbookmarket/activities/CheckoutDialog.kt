@@ -176,7 +176,7 @@ class CheckoutDialog : BottomSheetDialogFragment() {
             "fullName" to deliverAddress.fullName,
             "phoneNumber" to deliverAddress.phoneNumber,
             "userId" to user.email,
-            "status" to Constants.TRANSACTION.RECEIVED,
+            "status" to Constants.TRANSACTION.WAITING,
             "dateTime" to time,
             "totalPrince" to sum
         )
