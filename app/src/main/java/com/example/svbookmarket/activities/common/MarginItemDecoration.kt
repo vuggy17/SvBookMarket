@@ -17,26 +17,27 @@ class MarginItemDecoration(
         parent: RecyclerView, state: RecyclerView.State
     ) {
         with(outRect) {
-            if (orientation == GridLayoutManager.VERTICAL && !isHorizontalLayout) {
-                if (parent.getChildAdapterPosition(view) < spanCount) {
-                    top = spaceSize
-                }
-                if (parent.getChildAdapterPosition(view) % spanCount == 0) {
-                    left = spaceSize
-                }
-            } else {
-                if (parent.getChildAdapterPosition(view) < spanCount) {
-                    left = spaceSize
-                }
-                if (parent.getChildAdapterPosition(view) % spanCount == 0) {
-                    top = spaceSize
+            if (!isHorizontalLayout) {
+                if (orientation == GridLayoutManager.VERTICAL) {
+                    if (parent.getChildAdapterPosition(view) < spanCount) {
+                        top = spaceSize
+                    }
+                    if (parent.getChildAdapterPosition(view) % spanCount == 0) {
+                        left = spaceSize
+                    }
+                } else {
+                    if (parent.getChildAdapterPosition(view) < spanCount) {
+                        left = spaceSize
+                    }
+                    if (parent.getChildAdapterPosition(view) % spanCount == 0) {
+                        top = spaceSize
+                    }
                 }
             }
 
             left = spaceSize
             right = spaceSize
-            if (!isHorizontalLayout)
-                bottom = spaceSize
+            bottom = spaceSize
         }
     }
 }

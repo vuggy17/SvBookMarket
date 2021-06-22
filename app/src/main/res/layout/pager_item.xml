@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_launcher_background"
+    android:clipChildren="true"
+    android:minHeight="375dp">
+
+    <TextView
+        android:id="@+id/page_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ellipsize="marquee"
+        android:maxWidth="300dp"
+        android:maxLines="1"
+        android:text="@string/textTest"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/page_des"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:ellipsize="end"
+        android:maxWidth="400dp"
+        android:maxLines="2"
+        android:text="@string/textTest"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/page_title" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="168dp"
+        android:layout_height="222dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        app:cardMaxElevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/page_des"
+        app:strokeColor="#A4858C94">
+
+        <!--    168-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginStart="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginBottom="7dp"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:cardCornerRadius="6dp">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/page_bookThumbnail"
+                    android:layout_width="145dp"
+                    android:layout_height="145dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/loading"
+                    app:riv_border_color="@color/white"
+                    app:riv_border_width="0dip"
+                    app:riv_corner_radius="6dp"
+                    app:riv_mutate_background="true" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="left">
+
+                <TextView
+                    android:id="@+id/page_bookTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto_bold"
+                    android:maxWidth="145dp"
+                    android:maxLines="2"
+                    android:text="Eleanor and Park "
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/page_bookAuthor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto_regular"
+                    android:maxWidth="145dp"
+                    android:maxLines="2"
+                    android:text="By rainbow rowell"
+                    android:textColor="@color/disable"
+                    android:textSize="@dimen/text_super_small"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/page_bookTitle" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
