@@ -7,8 +7,12 @@ import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.data.OrderRepository
 import com.example.svbookmarket.activities.model.Cart
 import com.example.svbookmarket.activities.model.Order
+import com.google.firebase.Timestamp
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 @HiltViewModel
@@ -45,7 +49,10 @@ class UserOrderViewModel @Inject constructor(private val orderRepository: OrderR
             }
         }
     }
-
+    private fun getFormatDate(date: Date):String{
+        val sdf = SimpleDateFormat("HH:mm:ss dd-MM-yyyy ")
+        return sdf.format(date)
+    }
 
     private fun getAllOrder(): MutableLiveData<MutableList<Order>> {
         orderRepository.getAllOrderFromCloudFireStore().addSnapshotListener { value, error ->
@@ -56,7 +63,8 @@ class UserOrderViewModel @Inject constructor(private val orderRepository: OrderR
                 for (doc in value!!) {
                     val order = Order()
                     order.id = doc.id
-                    order.dateTime = doc["dateTime"].toString()
+                    val timeStamp = doc["dateTime"] as Timestamp
+                    order.dateTime = getFormatDate(timeStamp.toDate())
                     order.status = doc["status"].toString()
                     order.totalPrince = doc["totalPrince"].toString() +" đ"
                     order.userDeliverAddress.addressLane = doc["addressLane"].toString()

@@ -167,7 +167,7 @@ class CheckoutDialog : BottomSheetDialogFragment() {
         listNeedToMove: MutableList<Cart>,
         deliverAddress: UserDeliverAddress
     ) {
-        val time = getCurrentDate()
+        val time = Date()
         val mapOfAddress = hashMapOf<String, Any>(
             "addressId" to deliverAddress.id,
             "addressLane" to deliverAddress.addressLane,

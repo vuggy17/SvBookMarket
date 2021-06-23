@@ -20,7 +20,7 @@ class OrderRepository @Inject constructor(
     fun getAllOrderFromCloudFireStore(): Query{
        return userCollRef.document(Firebase.auth.currentUser?.email.toString()).collection(TAG).orderBy(
             "dateTime",
-            Query.Direction.ASCENDING
+            Query.Direction.DESCENDING
         )
     }
 
