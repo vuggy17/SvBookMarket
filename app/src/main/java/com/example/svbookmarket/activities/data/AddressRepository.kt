@@ -1,6 +1,9 @@
 package com.example.svbookmarket.activities.data
 
+import CurrentUserInfo
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.svbookmarket.activities.common.Constants.ADDRESS_REF
 import com.example.svbookmarket.activities.common.Constants.USERS_REF
 import com.example.svbookmarket.activities.common.Constants.VMTAG
@@ -19,25 +22,20 @@ class AddressRepository @Inject constructor(
     @Named(USERS_REF) private val accountColRef: CollectionReference
 ) {
 
-    private val testAddress = UserDeliverAddress(
-        "",
-        "khuong duy",
-        "012321322",
-        "lams son",
-        "cam thanh bac",
-        "khanh hoa",
-        false
-    )
+    private val user = CurrentUserInfo.getInstance().currentProfile
+
+    private val _address = MutableLiveData<MutableList<UserDeliverAddress>>()
+    val address: LiveData<MutableList<UserDeliverAddress>> get() = _address
 
 
-    fun setNewAddress(user: AppAccount, address: UserDeliverAddress) {
-        accountColRef.document(user.email).collection(ADDRESS_REF).document().set(testAddress)
-        Log.i(VMTAG, "$address")
+    fun addAddress(address: UserDeliverAddress) {
+        accountColRef.document(user.email).collection(ADDRESS_REF).add(address)
+            .addOnSuccessListener { Log.i(VMTAG, "new address created with id: {$it.id}") }
+            .addOnFailureListener { Log.i(VMTAG, "new address created failed") }
     }
 
-    fun getAddress(user: AppAccount) {
-        accountColRef.document(user.email).collection(ADDRESS_REF).document().get()
-            .addOnSuccessListener { }
+    fun getAddress(user: AppAccount): CollectionReference {
+        return accountColRef.document(user.email).collection(ADDRESS_REF)
     }
 
     fun getChosenAddress(user: AppAccount): Query {
@@ -45,9 +43,9 @@ class AddressRepository @Inject constructor(
             .collection("userDeliverAddresses")
     }
 
-    suspend fun update(item: UserDeliverAddress) {
+    suspend fun setSelectState(item: UserDeliverAddress, state: Boolean) {
         withContext(Dispatchers.IO) {
-            // TODO: 13/06/2021 update data to db
+           accountColRef.document(user.email).collection(ADDRESS_REF).document(item.id).update("chose", state)
         }
     }
 

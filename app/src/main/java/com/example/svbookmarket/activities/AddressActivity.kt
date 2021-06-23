@@ -1,24 +1,20 @@
 package com.example.svbookmarket.activities
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment.STYLE_NORMAL
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.AddressAdapter
-import com.example.svbookmarket.activities.common.InsetDividerItemDecoration
-import com.example.svbookmarket.activities.common.RecyclerViewClickListener
-import com.example.svbookmarket.activities.common.toPx
-import com.example.svbookmarket.activities.data.DataSource
+import com.example.svbookmarket.activities.model.UserDeliverAddress
 import com.example.svbookmarket.activities.viewmodel.AddressViewModel
 import com.example.svbookmarket.databinding.ActivityAddressBinding
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.FirebaseFirestore
+import dagger.hilt.android.AndroidEntryPoint
 
-class AddressActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class AddressActivity : AppCompatActivity(), OnCreateAddressListener,OnEditAddressListener,
+    AddressAdapter.NotifyAddressSelectionChanged {
     companion object {
         const val CHANGE_ADDRESS = "CHANGE_ADDRESS"
         const val IS_FROM_CART = true
@@ -27,8 +23,8 @@ class AddressActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityAddressBinding
     val viewmodel: AddressViewModel by viewModels()
+    private val addressAdapter = AddressAdapter(mutableListOf(), this)
 
-    lateinit var addressAdapter: AddressAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddressBinding.inflate(layoutInflater)
@@ -36,18 +32,9 @@ class AddressActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val adRecyclerview = binding.adRecyclerview
+        val addressList = binding.adRecyclerview
         val newAddressBtn = binding.adNewAddress
         val editAddressBtn = binding.adEditAdress
-
-        viewmodel.address.observe(this, {data->
-            adRecyclerview.apply {
-                adapter = AddressAdapter(context, data)
-                layoutManager = LinearLayoutManager(context)
-                addItemDecoration(InsetDividerItemDecoration(context, 138.toPx()))
-                setHasFixedSize(true)
-            }
-        })
 
         if (intent.extras?.getBoolean(FROM_CART) != null)
             binding.adContinue.visibility = View.VISIBLE
@@ -59,10 +46,9 @@ class AddressActivity : AppCompatActivity() {
         binding.adContinue.setOnClickListener { onBackPressed() }
 
         newAddressBtn.setOnClickListener {
-            val newAddressDialog = CreateAddressDialog()
+            val newAddressDialog = CreateAddressDialog(this)
             newAddressDialog.setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
             newAddressDialog.show(supportFragmentManager, "tag")
-            newAddressDialog.setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
         }
 
         editAddressBtn.setOnClickListener {
@@ -71,41 +57,71 @@ class AddressActivity : AppCompatActivity() {
             editAddressDialog.show(supportFragmentManager, "tag")
         }
 
-        onListenToDb()
+        addressList.adapter = addressAdapter
+
+        watchChanges()
+
+//        onListenToDb()
     }
 
-    fun onListenToDb()
-    {
-        val ref = FirebaseFirestore.getInstance().collection("accounts").document(CurrentUserInfo.getInstance().currentProfile.email).collection("userDeliverAddresses")
-        ref.addSnapshotListener { snapshot, e ->
-            e?.let {
-                Log.d("00000000000000000", e.message!!)
-                return@addSnapshotListener
+    private fun watchChanges() {
+        viewmodel.getAddress().observe(this, { address ->
+            val btn = binding.adEditAdress
+
+            if (address.size > 0 && !btn.isEnabled) {
+                btn.setTextColor(resources.getColor(R.color.blue_dark))
+                btn.isEnabled = true
             }
+            addressAdapter.addAddress(address)
 
-            for (dc in snapshot!!.documentChanges)
-            {
-                when(dc.type)
-                {
-                    DocumentChange.Type.ADDED -> { addressAdapter.onChange()
-                        addressAdapter.notifyDataSetChanged()}
-                    DocumentChange.Type.MODIFIED -> {addressAdapter.onChange()
-                        addressAdapter.notifyDataSetChanged()}
-                    DocumentChange.Type.REMOVED -> { addressAdapter.onChange()
-                        addressAdapter.notifyDataSetChanged()}
-                }
-            }
-        }
+        })
     }
 
-    override fun onResume() {
-        viewmodel.let {
-//            it.updateCurrentAddress()
-        }
-
-        super.onResume()
+    override fun onCreateAddress(address: UserDeliverAddress) {
+        viewmodel.addAddress(address)
     }
 
-    fun getdata() = ""
+
+//    fun onListenToDb()
+//    {
+//        val ref = FirebaseFirestore.getInstance().collection("accounts").document(CurrentUserInfo.getInstance().currentProfile.email).collection("userDeliverAddresses")
+//        ref.addSnapshotListener { snapshot, e ->
+//            e?.let {
+//                Log.d("00000000000000000", e.message!!)
+//                return@addSnapshotListener
+//            }
+//
+//            for (dc in snapshot!!.documentChanges)
+//            {
+//                when(dc.type)
+//                {
+//                    DocumentChange.Type.ADDED -> { addressAdapter.onChange()
+//                        addressAdapter.notifyDataSetChanged()}
+//                    DocumentChange.Type.MODIFIED -> {addressAdapter.onChange()
+//                        addressAdapter.notifyDataSetChanged()}
+//                    DocumentChange.Type.REMOVED -> { addressAdapter.onChange()
+//                        addressAdapter.notifyDataSetChanged()}
+//                }
+//            }
+//        }
+//    }
+
+
+    override fun onAddressChange(old: UserDeliverAddress, new: UserDeliverAddress) {
+        viewmodel.updateCurrentAddress(old, new)
+    }
+
+    override fun onEditAddress(address: UserDeliverAddress) {
+        TODO("Not yet implemented")
+    }
 }
+
+interface OnCreateAddressListener {
+    fun onCreateAddress(address: UserDeliverAddress)
+}
+
+interface OnEditAddressListener {
+    fun onEditAddress(address: UserDeliverAddress)
+}
+
 

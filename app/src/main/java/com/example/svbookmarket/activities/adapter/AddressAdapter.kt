@@ -1,6 +1,6 @@
 package com.example.svbookmarket.activities.adapter
 
-import android.content.Context
+import CurrentUserInfo
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,28 +8,32 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
-import com.example.svbookmarket.activities.AddressActivity
 import com.example.svbookmarket.activities.model.UserDeliverAddress
 import com.google.android.material.card.MaterialCardView
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlin.properties.Delegates
 
 
-public class AddressAdapter(var context: Context, private var dataset: MutableList<UserDeliverAddress>) :
+public class AddressAdapter(
+    private var items: MutableList<UserDeliverAddress>,
+    listener: NotifyAddressSelectionChanged
+) :
     RecyclerView.Adapter<AddressAdapter.VH>() {
+    private var selectedPos = -1
 
-    val defaultSelection = 0
+    private var selectedPosition by Delegates.observable(selectedPos) { _, oldPos, newPos ->
+        if (newPos in items.indices && newPos != oldPos && oldPos!= -1) {
+            //update list
+            items[oldPos].chose = false
+            items[newPos].chose = true
 
-    // default position = 0
-    var selectedPosition by Delegates.observable(defaultSelection) { property, oldPos, newPos ->
-        if (newPos in dataset.indices) {
+            listener.onAddressChange(items[oldPos], items[newPos])
+
+            //update adapter
             notifyItemChanged(oldPos)
             notifyItemChanged(newPos)
 
-            if(context is AddressActivity){
-                // TODO: 14/06/2021 update selected address trong viewmodeld de goi ham update trong viewmodel  
-            }
 
+            Log.i("customtag", "old: $oldPos new: $newPos")
         }
     }
 
@@ -40,49 +44,40 @@ public class AddressAdapter(var context: Context, private var dataset: MutableLi
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        holder.name.text = dataset[position].fullName
-        holder.phoneNumber.text = dataset[position].phoneNumber
-        holder.firstAddress.text = dataset[position].addressLane
-        holder.secondAddress.text = dataset[position].district
-        holder.thirdAddress.text = dataset[position].city
+        holder.name.text = items[position].fullName
+        holder.phoneNumber.text = items[position].phoneNumber
+        holder.firstAddress.text = items[position].addressLane
+        holder.secondAddress.text = items[position].district
+        holder.thirdAddress.text = items[position].city
 
-        //default position
+        (holder.itemView as MaterialCardView).isChecked = items[position].chose
 
-        (holder.itemView as MaterialCardView).setOnClickListener {
-            (it as MaterialCardView).isChecked = !it.isChecked
+        if (items[position].chose)
+            selectedPosition = position
 
+        Log.i("customtag", "onbind: ${selectedPos}")
+        //toggle selected
+        holder.itemView.setOnClickListener {
+            selectedPosition = position
         }
 
-        if (position in dataset.indices) {
-            holder.bind()
-            holder.itemView.setOnClickListener { selectedPosition = position
-                CurrentUserInfo.getInstance().lstUserDeliverAddress[position].chose = true
-                val ref = FirebaseFirestore.getInstance().collection("accounts").document(CurrentUserInfo.getInstance().currentProfile.email).collection("userDeliverAddresses")
-                for (i in 0 until CurrentUserInfo.getInstance().lstUserDeliverAddress.size)
-                {
-                    if ( CurrentUserInfo.getInstance().lstUserDeliverAddress[i].chose)
-                    {
-                        CurrentUserInfo.getInstance().lstUserDeliverAddress[i].chose = false
-                        ref.document(CurrentUserInfo.getInstance().lstUserDeliverAddress[i].id).update("isChose", false).addOnCompleteListener {
-                            Log.d("000000000000000", "dcm1")
-                        }
-                    }
-                }
-                ref.document(CurrentUserInfo.getInstance().lstUserDeliverAddress[position].id).update("isChose", true).addOnCompleteListener{
-                    Log.d("000000000000000", "dcm2")
-                }
-            }
-
-        }
     }
 
-    fun onChange()
-    {
-        dataset = CurrentUserInfo.getInstance().lstUserDeliverAddress
+    fun addAddress(address: List<UserDeliverAddress>) {
+        if (this.items.isNotEmpty()) {
+            this.items.clear()
+        }
+        this.items.addAll(address)
+        notifyDataSetChanged()
+    }
+
+
+    fun onChange() {
+        items = CurrentUserInfo.getInstance().lstUserDeliverAddress
     }
 
     override fun getItemCount(): Int {
-        return dataset.size
+        return items.size
     }
 
     inner class VH(view: View) : RecyclerView.ViewHolder(view) {
@@ -94,10 +89,9 @@ public class AddressAdapter(var context: Context, private var dataset: MutableLi
         var thirdAddress: TextView = view.findViewById(R.id.tvThirdAddress)
         var fourthAddress: TextView = view.findViewById(R.id.tvFourthAddress)
         var vieww: View = view
+    }
 
-        fun bind() {
-            (vieww as MaterialCardView).isChecked = selectedPosition == adapterPosition
-        }
-
+    interface NotifyAddressSelectionChanged {
+        fun onAddressChange(old: UserDeliverAddress, new: UserDeliverAddress)
     }
 }

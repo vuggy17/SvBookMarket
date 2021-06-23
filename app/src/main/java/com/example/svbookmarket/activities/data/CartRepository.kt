@@ -15,6 +15,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
+import javax.inject.Named
 import javax.inject.Singleton
 import kotlin.concurrent.thread
 import kotlin.math.roundToInt
@@ -23,12 +24,10 @@ import com.example.svbookmarket.activities.model.UserDeliverAddress as MyAddress
 
 @Singleton
 class CartRepository @Inject constructor(
-    @ApplicationContext val context: Context
+    @ApplicationContext val context: Context,
 ) {
 
-    fun updateCartWithAddress(newAddress: MyAddress, isChosen: Boolean) {
-        //call database to update current address
-    }
+
 
     suspend fun addCart(book: Book, user: AppAccount) {
         val rootRef = FirebaseFirestore.getInstance()
