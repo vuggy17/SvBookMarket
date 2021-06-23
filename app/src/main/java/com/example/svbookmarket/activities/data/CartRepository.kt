@@ -96,7 +96,7 @@ class CartRepository @Inject constructor( /*database */ @ApplicationContext val 
                 .update("Quantity", FieldValue.increment(1))
 
             Handler(Looper.getMainLooper()).post {
-                val toast: Toast = Toast(context)
+                val toast: Toast = Toast.makeText(context,"",Toast.LENGTH_SHORT)
                 toast.setText("Add to cart success")
                 toast.show()
                 val handler = Handler()
@@ -104,7 +104,7 @@ class CartRepository @Inject constructor( /*database */ @ApplicationContext val 
             }
         } else {
             Handler(Looper.getMainLooper()).post {
-                val toast: Toast = Toast(context)
+                val toast: Toast = Toast.makeText(context,"",Toast.LENGTH_SHORT)
                 toast.setText("At max in store")
                 toast.show()
                 val handler = Handler()
@@ -129,7 +129,7 @@ class CartRepository @Inject constructor( /*database */ @ApplicationContext val 
             FirebaseFirestore.getInstance().collection("accounts").document(user.email)
                 .collection("userCart").document(book.id!!).set(newCart)
             Handler(Looper.getMainLooper()).post {
-                val toast: Toast = Toast(context)
+                val toast: Toast = Toast.makeText(context,"",Toast.LENGTH_SHORT)
                 toast.setText("Add to cart success")
                 toast.show()
                 val handler = Handler()
@@ -197,7 +197,7 @@ class CartRepository @Inject constructor( /*database */ @ApplicationContext val 
                 }
             } else if (currenOnCart == avaiBook && avaiBook != -1.0 && currenOnCart != -1.0) {
                 Handler(Looper.getMainLooper()).post {
-                    val toast: Toast = Toast(context)
+                    val toast: Toast = Toast.makeText(context,"messenger",Toast.LENGTH_SHORT)
                     toast.setText("At max in store")
                     toast.show()
                     val handler = Handler()
