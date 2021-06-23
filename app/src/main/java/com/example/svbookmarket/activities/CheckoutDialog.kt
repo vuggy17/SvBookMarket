@@ -3,6 +3,7 @@ package com.example.svbookmarket.activities
 import CurrentUserInfo
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -88,12 +89,18 @@ class CheckoutDialog : BottomSheetDialogFragment() {
                     )
                     startActivity(Intent(context,ConfirmationActivity::class.java))
                 } else {
-                    Toast.makeText(context, "Not enough quantity in store", Toast.LENGTH_SHORT)
-                        .show()
+                    val toast: Toast = Toast(context)
+                    toast.setText("Not enough quantity in store")
+                    toast.show()
+                    val handler = Handler()
+                    handler.postDelayed({ toast.cancel() }, 500)
                 }
             } else {
-                Toast.makeText(context, "Have nothing in Checkout", Toast.LENGTH_SHORT)
-                    .show()
+                val toast: Toast = Toast(context)
+                toast.setText("Have nothing to checkout")
+                toast.show()
+                val handler = Handler()
+                handler.postDelayed({ toast.cancel() }, 500)
             }
         }
 

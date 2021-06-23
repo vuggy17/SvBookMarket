@@ -1,7 +1,7 @@
 package com.example.svbookmarket.activities.data
 
+import CurrentUserInfo
 import android.content.Context
-import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -10,15 +10,12 @@ import com.example.svbookmarket.activities.di.CartCache
 import com.example.svbookmarket.activities.model.AppAccount
 import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.model.Cart
-import com.example.svbookmarket.activities.model.CartModel
 import com.google.firebase.firestore.*
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.concurrent.thread
-import kotlin.math.roundToInt
 import com.example.svbookmarket.activities.model.UserDeliverAddress as MyAddress
 
 
@@ -99,11 +96,19 @@ class CartRepository @Inject constructor( /*database */ @ApplicationContext val 
                 .update("Quantity", FieldValue.increment(1))
 
             Handler(Looper.getMainLooper()).post {
-                Toast.makeText(context, "Add to cart success", Toast.LENGTH_SHORT).show()
+                val toast: Toast = Toast(context)
+                toast.setText("Add to cart success")
+                toast.show()
+                val handler = Handler()
+                handler.postDelayed({ toast.cancel() }, 500)
             }
         } else {
             Handler(Looper.getMainLooper()).post {
-            Toast.makeText(context, "At max in store", Toast.LENGTH_SHORT).show()
+                val toast: Toast = Toast(context)
+                toast.setText("At max in store")
+                toast.show()
+                val handler = Handler()
+                handler.postDelayed({ toast.cancel() }, 500)
         }
         }
     }
@@ -124,14 +129,20 @@ class CartRepository @Inject constructor( /*database */ @ApplicationContext val 
             FirebaseFirestore.getInstance().collection("accounts").document(user.email)
                 .collection("userCart").document(book.id!!).set(newCart)
             Handler(Looper.getMainLooper()).post {
-                Toast.makeText(context, "Add to cart success", Toast.LENGTH_SHORT).show()
+                val toast: Toast = Toast(context)
+                toast.setText("Add to cart success")
+                toast.show()
+                val handler = Handler()
+                handler.postDelayed({ toast.cancel() }, 500)
             }
         }
         else
         {
-            Handler(Looper.getMainLooper()).post {
-                Toast.makeText(context, "At max in store", Toast.LENGTH_SHORT).show()
-            }
+            val toast: Toast = Toast(context)
+            toast.setText("At max in store")
+            toast.show()
+            val handler = Handler()
+            handler.postDelayed({ toast.cancel() }, 500)
         }
     }
 
@@ -151,13 +162,26 @@ class CartRepository @Inject constructor( /*database */ @ApplicationContext val 
 
         var avaiBook: Double = -1.0
         var currenOnCart: Double = -1.0
-        var bookData: DocumentSnapshot = FirebaseFirestore.getInstance().collection("books").document(id).get().await()
-        var currentNumInCart: DocumentSnapshot = FirebaseFirestore.getInstance().collection("accounts")
-            .document(user.email).collection("userCart").document(id).get().await()
 
-        if (bookData.exists() && currentNumInCart.exists()) {
-            avaiBook = bookData.data?.get("Counts").toString().toDouble()
-            currenOnCart = currentNumInCart.data?.get("Quantity").toString().toDouble()
+        val currentListBook = FullBookList.getInstance().lstFullBook
+        val currentListCart = CurrentUserInfo.getInstance().lstUserCart
+
+        for (i in 0 until  currentListBook.size)
+        {
+            if (currentListBook[i].id == id)
+            {
+                avaiBook = currentListBook[i].Counts.toDouble()
+            }
+        }
+
+        for (i in 0 until  currentListCart.size)
+        {
+            if (currentListCart[i].id == id)
+            {
+                currenOnCart = currentListCart[i].numbers.toDouble()
+            }
+        }
+
 
             if (currenOnCart < avaiBook && plusOrMinus && avaiBook != -1.0 && currenOnCart != -1.0) {
                 FirebaseFirestore.getInstance().collection("accounts").document(user.email)
@@ -167,13 +191,17 @@ class CartRepository @Inject constructor( /*database */ @ApplicationContext val 
                 FirebaseFirestore.getInstance().collection("accounts").document(user.email)
                     .collection("userCart").document(id)
                     .update("Quantity", FieldValue.increment(-1))
-                currenOnCart = currentNumInCart.data?.get("Quantity").toString().toDouble().roundToInt() - 1.0
+                currenOnCart -= 1
                 if (currenOnCart == 0.0) {
                     deleteCart(user, id)
                 }
             } else if (currenOnCart == avaiBook && avaiBook != -1.0 && currenOnCart != -1.0) {
                 Handler(Looper.getMainLooper()).post {
-                    Toast.makeText(context, "At max in store", Toast.LENGTH_SHORT).show()
+                    val toast: Toast = Toast(context)
+                    toast.setText("At max in store")
+                    toast.show()
+                    val handler = Handler()
+                    handler.postDelayed({ toast.cancel() }, 500)
                 }
             }
                 else if (currenOnCart > avaiBook && avaiBook != -1.0 && currenOnCart != -1.0)
@@ -182,7 +210,6 @@ class CartRepository @Inject constructor( /*database */ @ApplicationContext val 
                     .collection("userCart").document(id)
                     .update("Quantity", avaiBook)
                 }
-        }
     }
 
     suspend fun updateData(list: MutableList<Cart>) {
