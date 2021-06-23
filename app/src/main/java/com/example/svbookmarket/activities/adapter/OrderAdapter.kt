@@ -2,7 +2,9 @@ package com.example.svbookmarket.activities.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.opengl.Visibility
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +12,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.CancelOrder
 import com.example.svbookmarket.activities.CheckoutDialog
+import com.example.svbookmarket.activities.RegisterActivity
+import com.example.svbookmarket.activities.common.AppUtil
 import com.example.svbookmarket.activities.model.Cart
 import com.example.svbookmarket.activities.model.Order
 import com.example.svbookmarket.databinding.ItemBillingBinding
@@ -33,6 +40,9 @@ class OrderAdapter(
         val expandAddress: Button = view.findViewById(R.id.expandAddress)
         val expandBill: Button = view.findViewById(R.id.expandBill)
         val addressLayout: LinearLayout = view.findViewById(R.id.addressLayout)
+        val cancelOrderLayout: ConstraintLayout = view.findViewById(R.id.cancelOrder)
+        val cancelOrderButton: Button = view.findViewById(R.id.cancelOrderButton)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -52,6 +62,9 @@ class OrderAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentOrder: Order = listOder[position]
         holder.apply {
+            if(currentOrder.status == "WAITING" || currentOrder.status == "CONFIRMED"){
+                cancelOrderLayout.visibility = View.VISIBLE
+            }
             status.text = currentOrder.status
             name.text = currentOrder.userDeliverAddress.fullName
             phone.text = currentOrder.userDeliverAddress.phoneNumber
@@ -62,7 +75,6 @@ class OrderAdapter(
             listItemOrder.adapter = billingItemAdapter
             listItemOrder.layoutManager = LinearLayoutManager(context)
             listItemOrder.visibility = View.GONE
-
             addressLayout.visibility = View.GONE
             expandAddress.setOnClickListener {
                 onExpandAddressClick(addressLayout, expandAddress)
@@ -70,8 +82,15 @@ class OrderAdapter(
             expandBill.setOnClickListener {
                 onExpandBillClick(listItemOrder, expandBill)
             }
+            cancelOrderButton.setOnClickListener {
+                AppUtil.currentOrder = currentOrder
+               gotoOrderCancel()
+            }
 
         }
+    }
+    private fun gotoOrderCancel(){
+        startActivity(context,Intent(context, CancelOrder::class.java), Bundle())
     }
     private fun onExpandBillClick(listItemOrder: RecyclerView, expandButton: Button){
         if(listItemOrder.visibility == View.GONE){

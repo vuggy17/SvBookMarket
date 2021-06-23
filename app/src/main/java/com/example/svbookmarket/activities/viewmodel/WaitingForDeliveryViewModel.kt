@@ -36,6 +36,7 @@ class WaitingForDeliveryViewModel @Inject constructor(private val orderRepositor
                     cart.numbers = doc["Quantity"].toString().toDouble().roundToInt()
                     cart.name = doc["title"].toString()
                     cart.price = doc["price"].toString().toLong()
+                    cart.id = doc.id
                     billingList.add(cart)
                 }
                 var orderList: MutableList<Order> = ArrayList()

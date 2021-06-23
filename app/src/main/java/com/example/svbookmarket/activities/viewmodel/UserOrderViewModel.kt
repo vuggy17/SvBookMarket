@@ -36,6 +36,7 @@ class UserOrderViewModel @Inject constructor(private val orderRepository: OrderR
                     cart.numbers = doc["Quantity"].toString().toDouble().roundToInt()
                     cart.name = doc["title"].toString()
                     cart.price = doc["price"].toString().toLong()
+                    cart.id = doc.id
                     billingList.add(cart)
                 }
                 var orderList: MutableList<Order> = ArrayList()
@@ -80,4 +81,5 @@ class UserOrderViewModel @Inject constructor(private val orderRepository: OrderR
         }
         return orders
     }
+
 }

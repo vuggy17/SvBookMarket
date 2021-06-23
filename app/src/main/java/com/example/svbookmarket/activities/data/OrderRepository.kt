@@ -1,6 +1,7 @@
 package com.example.svbookmarket.activities.data
 
 import androidx.lifecycle.MutableLiveData
+import com.example.svbookmarket.activities.common.AppUtil
 import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.model.Order
@@ -30,6 +31,14 @@ class OrderRepository @Inject constructor(
             Query.Direction.ASCENDING
         )
     }
+    fun updateOrderStatus(orderId: String){
+        userCollRef.document(AppUtil.currentAccount.email).collection(TAG).document(orderId).update("status","CANCEL")
+    }
+    fun updateReason(orderId: String, reason: String){
+        userCollRef.document(AppUtil.currentAccount.email).collection(TAG).document(orderId).update("reason",reason)
+    }
+
+
 
 
 }

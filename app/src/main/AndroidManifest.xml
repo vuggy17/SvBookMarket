@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SvBookMarket">
-        <activity android:name=".activities.DeliveringActivity"></activity>
+        <activity android:name=".activities.CancelConfirmation"></activity>
+        <activity android:name=".activities.CancelOrder" />
+        <activity android:name=".activities.DeliveringActivity" />
         <activity android:name=".activities.UserOrder" />
         <activity android:name=".activities.ForgotPassword" />
         <activity android:name=".activities.ConfirmationActivity" />
