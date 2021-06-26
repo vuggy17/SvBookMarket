@@ -3,11 +3,9 @@ package com.example.svbookmarket.activities.adapter
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.activities.model.Cart
-import com.example.svbookmarket.activities.model.Order
 import com.example.svbookmarket.databinding.ItemBillingBinding
 
 class BillingItemAdapter(

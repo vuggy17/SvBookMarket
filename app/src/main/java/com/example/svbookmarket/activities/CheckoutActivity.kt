@@ -1,6 +1,7 @@
 package com.example.svbookmarket.activities
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -35,8 +36,14 @@ class CheckoutActivity : AppCompatActivity() {
         binding = ActivityCheckoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        if (viewModel.deliverAddress.value?.fullName != null)
+        {
         binding.tvAddress.text = viewModel.deliverAddress.value?.fullName + ", " + viewModel.deliverAddress.value?.phoneNumber +  ", " + viewModel.deliverAddress.value?.addressLane + ", " + viewModel.deliverAddress.value?.district + ", " + viewModel.deliverAddress.value?.city
+        }
+        else
+        {
+            binding.tvAddress.text = ""
+        }
         binding.rcCheckout.apply {
             layoutManager =
                 LinearLayoutManager(this@CheckoutActivity)
@@ -45,11 +52,22 @@ class CheckoutActivity : AppCompatActivity() {
         }
         val buyReviewDialog = CheckoutDialog()
         binding.coCheckout.setOnClickListener {
-            Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show()
-            buyReviewDialog.show(supportFragmentManager,"tag")
+            if (viewModel.deliverAddress.value?.fullName != null) {
+                buyReviewDialog.show(supportFragmentManager, "tag")
+            }
+            else
+            {
+                val toast: Toast = Toast(this)
+                toast.setText("You must have an address")
+                toast.show()
+                val handler = Handler()
+                handler.postDelayed({ toast.cancel() }, 500)
+            }
         }
 
-        binding.coBackButton.setOnClickListener{onBackPressed()}
+        binding.coBackButton.setOnClickListener{
+            onBackPressed()
+        }
 
         viewModel.checkoutItem.observe(this, changeObserver)
         viewModel.deliverAddress.observe(this, changeAddress)

@@ -3,6 +3,7 @@ package com.example.svbookmarket.activities
 import CurrentUserInfo
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -88,12 +89,18 @@ class CheckoutDialog : BottomSheetDialogFragment() {
                     )
                     startActivity(Intent(context,ConfirmationActivity::class.java))
                 } else {
-                    Toast.makeText(context, "Not enough quantity in store", Toast.LENGTH_SHORT)
-                        .show()
+                    val toast: Toast = Toast(context)
+                    toast.setText("Not enough quantity in store")
+                    toast.show()
+                    val handler = Handler()
+                    handler.postDelayed({ toast.cancel() }, 500)
                 }
             } else {
-                Toast.makeText(context, "Have nothing in Checkout", Toast.LENGTH_SHORT)
-                    .show()
+                val toast: Toast = Toast(context)
+                toast.setText("Have nothing to checkout")
+                toast.show()
+                val handler = Handler()
+                handler.postDelayed({ toast.cancel() }, 500)
             }
         }
 
@@ -167,7 +174,7 @@ class CheckoutDialog : BottomSheetDialogFragment() {
         listNeedToMove: MutableList<Cart>,
         deliverAddress: UserDeliverAddress
     ) {
-        val time = getCurrentDate()
+        val time = Date()
         val mapOfAddress = hashMapOf<String, Any>(
             "addressId" to deliverAddress.id,
             "addressLane" to deliverAddress.addressLane,
@@ -176,7 +183,7 @@ class CheckoutDialog : BottomSheetDialogFragment() {
             "fullName" to deliverAddress.fullName,
             "phoneNumber" to deliverAddress.phoneNumber,
             "userId" to user.email,
-            "status" to Constants.TRANSACTION.RECEIVED,
+            "status" to Constants.TRANSACTION.WAITING,
             "dateTime" to time,
             "totalPrince" to sum
         )
