@@ -83,19 +83,23 @@ class ItemDetailViewModel @Inject constructor (private val savedStateHandle: Sav
                     Log.w(Constants.VMTAG, "Listen failed.", error)
                     return
                 }
-
-                var book: Book = Book(_itemToDisplay.value?.id!!,
-                value?.data?.get("Image").toString(),
-                    value?.data?.get("Name").toString(),
-                    value?.data?.get("Author").toString(),
-                    value?.data?.get("Price").toString().toDouble().roundToInt(),
-                    value?.data?.get("rate").toString().toDouble().roundToInt(),
-                    value?.data?.get("Kind").toString(),
-                    value?.data?.get("Counts").toString().toDouble().roundToInt(),
-                    value?.data?.get("Description").toString())
-                itemToDisplay.value = book
+                if(value?.data?.get("Name") != null) {
+                    var book: Book = Book(
+                        _itemToDisplay.value?.id!!,
+                        value?.data?.get("Image").toString(),
+                        value?.data?.get("Name").toString(),
+                        value?.data?.get("Author").toString(),
+                        value?.data?.get("Price").toString().toDouble().roundToInt(),
+                        value?.data?.get("rate").toString().toDouble().roundToInt(),
+                        value?.data?.get("Kind").toString(),
+                        value?.data?.get("Counts").toString().toDouble().roundToInt(),
+                        value?.data?.get("Description").toString()
+                    )
+                    itemToDisplay.value = book
+                }
             }
         })
+
     }
     fun addToCart() {
         viewModelScope.launch {
