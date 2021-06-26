@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.svbookmarket.activities.AddressActivity
 import com.example.svbookmarket.activities.model.UserDeliverAddress
 import com.example.svbookmarket.databinding.CardAddressBinding
 import com.google.android.material.card.MaterialCardView
@@ -18,27 +19,7 @@ class AddressAdapter(
     private val listener: NotifyAddressSelectionChanged,
 ) :
     RecyclerView.Adapter<AddressAdapter.VH>() {
-    private var selectedPos = -1
-
     private var lastSelectedPos = -1
-
-    private var selectedPosition by Delegates.observable(selectedPos) { _, oldPos, newPos ->
-        if (newPos in items.indices && newPos != oldPos && oldPos != -1) {
-            //update list
-            items[oldPos].chose = false
-            items[newPos].chose = true
-
-            listener.onAddressChange(items[oldPos], items[newPos])
-
-
-            //update adapter
-            notifyItemChanged(oldPos)
-            notifyItemChanged(newPos)
-
-
-            Log.i("customtag", "old: $oldPos new: $newPos")
-        }
-    }
 
     private fun toggleCheckedPosition(oldPos: Int, newPos: Int) {
         if (oldPos == -1 || oldPos == newPos) return
@@ -95,6 +76,8 @@ class AddressAdapter(
                 toggleCheckedPosition(lastSelectedPos, this.adapterPosition)
                 lastSelectedPos = this.layoutPosition
 
+                val recyclerView = (listener as AddressActivity).binding.adRecyclerview
+                recyclerView.itemAnimator?.onAnimationFinished(this)
 
             }
         }

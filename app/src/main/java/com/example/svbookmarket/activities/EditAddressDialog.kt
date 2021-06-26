@@ -128,8 +128,10 @@ class EditAddressDialog(
         val districtt = binding.edtDistrict.text.toString()
         val cityt = binding.edtCity.text.toString()
         val idt = address.id
+        val chosen = address.chose
 
-        return UserDeliverAddress(idt, namet, phonet, lanet, districtt, cityt)
+
+        return UserDeliverAddress(idt, namet, phonet, lanet, districtt, cityt, chosen)
     }
 
     /**

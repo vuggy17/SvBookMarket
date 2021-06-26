@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment.STYLE_NORMAL
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.AddressAdapter
+import com.example.svbookmarket.activities.common.Constants.DEFAULT_ADDRESS_POS
 import com.example.svbookmarket.activities.model.UserDeliverAddress
 import com.example.svbookmarket.activities.viewmodel.AddressViewModel
 import com.example.svbookmarket.databinding.ActivityAddressBinding
@@ -30,7 +31,6 @@ class AddressActivity : AppCompatActivity(), OnCreateAddressListener, OnEditAddr
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddressBinding.inflate(layoutInflater)
-        // set activity to display here
         setContentView(binding.root)
 
 
@@ -38,16 +38,16 @@ class AddressActivity : AppCompatActivity(), OnCreateAddressListener, OnEditAddr
         val newAddressBtn = binding.adNewAddress
         val editAddressBtn = binding.adEditAdress
 
+        // if this activity has not been opened from cart activity, hide continue button
         if (intent.extras?.getBoolean(FROM_CART) != null)
             binding.adContinue.visibility = View.VISIBLE
 
         //on back
         binding.adBack.setOnClickListener { onBackPressed() }
 
-        // TODO: 11/06/2021  update address then navigate back
         binding.adContinue.setOnClickListener { onBackPressed() }
 
-        // add form
+        // show add address form listener
         newAddressBtn.setOnClickListener {
             val newAddressDialog = CreateAddressDialog(this)
             newAddressDialog.setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
@@ -55,45 +55,46 @@ class AddressActivity : AppCompatActivity(), OnCreateAddressListener, OnEditAddr
         }
 
 
-        // edit form
+        // show edit form listener
         editAddressBtn.setOnClickListener {
-            Log.i("selectqq", "${viewmodel.selectedItem}")
-
+            // pass selected item to form
             val editAddressDialog =
-                viewmodel.selectedItem?.let { it1 -> EditAddressDialog(this, it1, this) }
+                viewmodel.selectedItem?.let { selectedItem -> EditAddressDialog(this, selectedItem, this) }
             editAddressDialog?.setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
             editAddressDialog?.show(supportFragmentManager, "tag")
         }
 
-        addressList.adapter = addressAdapter
 
+        addressList.adapter = addressAdapter
         watchChanges()
     }
 
+    /**
+     * watch for changes from database, then update ui
+     */
     private fun watchChanges() {
         viewmodel.getAddress().observe(this, { address ->
             val btn = binding.adEditAdress
-
             if (address.size > 0) {
                 if (!btn.isEnabled) {
                     btn.setTextColor(resources.getColor(R.color.blue_dark))
                     btn.isEnabled = true
                 }
-                val chosen = address.find { it.chose == true }
-                Log.i("found", "$chosen")
-//                if (chosen == null) {
-//                    viewmodel.setSelectStateToTrue(address[0])
-//                }
+
+
+                val chosen = viewmodel.selectedItem
+                // if there is no selected item, set selected item to default position(0)
+                if (chosen == null)
+                    viewmodel.setSelectStateToTrue(address[DEFAULT_ADDRESS_POS])
             }
 
+            // add freshen items to address then notify adapter about changes
             addressAdapter.addAddress(address)
-
         })
     }
 
     override fun onCreateAddress(address: UserDeliverAddress) {
         viewmodel.addAddress(address)
-        Log.i("createa", "create call")
     }
 
     override fun onAddressChange(old: UserDeliverAddress, new: UserDeliverAddress) {
@@ -106,7 +107,9 @@ class AddressActivity : AppCompatActivity(), OnCreateAddressListener, OnEditAddr
     }
 
     override fun onDeleteAddress(address: UserDeliverAddress) {
+        viewmodel.selectedItem = null
         viewmodel.deleteAddress(address)
+
     }
 }
 
