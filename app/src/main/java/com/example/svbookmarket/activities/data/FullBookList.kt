@@ -25,9 +25,16 @@ public class FullBookList private constructor(var lstFullBook: MutableList<Book>
                 }
                 val bookList: MutableList<Book> = ArrayList()
                 for (doc in value!!) {
-                    var bookItem = doc.toObject(Book::class.java)
-                    bookItem.id = doc.id
-                    bookList.add(bookItem)
+
+                   try{
+                       var bookItem = doc.toObject(Book::class.java)
+                       bookItem.id = doc.id
+                       bookList.add(bookItem)
+                       Log.i("VMTAG", ("${bookItem.Name} ${bookItem.Price}"))
+                   }catch (e:Exception){
+                       Log.i("VMTAG", "$doc")
+                   }
+
                 }
                 lstFullBook = bookList
             }

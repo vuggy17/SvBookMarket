@@ -20,19 +20,12 @@ class AddressViewModel @Inject constructor(
     private val cartRepository: CartRepository
 ) : ViewModel() {
 
-
     private val currentUser = CurrentUserInfo.getInstance().currentProfile
 
     private val _address = MutableLiveData<MutableList<UserDeliverAddress>>()
     val address: LiveData<MutableList<UserDeliverAddress>> get() = _address
 
-    private lateinit var _selectedItem: UserDeliverAddress
-    var selectedItem: UserDeliverAddress
-        get() = _selectedItem
-        set(value) {
-            _selectedItem = value
-        }
-
+    var selectedItem: UserDeliverAddress? = null
 
     fun getAddress(): MutableLiveData<MutableList<UserDeliverAddress>> {
         addressRepository.getAddress(currentUser).addSnapshotListener { value, error ->
@@ -47,18 +40,24 @@ class AddressViewModel @Inject constructor(
                 addressItem.id = doc.id
                 addressList.add(addressItem)
 
+                //set selected item
+                if (addressItem.chose) {
+                    selectedItem = addressItem
+                }
             }
             _address.value = addressList
-            Log.i("customtag", "${_address.value}")
+
+            if (selectedItem == null)
+                selectedItem = _address.value?.get(0)
         }
         return _address
     }
 
-    fun updateCurrentAddress(oldAddress: UserDeliverAddress, newAddress: UserDeliverAddress) {
+    fun chageSelectState(oldAddress: UserDeliverAddress, newAddress: UserDeliverAddress) {
         if (newAddress != oldAddress)
             viewModelScope.launch {
-                Log.i("custom1","$oldAddress")
-                Log.i("custom1","$newAddress")
+                Log.i("custom1", "$oldAddress")
+                Log.i("custom1", "$newAddress")
 
                 addressRepository.setSelectState(oldAddress, false)
                 addressRepository.setSelectState(newAddress, true)
@@ -74,6 +73,42 @@ class AddressViewModel @Inject constructor(
         addressRepository.addAddress(address)
     }
 
+    fun updateCurrentAddress(address: UserDeliverAddress) {
+        viewModelScope.launch {
+            addressRepository.updateAddress(address)
+        }
+    }
+
+    fun deleteAddress(address: UserDeliverAddress) {
+        viewModelScope.launch {
+            addressRepository.deleteAddress(address, currentUser)
+        }
+    }
+
+    suspend fun deleteAddress1(address: UserDeliverAddress) {
+        val job = viewModelScope.launch {
+            addressRepository.deleteAddress(address, currentUser)
+            getAddress()
+        }
+        job.join()
+//        _address.value?.get(0)?.let { setSelectStateToTrue(it) }
+    }
+
+    fun setSelectStateToTrue(address: UserDeliverAddress) {
+        viewModelScope.launch {
+            addressRepository.setSelectState(address, true)
+        }
+    }
+
+    /**
+     * set it to first address
+     */
+//    fun resetSelectedAddress() {
+//       viewModelScope.launch {
+//           _address.value?.get(0)?.let { addressRepository.setSelectState(it,true) }
+//       }
+//    }
+
     /***
      * generate tempdata
      */
@@ -88,4 +123,5 @@ class AddressViewModel @Inject constructor(
         "khanh hoa",
         false
     )
+
 }

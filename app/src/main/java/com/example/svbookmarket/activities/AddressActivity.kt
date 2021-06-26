@@ -1,6 +1,7 @@
 package com.example.svbookmarket.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +14,8 @@ import com.example.svbookmarket.databinding.ActivityAddressBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddressActivity : AppCompatActivity(), OnCreateAddressListener,OnEditAddressListener,
+class AddressActivity : AppCompatActivity(), OnCreateAddressListener, OnEditAddressListener,
+    OnDeleteAddressListener,
     AddressAdapter.NotifyAddressSelectionChanged {
     companion object {
         const val CHANGE_ADDRESS = "CHANGE_ADDRESS"
@@ -39,39 +41,51 @@ class AddressActivity : AppCompatActivity(), OnCreateAddressListener,OnEditAddre
         if (intent.extras?.getBoolean(FROM_CART) != null)
             binding.adContinue.visibility = View.VISIBLE
 
-        //on click
+        //on back
         binding.adBack.setOnClickListener { onBackPressed() }
 
         // TODO: 11/06/2021  update address then navigate back
         binding.adContinue.setOnClickListener { onBackPressed() }
 
+        // add form
         newAddressBtn.setOnClickListener {
             val newAddressDialog = CreateAddressDialog(this)
             newAddressDialog.setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
             newAddressDialog.show(supportFragmentManager, "tag")
         }
 
+
+        // edit form
         editAddressBtn.setOnClickListener {
-            val editAddressDialog = EditAddressDialog()
-            editAddressDialog.setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
-            editAddressDialog.show(supportFragmentManager, "tag")
+            Log.i("selectqq", "${viewmodel.selectedItem}")
+
+            val editAddressDialog =
+                viewmodel.selectedItem?.let { it1 -> EditAddressDialog(this, it1, this) }
+            editAddressDialog?.setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
+            editAddressDialog?.show(supportFragmentManager, "tag")
         }
 
         addressList.adapter = addressAdapter
 
         watchChanges()
-
-//        onListenToDb()
     }
 
     private fun watchChanges() {
         viewmodel.getAddress().observe(this, { address ->
             val btn = binding.adEditAdress
 
-            if (address.size > 0 && !btn.isEnabled) {
-                btn.setTextColor(resources.getColor(R.color.blue_dark))
-                btn.isEnabled = true
+            if (address.size > 0) {
+                if (!btn.isEnabled) {
+                    btn.setTextColor(resources.getColor(R.color.blue_dark))
+                    btn.isEnabled = true
+                }
+                val chosen = address.find { it.chose == true }
+                Log.i("found", "$chosen")
+//                if (chosen == null) {
+//                    viewmodel.setSelectStateToTrue(address[0])
+//                }
             }
+
             addressAdapter.addAddress(address)
 
         })
@@ -79,40 +93,20 @@ class AddressActivity : AppCompatActivity(), OnCreateAddressListener,OnEditAddre
 
     override fun onCreateAddress(address: UserDeliverAddress) {
         viewmodel.addAddress(address)
+        Log.i("createa", "create call")
     }
 
-
-//    fun onListenToDb()
-//    {
-//        val ref = FirebaseFirestore.getInstance().collection("accounts").document(CurrentUserInfo.getInstance().currentProfile.email).collection("userDeliverAddresses")
-//        ref.addSnapshotListener { snapshot, e ->
-//            e?.let {
-//                Log.d("00000000000000000", e.message!!)
-//                return@addSnapshotListener
-//            }
-//
-//            for (dc in snapshot!!.documentChanges)
-//            {
-//                when(dc.type)
-//                {
-//                    DocumentChange.Type.ADDED -> { addressAdapter.onChange()
-//                        addressAdapter.notifyDataSetChanged()}
-//                    DocumentChange.Type.MODIFIED -> {addressAdapter.onChange()
-//                        addressAdapter.notifyDataSetChanged()}
-//                    DocumentChange.Type.REMOVED -> { addressAdapter.onChange()
-//                        addressAdapter.notifyDataSetChanged()}
-//                }
-//            }
-//        }
-//    }
-
-
     override fun onAddressChange(old: UserDeliverAddress, new: UserDeliverAddress) {
-        viewmodel.updateCurrentAddress(old, new)
+        viewmodel.chageSelectState(old, new)
+        viewmodel.selectedItem = new
     }
 
     override fun onEditAddress(address: UserDeliverAddress) {
-        TODO("Not yet implemented")
+        viewmodel.updateCurrentAddress(address)
+    }
+
+    override fun onDeleteAddress(address: UserDeliverAddress) {
+        viewmodel.deleteAddress(address)
     }
 }
 
@@ -122,6 +116,10 @@ interface OnCreateAddressListener {
 
 interface OnEditAddressListener {
     fun onEditAddress(address: UserDeliverAddress)
+}
+
+interface OnDeleteAddressListener {
+    fun onDeleteAddress(address: UserDeliverAddress)
 }
 
 

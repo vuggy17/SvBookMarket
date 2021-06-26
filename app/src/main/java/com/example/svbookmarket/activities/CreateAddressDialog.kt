@@ -60,6 +60,8 @@ class CreateAddressDialog(private val listener: OnCreateAddressListener) :
                 district.error = getString(state.districtError)
             if (state.cityError != null)
                 city.error = getString(state.cityError)
+            if(state.phoneError !=null)
+                phone.error = getString(state.phoneError)
         })
 
 

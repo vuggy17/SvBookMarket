@@ -1,17 +1,13 @@
 package com.example.svbookmarket.activities.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.svbookmarket.R
-import com.example.svbookmarket.activities.common.Constants.VMTAG
 import com.example.svbookmarket.activities.model.CreateAddressFormState
 import com.example.svbookmarket.activities.model.UserDeliverAddress
-import kotlin.math.log
 
-
-class CreateAddressViewModel : ViewModel() {
+class EditAddressViewModel:ViewModel() {
 
     private val _createAddressForm = MutableLiveData<CreateAddressFormState>()
     val createAddressFormState: LiveData<CreateAddressFormState> = _createAddressForm
@@ -32,6 +28,7 @@ class CreateAddressViewModel : ViewModel() {
             _createAddressForm.value = CreateAddressFormState(isDataValid = true)
     }
 
+
     fun isNameValid(input: String): Boolean {
 //        val regex = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$".toRegex()
 //
@@ -50,7 +47,7 @@ class CreateAddressViewModel : ViewModel() {
         return input.isNotBlank()
     }
 
-    init {
-        Log.i("viewmodeltag", "created!!")
-    }
+
+
+
 }

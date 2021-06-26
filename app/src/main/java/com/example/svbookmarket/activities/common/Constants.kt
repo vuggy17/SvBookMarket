@@ -25,6 +25,7 @@ object Constants {
     const val PHOTO_URL = "photoUrl"
     const val CREATED_AT = "createdAt"
     const val RATING = "rating"
+    const val DEFAULT_ADDRESS_POS = 0   //use to set select position after delete address
 
     //Bindings
     const val MOVIE_POSTER = "moviePoster"

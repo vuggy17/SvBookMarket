@@ -50,4 +50,5 @@
     <string name="invalid_lane">Invalid address lane</string>
     <string name="invalid_city">Invalid city</string>
     <string name="invalid_district">Invalid district</string>
+    <string name="invalid_phone">Invalid phone</string>
 </resources>

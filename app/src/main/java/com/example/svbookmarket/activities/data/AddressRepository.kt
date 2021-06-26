@@ -45,11 +45,26 @@ class AddressRepository @Inject constructor(
 
     suspend fun setSelectState(item: UserDeliverAddress, state: Boolean) {
         withContext(Dispatchers.IO) {
-           accountColRef.document(user.email).collection(ADDRESS_REF).document(item.id).update("chose", state)
+            accountColRef.document(user.email).collection(ADDRESS_REF).document(item.id)
+                .update("chose", state)
         }
     }
 
-    init {
+    suspend fun updateAddress(item: UserDeliverAddress) {
+        withContext(Dispatchers.IO) {
+            accountColRef.document(user.email).collection((ADDRESS_REF)).document(item.id).set(item)
+        }
     }
 
+    suspend fun deleteAddress(item: UserDeliverAddress, user: AppAccount) {
+        withContext(Dispatchers.IO) {
+            val query =
+                accountColRef.document(user.email).collection((ADDRESS_REF)).document(item.id).run {
+                    delete()
+
+
+                }
+            Log.i("custom6", "called in delte repo")
+        }
+    }
 }

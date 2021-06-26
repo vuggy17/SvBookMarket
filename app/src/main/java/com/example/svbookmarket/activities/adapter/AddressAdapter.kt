@@ -7,26 +7,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.model.UserDeliverAddress
+import com.example.svbookmarket.databinding.CardAddressBinding
 import com.google.android.material.card.MaterialCardView
 import kotlin.properties.Delegates
 
 
-public class AddressAdapter(
+class AddressAdapter(
     private var items: MutableList<UserDeliverAddress>,
-    listener: NotifyAddressSelectionChanged
+    private val listener: NotifyAddressSelectionChanged,
 ) :
     RecyclerView.Adapter<AddressAdapter.VH>() {
     private var selectedPos = -1
 
+    private var lastSelectedPos = -1
+
     private var selectedPosition by Delegates.observable(selectedPos) { _, oldPos, newPos ->
-        if (newPos in items.indices && newPos != oldPos && oldPos!= -1) {
+        if (newPos in items.indices && newPos != oldPos && oldPos != -1) {
             //update list
             items[oldPos].chose = false
             items[newPos].chose = true
 
             listener.onAddressChange(items[oldPos], items[newPos])
+
 
             //update adapter
             notifyItemChanged(oldPos)
@@ -37,30 +40,28 @@ public class AddressAdapter(
         }
     }
 
+    private fun toggleCheckedPosition(oldPos: Int, newPos: Int) {
+        if (oldPos == -1 || oldPos == newPos) return
+        listener.onAddressChange(items[oldPos], items[newPos])
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        val adapterLayout =
-            LayoutInflater.from(parent.context).inflate(R.layout.card_address, parent, false)
-        return VH(adapterLayout)
+        val binding = CardAddressBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return VH(binding)
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.name.text = items[position].fullName
         holder.phoneNumber.text = items[position].phoneNumber
-        holder.firstAddress.text = items[position].addressLane
-        holder.secondAddress.text = items[position].district
-        holder.thirdAddress.text = items[position].city
+        holder.lane.text = items[position].addressLane
+        holder.district.text = items[position].district
+        holder.city.text = items[position].city
 
-        (holder.itemView as MaterialCardView).isChecked = items[position].chose
-
-        if (items[position].chose)
-            selectedPosition = position
-
-        Log.i("customtag", "onbind: ${selectedPos}")
-        //toggle selected
-        holder.itemView.setOnClickListener {
-            selectedPosition = position
+        if (items[position].chose) {
+            lastSelectedPos = position
         }
 
+        (holder.itemView as MaterialCardView).isChecked = items[position].chose
     }
 
     fun addAddress(address: List<UserDeliverAddress>) {
@@ -80,15 +81,23 @@ public class AddressAdapter(
         return items.size
     }
 
-    inner class VH(view: View) : RecyclerView.ViewHolder(view) {
+    inner class VH(binding: CardAddressBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        var name: TextView = view.findViewById(R.id.tvName)
-        var phoneNumber: TextView = view.findViewById(R.id.tvPhoneNumber)
-        var firstAddress: TextView = view.findViewById(R.id.tvAddress)
-        var secondAddress: TextView = view.findViewById(R.id.tvSecondAddress)
-        var thirdAddress: TextView = view.findViewById(R.id.tvThirdAddress)
-        var fourthAddress: TextView = view.findViewById(R.id.tvFourthAddress)
-        var vieww: View = view
+        var name: TextView = binding.tvName
+        var phoneNumber: TextView = binding.cardAdPhone
+        var lane: TextView = binding.cardAdLane
+        var district: TextView = binding.cardAdDistrict
+        var city: TextView = binding.cardAdCity
+        var root: View = binding.root
+
+        init {
+            (root as MaterialCardView).setOnClickListener {
+                toggleCheckedPosition(lastSelectedPos, this.adapterPosition)
+                lastSelectedPos = this.layoutPosition
+
+
+            }
+        }
     }
 
     interface NotifyAddressSelectionChanged {
