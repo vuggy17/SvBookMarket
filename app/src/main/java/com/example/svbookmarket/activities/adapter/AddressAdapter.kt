@@ -1,105 +1,89 @@
 package com.example.svbookmarket.activities.adapter
 
-import android.content.Context
+import CurrentUserInfo
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CursorAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.AddressActivity
-import com.example.svbookmarket.activities.model.AddressModel
 import com.example.svbookmarket.activities.model.UserDeliverAddress
+import com.example.svbookmarket.databinding.CardAddressBinding
 import com.google.android.material.card.MaterialCardView
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlin.properties.Delegates
 
 
-public class AddressAdapter(var context: Context, private var dataset: MutableList<UserDeliverAddress>) :
+class AddressAdapter(
+    private var items: MutableList<UserDeliverAddress>,
+    private val listener: NotifyAddressSelectionChanged,
+) :
     RecyclerView.Adapter<AddressAdapter.VH>() {
+    private var lastSelectedPos = -1
 
-    val defaultSelection = 0
-
-    // default position = 0
-    var selectedPosition by Delegates.observable(defaultSelection) { property, oldPos, newPos ->
-        if (newPos in dataset.indices) {
-            notifyItemChanged(oldPos)
-            notifyItemChanged(newPos)
-
-            if(context is AddressActivity){
-                // TODO: 14/06/2021 update selected address trong viewmodeld de goi ham update trong viewmodel  
-            }
-
-        }
+    private fun toggleCheckedPosition(oldPos: Int, newPos: Int) {
+        if (oldPos == -1 || oldPos == newPos) return
+        listener.onAddressChange(items[oldPos], items[newPos])
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        val adapterLayout =
-            LayoutInflater.from(parent.context).inflate(R.layout.card_address, parent, false)
-        return VH(adapterLayout)
+        val binding = CardAddressBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return VH(binding)
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        holder.name.text = dataset[position].fullName
-        holder.phoneNumber.text = dataset[position].phoneNumber
-        holder.firstAddress.text = dataset[position].addressLane
-        holder.secondAddress.text = dataset[position].district
-        holder.thirdAddress.text = dataset[position].city
+        holder.name.text = items[position].fullName
+        holder.phoneNumber.text = items[position].phoneNumber
+        holder.lane.text = items[position].addressLane
+        holder.district.text = items[position].district
+        holder.city.text = items[position].city
 
-        //default position
-
-        (holder.itemView as MaterialCardView).setOnClickListener {
-            (it as MaterialCardView).isChecked = !it.isChecked
-
+        if (items[position].chose) {
+            lastSelectedPos = position
         }
 
-        if (position in dataset.indices) {
-            holder.bind()
-            holder.itemView.setOnClickListener { selectedPosition = position
-                CurrentUserInfo.getInstance().lstUserDeliverAddress[position].isChose = true
-                val ref = FirebaseFirestore.getInstance().collection("accounts").document(CurrentUserInfo.getInstance().currentProfile.email).collection("userDeliverAddresses")
-                for (i in 0 until CurrentUserInfo.getInstance().lstUserDeliverAddress.size)
-                {
-                    if ( CurrentUserInfo.getInstance().lstUserDeliverAddress[i].isChose)
-                    {
-                        CurrentUserInfo.getInstance().lstUserDeliverAddress[i].isChose = false
-                        ref.document(CurrentUserInfo.getInstance().lstUserDeliverAddress[i].id).update("isChose", false).addOnCompleteListener {
-                            Log.d("000000000000000", "dcm1")
-                        }
-                    }
-                }
-                ref.document(CurrentUserInfo.getInstance().lstUserDeliverAddress[position].id).update("isChose", true).addOnCompleteListener{
-                    Log.d("000000000000000", "dcm2")
-                }
-            }
-
-        }
+        (holder.itemView as MaterialCardView).isChecked = items[position].chose
     }
 
-    fun onChange()
-    {
-        dataset = CurrentUserInfo.getInstance().lstUserDeliverAddress
+    fun addAddress(address: List<UserDeliverAddress>) {
+        if (this.items.isNotEmpty()) {
+            this.items.clear()
+        }
+        this.items.addAll(address)
+        notifyDataSetChanged()
+    }
+
+
+    fun onChange() {
+        items = CurrentUserInfo.getInstance().lstUserDeliverAddress
     }
 
     override fun getItemCount(): Int {
-        return dataset.size
+        return items.size
     }
 
-    inner class VH(view: View) : RecyclerView.ViewHolder(view) {
+    inner class VH(binding: CardAddressBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        var name: TextView = view.findViewById(R.id.tvName)
-        var phoneNumber: TextView = view.findViewById(R.id.tvPhoneNumber)
-        var firstAddress: TextView = view.findViewById(R.id.tvAddress)
-        var secondAddress: TextView = view.findViewById(R.id.tvSecondAddress)
-        var thirdAddress: TextView = view.findViewById(R.id.tvThirdAddress)
-        var fourthAddress: TextView = view.findViewById(R.id.tvFourthAddress)
-        var vieww: View = view
+        var name: TextView = binding.tvName
+        var phoneNumber: TextView = binding.cardAdPhone
+        var lane: TextView = binding.cardAdLane
+        var district: TextView = binding.cardAdDistrict
+        var city: TextView = binding.cardAdCity
+        var root: View = binding.root
 
-        fun bind() {
-            (vieww as MaterialCardView).isChecked = selectedPosition == adapterPosition
+        init {
+            (root as MaterialCardView).setOnClickListener {
+                toggleCheckedPosition(lastSelectedPos, this.adapterPosition)
+                lastSelectedPos = this.layoutPosition
+
+                val recyclerView = (listener as AddressActivity).binding.adRecyclerview
+                recyclerView.itemAnimator?.onAnimationFinished(this)
+
+            }
         }
+    }
 
+    interface NotifyAddressSelectionChanged {
+        fun onAddressChange(old: UserDeliverAddress, new: UserDeliverAddress)
     }
 }

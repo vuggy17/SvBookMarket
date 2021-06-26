@@ -1,59 +1,127 @@
 package com.example.svbookmarket.activities.viewmodel
 
-import androidx.lifecycle.*
+import CurrentUserInfo
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.svbookmarket.activities.common.Constants.VMTAG
 import com.example.svbookmarket.activities.data.AddressRepository
 import com.example.svbookmarket.activities.data.CartRepository
-import dagger.hilt.android.scopes.ViewModelScoped
+import com.example.svbookmarket.activities.model.UserDeliverAddress
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
-import com.example.svbookmarket.activities.model.UserDeliverAddress as MyAddress
 
-@ViewModelScoped
+@HiltViewModel
 class AddressViewModel @Inject constructor(
     private val addressRepository: AddressRepository,
     private val cartRepository: CartRepository
 ) : ViewModel() {
 
-    private val _address = MutableLiveData<MutableList<MyAddress>>()
-    val address: LiveData<MutableList<MyAddress>> get() = _address
+    private val currentUser = CurrentUserInfo.getInstance().currentProfile
 
-    private lateinit var _selectedItem: MyAddress
-    var selectedItem:MyAddress
-        get() = _selectedItem
-        set(value) {
-            _selectedItem = value
+    private val _address = MutableLiveData<MutableList<UserDeliverAddress>>()
+    val address: LiveData<MutableList<UserDeliverAddress>> get() = _address
+
+    var selectedItem: UserDeliverAddress? = null
+
+    fun getAddress(): MutableLiveData<MutableList<UserDeliverAddress>> {
+        addressRepository.getAddress(currentUser).addSnapshotListener { value, error ->
+            if (error != null) {
+                Log.e(VMTAG, "Listen failed, $error")
+            }
+
+            val addressList: MutableList<UserDeliverAddress> = ArrayList()
+
+            for (doc in value!!) {
+                val addressItem = doc.toObject(UserDeliverAddress::class.java)
+                addressItem.id = doc.id
+                addressList.add(addressItem)
+
+                //set selected item
+                if (addressItem.chose) {
+                    selectedItem = addressItem
+                }
+            }
+            _address.value = addressList
+
+            if (selectedItem == null)
+                selectedItem = _address.value?.get(0)
         }
+        return _address
+    }
 
+    fun chageSelectState(oldAddress: UserDeliverAddress, newAddress: UserDeliverAddress) {
+        if (newAddress != oldAddress)
+            viewModelScope.launch {
+                Log.i("custom1", "$oldAddress")
+                Log.i("custom1", "$newAddress")
 
-    fun updateCurrentAddress(oldAddress: MyAddress,newAddress: MyAddress ) {
-        if(newAddress != oldAddress)
+                addressRepository.setSelectState(oldAddress, false)
+                addressRepository.setSelectState(newAddress, true)
+            }
+    }
+
+    fun isAddressExist(address: UserDeliverAddress): Boolean {
+        val index = _address.value?.indexOf(address)
+        return index == -1
+    }
+
+    fun addAddress(address: UserDeliverAddress) {
+        addressRepository.addAddress(address)
+    }
+
+    fun updateCurrentAddress(address: UserDeliverAddress) {
         viewModelScope.launch {
-            cartRepository.updateCartWithAddress(oldAddress, false)
-            cartRepository.updateCartWithAddress(oldAddress, true)
+            addressRepository.updateAddress(address)
         }
     }
 
-    init {
+    fun deleteAddress(address: UserDeliverAddress) {
         viewModelScope.launch {
-            // call repository go get data
-           _address.value =  addressRepository.getAddress()
+            addressRepository.deleteAddress(address, currentUser)
         }
     }
+
+    suspend fun deleteAddress1(address: UserDeliverAddress) {
+        val job = viewModelScope.launch {
+            addressRepository.deleteAddress(address, currentUser)
+            getAddress()
+        }
+        job.join()
+//        _address.value?.get(0)?.let { setSelectStateToTrue(it) }
+    }
+
+    fun setSelectStateToTrue(address: UserDeliverAddress) {
+        viewModelScope.launch {
+            addressRepository.setSelectState(address, true)
+        }
+    }
+
+    /**
+     * set it to first address
+     */
+//    fun resetSelectedAddress() {
+//       viewModelScope.launch {
+//           _address.value?.get(0)?.let { addressRepository.setSelectState(it,true) }
+//       }
+//    }
 
     /***
      * generate tempdata
      */
 
-    private fun generate(): MyAddress = MyAddress(
-        "Khuong Duy",
-        "0869256174",
-        "Ktx khu A, DHQG",
-        "Phuong Linh Trung",
-        "Quan Thu Duc",
-        "Tp.Ho Chi Minh"
+
+    private val testAddress = UserDeliverAddress(
+        "",
+        "khuong duy",
+        "012321322",
+        "lams son",
+        "cam thanh bac",
+        "khanh hoa",
+        false
     )
-
-
 
 }

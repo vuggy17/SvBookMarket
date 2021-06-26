@@ -21,7 +21,6 @@ import com.example.svbookmarket.activities.model.UserDeliverAddress
 import com.example.svbookmarket.databinding.ItemBillingBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
-import com.google.firebase.Timestamp
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +30,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
@@ -153,7 +151,7 @@ class CheckoutDialog : BottomSheetDialogFragment() {
         lstAddress: MutableList<UserDeliverAddress>
     ) {
         for (i in 0 until lstAddress.size) {
-            if (lstAddress[i].isChose) {
+            if (lstAddress[i].chose) {
                 GlobalScope.launch {
                     withContext(Dispatchers.IO) {
                         moveToUserOrDer(user, lstCheckout, lstAddress[i])

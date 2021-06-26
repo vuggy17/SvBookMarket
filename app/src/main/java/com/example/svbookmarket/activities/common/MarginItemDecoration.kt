@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MarginItemDecoration(
     private val spaceSize: Int,
+    private val leftSpaceSize: Int = -1,
     private val spanCount: Int = 1,
     private val orientation: Int = GridLayoutManager.VERTICAL,
     private val isHorizontalLayout: Boolean = false
@@ -35,7 +36,7 @@ class MarginItemDecoration(
                 }
             }
 
-            left = spaceSize
+            left = if(leftSpaceSize!= -1) leftSpaceSize else spaceSize
             right = spaceSize
             bottom = spaceSize
         }

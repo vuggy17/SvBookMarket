@@ -3,24 +3,21 @@ package com.example.svbookmarket.activities.common
 
 object Constants {
     //App
-    const val TAG = "FireAppTag"
+    const val VMTAG = "VMTAG"
+
 
     //Intents
     const val SPLASH_INTENT = "splashIntent"
-    const val AUTH_INTENT = "authIntent"
-    const val MAIN_INTENT = "mainIntent"
 
     //Bundles
-    const val MOVIE = "movie"
+    const val ITEM = "ITEM_TO_DISPLAY"
 
-    //Database Types
-    const val PRODUCT_NAME = "productName"
-    const val CLOUD_FIRESTORE = "Cloud Firestore"
-    const val REALTIME_DATABASE = "Realtime Database"
 
     //References
     const val USERS_REF = "accounts"
     const val BOOK_REF = "books"
+    const val ADDRESS_REF = "userDeliverAddresses"
+
 
     //Fields
     const val NAME = "name"
@@ -28,6 +25,7 @@ object Constants {
     const val PHOTO_URL = "photoUrl"
     const val CREATED_AT = "createdAt"
     const val RATING = "rating"
+    const val DEFAULT_ADDRESS_POS = 0   //use to set select position after delete address
 
     //Bindings
     const val MOVIE_POSTER = "moviePoster"
@@ -54,12 +52,4 @@ object Constants {
             return name.toUpperCase().capitalize()
         }
     }
-
-    // activity detail
-    const val ITEM = "ITEM_TO_DISPLAY"
-
-
-    //Tags
-    const val VMTAG = "VMTAG"
-
 }

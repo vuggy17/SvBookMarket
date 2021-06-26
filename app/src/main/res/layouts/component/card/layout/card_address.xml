@@ -31,7 +31,7 @@
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/tvPhoneNumber"
+            android:id="@+id/card_ad_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
@@ -39,7 +39,7 @@
             />
 
         <TextView
-            android:id="@+id/tvAddress"
+            android:id="@+id/card_ad_lane"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
@@ -47,24 +47,17 @@
             />
 
         <TextView
-            android:id="@+id/tvSecondAddress"
+            android:id="@+id/card_ad_district"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Phuong Linh Trung"
             />
 
         <TextView
-            android:id="@+id/tvThirdAddress"
+            android:id="@+id/card_ad_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Quan Thu Duc"
-            />
-
-        <TextView
-            android:id="@+id/tvFourthAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tp. Ho Chi Minh"
             />
 
     </LinearLayout>

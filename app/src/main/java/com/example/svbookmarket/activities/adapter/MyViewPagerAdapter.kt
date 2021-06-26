@@ -39,7 +39,7 @@ class MyViewPagerAdapter(
                     .placeholder(R.drawable.ic_launcher_background)
                     .into(it.bookThumbnail);
 
-
+                it.cardBook.setOnClickListener{ listener.onViewPagerClick(this)}
             }
         }
     }
@@ -60,6 +60,7 @@ class MyViewPagerAdapter(
         val pageTitle = binding.pageTitle
         val bookTitle = binding.pageBookTitle
         val bookThumbnail = binding.pageBookThumbnail
+        val cardBook = binding.cardBook
     }
 
 
