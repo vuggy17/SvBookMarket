@@ -109,7 +109,7 @@ class CartRepository @Inject constructor(
         }
         else
         {
-            val toast: Toast = Toast(context)
+            val toast: Toast = Toast.makeText(context,"messenger",Toast.LENGTH_SHORT)
             toast.setText("At max in store")
             toast.show()
             val handler = Handler()

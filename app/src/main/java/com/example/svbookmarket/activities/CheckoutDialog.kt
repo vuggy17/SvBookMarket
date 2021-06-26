@@ -87,14 +87,14 @@ class CheckoutDialog : BottomSheetDialogFragment() {
                     )
                     startActivity(Intent(context,ConfirmationActivity::class.java))
                 } else {
-                    val toast: Toast = Toast(context)
+                    val toast: Toast = Toast.makeText(context,"messenger",Toast.LENGTH_SHORT)
                     toast.setText("Not enough quantity in store")
                     toast.show()
                     val handler = Handler()
                     handler.postDelayed({ toast.cancel() }, 500)
                 }
             } else {
-                val toast: Toast = Toast(context)
+                val toast: Toast = Toast.makeText(context,"messenger",Toast.LENGTH_SHORT)
                 toast.setText("Have nothing to checkout")
                 toast.show()
                 val handler = Handler()
