@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.common.Constants.DEFAULT_IMG_PLACEHOLDER
 import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.databinding.CardBookBinding
 
@@ -40,7 +41,7 @@ class CategoryDetailAdapter(
                     .with(holder.itemView)
                     .load(Image)
                     .centerCrop()
-                    .placeholder(R.drawable.ic_launcher_background)
+                    .placeholder(DEFAULT_IMG_PLACEHOLDER)
                     .into(it.img);
 
                 //set up position touch listener

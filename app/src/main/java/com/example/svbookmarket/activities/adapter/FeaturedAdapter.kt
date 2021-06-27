@@ -1,15 +1,23 @@
 package com.example.svbookmarket.activities.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.common.Constants.DEFAULT_IMG_PLACEHOLDER
 import com.example.svbookmarket.activities.model.Book
-import com.example.svbookmarket.databinding.CardBook2Binding
 import com.example.svbookmarket.databinding.CardBookBinding
 import com.makeramen.roundedimageview.RoundedImageView
 
@@ -22,7 +30,7 @@ class FeaturedAdapter(
 ) :
     RecyclerView.Adapter<FeaturedAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-       val binding = CardBookBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = CardBookBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -39,11 +47,13 @@ class FeaturedAdapter(
                 Glide
                     .with(holder.itemView)
                     .load(Image)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .centerCrop()
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .into(it.bookImage);
+                    .placeholder(DEFAULT_IMG_PLACEHOLDER)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(it.bookImage)
 
-                it.itemView.setOnClickListener{listener.onBookClick(this)}
+                it.itemView.setOnClickListener { listener.onBookClick(this) }
             }
         }
     }
@@ -63,10 +73,11 @@ class FeaturedAdapter(
 
     class ViewHolder(binding: CardBookBinding) : RecyclerView.ViewHolder(binding.root) {
         val bookImage: RoundedImageView = binding.BookImage
-        val bookTitle: TextView =binding.bookTitle
+        val bookTitle: TextView = binding.bookTitle
         val bookAuthor: TextView = binding.bookAuthor
         val bookPrice: TextView = binding.bookPrice
         val bookRate: TextView = binding.bookRate
+        var dominanceColor =  Color.WHITE
     }
 
     interface OnBookClickLitener {

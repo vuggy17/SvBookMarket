@@ -10,6 +10,7 @@
     <TextView
         android:id="@+id/page_title"
         android:layout_width="wrap_content"
+        android:textStyle="bold"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:ellipsize="marquee"
@@ -25,15 +26,15 @@
 
     <TextView
         android:id="@+id/page_des"
-        android:layout_width="400dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:ellipsize="end"
-        android:maxWidth="400dp"
+        android:maxWidth="380dp"
         android:maxLines="2"
         android:text="@string/textTest"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/page_title" />
@@ -101,7 +102,6 @@
                     android:fontFamily="@font/roboto_bold"
                     android:maxWidth="145dp"
                     android:maxLines="2"
-                    android:text="Eleanor and Park "
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"

@@ -23,9 +23,10 @@
                 android:layout_height="180dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
+                android:foreground="@color/dark_tint"
+                android:foregroundTintMode="src_atop"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
                 android:id="@+id/cd_title"

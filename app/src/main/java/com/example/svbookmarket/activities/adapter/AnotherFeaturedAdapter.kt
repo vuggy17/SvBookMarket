@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.databinding.CardBook2Binding
 import com.makeramen.roundedimageview.RoundedImageView
@@ -41,7 +42,7 @@ class AnotherFeaturedAdapter(
                     .with(holder.itemView)
                     .load(Image)
                     .centerCrop()
-                    .placeholder(R.drawable.ic_launcher_background)
+                    .placeholder(Constants.DEFAULT_IMG_PLACEHOLDER)
                     .into(it.bookImage);
 
                 it.itemView.setOnClickListener{listener.onAnotherBookClick(this)}

@@ -51,28 +51,8 @@
             app:layout_constraintStart_toStartOf="@+id/f_backButton"
             app:layout_constraintTop_toTopOf="@+id/f_backButton" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView4"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@color/white"-->
-<!--            android:clickable="true"-->
-<!--            android:focusable="true"-->
-<!--            android:src="@drawable/ic_outline_cart"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/textView11"/>-->
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/feature_recycler"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="240dp"-->
-<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--            android:layout_marginTop="-200dp"-->
-<!--            android:orientation="horizontal"-->
-<!--            tools:listitem="@layout/card_book" />-->
-
-<!--   -->
 
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
@@ -82,14 +62,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="24dp"
-        android:text="Bestselling"
-        android:fontFamily="@font/roboto_bold"
-        android:textSize="24dp"
-        android:textColor="@color/black_header"/>
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="12dp"
+        android:text="@string/best_selling"
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="22sp"
+        android:textColor="@color/black"/>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
+        android:paddingTop="16dp"
         android:id="@+id/rc_Bestselling"
         android:layout_width="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -99,12 +82,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="24dp"
-        android:text="For you"
-        android:fontFamily="@font/roboto_bold"
-        android:textSize="24dp"
-        android:textColor="@color/black_header"/>
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="12dp"
+        android:text="@string/for_you"
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="16dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rc_Suggest"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -115,14 +99,15 @@
         tools:listitem="@layout/card_suggest" />
 
     <TextView
+        android:layout_marginBottom="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="24dp"
-        android:textSize="24dp"
-        android:fontFamily="@font/roboto_bold"
-        android:textColor="@color/black_header"
-        android:text="Explore more"/>
+        android:layout_marginStart="12dp"
+        android:textSize="22sp"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="@color/black"
+        android:text="@string/explore_more"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/f_rcMore"

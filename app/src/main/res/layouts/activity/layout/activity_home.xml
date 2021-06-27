@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="32dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -131,6 +131,7 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
+                android:paddingTop="16dp"
                 android:id="@+id/rc_Suggest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -142,9 +143,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="@dimen/margin"
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="12dp"
                 android:orientation="horizontal">
 
                 <TextView

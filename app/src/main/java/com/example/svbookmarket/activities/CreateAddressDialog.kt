@@ -23,7 +23,7 @@ class CreateAddressDialog(private val listener: OnCreateAddressListener) :
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DialogCreateAddressBinding.inflate(inflater, container, false)
         viewmodel = ViewModelProvider(this).get(CreateAddressViewModel::class.java)
 

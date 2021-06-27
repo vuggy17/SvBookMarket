@@ -49,10 +49,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="Name"
-
             android:fontFamily="@font/roboto_regular"
             android:inputType="text"
-            android:text="Nguyen Van A"
             android:textColor="@color/less_black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -82,7 +80,6 @@
 
             android:fontFamily="@font/roboto_regular"
             android:inputType="number"
-            android:text="0123456789"
             android:textColor="@color/less_black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -111,7 +108,6 @@
             android:autofillHints="District"
             android:fontFamily="@font/roboto_regular"
             android:inputType="text"
-            android:text="KTX khu B ĐHQG"
             android:textColor="@color/less_black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -154,7 +150,6 @@
 
                     android:fontFamily="@font/roboto_regular"
                     android:inputType="text"
-                    android:text="5"
                     android:textColor="@color/less_black"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -189,7 +184,6 @@
                     android:fontFamily="@font/roboto_regular"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:text="TP.Thu Duc"
                     android:textColor="@color/less_black"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"

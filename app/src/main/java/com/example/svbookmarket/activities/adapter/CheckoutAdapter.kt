@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.model.Cart
 import com.google.android.material.card.MaterialCardView
 
@@ -37,7 +38,7 @@ class CheckoutAdapter(private val context: Context, private var items: MutableLi
             .with(holder.itemView)
             .load(items[position].imgUrl)
             .centerCrop()
-            .placeholder(R.drawable.ic_launcher_background)
+            .placeholder(Constants.DEFAULT_IMG_PLACEHOLDER)
             .into(holder.imgCover);
         //check option
         holder.itemView.setOnLongClickListener() {

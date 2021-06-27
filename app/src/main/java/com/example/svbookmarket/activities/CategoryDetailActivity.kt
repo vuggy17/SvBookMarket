@@ -3,19 +3,19 @@ package com.example.svbookmarket.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.signature.MediaStoreSignature
+import com.bumptech.glide.signature.ObjectKey
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.CategoryDetailAdapter
-import com.example.svbookmarket.activities.common.Constants
+import com.example.svbookmarket.activities.common.BlurTransformation
 import com.example.svbookmarket.activities.common.Constants.ACTIVITY.CATEGORY_DETAIL
 import com.example.svbookmarket.activities.common.Constants.ITEM
 import com.example.svbookmarket.activities.common.MarginItemDecoration
-import com.example.svbookmarket.activities.common.RecyclerViewClickListener
 import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.viewmodel.CategoryDetailViewModel
 import com.example.svbookmarket.databinding.ActivityCategoryDetailBinding
@@ -35,10 +35,7 @@ class CategoryDetailActivity : AppCompatActivity(), CategoryDetailAdapter.OnCate
         super.onCreate(savedInstanceState)
         binding = ActivityCategoryDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setupView()
-
-
     }
 
     private fun setupView() {
@@ -58,7 +55,8 @@ class CategoryDetailActivity : AppCompatActivity(), CategoryDetailAdapter.OnCate
             .with(baseContext)
             .load(backgroundResId)
             .centerCrop()
-            .placeholder(R.drawable.ic_launcher_background)
+            .placeholder(R.drawable.bg_button_white)
+            .transition(DrawableTransitionOptions.withCrossFade())
             .into(binding.cdCover);
 
 
@@ -83,6 +81,7 @@ class CategoryDetailActivity : AppCompatActivity(), CategoryDetailAdapter.OnCate
         items = bundle?.getParcelableArrayList<Book>(CATEGORY_DETAIL.toString()) as ArrayList<Book>
         return items
     }
+
     private fun getCategoryNameFromIntent(): String = intent.getStringExtra(CATEGORY_TYPE)!!
 
 
@@ -90,9 +89,10 @@ class CategoryDetailActivity : AppCompatActivity(), CategoryDetailAdapter.OnCate
         val i = putBookIntoIntent(item)
         navigate(i)
     }
-    private fun navigate(mIntent:Intent)= this.binding.root.context.startActivity(mIntent)
 
-    private fun putBookIntoIntent(item:Book):Intent{
+    private fun navigate(mIntent: Intent) = this.binding.root.context.startActivity(mIntent)
+
+    private fun putBookIntoIntent(item: Book): Intent {
         val bundle = Bundle()
         bundle.putParcelable(ITEM, item)
         val i = Intent(this, ItemDetailActivity::class.java)

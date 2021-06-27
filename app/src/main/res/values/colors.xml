@@ -30,4 +30,5 @@
     <color name="litle_gray">#919191</color>
 
     <color name="advertise_background">#E2E2E2</color>
+    <color name="dark_tint">#50000000</color>
 </resources>

@@ -46,9 +46,17 @@
     <string name="hello_world">Hello Square World!</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="cancel">Cancel</string>
+
     <string name="invalid_name">Invalid name</string>
     <string name="invalid_lane">Invalid address lane</string>
     <string name="invalid_city">Invalid city</string>
     <string name="invalid_district">Invalid district</string>
     <string name="invalid_phone">Invalid phone</string>
+    <string name="best_selling">Best selling</string>
+    <string name="for_you">For you</string>
+    <string name="explore_more">Explore more</string>
+
 </resources>

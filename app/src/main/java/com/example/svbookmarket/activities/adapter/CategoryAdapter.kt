@@ -8,7 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.model.Category
 
 class CategoryAdapter(private val items: MutableList<Category>, private val listener: onCategoryItemClick) :
@@ -29,8 +31,9 @@ class CategoryAdapter(private val items: MutableList<Category>, private val list
                     .with(holder.itemView)
                     .load(backgroundResId)
                     .centerCrop()
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .into(it.background);
+                    .placeholder(Constants.DEFAULT_IMG_PLACEHOLDER)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(it.background)
                 //setup listener
                 it.itemView.setOnClickListener { listener.onCategoryItemClick(this.name) }
             }

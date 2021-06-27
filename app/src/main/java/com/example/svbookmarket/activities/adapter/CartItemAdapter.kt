@@ -9,6 +9,7 @@ import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.model.Cart
 import com.google.android.material.card.MaterialCardView
 
@@ -27,7 +28,7 @@ class CartItemAdapter(val listener: OnButtonClickListener, private var cartList:
             .with(holder.itemView)
             .load(cartList[position].imgUrl)
             .centerCrop()
-            .placeholder(R.drawable.ic_launcher_background)
+            .placeholder(Constants.DEFAULT_IMG_PLACEHOLDER)
             .into(holder.coverimg);
 
         holder.price.text = cartList[position].price.toString() + " đ"

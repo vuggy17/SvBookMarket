@@ -9,7 +9,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.common.Constants.DEFAULT_IMG_PLACEHOLDER
 import com.example.svbookmarket.activities.common.Constants.ITEM
 import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.viewmodel.ItemDetailViewModel
@@ -83,13 +85,15 @@ class ItemDetailActivity : AppCompatActivity() {
             .with(baseContext)
             .load(uri)
             .centerCrop()
-            .placeholder(R.drawable.ic_launcher_background)
+            .placeholder(DEFAULT_IMG_PLACEHOLDER)
+            .transition(DrawableTransitionOptions.withCrossFade())
             .into(binding.idTnBackground)
         Glide
             .with(baseContext)
             .load(uri)
             .centerCrop()
-            .placeholder(R.drawable.ic_launcher_background)
+            .placeholder(DEFAULT_IMG_PLACEHOLDER)
+            .transition(DrawableTransitionOptions.withCrossFade())
             .into(binding.idThumbnail)
     }
 }

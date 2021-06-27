@@ -37,13 +37,6 @@ class RecentSearchAdapter(context: Context, private val lstRecentSearch: Mutable
             {
                 if (book.Name == holder.recentSearchName.text)
                 {
-//                    bundle.putString(ItemDetailActivity.TITLE,book.Name)
-//                    bundle.putString(ItemDetailActivity.AUTHOR,book.Author)
-//                    bundle.putString(ItemDetailActivity.PRICE, book.Price.toString())
-//                    bundle.putString(ItemDetailActivity.RATEPOINT, book.rate.toString())
-//                    bundle.putString(ItemDetailActivity.DESCRIPTION, book.Description)
-//                    bundle.putString(ItemDetailActivity.KIND, book.Kind)
-//                    bundle.putString(ItemDetailActivity.THUMBNAIL_URL, book.Image.toString())
                     bundle.putParcelable(ITEM, book)
                 }
             }
