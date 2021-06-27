@@ -184,7 +184,8 @@ class CheckoutDialog : BottomSheetDialogFragment() {
             "status" to Constants.TRANSACTION.WAITING,
             "dateTime" to time,
             "totalPrince" to sum,
-            "user" to AppUtil.currentUser
+            "user" to AppUtil.currentUser,
+            "userId" to AppUtil.currentAccount.email
         )
 
         val newOrderId: String =
