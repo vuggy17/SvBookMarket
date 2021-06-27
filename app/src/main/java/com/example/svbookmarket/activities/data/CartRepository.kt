@@ -55,65 +55,68 @@ class CartRepository @Inject constructor(
         var avaiBook: Double = -1.0
         var currenOnCart: Double = -1.0
         var bookData: DocumentSnapshot = FirebaseFirestore.getInstance().collection("books").document(book.id!!).get().await()
-        var currentNumInCart: DocumentSnapshot = FirebaseFirestore.getInstance().collection("accounts")
-            .document(user.email).collection("userCart").document(book.id!!).get().await()
+        if (bookData.data?.get("Name") != null) {
+            var currentNumInCart: DocumentSnapshot =
+                FirebaseFirestore.getInstance().collection("accounts")
+                    .document(user.email).collection("userCart").document(book.id!!).get().await()
 
-        avaiBook = bookData.data?.get("Counts").toString().toDouble()
-        currenOnCart = currentNumInCart.data?.get("Quantity").toString().toDouble()
+            avaiBook = bookData.data?.get("Counts").toString().toDouble()
+            currenOnCart = currentNumInCart.data?.get("Quantity").toString().toDouble()
 
-        if (avaiBook > currenOnCart && avaiBook != -1.0 && currenOnCart != -1.0 && avaiBook != 0.0) {
-            FirebaseFirestore.getInstance().collection("accounts").document(user.email)
-                .collection("userCart").document(book.id!!)
-                .update("Quantity", FieldValue.increment(1))
+            if (avaiBook > currenOnCart && avaiBook != -1.0 && currenOnCart != -1.0 && avaiBook != 0.0) {
+                FirebaseFirestore.getInstance().collection("accounts").document(user.email)
+                    .collection("userCart").document(book.id!!)
+                    .update("Quantity", FieldValue.increment(1))
 
-            Handler(Looper.getMainLooper()).post {
-                val toast: Toast = Toast.makeText(context,"",Toast.LENGTH_SHORT)
-                toast.setText("Add to cart success")
-                toast.show()
-                val handler = Handler()
-                handler.postDelayed({ toast.cancel() }, 500)
+                Handler(Looper.getMainLooper()).post {
+                    val toast: Toast = Toast.makeText(context, "", Toast.LENGTH_SHORT)
+                    toast.setText("Add to cart success")
+                    toast.show()
+                    val handler = Handler()
+                    handler.postDelayed({ toast.cancel() }, 500)
+                }
+            } else {
+                Handler(Looper.getMainLooper()).post {
+                    val toast: Toast = Toast.makeText(context, "", Toast.LENGTH_SHORT)
+                    toast.setText("At max in store")
+                    toast.show()
+                    val handler = Handler()
+                    handler.postDelayed({ toast.cancel() }, 500)
+                }
             }
-        } else {
-            Handler(Looper.getMainLooper()).post {
-                val toast: Toast = Toast.makeText(context,"",Toast.LENGTH_SHORT)
-                toast.setText("At max in store")
-                toast.show()
-                val handler = Handler()
-                handler.postDelayed({ toast.cancel() }, 500)
-        }
         }
     }
 
     private suspend fun addNewCart(book: Book, user: AppAccount) {
         var avaiBook: Double = -1.0
         var dataBook: DocumentSnapshot = FirebaseFirestore.getInstance().collection("books").document(book.id!!).get().await()
-        avaiBook = dataBook.data?.get("Counts").toString().toDouble()
-        if (avaiBook != -1.0 && avaiBook != 0.0) {
-            var newCart: MutableMap<String, *> = mutableMapOf(
-                "Quantity" to 1,
-                "author" to book.Author,
-                "image" to book.Image,
-                "title" to book.Name,
-                "isChose" to false,
-                "price" to book.Price
-            )
-            FirebaseFirestore.getInstance().collection("accounts").document(user.email)
-                .collection("userCart").document(book.id!!).set(newCart)
-            Handler(Looper.getMainLooper()).post {
-                val toast: Toast = Toast.makeText(context,"",Toast.LENGTH_SHORT)
-                toast.setText("Add to cart success")
+        if (dataBook.data?.get("Name") != null) {
+            avaiBook = dataBook.data?.get("Counts").toString().toDouble()
+            if (avaiBook != -1.0 && avaiBook != 0.0) {
+                var newCart: MutableMap<String, *> = mutableMapOf(
+                    "Quantity" to 1,
+                    "author" to book.Author,
+                    "image" to book.Image,
+                    "title" to book.Name,
+                    "isChose" to false,
+                    "price" to book.Price
+                )
+                FirebaseFirestore.getInstance().collection("accounts").document(user.email)
+                    .collection("userCart").document(book.id!!).set(newCart)
+                Handler(Looper.getMainLooper()).post {
+                    val toast: Toast = Toast.makeText(context, "", Toast.LENGTH_SHORT)
+                    toast.setText("Add to cart success")
+                    toast.show()
+                    val handler = Handler()
+                    handler.postDelayed({ toast.cancel() }, 500)
+                }
+            } else {
+                val toast: Toast = Toast.makeText(context, "messenger", Toast.LENGTH_SHORT)
+                toast.setText("At max in store")
                 toast.show()
                 val handler = Handler()
                 handler.postDelayed({ toast.cancel() }, 500)
             }
-        }
-        else
-        {
-            val toast: Toast = Toast.makeText(context,"messenger",Toast.LENGTH_SHORT)
-            toast.setText("At max in store")
-            toast.show()
-            val handler = Handler()
-            handler.postDelayed({ toast.cancel() }, 500)
         }
     }
 

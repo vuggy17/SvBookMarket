@@ -51,7 +51,6 @@ class ItemDetailActivity : AppCompatActivity() {
         else
             {
                 startActivity(Intent(this, HomeActivity::class.java))
-                finish()
             }}
     }
 
@@ -114,7 +113,10 @@ class ItemDetailActivity : AppCompatActivity() {
                 if(dc.document.id == viewModel.itemToDisplay.value?.id)
                 when (dc.type) {
                     DocumentChange.Type.REMOVED -> {
-                        startActivity(Intent(this, HomeActivity::class.java))
+                        if(currentFocus == ItemDetailActivity::class.java) {
+                            Log.d("000000000000000", "dcmmmmmmmmmmmmmmmmm")
+                            startActivity(Intent(this, HomeActivity::class.java))
+                        }
                         finish()
                     }
                 }

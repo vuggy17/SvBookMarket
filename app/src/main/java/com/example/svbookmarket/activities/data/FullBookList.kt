@@ -29,10 +29,12 @@ public class FullBookList private constructor(var lstFullBook: MutableList<Book>
                 for (doc in value!!) {
 
                    try{
-                       var bookItem = doc.toObject(Book::class.java)
-                       bookItem.id = doc.id
-                       bookList.add(bookItem)
-                       Log.i("VMTAG", ("${bookItem.Name} ${bookItem.Price}"))
+                       if (doc.data["Name"] != null) {
+                           var bookItem = doc.toObject(Book::class.java)
+                           bookItem.id = doc.id
+                           bookList.add(bookItem)
+                           Log.i("VMTAG", ("${bookItem.Name} ${bookItem.Price}"))
+                       }
                    }catch (e:Exception){
                        Log.i("VMTAG", "$doc")
                    }
