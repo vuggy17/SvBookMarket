@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.common.AppUtil
 import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.data.FullBookList
 import com.example.svbookmarket.activities.model.AppAccount
@@ -180,10 +181,10 @@ class CheckoutDialog : BottomSheetDialogFragment() {
             "district" to deliverAddress.district,
             "fullName" to deliverAddress.fullName,
             "phoneNumber" to deliverAddress.phoneNumber,
-            "userId" to user.email,
             "status" to Constants.TRANSACTION.WAITING,
             "dateTime" to time,
-            "totalPrince" to sum
+            "totalPrince" to sum,
+            "user" to AppUtil.currentUser
         )
 
         val newOrderId: String =
