@@ -27,28 +27,32 @@ class UserManageActivity : AppCompatActivity() {
         setDeliveryAddress()
         setAllOrderClick()
     }
-     private fun setAllOrderClick(){
-        binding.allOrders.setOnClickListener{
+
+    private fun setAllOrderClick() {
+        binding.allOrders.setOnClickListener {
             startActivity(Intent(baseContext, UserOrder::class.java))
+            finish()
         }
     }
-    fun setDeliveryAddress(){
+
+    fun setDeliveryAddress() {
         binding.address.setOnClickListener {
             startActivity(Intent(baseContext, AddressActivity::class.java))
+            finish()
         }
-    }
-    override fun onBackPressed() {
-        startActivity(Intent(baseContext, HomeActivity::class.java))
     }
 
     private fun setButtonBack() {
         binding.backButton.setOnClickListener {
-           onBackPressed()
+            onBackPressed()
+            finish()
         }
     }
-    private fun setYourProfile(){
+
+    private fun setYourProfile() {
         binding.yourInfo.setOnClickListener {
             startActivity(Intent(baseContext, ProfileActivity::class.java))
+            finish()
         }
     }
 
@@ -60,10 +64,11 @@ class UserManageActivity : AppCompatActivity() {
             finish()
         }
     }
-    private fun setUpUserInfoView(){
-        if(userViewModel.getUserInfo().gender == "Male"){
+
+    private fun setUpUserInfoView() {
+        if (userViewModel.getUserInfo().gender == "Male") {
             binding.avatar.setImageResource(R.drawable.ic_male)
-        }else{
+        } else {
             binding.avatar.setImageResource(R.drawable.ic_female)
         }
         binding.userName.text = userViewModel.getUserInfo().fullName

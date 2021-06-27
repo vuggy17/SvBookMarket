@@ -58,5 +58,6 @@
     <string name="best_selling">Best selling</string>
     <string name="for_you">For you</string>
     <string name="explore_more">Explore more</string>
+    <string name="your_cart_is_empty">Your cart is empty</string>
 
 </resources>

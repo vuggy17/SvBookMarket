@@ -4,8 +4,10 @@ import android.content.Intent
 import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
+import android.transition.Visibility
 import android.util.Log
 import android.view.View
+import android.view.View.GONE
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -64,8 +66,34 @@ class CartActivity : AppCompatActivity(), CartItemAdapter.OnButtonClickListener 
             dataCart = value
             cartAdapter.onChange(value)
             cartAdapter.notifyDataSetChanged()
+
+            //show empty text if there is no item in list
+            // otherwise show recyclerview
+            showItem(value.size)
             Log.d("0000000000000", value.toString())
         }
+    }
+
+    /**
+     * change item's visual effect based on item in cartList's size
+     */
+    private fun showItem(listSize:Int) {
+        if (listSize > 0) {
+            setButtonColor(R.color.green)
+            binding.ctCheckout.isClickable = true
+            binding.ctEmptyText.visibility = GONE
+            binding.rcCardList.visibility = View.VISIBLE
+        } else {
+            setButtonColor(R.color.disable)
+            binding.ctCheckout.isClickable = false
+            binding.rcCardList.visibility = GONE
+            binding.ctEmptyText.visibility = View.VISIBLE
+        }
+    }
+
+
+    private fun setButtonColor(color: Int) {
+        binding.ctCheckout.backgroundTintList = getColorStateList(color)
     }
 
     private fun startIntent(type: String) {
@@ -152,13 +180,6 @@ class CartActivity : AppCompatActivity(), CartItemAdapter.OnButtonClickListener 
         viewModel.isChoseChange(id, isChose)
     }
 
-//    override fun onPause() {
-//      super.onPause()
-//        //save data to repository
-//
-//       viewModel.updateData(dataCart)
-//
-//    }
 }
 
 
