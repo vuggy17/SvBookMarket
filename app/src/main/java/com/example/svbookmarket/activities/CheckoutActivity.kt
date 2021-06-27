@@ -83,7 +83,7 @@ class CheckoutActivity : AppCompatActivity() {
 
     private val changeAddress = Observer<UserDeliverAddress> { value ->
         value?.let {
-            binding.tvAddress.text = value.fullName + ", " + value.phoneNumber + "/n" + value.addressLane + ", " + value.district + ", " + value.city
+            binding.tvAddress.text = value.fullName + ", " + value.phoneNumber + ", " + value.addressLane + ", " + value.district + ", " + value.city
         }
     }
 }
