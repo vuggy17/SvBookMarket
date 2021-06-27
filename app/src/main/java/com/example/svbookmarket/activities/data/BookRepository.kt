@@ -5,10 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.svbookmarket.activities.common.Constants.BOOK_REF
 import com.example.svbookmarket.activities.model.Book
-import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.*
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
@@ -32,6 +29,9 @@ class BookRepository @Inject constructor(
 
     init {
         Log.i("WTF", "book repo created")
+    }
+    fun updateBookCount(bookId: String){
+        bookCollRef.document(bookId).update("Counts", FieldValue.increment(1))
     }
 }
 

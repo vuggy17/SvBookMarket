@@ -2,6 +2,7 @@ package com.example.svbookmarket.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -48,10 +49,23 @@ class CheckoutActivity : AppCompatActivity() {
     }
 
     private fun setCheckoutDialog() {
-        val buyReviewDialog = CheckoutDialog()
+         val buyReviewDialog = CheckoutDialog()
         binding.coCheckout.setOnClickListener {
-            Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show()
-            buyReviewDialog.show(supportFragmentManager, "tag")
+            if (viewModel.deliverAddress.value?.fullName != null) {
+                buyReviewDialog.show(supportFragmentManager, "tag")
+            }
+            else
+            {
+                val toast: Toast = Toast(this)
+                toast.setText("You must have an address")
+                toast.show()
+                val handler = Handler()
+                handler.postDelayed({ toast.cancel() }, 500)
+            }
+        }
+
+        binding.coBackButton.setOnClickListener{
+            onBackPressed()
         }
     }
 
@@ -75,6 +89,7 @@ class CheckoutActivity : AppCompatActivity() {
         }
         binding.tvAddress.text = s
     }
+     
 
     private fun navigateToAddress() {
         val i = Intent(this, AddressActivity::class.java).putExtra(
@@ -94,8 +109,7 @@ class CheckoutActivity : AppCompatActivity() {
 
     private val changeAddress = Observer<UserDeliverAddress> { value ->
         value?.let {
-            binding.tvAddress.text =
-                value.fullName + ", " + value.phoneNumber + "/n" + value.addressLane + ", " + value.district + ", " + value.city
+            binding.tvAddress.text = value.fullName + ", " + value.phoneNumber + ", " + value.addressLane + ", " + value.district + ", " + value.city
         }
     }
 }

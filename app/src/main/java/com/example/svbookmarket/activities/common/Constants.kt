@@ -39,7 +39,7 @@ object Constants {
         }
     }
     enum class TRANSACTION{
-        RECEIVED, COMPLETE,DELIVERING,CANCEL;
+        COMPLETE,DELIVERING,CANCEL,CONFIRMED, WAITING;
         override fun toString(): String {
             return name.toLowerCase().capitalize()
         }
@@ -49,7 +49,7 @@ object Constants {
         COMIC, FICTION, NOVEL, BUSINESS, TECHNOLOGY, ART;
 
         override fun toString(): String {
-            return name.toLowerCase().capitalize()
+            return name.toUpperCase().capitalize()
         }
     }
 }

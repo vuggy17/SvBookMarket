@@ -85,11 +85,20 @@ public class CurrentUserInfo private constructor(var currentProfile: AppAccount 
 
                     val cartList: MutableList<Cart> = ArrayList()
                     for (doc in value!!) {
-                        var bool = doc.data["isChose"].toString() == "true"
-                        var item = Cart("", doc.data["image"].toString(),doc.data["title"].toString(), doc.data["author"].toString(),
-                            (doc.data["Quantity"].toString().toDouble()).roundToInt(), doc.data["price"].toString().toLong(), bool)
-                        item.id = doc.id
-                        cartList.add(item)
+                        if (doc.data["title"] != null) {
+                            var bool = doc.data["isChose"].toString() == "true"
+                            var item = Cart(
+                                "",
+                                doc.data["image"].toString(),
+                                doc.data["title"].toString(),
+                                doc.data["author"].toString(),
+                                (doc.data["Quantity"].toString().toDouble()).roundToInt(),
+                                doc.data["price"].toString().toLong(),
+                                bool
+                            )
+                            item.id = doc.id
+                            cartList.add(item)
+                        }
                     }
                     lstUserCart = cartList
                 }

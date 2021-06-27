@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/delivering_bottom_navigation"
+    app:startDestination="@id/waiting">
+
+    <fragment
+        android:id="@+id/confirmed"
+        android:name="com.example.svbookmarket.ConfirmedFragment"
+        android:label="fragment_confirmed"
+        tools:layout="@layout/fragment_confirmed" />
+    <fragment
+        android:id="@+id/delivering"
+        android:name="com.example.svbookmarket.DeliveringFragment"
+        android:label="fragment_delivering"
+        tools:layout="@layout/fragment_delivering" />
+    <fragment
+        android:id="@+id/waiting"
+        android:name="com.example.svbookmarket.WaitingFragment"
+        android:label="fragment_waiting"
+        tools:layout="@layout/fragment_waiting" />
+</navigation>

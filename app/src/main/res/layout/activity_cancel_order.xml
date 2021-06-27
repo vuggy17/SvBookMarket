@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/Theme.MaterialComponents.DayNight.NoActionBar"
     android:layout_width="match_parent"
+    style="@style/Theme.MaterialComponents.DayNight.NoActionBar"
     android:layout_height="match_parent"
-    tools:context=".activities.ForgotPassword">
+    android:background="@drawable/profile_background"
+    tools:context=".activities.CancelOrder">
     <include
         android:id="@+id/include"
         layout="@layout/action_bar"
@@ -18,35 +19,60 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="88dp"
-        android:text="Reset password"
+        android:layout_marginTop="70dp"
+        android:text="Cancel order"
         android:textStyle="bold"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="32dp"
+        android:layout_marginHorizontal="50dp"
+
         android:contentDescription="login-image"
-        android:src="@drawable/ic_login_rafiki"
+
+
+        android:src="@drawable/bg_cancel_order_without_background"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.263" />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:gravity="center"
+
+        android:text="Please let us know the reason for canceling the order so that we can serve you better in the future.Thanks you."
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+    </TextView>
+
 
     <LinearLayout
+        android:layout_marginTop="20dp"
         android:id="@+id/formLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="40dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/textView8">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,15 +93,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="Please enter your email." />
+                android:text="The reason here" />
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/LoginEmailLayout"
-            android:layout_marginTop="-15dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="-15dp"
             android:background="@android:color/transparent"
             android:paddingLeft="-15dp"
             android:textAlignment="viewStart"
@@ -110,31 +136,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/formLogin" />
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/submit">
 
-        <TextView
-            style="@style/tv_12_regular_light"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/don_t_have_account" />
-
-        <TextView
-            android:id="@+id/LoginSignUp"
-            style="@style/tv_12_regular_blue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginLeft="3dp"
-            android:text="@string/sign_up" />
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

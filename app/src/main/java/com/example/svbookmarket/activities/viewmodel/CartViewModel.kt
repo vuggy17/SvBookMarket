@@ -8,12 +8,10 @@ import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.data.CartRepository
 import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.model.Cart
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.EventListener
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.annotation.meta.When
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
@@ -25,6 +23,7 @@ class CartViewModel @Inject constructor(private val cartRepository: CartReposito
 
     init{
         loadCartItem()
+        onDeleteHandle()
     }
 
     fun loadCartItem()
@@ -47,7 +46,6 @@ class CartViewModel @Inject constructor(private val cartRepository: CartReposito
                 }
                 cartItem.value = cartList
             }
-
         })
     }
 
@@ -71,5 +69,23 @@ class CartViewModel @Inject constructor(private val cartRepository: CartReposito
     fun isChoseChange(id: String, isChose: Boolean)
     {
         cartRepository.isChoseChange(CurrentUserInfo.getInstance().currentProfile, id, isChose)
+    }
+
+    fun onDeleteHandle()
+    {
+        FirebaseFirestore.getInstance().collection("books").addSnapshotListener { snapshots, e ->
+            e?.let {
+                Log.d("0000000000", e.message!!)
+            }
+
+                for(doc in snapshots!!.documentChanges) {
+                    when(doc.type)
+                    {
+                        DocumentChange.Type.REMOVED -> {
+                            deleteCart(doc.document.id)
+                        }
+                    }
+                }
+        }
     }
 }

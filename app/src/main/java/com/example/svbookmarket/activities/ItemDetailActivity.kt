@@ -16,6 +16,8 @@ import com.example.svbookmarket.activities.common.Constants.ITEM
 import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.viewmodel.ItemDetailViewModel
 import com.example.svbookmarket.databinding.ActivityItemDetailBinding
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -35,16 +37,23 @@ class ItemDetailActivity : AppCompatActivity() {
 
         //getItemToDisplayFromBundle()
         setupOnlickListener()
+        onDeleteListen()
     }
 
     private val changeObserver = Observer<Book> { value ->
         value?.let {
+            if (value.Name != "null")
+            {
             binding.idTitle.text = it.Name
             binding.idPrice.text = it.Price.toString()
             binding.idAuthor.text = it.Author
             binding.idRate.text = it.rate.toString()
             binding.idDescription.text = it.Description
             it.Image?.let { uri -> loadImageFromUri(Uri.parse(uri)) } }
+        else
+            {
+                startActivity(Intent(this, HomeActivity::class.java))
+            }}
     }
 
 
@@ -95,5 +104,27 @@ class ItemDetailActivity : AppCompatActivity() {
             .placeholder(DEFAULT_IMG_PLACEHOLDER)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(binding.idThumbnail)
+    }
+
+    fun onDeleteListen()
+    {
+        FirebaseFirestore.getInstance().collection("books").addSnapshotListener { snapshots, e ->
+            e?.let {
+                Log.d("0000000", e.message!!)
+            }
+
+            for (dc in snapshots!!.documentChanges) {
+                if(dc.document.id == viewModel.itemToDisplay.value?.id)
+                when (dc.type) {
+                    DocumentChange.Type.REMOVED -> {
+                        if(currentFocus == ItemDetailActivity::class.java) {
+                            Log.d("000000000000000", "dcmmmmmmmmmmmmmmmmm")
+                            startActivity(Intent(this, HomeActivity::class.java))
+                        }
+                        finish()
+                    }
+                }
+            }
+        }
     }
 }

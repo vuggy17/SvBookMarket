@@ -26,6 +26,7 @@ class UserManageActivity : AppCompatActivity() {
         setUpUserInfoView()
         setDeliveryAddress()
         setAllOrderClick()
+        setWaitingForDeliverRy()
     }
 
     private fun setAllOrderClick() {
@@ -35,10 +36,16 @@ class UserManageActivity : AppCompatActivity() {
         }
     }
 
-    fun setDeliveryAddress() {
+    private fun setDeliveryAddress() {
         binding.address.setOnClickListener {
             startActivity(Intent(baseContext, AddressActivity::class.java))
             finish()
+        }
+    }
+
+    private fun setWaitingForDeliverRy(){
+        binding.waitingForDelivery.setOnClickListener {
+            startActivity(Intent(baseContext, DeliveringActivity::class.java))
         }
     }
 
@@ -74,4 +81,6 @@ class UserManageActivity : AppCompatActivity() {
         binding.userName.text = userViewModel.getUserInfo().fullName
         binding.userEmail.text = userViewModel.getAccountInfo().email
     }
+
+
 }

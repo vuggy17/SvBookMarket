@@ -1,12 +1,14 @@
 package com.example.svbookmarket.activities.data
 
 import android.util.Log
+import com.example.svbookmarket.activities.common.AppUtil
 import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.model.Cart
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
 import java.util.*
+import kotlin.math.roundToInt
 
 public class FullBookList private constructor(var lstFullBook: MutableList<Book> = mutableListOf()) {
 
@@ -27,10 +29,12 @@ public class FullBookList private constructor(var lstFullBook: MutableList<Book>
                 for (doc in value!!) {
 
                    try{
-                       var bookItem = doc.toObject(Book::class.java)
-                       bookItem.id = doc.id
-                       bookList.add(bookItem)
-                       Log.i("VMTAG", ("${bookItem.Name} ${bookItem.Price}"))
+                       if (doc.data["Name"] != null) {
+                           var bookItem = doc.toObject(Book::class.java)
+                           bookItem.id = doc.id
+                           bookList.add(bookItem)
+                           Log.i("VMTAG", ("${bookItem.Name} ${bookItem.Price}"))
+                       }
                    }catch (e:Exception){
                        Log.i("VMTAG", "$doc")
                    }

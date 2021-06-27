@@ -1,6 +1,7 @@
 package com.example.svbookmarket.activities.data
 
 import androidx.lifecycle.MutableLiveData
+import com.example.svbookmarket.activities.common.AppUtil
 import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.model.Order
@@ -20,21 +21,24 @@ class OrderRepository @Inject constructor(
     fun getAllOrderFromCloudFireStore(): Query{
        return userCollRef.document(Firebase.auth.currentUser?.email.toString()).collection(TAG).orderBy(
             "dateTime",
-            Query.Direction.ASCENDING
-        )
-    }
-    fun getReceiverOrderFromCloudFireStore(): Query{
-        return userCollRef.document(Firebase.auth.currentUser?.email.toString()).collection(TAG).orderBy(
-            "dateTime",
             Query.Direction.DESCENDING
         )
     }
+
     fun getAllBillingIem(docId: String): Query{
         return userCollRef.document(Firebase.auth.currentUser?.email.toString()).collection(TAG).document(docId).collection("books").orderBy(
             "price",
             Query.Direction.ASCENDING
         )
     }
+    fun updateOrderStatus(orderId: String){
+        userCollRef.document(AppUtil.currentAccount.email).collection(TAG).document(orderId).update("status","CANCEL")
+    }
+    fun updateReason(orderId: String, reason: String){
+        userCollRef.document(AppUtil.currentAccount.email).collection(TAG).document(orderId).update("reason",reason)
+    }
+
+
 
 
 }

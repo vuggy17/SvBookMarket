@@ -3,6 +3,7 @@ package com.example.svbookmarket.activities.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.svbookmarket.activities.common.AppUtil
 import com.example.svbookmarket.activities.common.Constants.VMTAG
 import com.example.svbookmarket.activities.data.AdsRepository
 import com.example.svbookmarket.activities.data.BookRepository
