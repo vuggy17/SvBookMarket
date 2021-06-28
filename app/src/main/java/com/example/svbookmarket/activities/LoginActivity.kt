@@ -144,7 +144,7 @@ class LoginActivity : AppCompatActivity() {
 //                    result["password"].toString(),
 //                    recentUser
 //                )
-                CurrentUserInfo.getInstance()
+                CurrentUserInfo.destroyOld()
                 startActivity(Intent(baseContext, HomeActivity::class.java))
                 finish()
             }
