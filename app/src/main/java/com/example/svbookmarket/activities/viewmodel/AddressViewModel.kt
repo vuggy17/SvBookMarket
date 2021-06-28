@@ -17,7 +17,6 @@ import javax.inject.Inject
 @HiltViewModel
 class AddressViewModel @Inject constructor(
     private val addressRepository: AddressRepository,
-    private val cartRepository: CartRepository
 ) : ViewModel() {
 
     private val currentUser = CurrentUserInfo.getInstance().currentProfile
@@ -25,6 +24,9 @@ class AddressViewModel @Inject constructor(
     private val _address = MutableLiveData<MutableList<UserDeliverAddress>>()
     val address: LiveData<MutableList<UserDeliverAddress>> get() = _address
 
+    /**
+     * save address selected by user
+     */
     var selectedItem: UserDeliverAddress? = null
 
     fun getAddress(): MutableLiveData<MutableList<UserDeliverAddress>> {
@@ -47,7 +49,7 @@ class AddressViewModel @Inject constructor(
             }
             _address.value = addressList
 
-            if (selectedItem == null)
+            if (selectedItem == null && addressList.size > 0)
                 selectedItem = _address.value?.get(0)
         }
         return _address
@@ -100,19 +102,9 @@ class AddressViewModel @Inject constructor(
         }
     }
 
-    /**
-     * set it to first address
-     */
-//    fun resetSelectedAddress() {
-//       viewModelScope.launch {
-//           _address.value?.get(0)?.let { addressRepository.setSelectState(it,true) }
-//       }
-//    }
-
-    /***
-     * generate tempdata
-     */
-
+init {
+    getAddress()
+}
 
     private val testAddress = UserDeliverAddress(
         "",

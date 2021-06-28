@@ -1,7 +1,6 @@
 package com.example.svbookmarket.activities
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +19,6 @@ class AddressActivity : AppCompatActivity(), OnCreateAddressListener, OnEditAddr
     AddressAdapter.NotifyAddressSelectionChanged {
     companion object {
         const val CHANGE_ADDRESS = "CHANGE_ADDRESS"
-        const val IS_FROM_CART = true
         const val FROM_CART = "FROM_CART"
     }
 
@@ -59,39 +57,72 @@ class AddressActivity : AppCompatActivity(), OnCreateAddressListener, OnEditAddr
         editAddressBtn.setOnClickListener {
             // pass selected item to form
             val editAddressDialog =
-                viewmodel.selectedItem?.let { selectedItem -> EditAddressDialog(this, selectedItem, this) }
+                viewmodel.selectedItem?.let { selectedItem ->
+                    EditAddressDialog(
+                        this,
+                        selectedItem,
+                        this
+                    )
+                }
             editAddressDialog?.setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
             editAddressDialog?.show(supportFragmentManager, "tag")
         }
 
 
         addressList.adapter = addressAdapter
-        watchChanges()
+        watchForDataChange()
     }
 
     /**
      * watch for changes from database, then update ui
      */
-    private fun watchChanges() {
-        viewmodel.getAddress().observe(this, { address ->
+    private fun watchForDataChange() {
+        viewmodel.address.observe(this, { address ->
+
             val btn = binding.adEditAdress
             if (address.size > 0) {
+                // enable edit button
                 if (!btn.isEnabled) {
                     btn.setTextColor(resources.getColor(R.color.blue_dark))
                     btn.isEnabled = true
                 }
 
 
-                val chosen = viewmodel.selectedItem
                 // if there is no selected item, set selected item to default position(0)
-                if (chosen == null)
+                if (viewmodel.selectedItem == null)
                     viewmodel.setSelectStateToTrue(address[DEFAULT_ADDRESS_POS])
-            }
 
-            // add freshen items to address then notify adapter about changes
-            addressAdapter.addAddress(address)
+
+                // add freshen items to address then notify adapter about changes
+                // then show recyclerview
+                addItemToRecyclerView(address)
+                showRecyclerView()
+            } else {
+                // if no address, show empty notification
+                showEmptyNotification()
+                // disable edit button
+                btn.setTextColor(resources.getColor(R.color.disable))
+                btn.isEnabled = false
+            }
         })
     }
+
+    private fun addItemToRecyclerView(address: MutableList<UserDeliverAddress>) {
+        addressAdapter.addAddress(address)
+    }
+
+    private fun showEmptyNotification() {
+        binding.adRecyclerview.visibility = View.GONE
+        binding.adEmptyImage.visibility = View.VISIBLE
+        binding.adEmptyText.visibility = View.VISIBLE
+    }
+
+    private fun showRecyclerView() {
+        binding.adRecyclerview.visibility = View.VISIBLE
+        binding.adEmptyImage.visibility = View.GONE
+        binding.adEmptyText.visibility = View.GONE
+    }
+
 
     override fun onCreateAddress(address: UserDeliverAddress) {
         viewmodel.addAddress(address)
@@ -109,6 +140,7 @@ class AddressActivity : AppCompatActivity(), OnCreateAddressListener, OnEditAddr
     override fun onDeleteAddress(address: UserDeliverAddress) {
         viewmodel.selectedItem = null
         viewmodel.deleteAddress(address)
+        viewmodel.getAddress()
 
     }
 }

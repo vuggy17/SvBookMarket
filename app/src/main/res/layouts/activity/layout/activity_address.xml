@@ -35,6 +35,7 @@
         app:layout_constraintTop_toTopOf="@+id/ad_back" />
 
         <Button
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:id="@+id/ad_editAdress"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="70dp"
@@ -58,49 +59,84 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Tap to select your address"
+        android:text="@string/tap_to_select_your_address"
         android:textColor="@color/fade_gray"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ad_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxHeight="500dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"
-        android:layout_marginTop="16dp"
-        tools:itemCount="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/card_address"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/select"
-       />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ad_childContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-    <Button
-        android:id="@+id/ad_newAddress"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="Press to add new address"
-        android:textAllCaps="false"
-        android:textColor="@color/blue_dark"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ad_recyclerview"
-        app:rippleColor="#5a95f2" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/select">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ad_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="2"
+                tools:listitem="@layout/card_address" />
+            <!--            android:maxHeight="500dp"-->
+
+            <ImageView
+                android:id="@+id/ad_emptyImage"
+                android:layout_width="129dp"
+                android:layout_height="178dp"
+                android:layout_marginTop="56dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/cactus"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            
+            <TextView
+                android:id="@+id/ad_emptyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/your_address_is_empty"
+                android:textAlignment="center"
+                android:textColor="@color/disable"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ad_emptyImage" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/ad_newAddress"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/press_to_add_new_address"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/blue_dark"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ad_childContainer"
+            app:rippleColor="#5a95f2" />
+        
         <com.google.android.material.button.MaterialButton
             android:id="@+id/ad_continue"
             android:visibility="gone"
             android:layout_width="@dimen/btn_width"
             android:layout_height="@dimen/btn_height"
-            android:text="Continue to payment"
+            android:text="@string/continue_to_payment"
             android:textAllCaps="true"
             android:textStyle="bold"
             app:backgroundTint="@color/green"
