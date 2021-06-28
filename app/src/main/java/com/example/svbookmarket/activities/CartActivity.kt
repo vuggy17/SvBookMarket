@@ -2,30 +2,22 @@ package com.example.svbookmarket.activities
 
 import android.content.Intent
 import android.graphics.Canvas
-import android.net.Uri
 import android.os.Bundle
-import android.transition.Visibility
-import android.util.Log
 import android.view.View
 import android.view.View.GONE
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.svbookmarket.R
-import com.example.svbookmarket.activities.adapter.AdvertiseAdapter
 import com.example.svbookmarket.activities.adapter.CartItemAdapter
-import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.model.Cart
 import com.example.svbookmarket.activities.viewmodel.CartViewModel
 import com.example.svbookmarket.databinding.ActivityCartBinding
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
@@ -34,7 +26,7 @@ class CartActivity : AppCompatActivity(), CartItemAdapter.OnButtonClickListener 
     lateinit var binding: ActivityCartBinding
     private val viewModel: CartViewModel by viewModels()
     var cartAdapter: CartItemAdapter = CartItemAdapter(this, mutableListOf())
-    lateinit var dataCart : MutableList<Cart>
+    lateinit var dataCart: MutableList<Cart>
     var deleteItem: View? = null
 
     //variable to save deleted item, later is used for redo action
@@ -57,55 +49,56 @@ class CartActivity : AppCompatActivity(), CartItemAdapter.OnButtonClickListener 
             touchHelper.attachToRecyclerView(this)
         }
         binding.backButton.setOnClickListener { onBackPressed() }
-        binding.ctCheckout.setOnClickListener { startIntent("checkout") }
-//        binding.ctChangeLocation.setOnClickListener { startIntent(AddressActivity.CHANGE_ADDRESS) }
+        binding.ctCheckout.setOnClickListener { navigateToCheckout() }
+        binding.ctAddItem.setOnClickListener{onBackPressed()}
     }
 
     private val changeObserver = Observer<MutableList<Cart>> { value ->
-        value?.let {
-            dataCart = value
-            cartAdapter.onChange(value)
-            cartAdapter.notifyDataSetChanged()
+        // if have any item in cart. show cart recycler view, otherwise show empty notification
+        if (value.size > 0) {
+            value?.let {
+                dataCart = value
+                cartAdapter.onChange(value)
+                cartAdapter.notifyDataSetChanged()
+                showCartList()
 
-            //show empty text if there is no item in list
-            // otherwise show recyclerview
-            showItem(value.size)
-            Log.d("0000000000000", value.toString())
-        }
-    }
+                setButtonColor(R.color.green, true)
 
-    /**
-     * change item's visual effect based on item in cartList's size
-     */
-    private fun showItem(listSize:Int) {
-        if (listSize > 0) {
-            setButtonColor(R.color.green)
-            binding.ctCheckout.isClickable = true
-            binding.ctEmptyText.visibility = GONE
-            binding.rcCardList.visibility = View.VISIBLE
+            }
         } else {
-            setButtonColor(R.color.disable)
-            binding.ctCheckout.isClickable = false
-            binding.rcCardList.visibility = GONE
-            binding.ctEmptyText.visibility = View.VISIBLE
+            setButtonColor(R.color.disable, false)
+            showEmptyNotification()
         }
+
     }
 
+    private fun showEmptyNotification() {
+        binding.rcCardList.visibility = GONE
+        binding.ctChildContainer.visibility = View.VISIBLE
+    }
 
-    private fun setButtonColor(color: Int) {
+    private fun showCartList() {
+        binding.rcCardList.visibility = View.VISIBLE
+        binding.ctChildContainer.visibility = GONE
+    }
+
+    private fun setButtonColor(color: Int, clickable: Boolean) {
         binding.ctCheckout.backgroundTintList = getColorStateList(color)
+        binding.ctCheckout.isClickable = clickable
     }
 
-    private fun startIntent(type: String) {
-        val intent = when (type) {
-            "checkout" -> Intent(this, CheckoutActivity::class.java)
-            AddressActivity.CHANGE_ADDRESS -> Intent(this, AddressActivity::class.java).putExtra(
-                AddressActivity.FROM_CART,
-                true
-            )
-            else -> Intent(this, HomeActivity::class.java)
-        }
+    private fun navigateToCheckout() {
+        val intent =
+            Intent(this, CheckoutActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun onButtonClick(id: String, plusOrMinus: Boolean) {
+        viewModel.updateQuantity(id, plusOrMinus)
+    }
+
+    override fun onItemClick(id: String, isChose: Boolean) {
+        viewModel.isChoseChange(id, isChose)
     }
 
     private var touchHelper = ItemTouchHelper(
@@ -172,13 +165,6 @@ class CartActivity : AppCompatActivity(), CartItemAdapter.OnButtonClickListener 
             }
         })
 
-    override fun onButtonClick(id: String, plusOrMinus: Boolean) {
-            viewModel.updateQuantity(id, plusOrMinus)
-    }
-
-    override fun onItemClick(id: String, isChose: Boolean) {
-        viewModel.isChoseChange(id, isChose)
-    }
 
 }
 
