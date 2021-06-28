@@ -51,7 +51,7 @@ class CheckoutActivity : AppCompatActivity() {
     private fun setCheckoutDialog() {
          val buyReviewDialog = CheckoutDialog()
         binding.coCheckout.setOnClickListener {
-            if (viewModel.deliverAddress.value?.fullName != null) {
+            if (viewModel.deliverAddress.value?.fullName != null && viewModel.deliverAddress.value?.addressLane != null) {
                 buyReviewDialog.show(supportFragmentManager, "tag")
             }
             else
@@ -109,7 +109,7 @@ class CheckoutActivity : AppCompatActivity() {
 
     private val changeAddress = Observer<UserDeliverAddress> { value ->
         value?.let {
-            binding.tvAddress.text = value.fullName + ", " + value.phoneNumber + ", " + value.addressLane + ", " + value.district + ", " + value.city
+            binding.tvAddress.text = value.fullName + ", " + value.phoneNumber + "\n" + value.addressLane + ", " + value.district + ", " + value.city
         }
     }
 }

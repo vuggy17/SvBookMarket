@@ -114,6 +114,10 @@ public class CurrentUserInfo private constructor(var currentProfile: AppAccount 
         fun getInstance(): CurrentUserInfo{
             return Holder.INSTANCE
         }
+        fun destroyOld()
+        {
+            Holder.INSTANCE.getDataFromDb()
+        }
     }
 }
 
