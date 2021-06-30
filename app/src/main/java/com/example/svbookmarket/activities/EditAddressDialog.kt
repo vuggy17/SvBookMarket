@@ -2,6 +2,7 @@ package com.example.svbookmarket.activities
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.example.svbookmarket.R
@@ -27,6 +29,8 @@ class EditAddressDialog(
     private lateinit var binding: ActivityEditAdressBinding
     private lateinit var viewmodel: EditAddressViewModel
 
+    lateinit var dialogContext: Context
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +41,7 @@ class EditAddressDialog(
         viewmodel = ViewModelProvider(this).get(EditAddressViewModel::class.java)
 
         display(address)
-
+        dialogContext = binding.root.context
         return binding.root
     }
 
@@ -53,11 +57,13 @@ class EditAddressDialog(
         val editBtn = binding.btnEditAddress
         val delBtn = binding.edDelete
 
+
         //delete btn
         delBtn.setOnClickListener {
             deleteListener.onDeleteAddress(bind())
             this.dismiss()
-            Toast.makeText(binding.root.context, "Address deleted successful!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(binding.root.context, "Address deleted successful!", Toast.LENGTH_SHORT)
+                .show()
         }
 
         viewmodel.createAddressFormState.observe(this, Observer@{
@@ -66,7 +72,9 @@ class EditAddressDialog(
             editBtn.apply {
                 isEnabled = it.isDataValid
                 if (isEnabled)
-                    setBackgroundColor(binding.root.resources.getColor(R.color.green))
+                    setBackgroundColor(ContextCompat.getColor(dialogContext, R.color.green))
+                else
+                    setBackgroundColor(ContextCompat.getColor(dialogContext, R.color.disable))
             }
 
             if (state.nameError != null)

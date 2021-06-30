@@ -23,8 +23,6 @@
         app:boxStrokeWidth="0dp"
         app:boxBackgroundColor="@color/white"
         android:focusable="false"
-
-        app:endIconMode="clear_text"
         app:startIconDrawable="@drawable/ic_baseline_search_35"
         app:hintEnabled="false"
         app:boxStrokeWidthFocused="0dp"

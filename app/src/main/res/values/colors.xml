@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+    <color name="black">#262626</color>
+    <color name="header_black">#151515</color>
     <color name="background_white">#F5F6F7</color>
     <color name="white">#FFFFFF</color>
     <color name="disable">#696969</color>

@@ -9,8 +9,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SvBookMarket">
-        <activity android:name=".activities.CancelConfirmation"></activity>
+        android:theme="@style/Theme.SvBookMarket"
+        >
+        <activity android:name=".activities.CancelConfirmation" />
         <activity android:name=".activities.CancelOrder" />
         <activity android:name=".activities.DeliveringActivity" />
         <activity android:name=".activities.UserOrder" />
@@ -25,32 +26,21 @@
         <activity android:name=".activities.EditProfileActivity" />
         <activity android:name=".activities.ItemDetailActivity" />
         <activity android:name=".activities.CheckoutActivity" />
-        <activity
-            android:name=".activities.WelcomeActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.RegisterActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.SplashActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".activities.WelcomeActivity"/>
+        <activity android:name=".activities.RegisterActivity"/>
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.EditAdressActivity" />
         <activity android:name=".activities.MenuActivity" />
         <activity android:name=".activities.CartActivity" />
         <activity android:name=".activities.AddressActivity" />
-        <activity
-            android:name=".activities.HomeActivity"
-            android:screenOrientation="fullSensor"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+        <activity android:name=".activities.HomeActivity" android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" android:screenOrientation="locked"   />
         <activity android:name=".activities.CategoryActivity" />
-
+        <activity android:name=".activities.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

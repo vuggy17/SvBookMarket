@@ -21,8 +21,6 @@ import java.util.regex.Pattern
 class RegisterActivity : AppCompatActivity() {
 
     //Init view
-    private lateinit var agreeTermAndCondition: CheckBox;
-    private lateinit var errorAgreeTermNotification: TextView
     private lateinit var edtPassword: EditText
     private lateinit var edtConfirmPasswordLayout: TextInputLayout
     private lateinit var edtPasswordConfirm: EditText
@@ -50,8 +48,6 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        agreeTermAndCondition = findViewById(R.id.cbAgreeTermAndConditions)
-        errorAgreeTermNotification = findViewById(R.id.errorAgreeTermNotification)
         edtPassword = findViewById(R.id.edtUserPassword)
         edtConfirmPasswordLayout = findViewById(R.id.inputTextPasswordConfirmLayout)
         edtPasswordConfirm = findViewById(R.id.edtUserPasswordConfirm)
@@ -83,7 +79,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun signUpClick() {
-        if (isValidName() && isValidEmail() && isValidPassword() && isValidConfirmPassword() && isAgreeTermAndConditions()) {
+        if (isValidName() && isValidEmail() && isValidPassword() && isValidConfirmPassword()) {
             dbReference.get().addOnSuccessListener() { result ->
                 var emailExist: Boolean=false
                 for (document in result) {
@@ -129,16 +125,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
 
-    private fun isAgreeTermAndConditions(): Boolean {
 
-        return if (agreeTermAndCondition.isChecked) {
-            errorAgreeTermNotification.visibility = View.INVISIBLE
-            true
-        } else {
-            errorAgreeTermNotification.visibility = View.VISIBLE
-            false
-        }
-    }
 
     private fun isValidConfirmPassword(): Boolean {
 

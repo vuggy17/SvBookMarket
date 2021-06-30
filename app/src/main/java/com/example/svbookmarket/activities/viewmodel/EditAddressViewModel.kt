@@ -1,9 +1,11 @@
 package com.example.svbookmarket.activities.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.svbookmarket.R
+import com.example.svbookmarket.activities.common.AppUtil
 import com.example.svbookmarket.activities.model.CreateAddressFormState
 import com.example.svbookmarket.activities.model.UserDeliverAddress
 
@@ -16,38 +18,24 @@ class EditAddressViewModel:ViewModel() {
     fun formDataChanged(a: UserDeliverAddress) {
         if (!isNameValid(a.fullName))
             _createAddressForm.value = CreateAddressFormState(nameError = R.string.invalid_name)
-        else if (!isInputValid(a.addressLane))
+        else if (!isAddressValid(a.addressLane))
             _createAddressForm.value = CreateAddressFormState(laneError = R.string.invalid_lane)
-        else if (!isInputValid(a.city))
+        else if (!isAddressValid(a.city))
             _createAddressForm.value = CreateAddressFormState(cityError = R.string.invalid_city)
-        else if (!isInputValid(a.district))
+        else if (!isAddressValid(a.district))
             _createAddressForm.value = CreateAddressFormState(districtError = R.string.invalid_district)
-        else if (!isInputValid(a.phoneNumber))
+        else if (!isPhoneNumberValid(a.phoneNumber))
             _createAddressForm.value = CreateAddressFormState(phoneError = R.string.invalid_phone)
         else
             _createAddressForm.value = CreateAddressFormState(isDataValid = true)
+
+        Log.i("test name",isAddressValid(a.fullName).toString())
     }
 
+    private fun isNameValid(input: String): Boolean = input.isBlank() || AppUtil.checkName(input)
 
-    fun isNameValid(input: String): Boolean {
-//        val regex = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$".toRegex()
-//
-//        return if (input.isNotBlank()) {
-//            input.matches(regex)
-//        } else false
-        return input.isNotBlank()
-    }
+    private fun isAddressValid(address:String):Boolean = address.isBlank() || AppUtil.checkAddress(address)
 
-    /**
-     * validate address
-     * if conntain @, /,.. -> invalid
-     */
-    fun isInputValid(input: String): Boolean {
-        // TODO: 22/06/2021 chuyen ve khong dau bang regex,sau do check \
-        return input.isNotBlank()
-    }
-
-
-
+    private fun isPhoneNumberValid(number:String):Boolean = number.isBlank() || AppUtil.checkPhoneNumber(number)
 
 }

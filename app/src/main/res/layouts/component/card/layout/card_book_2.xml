@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="178dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:checkable="true"
@@ -16,6 +16,7 @@
 
     <!--    168-->
     <LinearLayout
+        android:gravity="center_horizontal"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -46,37 +47,38 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_gravity="left"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/bookTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/roboto_bold"
-                android:maxWidth="146dp"
+                android:lines="2"
                 android:maxLines="2"
-                android:text="Eleanor and Park gvjhkghjkgjkhkjhkljhkl"
+                android:text="Eleanor "
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:maxLines="1"
-                android:ellipsize="end"
                 android:id="@+id/bookAuthor"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:fontFamily="@font/roboto_regular"
-                android:text="By rainbow rowell"
+                android:maxLines="1"
+                android:text="By ranbow rowell"
                 android:textColor="@color/disable"
                 android:textSize="@dimen/text_super_small"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bookTitle" />
 
@@ -87,8 +89,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
                 android:text="@string/price_format_vn"
-                android:textStyle="bold"
                 android:textSize="@dimen/text_small"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bookAuthor" />
 
@@ -105,7 +108,9 @@
                 android:textSize="12dp"
                 app:layout_constraintBottom_toBottomOf="@+id/bookPrice"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/bookPrice" />
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@id/bookPrice"
+                app:layout_constraintTop_toTopOf="@+id/bookPrice" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

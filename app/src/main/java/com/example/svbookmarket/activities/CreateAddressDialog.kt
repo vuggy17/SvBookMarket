@@ -49,7 +49,7 @@ class CreateAddressDialog(private val listener: OnCreateAddressListener) :
             addBtn.apply {
                 isEnabled = it.isDataValid
                 if (isEnabled)
-                    setBackgroundColor(binding.root.resources.getColor(R.color.blue_light))
+                    setBackgroundColor(binding.root.resources.getColor(R.color.blue_dark))
             }
 
             if (state.nameError != null)

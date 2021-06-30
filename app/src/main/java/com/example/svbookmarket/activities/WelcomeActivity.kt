@@ -25,6 +25,9 @@ class WelcomeActivity : AppCompatActivity() {
     private val db = Firebase.firestore
     private val dbAccountsReference = db.collection("accounts")
     var loadDialog = LoadDialog(this)
+    var isBackPressedOnce = false
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
@@ -35,13 +38,7 @@ class WelcomeActivity : AppCompatActivity() {
             startActivity(Intent(baseContext, LoginActivity::class.java))
             finish();
         }
-        var guestLogin = findViewById<TextView>(R.id.tvContinueAsGuest)
-        guestLogin.setOnClickListener {
-            startActivity(Intent(this, HomeActivity::class.java))
-            finish();
-        }
     }
-    var isBackPressedOnce = false
 
 
     public override fun onBackPressed() {

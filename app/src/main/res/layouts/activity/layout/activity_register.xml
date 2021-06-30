@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.RegisterActivity"
-    android:theme="@style/Theme.MaterialComponents.DayNight"
     >
 
     <include
@@ -32,7 +31,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="160dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -54,7 +53,6 @@
                 android:hint="Name"
                 app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:startIconDrawable="@drawable/ic_outline_person">
@@ -77,12 +75,9 @@
                 android:hint="@string/email"
                 app:endIconMode="clear_text"
                 app:helperTextTextColor="@color/danger"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/inputTextUserNameLayout"
-                app:layout_constraintVertical_bias="0.03"
                 app:startIconDrawable="@drawable/ic_outline_email">
 
                 <EditText
@@ -101,15 +96,11 @@
                 android:layout_marginEnd="@dimen/margin"
                 android:fontFamily="@font/roboto_regular"
                 android:hint="Password"
-                app:counterEnabled="true"
-                app:counterMaxLength="20"
                 app:endIconMode="password_toggle"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/inputTextEmailLayout"
-                app:layout_constraintVertical_bias="0.03"
                 app:startIconDrawable="@drawable/ic_outline_password">
 
                 <EditText
@@ -129,12 +120,9 @@
                 android:fontFamily="@font/roboto_regular"
                 android:hint="Confirm password"
                 app:endIconMode="password_toggle"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/inputTextPasswordLayout"
-                app:layout_constraintVertical_bias="0"
                 app:startIconDrawable="@drawable/ic_outline_password">
 
                 <EditText
@@ -143,71 +131,34 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
-            <LinearLayout
-                android:id="@+id/layoutTermAndConditions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputTextPasswordConfirmLayout">
 
-                <CheckBox
-                    android:id="@+id/cbAgreeTermAndConditions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:buttonTint="@color/blue_light"
-                    android:checked="true" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="-10dp"
-                    android:text="I Agree to the "
-                    android:textColor="@color/disable"
-                    android:textSize="@dimen/text_small" />
 
-                <TextView
-                    android:id="@+id/tvTermAndConditions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Term and Conditions"
-                    android:textColor="@color/blue_dark" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/errorAgreeTermNotification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="*Please agree to term and conditions"
-                android:visibility="gone"
-                android:textColor="@color/danger"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layoutTermAndConditions"/>
-
-            <androidx.appcompat.widget.AppCompatButton
+            <Button
+                android:layout_marginTop="32dp"
                 android:id="@+id/btn_Register"
                 style="@style/btn_blue"
+                android:layout_width="341dp"
+                android:layout_height="@dimen/btn_height"
                 android:layout_marginHorizontal="50dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/bg_button_gradient"
                 android:elevation="12dp"
                 android:fontFamily="@font/roboto_medium"
                 android:shadowRadius="8"
                 android:text="@string/sign_up"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textSize="@dimen/text_small"
+                android:textStyle="bold"
+                app:cornerRadius="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layoutTermAndConditions" />
+                app:layout_constraintTop_toBottomOf="@+id/inputTextPasswordConfirmLayout" />
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin"
+                android:layout_marginTop="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_Register">
@@ -215,15 +166,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Already have an account ? "
-                    android:textColor="@color/disable"
-                    android:textSize="@dimen/text_small" />
+                    android:text="@string/already_have_an_account"
+                    android:textColor="@color/fade_gray"
+                    />
 
                 <TextView
+                    android:layout_marginStart="3dp"
                     android:id="@+id/tvSignIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/sign_in"
+                    android:textStyle="bold"
                     android:textColor="@color/blue_dark" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

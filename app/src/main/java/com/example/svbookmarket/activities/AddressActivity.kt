@@ -1,17 +1,22 @@
 package com.example.svbookmarket.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment.STYLE_NORMAL
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.AddressAdapter
 import com.example.svbookmarket.activities.common.Constants.DEFAULT_ADDRESS_POS
+import com.example.svbookmarket.activities.common.SimpleCustomSnackbar
 import com.example.svbookmarket.activities.model.UserDeliverAddress
 import com.example.svbookmarket.activities.viewmodel.AddressViewModel
 import com.example.svbookmarket.databinding.ActivityAddressBinding
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class AddressActivity : AppCompatActivity(), OnCreateAddressListener, OnEditAddressListener,
@@ -47,30 +52,37 @@ class AddressActivity : AppCompatActivity(), OnCreateAddressListener, OnEditAddr
 
         // show add address form listener
         newAddressBtn.setOnClickListener {
-            val newAddressDialog = CreateAddressDialog(this)
-            newAddressDialog.setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
-            newAddressDialog.show(supportFragmentManager, "tag")
+            showAddNewAddressDialog()
         }
 
 
         // show edit form listener
         editAddressBtn.setOnClickListener {
-            // pass selected item to form
-            val editAddressDialog =
-                viewmodel.selectedItem?.let { selectedItem ->
-                    EditAddressDialog(
-                        this,
-                        selectedItem,
-                        this
-                    )
-                }
-            editAddressDialog?.setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
-            editAddressDialog?.show(supportFragmentManager, "tag")
+            showEditAddressDialog()
         }
 
 
         addressList.adapter = addressAdapter
         watchForDataChange()
+    }
+
+    private fun showAddNewAddressDialog() {
+        val newAddressDialog = CreateAddressDialog(this)
+        newAddressDialog.setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
+        newAddressDialog.show(supportFragmentManager, "tag")
+    }
+
+    private fun showEditAddressDialog() {
+        val editAddressDialog =
+            viewmodel.selectedItem?.let { selectedItem ->
+                EditAddressDialog(
+                    this,
+                    selectedItem,
+                    this
+                )
+            }
+        editAddressDialog?.setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
+        editAddressDialog?.show(supportFragmentManager, "tag")
     }
 
     /**
@@ -79,32 +91,41 @@ class AddressActivity : AppCompatActivity(), OnCreateAddressListener, OnEditAddr
     private fun watchForDataChange() {
         viewmodel.address.observe(this, { address ->
 
-            val btn = binding.adEditAdress
             if (address.size > 0) {
                 // enable edit button
-                if (!btn.isEnabled) {
-                    btn.setTextColor(resources.getColor(R.color.blue_dark))
-                    btn.isEnabled = true
-                }
+                changeEditButtonState(true)
 
-
-                // if there is no selected item, set selected item to default position(0)
-                if (viewmodel.selectedItem == null)
-                    viewmodel.setSelectStateToTrue(address[DEFAULT_ADDRESS_POS])
-
-
+                changeContinueToPaymentState(true)
                 // add freshen items to address then notify adapter about changes
                 // then show recyclerview
                 addItemToRecyclerView(address)
                 showRecyclerView()
+
             } else {
+                changeContinueToPaymentState(false)
                 // if no address, show empty notification
                 showEmptyNotification()
                 // disable edit button
-                btn.setTextColor(resources.getColor(R.color.disable))
-                btn.isEnabled = false
+                changeEditButtonState(false)
             }
         })
+    }
+
+    private fun changeEditButtonState(canEdit: Boolean) {
+        binding.adEditAdress.apply {
+            isEnabled = canEdit
+            val textColor =
+                if (canEdit) resources.getColor(R.color.blue_dark) else resources.getColor(R.color.disable)
+            setTextColor(textColor)
+        }
+    }
+
+    private fun changeContinueToPaymentState(canContinue: Boolean) {
+        binding.adContinue.isClickable = canContinue
+        binding.adContinue.backgroundTintList = if (canContinue)
+            getColorStateList(R.color.green)
+        else getColorStateList(R.color.disable)
+
     }
 
     private fun addItemToRecyclerView(address: MutableList<UserDeliverAddress>) {
@@ -126,21 +147,44 @@ class AddressActivity : AppCompatActivity(), OnCreateAddressListener, OnEditAddr
 
     override fun onCreateAddress(address: UserDeliverAddress) {
         viewmodel.addAddress(address)
+        SimpleCustomSnackbar.make(
+            binding.root,
+            "Address added successful",
+            Snackbar.LENGTH_SHORT,
+            null,
+            R.drawable.ic_thumb_up,
+            null,
+            ContextCompat.getColor(binding.root.context, R.color.green)
+        )?.show()
     }
 
     override fun onAddressChange(old: UserDeliverAddress, new: UserDeliverAddress) {
         viewmodel.chageSelectState(old, new)
         viewmodel.selectedItem = new
+
+
     }
 
     override fun onEditAddress(address: UserDeliverAddress) {
         viewmodel.updateCurrentAddress(address)
+
     }
 
     override fun onDeleteAddress(address: UserDeliverAddress) {
         viewmodel.selectedItem = null
         viewmodel.deleteAddress(address)
+        Log.i("concac1", " o delete func ${viewmodel.selectedItem }")
         viewmodel.getAddress()
+
+//        SimpleCustomSnackbar.make(
+//            binding.root,
+//            "Address deleted",
+//            Snackbar.LENGTH_SHORT,
+//            null,
+//            R.drawable.ic_thumb_up,
+//            null,
+//            ContextCompat.getColor(binding.root.context, R.color.green)
+//        )?.show()
 
     }
 }

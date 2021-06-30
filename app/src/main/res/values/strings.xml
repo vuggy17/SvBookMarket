@@ -3,12 +3,12 @@
 
     <string name="wellcome_slogan">Wellcome to bookmaket</string>
 
-    <string name="register">Register</string>
+    <string name="register">Create account</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
     <string name="don_t_have_account">Don\'t have account?</string>
-    <string name="sign_up">Sign up</string>
     <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
     <string name="cover">cover</string>
     <string name="author">author</string>
     <string name="price">price</string>
@@ -63,5 +63,12 @@
     <string name="press_to_add_new_address">Press to add new address</string>
     <string name="continue_to_payment">Continue to payment</string>
     <string name="tap_to_select_your_address">Tap to select your address</string>
+    <string name="ops">Ops!</string>
+    <string name="let_s_us_know_your_address">Let\'s us know your address</string>
+    <string name="add_an_address">Add an address</string>
+    <string name="buy">buy</string>
+    <string name="description">Description</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="already_have_an_account">Already have an account ?</string>
 
 </resources>

@@ -6,9 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.svbookmarket.activities.common.Constants.DEFAULT_ADDRESS_POS
 import com.example.svbookmarket.activities.common.Constants.VMTAG
 import com.example.svbookmarket.activities.data.AddressRepository
-import com.example.svbookmarket.activities.data.CartRepository
 import com.example.svbookmarket.activities.model.UserDeliverAddress
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -29,6 +29,12 @@ class AddressViewModel @Inject constructor(
      */
     var selectedItem: UserDeliverAddress? = null
 
+
+    /**
+     * get latest data
+     * set selected item if no item selected
+     */
+
     fun getAddress(): MutableLiveData<MutableList<UserDeliverAddress>> {
         addressRepository.getAddress(currentUser).addSnapshotListener { value, error ->
             if (error != null) {
@@ -46,11 +52,14 @@ class AddressViewModel @Inject constructor(
                 if (addressItem.chose) {
                     selectedItem = addressItem
                 }
+
+                // if there is no selected item, set selected item to default position(0)
+                if(selectedItem == null && addressList.size > 0){
+                    selectedItem = addressList[DEFAULT_ADDRESS_POS]
+                    setSelectStateToTrue(selectedItem!!)
+                }
             }
             _address.value = addressList
-
-            if (selectedItem == null && addressList.size > 0)
-                selectedItem = _address.value?.get(0)
         }
         return _address
     }
@@ -87,14 +96,6 @@ class AddressViewModel @Inject constructor(
         }
     }
 
-    suspend fun deleteAddress1(address: UserDeliverAddress) {
-        val job = viewModelScope.launch {
-            addressRepository.deleteAddress(address, currentUser)
-            getAddress()
-        }
-        job.join()
-//        _address.value?.get(0)?.let { setSelectStateToTrue(it) }
-    }
 
     fun setSelectStateToTrue(address: UserDeliverAddress) {
         viewModelScope.launch {
@@ -102,18 +103,9 @@ class AddressViewModel @Inject constructor(
         }
     }
 
-init {
-    getAddress()
-}
+    init {
+        getAddress()
+    }
 
-    private val testAddress = UserDeliverAddress(
-        "",
-        "khuong duy",
-        "012321322",
-        "lams son",
-        "cam thanh bac",
-        "khanh hoa",
-        false
-    )
 
 }

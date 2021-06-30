@@ -23,71 +23,44 @@
 
     <TextView
         android:id="@+id/tvExplore"
-        android:layout_width="85sp"
-        android:layout_height="24sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="616dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="Explore us"
-        android:textColor="@color/disable"
-        android:textSize="18dp"
+        android:text="Get start"
+        android:textColor="@color/fade_gray"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_editor_absoluteX="153sp"
-        app:layout_editor_absoluteY="210sp"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/appCompatImageView"
-        android:layout_width="354.38sp"
-        android:layout_height="216.02sp"
+        android:layout_width="372dp"
+        android:layout_height="344dp"
         android:layout_marginTop="64dp"
         android:background="@drawable/welcome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvExplore"/>
+        app:layout_constraintTop_toBottomOf="@+id/tvExplore" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <Button
         android:id="@+id/btnLogin"
         style="@style/btn_blue"
-        android:layout_marginHorizontal="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_regular"
-        android:background="@drawable/bg_button_gradient"
+        android:layout_width="341dp"
+        android:layout_height="@dimen/btn_height"
         android:elevation="12dp"
-        android:text="Log in"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="16dp"
         android:gravity="center"
+        android:insetBottom="0dp"
+        android:text="Log in"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:cornerRadius="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatImageView"
-        app:layout_constraintVertical_bias="0.409"
-        app:layout_editor_absoluteX="55.98dp"
-        app:layout_editor_absoluteY="600sp"/>
+        app:layout_constraintVertical_bias="0.409" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="or"
-        android:textColor="@color/fade_gray"
-        app:layout_constraintBottom_toTopOf="@+id/tvContinueAsGuest"
-        app:layout_constraintEnd_toEndOf="@+id/btnLogin"
-        app:layout_constraintStart_toStartOf="@+id/btnLogin"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
-    <TextView
-        android:layout_marginTop="32dp"
-        android:id="@+id/tvContinueAsGuest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_medium"
-        android:gravity="center"
-        android:text="Continue as guest"
-        android:textColor="@color/blue_light"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 </androidx.constraintlayout.widget.ConstraintLayout>

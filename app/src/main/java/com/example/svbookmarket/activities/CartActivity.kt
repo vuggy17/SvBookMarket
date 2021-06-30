@@ -18,6 +18,8 @@ import com.example.svbookmarket.activities.adapter.CartItemAdapter
 import com.example.svbookmarket.activities.model.Cart
 import com.example.svbookmarket.activities.viewmodel.CartViewModel
 import com.example.svbookmarket.databinding.ActivityCartBinding
+import com.example.svbookmarket.databinding.DialogEmptyNotiBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
@@ -26,6 +28,7 @@ class CartActivity : AppCompatActivity(), CartItemAdapter.OnButtonClickListener 
     lateinit var binding: ActivityCartBinding
     private val viewModel: CartViewModel by viewModels()
     var cartAdapter: CartItemAdapter = CartItemAdapter(this, mutableListOf())
+
     lateinit var dataCart: MutableList<Cart>
     var deleteItem: View? = null
 
@@ -38,7 +41,6 @@ class CartActivity : AppCompatActivity(), CartItemAdapter.OnButtonClickListener 
         binding = ActivityCartBinding.inflate(layoutInflater)
         // set activity to display here
         setContentView(binding.root)
-
         viewModel.cartItem.observe(this, changeObserver)
 
         binding.rcCardList.apply {
@@ -50,22 +52,29 @@ class CartActivity : AppCompatActivity(), CartItemAdapter.OnButtonClickListener 
         }
         binding.backButton.setOnClickListener { onBackPressed() }
         binding.ctCheckout.setOnClickListener { navigateToCheckout() }
-        binding.ctAddItem.setOnClickListener{onBackPressed()}
+        binding.ctAddItem.setOnClickListener { onBackPressed() }
     }
 
     private val changeObserver = Observer<MutableList<Cart>> { value ->
         // if have any item in cart. show cart recycler view, otherwise show empty notification
         if (value.size > 0) {
+            //show guide text
+                binding.ctGuide.visibility = View.VISIBLE
             value?.let {
                 dataCart = value
                 cartAdapter.onChange(value)
                 cartAdapter.notifyDataSetChanged()
                 showCartList()
 
-                setButtonColor(R.color.green, true)
-
+                val selectedItem = value.find { it.isChose }
+                if (selectedItem != null)
+                    setButtonColor(R.color.green, true)
+                else
+                    setButtonColor(R.color.disable, false)
             }
         } else {
+            //hide guide text
+            binding.ctGuide.visibility = View.GONE
             setButtonColor(R.color.disable, false)
             showEmptyNotification()
         }
@@ -92,6 +101,8 @@ class CartActivity : AppCompatActivity(), CartItemAdapter.OnButtonClickListener 
             Intent(this, CheckoutActivity::class.java)
         startActivity(intent)
     }
+
+
 
     override fun onButtonClick(id: String, plusOrMinus: Boolean) {
         viewModel.updateQuantity(id, plusOrMinus)

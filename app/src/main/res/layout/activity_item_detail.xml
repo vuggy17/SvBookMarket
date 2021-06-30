@@ -90,10 +90,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:fontFamily="@font/roboto_bold"
                     android:text="Sự im lặng của bầy cừu"
-                    android:textColor="#2A2A2A"
-                    android:textSize="25dp"
+                    android:textColor="@color/header_black"
+                    android:textSize="25sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -104,10 +103,9 @@
                     android:id="@+id/id_author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
                     android:text="Thomas Harris"
                     android:textColor="@color/fade_gray"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -131,9 +129,9 @@
                     android:id="@+id/id_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="đ10000"
-                    android:textSize="22dp"
+                    android:text="10000"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1"
                     app:layout_constraintStart_toEndOf="@+id/id_tag"
@@ -143,11 +141,10 @@
                     android:id="@+id/id_review"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
                     android:text="Purchases"
-                    android:textSize="14dp"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.008"
+                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/id_tag" />
 
@@ -168,7 +165,7 @@
                         android:fontFamily="@font/roboto_regular"
                         android:text="0"
                         android:textColor="#FFC107"
-                        android:textSize="12dp" />
+                        android:textSize="14sp" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -183,9 +180,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="Description"
-                    android:textFontWeight="600"
+                    android:text="@string/description"
                     android:textSize="16sp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -209,7 +206,6 @@
         android:id="@+id/id_btnContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -218,29 +214,46 @@
         app:layout_constraintTop_toBottomOf="@id/scrollView2">
 
 
-        <androidx.appcompat.widget.AppCompatButton
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/id_addCart"-->
+<!--            android:layout_width="64dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:background="@drawable/bg_blue_rounded_outline_btn"-->
+<!--            android:drawableStart="@drawable/img_add_cart"-->
+<!--            android:paddingStart="20dp" />-->
+
+        <Button
+            android:shadowColor="@color/trans"
+            android:layout_marginStart="24dp"
             android:id="@+id/id_addCart"
+            style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="64dp"
             android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:background="@drawable/bg_blue_rounded_outline_btn"
-            android:drawableStart="@drawable/img_add_cart"
-            android:paddingStart="20dp" />
-
+            android:backgroundTint="@color/white"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="12dp"
+            app:icon="@drawable/img_add_cart"
+            app:iconGravity="textStart"
+            android:paddingStart="20dp"
+            app:iconTint="@color/blue_dark"
+            app:rippleColor="#bdd5fa"
+            app:strokeColor="@color/blue_dark"
+            app:strokeWidth="2dp" />
 
         <Button
             android:id="@+id/id_buy"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/btn_height"
             android:layout_marginStart="18dp"
-            android:backgroundTint="@color/blue_light"
-            android:fontFamily="@font/roboto_regular"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
+            android:layout_marginEnd="24dp"
+            android:shadowColor="@color/trans"
             android:text="Buy Now"
-            android:textAllCaps="false"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textStyle="bold"
             app:cornerRadius="14dp" />
     </LinearLayout>
 

@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:alpha="0.9"
     android:background="@color/home_gray"
     android:orientation="horizontal"
-    android:alpha="0.9"
     tools:context=".activities.HomeActivity">
 
 
@@ -24,13 +24,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <include
-                android:layout_marginHorizontal="10dp"
-                android:id="@+id/htb_homeToolBar"
 
+            <include
+                android:id="@+id/htb_homeToolBar"
                 layout="@layout/search_bar"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -72,12 +73,13 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
                     android:gravity="center"
                     android:text="@string/categories"
-                    android:textColor="@color/black"
+                    android:textColor="@color/header_black"
                     android:textSize="@dimen/home_title"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -88,9 +90,7 @@
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="60dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="10dp"
                     android:fontFamily="@font/roboto_medium"
-                    android:gravity="end|center"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:text="@string/see_all"
@@ -100,6 +100,8 @@
                     android:textSize="@dimen/see_all_text_size"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.95"
+                    app:layout_constraintStart_toEndOf="@+id/textView6"
                     app:layout_constraintTop_toTopOf="parent"
                     app:rippleColor="@color/litle_gray" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -121,40 +123,39 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
                     android:gravity="center"
                     android:text="@string/featured"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/home_title" />
+                    android:textColor="@color/header_black"
+                    android:textSize="@dimen/home_title"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:rippleColor="@color/litle_gray"
                     android:id="@+id/h_allFeature"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="60dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="10dp"
-                    android:textAllCaps="false"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-
-
-
-
                     android:fontFamily="@font/roboto_medium"
                     android:gravity="end|center"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:text="@string/see_all"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+
+
                     android:textColor="@color/disable"
-                    android:textSize="@dimen/see_all_text_size" />
+                    android:textSize="@dimen/see_all_text_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.95"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:rippleColor="@color/litle_gray" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -181,7 +182,7 @@
                     android:fontFamily="@font/roboto_medium"
                     android:gravity="center"
                     android:text="@string/more"
-                    android:textColor="@color/black"
+                    android:textColor="@color/header_black"
                     android:textSize="@dimen/home_title" />
             </LinearLayout>
 
@@ -201,18 +202,17 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
-        android:alpha="1"
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bottomNavigation"
-        app:mbn_selectedIconColor="@color/white"
-        app:mbn_defaultIconColor="@color/white"
-        app:mbn_countTextColor="@color/white"
-        app:mbn_countBackgroundColor="#ff6f00"
-        app:mbn_backgroundBottomColor="@color/blue_light"
+        android:alpha="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:mbn_backgroundBottomColor="@color/blue_light"
+        app:mbn_countBackgroundColor="#ff6f00"
+        app:mbn_countTextColor="@color/white"
+        app:mbn_defaultIconColor="@color/white"
+        app:mbn_selectedIconColor="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

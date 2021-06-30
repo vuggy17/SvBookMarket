@@ -20,12 +20,16 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <SearchView
+            android:iconifiedByDefault="false"
+            android:queryBackground="@color/trans"
+            android:clickable="true"
             app:iconifiedByDefault="false"
             app:queryBackground="@null"
             android:id="@+id/tb_searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_search" />
+            android:background="@drawable/bg_search"
+            android:focusable="true" />
 
         <ListView
             android:id="@+id/rc_suggest_search"

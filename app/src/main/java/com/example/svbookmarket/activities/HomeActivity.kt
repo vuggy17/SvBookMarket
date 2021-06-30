@@ -63,10 +63,10 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
 
 
         // watch data change
-        getBooks()
+        watchForDataChange()
         setAdsAdapter()
         setCategoryAdapter()
-        setSuggestAdapter()
+        setSuggestAdapter() // feature
         setMoreAdapter()
         setupNavigation()
         setUpBottomNavigationView()
@@ -83,13 +83,17 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
 
     }
 
-    private fun getBooks() {
+    private fun watchForDataChange() {
         viewModel.getBookFrom().observe(this, { changes ->
-            moreAdapter.addBooks(changes)
-            suggestAdapter.addBooks(changes)
+            // filter theo so luot mua
+            val b = changes.toList().sortedByDescending { it.rate }
+            val top15 = b.take(15)
+            val rest = b.drop(15)
+
+            suggestAdapter.addBooks(top15)
+            moreAdapter.addBooks(rest)
         })
 
-        // TODO: 16/06/2021  ads, suggest se duoc implement khi db hoan thanh
     }
 
     private fun setSuggestAdapter() {

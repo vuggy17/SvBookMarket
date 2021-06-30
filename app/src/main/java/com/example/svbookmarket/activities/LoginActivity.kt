@@ -44,10 +44,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var loadDialog: LoadDialog
 
-    // tạo biến account để lưu về thông tin khách hàng đã có
-//    companion object {
-//        var recentAccountLogin: AppAccount = AppAccount("", "", User())
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

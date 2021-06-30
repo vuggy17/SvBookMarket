@@ -10,6 +10,7 @@
         android:id="@+id/co_mainContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/light_gray"
         app:layout_constraintBottom_toTopOf="@id/co_checkout"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -105,7 +106,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:drawablePadding="6dp"
-                    android:text="696 Hang Bai, khu pho 6, phuong Linh Trung, quan Thu Duc, thanh pho Ho Chi Minh"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textStyle="normal"
