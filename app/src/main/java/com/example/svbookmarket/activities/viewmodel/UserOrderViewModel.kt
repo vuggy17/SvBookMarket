@@ -73,6 +73,7 @@ class UserOrderViewModel @Inject constructor(private val orderRepository: OrderR
                     order.userDeliverAddress.phoneNumber = doc["phoneNumber"].toString()
                     order.userDeliverAddress.city = doc["city"].toString()
                     order.userDeliverAddress.district = doc["district"].toString()
+
                     setBillingItem( order.id )
                     orderList.add(order)
                 }

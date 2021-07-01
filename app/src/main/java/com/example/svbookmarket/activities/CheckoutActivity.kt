@@ -91,8 +91,9 @@ class CheckoutActivity : AppCompatActivity() {
                 .append(it.district)
                 .append(", ")
                 .append(it.city)
+            binding.tvAddress.text = s
         }
-        binding.tvAddress.text = s
+
     }
 
 
@@ -108,7 +109,6 @@ class CheckoutActivity : AppCompatActivity() {
             dataset = value
             checkoutAdapter.onChange(value)
             checkoutAdapter.notifyDataSetChanged()
-            Log.d("00000000000001", "$value")
         }
     }
 
