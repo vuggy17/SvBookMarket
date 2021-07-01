@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="616dp"
-        android:text="Get start"
+        android:text="To to shop"
         android:textColor="@color/fade_gray"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,8 +35,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/appCompatImageView"
-        android:layout_width="372dp"
-        android:layout_height="344dp"
+        android:layout_width="390dp"
+        android:layout_height="276dp"
         android:layout_marginTop="64dp"
         android:background="@drawable/welcome"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,6 @@
         android:layout_height="@dimen/btn_height"
         android:elevation="12dp"
         android:gravity="center"
-        android:insetBottom="0dp"
         android:text="Log in"
         android:textAllCaps="true"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"

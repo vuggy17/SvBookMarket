@@ -8,6 +8,14 @@ plugins {
 }
 
 android {
+//    signingConfigs {
+//        release {
+//            storeFile file('D:\\svbookmarket-release1.jks')
+//            storePassword 'khuongduy'
+//            keyAlias 'key1'
+//            keyPassword 'khuongduy'
+//        }
+//    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -24,6 +32,7 @@ android {
         apply plugin: 'kotlin-android'
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true
+        signingConfig signingConfigs.debug
 
 
     }
@@ -31,12 +40,14 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources = false
+
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-
-        create("customDebugType") {
-            debuggable = true
-        }
+//uncomment for release
+//        create("customDebugType") {
+//            debuggable = true
+//        }
     }
 
 
@@ -71,7 +82,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.google.firebase:firebase-storage:19.2.2'
-    implementation platform('com.google.firebase:firebase-bom:27.1.0')
     implementation 'com.google.firebase:firebase-firestore-ktx'
   
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -82,7 +92,6 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.22'
