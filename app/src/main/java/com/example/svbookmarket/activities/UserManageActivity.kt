@@ -22,7 +22,7 @@ class UserManageActivity : AppCompatActivity() {
         setContentView(binding.root)
         setButtonBack()
         setLogout()
-        setYourProfile()
+//        setYourProfile()
         setUpUserInfoView()
         setDeliveryAddress()
         setAllOrderClick()
@@ -56,12 +56,12 @@ class UserManageActivity : AppCompatActivity() {
         }
     }
 
-    private fun setYourProfile() {
-        binding.yourInfo.setOnClickListener {
-            startActivity(Intent(baseContext, ProfileActivity::class.java))
-            finish()
-        }
-    }
+//    private fun setYourProfile() {
+//        binding.yourInfo.setOnClickListener {
+//            startActivity(Intent(baseContext, ProfileActivity::class.java))
+//            finish()
+//        }
+//    }
 
     private lateinit var auth: FirebaseAuth
     private fun setLogout() {

@@ -35,6 +35,7 @@ class CheckoutActivity : AppCompatActivity() {
         binding = ActivityCheckoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         displayAddress()
         setCheckoutAdapter()
         setCheckoutButton()
@@ -83,10 +84,12 @@ class CheckoutActivity : AppCompatActivity() {
     private fun displayAddress() {
         val s = StringBuilder("")
         viewModel.deliverAddress.value?.let {
-            s.append(it.fullName)
-                .append(it.phoneNumber)
+            s.append("${it.fullName}\n")
+                .append("${ it.phoneNumber}\n")
                 .append(it.addressLane)
+                .append(", ")
                 .append(it.district)
+                .append(", ")
                 .append(it.city)
         }
         binding.tvAddress.text = s
@@ -111,8 +114,7 @@ class CheckoutActivity : AppCompatActivity() {
 
     private val changeAddress = Observer<UserDeliverAddress> { value ->
         value?.let {
-            binding.tvAddress.text =
-                "$value.fullName, $value.phoneNumber, $value.addressLane, $value.district, $value.city"
+            displayAddress()
         }
     }
 

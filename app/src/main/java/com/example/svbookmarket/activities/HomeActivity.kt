@@ -49,7 +49,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
     val viewModel: HomeViewModel by viewModels()
 
     private var adsAdapter = AdvertiseAdapter(mutableListOf())
-    private var catgoryAdapter = CategoryAdapter(mutableListOf(), this@HomeActivity)
+    private var categoryAdapter = CategoryAdapter(mutableListOf(), this@HomeActivity)
     private var suggestAdapter = SuggestAdapter(mutableListOf(), this)
     private var moreAdapter = FeaturedAdapter(mutableListOf(), this)
 
@@ -124,8 +124,9 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
 
     private fun setCategoryAdapter() {
         viewModel.category.observe(this, Observer { newCategory ->
+            categoryAdapter.addCategory(newCategory)
             binding.bookCategory.apply {
-                adapter = CategoryAdapter(newCategory, this@HomeActivity)
+                adapter = categoryAdapter
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 addItemDecoration(MarginItemDecoration(spaceSize = 20, isHorizontalLayout = true))
             }
@@ -192,7 +193,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
      */
     private fun putBooksOfCategoryIntoIntent(categoryName: String): Intent {
         val bundle = Bundle()
-        val i = viewModel.getBooksOfCategory(categoryName) as ArrayList<Book>
+        val i = viewModel.getBooksOfCategory(categoryName)
 
         //put data into bundle
         bundle.putParcelableArrayList(CATEGORY_DETAIL.toString(), i)

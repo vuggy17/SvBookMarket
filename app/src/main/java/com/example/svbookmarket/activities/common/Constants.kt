@@ -49,7 +49,7 @@ object Constants {
         COMIC, FICTION, NOVEL, BUSINESS, TECHNOLOGY, ART;
 
         override fun toString(): String {
-            return name.toUpperCase().capitalize()
+            return name.toLowerCase().capitalize()
         }
     }
 }
