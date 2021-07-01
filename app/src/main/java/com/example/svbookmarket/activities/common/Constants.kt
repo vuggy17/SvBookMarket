@@ -1,6 +1,7 @@
 package com.example.svbookmarket.activities.common
 
 import com.example.svbookmarket.R
+import dagger.Provides
 
 
 object Constants {
@@ -16,6 +17,7 @@ object Constants {
 
 
     //References
+
     const val USERS_REF = "accounts"
     const val BOOK_REF = "books"
     const val ADDRESS_REF = "userDeliverAddresses"

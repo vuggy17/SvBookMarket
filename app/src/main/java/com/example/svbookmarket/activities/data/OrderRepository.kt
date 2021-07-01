@@ -12,7 +12,7 @@ import com.google.firebase.ktx.Firebase
 import javax.inject.Inject
 import javax.inject.Named
 
-class OrderRepository @Inject constructor(
+class  OrderRepository @Inject constructor(
     @Named(Constants.USERS_REF) private val userCollRef: CollectionReference
 ) {
 
@@ -37,8 +37,6 @@ class OrderRepository @Inject constructor(
     fun updateReason(orderId: String, reason: String){
         userCollRef.document(AppUtil.currentAccount.email).collection(TAG).document(orderId).update("reason",reason)
     }
-
-
 
 
 }
