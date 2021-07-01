@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.common.Constants
+import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.model.Category
 
 class CategoryAdapter(private val items: MutableList<Category>, private val listener: onCategoryItemClick) :
@@ -41,6 +42,16 @@ class CategoryAdapter(private val items: MutableList<Category>, private val list
         Log.i("TAG", "bindView time: " + (System.currentTimeMillis() - startTime));
     }
     override fun getItemCount(): Int = items.size
+
+    fun addCategory(category: List<Category>) {
+        if (this.items.isNotEmpty()) {
+            this.items.clear()
+        }
+        this.items.addAll(category)
+        notifyDataSetChanged()
+    }
+
+
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.categoryName)
