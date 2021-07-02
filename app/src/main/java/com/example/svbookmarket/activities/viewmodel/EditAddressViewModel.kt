@@ -20,7 +20,7 @@ class EditAddressViewModel:ViewModel() {
             _createAddressForm.value = CreateAddressFormState(nameError = R.string.invalid_name)
         else if (!isAddressValid(a.addressLane))
             _createAddressForm.value = CreateAddressFormState(laneError = R.string.invalid_lane)
-        else if (!isAddressValid(a.city))
+        else if (!isNameValid(a.city))
             _createAddressForm.value = CreateAddressFormState(cityError = R.string.invalid_city)
         else if (!isAddressValid(a.district))
             _createAddressForm.value = CreateAddressFormState(districtError = R.string.invalid_district)

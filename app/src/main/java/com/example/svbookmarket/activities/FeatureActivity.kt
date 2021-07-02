@@ -64,14 +64,17 @@ class FeatureActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
     private fun watchChanges() {
         viewmodel.books.observe(this, { books ->
             var b = books.toList().sortedByDescending { it.rate }
-            // get top 5
-            val top5 = b.take(5)
-            b = b.drop(5)
+//          disable for test
+//           get top 5
+//            val top5 = b.take(5)
+//            b = b.drop(5)
+//
+//            // get top 10
+//            val top10 = b.take(10)
+//            b = books.drop(10)
 
-            // get top 10
-            val top10 = b.take(10)
-            b = books.drop(10)
-
+            val top5 = b
+            val top10 =b
             featuredAdapter.addBooks(top5)
             bestSellAdapter.addBooks(top10)
             suggestAdapter.addBooks(b)

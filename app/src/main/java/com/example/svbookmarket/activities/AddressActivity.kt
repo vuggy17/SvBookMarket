@@ -1,7 +1,6 @@
 package com.example.svbookmarket.activities
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +8,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment.STYLE_NORMAL
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.AddressAdapter
-import com.example.svbookmarket.activities.common.Constants.DEFAULT_ADDRESS_POS
 import com.example.svbookmarket.activities.common.SimpleCustomSnackbar
 import com.example.svbookmarket.activities.model.UserDeliverAddress
 import com.example.svbookmarket.activities.viewmodel.AddressViewModel
@@ -173,8 +171,6 @@ class AddressActivity : AppCompatActivity(), OnCreateAddressListener, OnEditAddr
     override fun onDeleteAddress(address: UserDeliverAddress) {
         viewmodel.selectedItem = null
         viewmodel.deleteAddress(address)
-        Log.i("concac1", " o delete func ${viewmodel.selectedItem }")
-        viewmodel.getAddress()
 
 //        SimpleCustomSnackbar.make(
 //            binding.root,

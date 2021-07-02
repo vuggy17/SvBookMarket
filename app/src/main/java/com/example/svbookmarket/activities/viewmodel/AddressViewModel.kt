@@ -52,12 +52,11 @@ class AddressViewModel @Inject constructor(
                 if (addressItem.chose) {
                     selectedItem = addressItem
                 }
-
-                // if there is no selected item, set selected item to default position(0)
-                if(selectedItem == null && addressList.size > 0){
-                    selectedItem = addressList[DEFAULT_ADDRESS_POS]
-                    setSelectStateToTrue(selectedItem!!)
-                }
+            }
+            // if there is no selected item, set selected item to default position(0)
+            if(selectedItem == null && addressList.size > 0){
+                selectedItem = addressList[DEFAULT_ADDRESS_POS]
+                setSelectStateToTrue(selectedItem!!)
             }
             _address.value = addressList
         }

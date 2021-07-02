@@ -144,7 +144,7 @@ class MyViewPagerAdapter(
         private fun computeTextColor(): Int {
             setDominantColor()
             // use dominant color to compute color
-            return if (this.dominantColor.luminance > 0.5) Color.BLACK else Color.WHITE
+            return if (this.dominantColor.luminance > 0.5) Color.WHITE else Color.BLACK
         }
 
         private fun setDominantColor() {
