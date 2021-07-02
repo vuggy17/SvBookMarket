@@ -37,7 +37,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
 
     val viewModel: HomeViewModel by viewModels()
 
-    private var adsAdapter = AdvertiseAdapter(mutableListOf())
+//    private var adsAdapter = AdvertiseAdapter(mutableListOf())
     private var categoryAdapter = CategoryAdapter(mutableListOf(), this@HomeActivity)
     private var suggestAdapter = SuggestAdapter(mutableListOf(), this)
     private var moreAdapter = FeaturedAdapter(mutableListOf(), this)
@@ -53,7 +53,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
 
         // watch data change
         watchForDataChange()
-        setAdsAdapter()
+//        setAdsAdapter()
         setCategoryAdapter()
         setSuggestAdapter() // feature
         setMoreAdapter()
@@ -104,17 +104,17 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
         }
     }
 
-    private fun setAdsAdapter() {
-        viewModel.ads.observe(this, Observer { newAds ->
-            binding.advertise.apply {
-                adapter = AdvertiseAdapter(newAds)
-                addItemDecoration(MarginItemDecoration(spaceSize = 24, isHorizontalLayout = true))
-
-                LinearSnapHelper().attachToRecyclerView(this)
-            }
-        })
-
-    }
+//    private fun setAdsAdapter() {
+//        viewModel.ads.observe(this, Observer { newAds ->
+//            binding.advertise.apply {
+//                adapter = AdvertiseAdapter(newAds)
+//                addItemDecoration(MarginItemDecoration(spaceSize = 24, isHorizontalLayout = true))
+//
+//                LinearSnapHelper().attachToRecyclerView(this)
+//            }
+//        })
+//
+//    }
 
     private fun setCategoryAdapter() {
         viewModel.category.observe(this, Observer { newCategory ->
