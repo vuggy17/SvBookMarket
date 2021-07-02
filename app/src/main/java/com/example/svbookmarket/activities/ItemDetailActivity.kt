@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -52,7 +53,7 @@ class ItemDetailActivity : AppCompatActivity() {
     }
 
 
-    private fun startIntent(type: String) {
+    private fun goToCart() {
         val intent = Intent(this, CartActivity::class.java)
         startActivity(intent)
     }
@@ -64,7 +65,7 @@ class ItemDetailActivity : AppCompatActivity() {
     fun setupOnlickListener() {
         binding.idBuy.setOnClickListener {
             addItemToCart()
-            startIntent("buy")
+            goToCart()
         }
         binding.idAddCart.setOnClickListener { addItemToCart() }
         binding.idBack.setOnClickListener { onBackPressed() }

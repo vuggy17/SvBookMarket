@@ -1,19 +1,14 @@
 package com.example.svbookmarket.activities
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.widget.ImageView
-import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import androidx.core.view.marginTop
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,23 +17,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.*
-import com.example.svbookmarket.activities.animation.TranslateAnimationUtil
 import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.common.Constants.ACTIVITY
 import com.example.svbookmarket.activities.common.Constants.ACTIVITY.*
 import com.example.svbookmarket.activities.common.Constants.ITEM
 import com.example.svbookmarket.activities.common.MarginItemDecoration
-import com.example.svbookmarket.activities.common.RecyclerViewItemMargin
-import com.example.svbookmarket.activities.data.DataSource
 import com.example.svbookmarket.activities.data.Response.*
 import com.example.svbookmarket.activities.model.Book
 import com.example.svbookmarket.activities.viewmodel.HomeViewModel
 import com.example.svbookmarket.databinding.ActivityHomeBinding
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
-import io.grpc.InternalChannelz.id
-import java.lang.Thread.sleep
 
 
 @AndroidEntryPoint
@@ -71,14 +60,14 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
         setupNavigation()
         setUpBottomNavigationView()
 
-       binding.nestedScrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-           if(scrollY - oldScrollY >0){
-               binding.bottomNavigation.visibility = View.GONE
+        binding.nestedScrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            if (scrollY - oldScrollY > 0) {
+                binding.bottomNavigation.visibility = View.GONE
 
-           }else{
-               binding.bottomNavigation.visibility = View.VISIBLE
-           }
-       }
+            } else {
+                binding.bottomNavigation.visibility = View.VISIBLE
+            }
+        }
 
 
     }
@@ -87,8 +76,12 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
         viewModel.getBookFrom().observe(this, { changes ->
             // filter theo so luot mua
             val b = changes.toList().sortedByDescending { it.rate }
-            val top15 = b.take(15)
-            val rest = b.drop(15)
+//            disable for test
+//            val top15 = b.take(15)
+//            val rest = b.drop(15)
+
+            val top15 = b
+            val rest = b
 
             suggestAdapter.addBooks(top15)
             moreAdapter.addBooks(rest)
@@ -110,6 +103,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
 
         }
     }
+
     private fun setAdsAdapter() {
         viewModel.ads.observe(this, Observer { newAds ->
             binding.advertise.apply {
@@ -180,7 +174,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
     /**
      * put single book into intent
      */
-    private fun putBookIntoIntent(item:Book):Intent{
+    private fun putBookIntoIntent(item: Book): Intent {
         val bundle = Bundle()
         bundle.putParcelable(ITEM, item)
         val i = Intent(this, ItemDetailActivity::class.java)
@@ -247,28 +241,39 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
 
         Handler().postDelayed(Runnable { isBackPressedOnce = false }, 2000)
     }
-    private fun setUpBottomNavigationView(){
 
-        binding.bottomNavigation.add(MeowBottomNavigation.Model(id= 1, R.drawable.ic_baseline_person_24))
-        binding.bottomNavigation.add(MeowBottomNavigation.Model(id= 2, R.drawable.ic_home))
-        binding.bottomNavigation.add(MeowBottomNavigation.Model(id= 3, R.drawable.ic_baseline_shopping_cart_24))
-        binding.bottomNavigation.setCount( id=3, "3")
-        binding.bottomNavigation.show(id = 2,   true)
+    private fun setUpBottomNavigationView() {
+
+        binding.bottomNavigation.add(
+            MeowBottomNavigation.Model(
+                id = 1,
+                R.drawable.ic_baseline_person_24
+            )
+        )
+        binding.bottomNavigation.add(MeowBottomNavigation.Model(id = 2, R.drawable.ic_home))
+        binding.bottomNavigation.add(
+            MeowBottomNavigation.Model(
+                id = 3,
+                R.drawable.ic_baseline_shopping_cart_24
+            )
+        )
+        binding.bottomNavigation.setCount(id = 3, "3")
+        binding.bottomNavigation.show(id = 2, true)
         binding.bottomNavigation.setOnClickMenuListener {
-            if(it.id ==3){
+            if (it.id == 3) {
                 startIntent(Constants.ACTIVITY.CART)
             }
-            if(it.id ==1){
+            if (it.id == 1) {
                 startIntent(Constants.ACTIVITY.PROFILE)
 
             }
 
         }
         binding.bottomNavigation.setOnShowListener {
-            if(it.id ==3){
-               binding.bottomNavigation.show(2, true)
+            if (it.id == 3) {
+                binding.bottomNavigation.show(2, true)
             }
-            if(it.id ==1){
+            if (it.id == 1) {
                 binding.bottomNavigation.show(2, true)
             }
         }
