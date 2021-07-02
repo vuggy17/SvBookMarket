@@ -77,7 +77,6 @@
                         android:layout_height="match_parent">
                         <ImageView
                             android:id="@+id/c_art_i"
-
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:foreground="@color/dark_tint"
