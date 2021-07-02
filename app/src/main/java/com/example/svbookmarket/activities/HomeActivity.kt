@@ -246,10 +246,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
 
     private fun setCountOfBottomMeow() {
         viewModel.getCart(AppUtil.currentAccount).observe(this, Observer { change ->
-
             binding.bottomNavigation.setCount(id = 3, change.size.toString())
-
-
         })
     }
 
