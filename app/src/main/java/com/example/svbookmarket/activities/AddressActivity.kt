@@ -50,17 +50,7 @@ class AddressActivity : AppCompatActivity(), OnCreateAddressListener, OnEditAddr
 
         // show add address form listener
         newAddressBtn.setOnClickListener {
-//            showAddNewAddressDialog()
-
-            val test = UserDeliverAddress(
-                "",
-                "Khuong Duy ${Random.nextInt(10)}",
-                "0869256174",
-                "Lam Son, Cam Thanh Bac",
-                "Cam Lam",
-                "Khanh Hoa"
-            )
-            onCreateAddress(test)
+            showAddNewAddressDialog()
         }
 
 
