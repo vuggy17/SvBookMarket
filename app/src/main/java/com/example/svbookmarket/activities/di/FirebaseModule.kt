@@ -14,10 +14,6 @@ import javax.inject.Named
 @Module
 @InstallIn(SingletonComponent::class)
 object FirebaseModule {
-//    @Provides
-//    fun provideFirebaseAuthInstance(): FirebaseAuth {
-//        return FirebaseAuth.getInstance()
-//    }
 
     @Provides
     fun provideFirebaseFirestore(): FirebaseFirestore {

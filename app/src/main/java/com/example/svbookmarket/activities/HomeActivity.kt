@@ -77,11 +77,8 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
             // filter theo so luot mua
             val b = changes.toList().sortedByDescending { it.rate }
 //            disable for test
-//            val top15 = b.take(15)
-//            val rest = b.drop(15)
-
-            val top15 = b
-            val rest = b
+            val top15 = b.take(15)
+            val rest = b.drop(15)
 
             suggestAdapter.addBooks(top15)
             moreAdapter.addBooks(rest)
