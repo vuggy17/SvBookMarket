@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.adapter.*
+import com.example.svbookmarket.activities.common.AppUtil
 import com.example.svbookmarket.activities.common.Constants
 import com.example.svbookmarket.activities.common.Constants.ACTIVITY
 import com.example.svbookmarket.activities.common.Constants.ACTIVITY.*
@@ -37,7 +38,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
 
     val viewModel: HomeViewModel by viewModels()
 
-    private var adsAdapter = AdvertiseAdapter(mutableListOf())
+    //    private var adsAdapter = AdvertiseAdapter(mutableListOf())
     private var categoryAdapter = CategoryAdapter(mutableListOf(), this@HomeActivity)
     private var suggestAdapter = SuggestAdapter(mutableListOf(), this)
     private var moreAdapter = FeaturedAdapter(mutableListOf(), this)
@@ -53,7 +54,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
 
         // watch data change
         watchForDataChange()
-        setAdsAdapter()
+//        setAdsAdapter()
         setCategoryAdapter()
         setSuggestAdapter() // feature
         setMoreAdapter()
@@ -71,6 +72,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
 
 
     }
+
 
     private fun watchForDataChange() {
         viewModel.getBookFrom().observe(this, { changes ->
@@ -101,17 +103,17 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
         }
     }
 
-    private fun setAdsAdapter() {
-        viewModel.ads.observe(this, Observer { newAds ->
-            binding.advertise.apply {
-                adapter = AdvertiseAdapter(newAds)
-                addItemDecoration(MarginItemDecoration(spaceSize = 24, isHorizontalLayout = true))
-
-                LinearSnapHelper().attachToRecyclerView(this)
-            }
-        })
-
-    }
+//    private fun setAdsAdapter() {
+//        viewModel.ads.observe(this, Observer { newAds ->
+//            binding.advertise.apply {
+//                adapter = AdvertiseAdapter(newAds)
+//                addItemDecoration(MarginItemDecoration(spaceSize = 24, isHorizontalLayout = true))
+//
+//                LinearSnapHelper().attachToRecyclerView(this)
+//            }
+//        })
+//
+//    }
 
     private fun setCategoryAdapter() {
         viewModel.category.observe(this, Observer { newCategory ->
@@ -239,6 +241,12 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
         Handler().postDelayed(Runnable { isBackPressedOnce = false }, 2000)
     }
 
+    private fun setCountOfBottomMeow() {
+        viewModel.getCart(AppUtil.currentAccount).observe(this, Observer { change ->
+            binding.bottomNavigation.setCount(id = 3, change.size.toString())
+        })
+    }
+
     private fun setUpBottomNavigationView() {
 
         binding.bottomNavigation.add(
@@ -254,7 +262,7 @@ class HomeActivity : AppCompatActivity(), FeaturedAdapter.OnBookClickLitener,
                 R.drawable.ic_baseline_shopping_cart_24
             )
         )
-        binding.bottomNavigation.setCount(id = 3, "3")
+        setCountOfBottomMeow()
         binding.bottomNavigation.show(id = 2, true)
         binding.bottomNavigation.setOnClickMenuListener {
             if (it.id == 3) {

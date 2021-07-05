@@ -37,7 +37,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loginButton: Button
     private val TAG = "LOGIN"
 
-
     //init database reference
     private val db = Firebase.firestore
     private val dbAccountsReference = db.collection("accounts")
