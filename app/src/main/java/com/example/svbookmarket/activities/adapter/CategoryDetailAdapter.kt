@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions
 import com.example.svbookmarket.R
 import com.example.svbookmarket.activities.common.Constants.DEFAULT_IMG_PLACEHOLDER
 import com.example.svbookmarket.activities.model.Book
@@ -39,9 +40,11 @@ class CategoryDetailAdapter(
                 //load image from uri
                 Glide
                     .with(holder.itemView)
+                    .asBitmap()
                     .load(Image)
                     .centerCrop()
                     .placeholder(DEFAULT_IMG_PLACEHOLDER)
+                    .transition(BitmapTransitionOptions.withCrossFade())
                     .into(it.img);
 
                 //set up position touch listener
