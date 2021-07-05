@@ -84,12 +84,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Pham Minh Tan"
+                    android:ellipsize="end"
+                    android:maxLines="2"
                     android:textColor="@color/white"
                     android:textSize="25sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/userEmail"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="tan.lk16.cla@gmail.com"

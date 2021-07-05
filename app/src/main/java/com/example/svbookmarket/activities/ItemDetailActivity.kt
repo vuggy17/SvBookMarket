@@ -41,7 +41,7 @@ class ItemDetailActivity : AppCompatActivity() {
         value?.let {
             if (value.Name != "null") {
                 binding.idTitle.text = it.Name
-                binding.idPrice.text = it.Price.toString()
+                binding.idPrice.text = "${it.Price} đ"
                 binding.idAuthor.text = it.Author
                 binding.idRate.text = it.rate.toString()
                 binding.idDescription.text = it.Description
