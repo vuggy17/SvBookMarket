@@ -63,7 +63,6 @@ class SearchActivity : AppCompatActivity() {
         {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchBar.clearFocus()
-
                 if (query == null)
                 {
                     suggestSearch.visibility = View.INVISIBLE
@@ -92,7 +91,6 @@ class SearchActivity : AppCompatActivity() {
                 }
                 return false
             }
-
         })
         snipInDb()
     }
@@ -113,14 +111,17 @@ class SearchActivity : AppCompatActivity() {
                     Log.w(Constants.VMTAG, "Listen failed.", error)
                     return
                 }
-
                 adapter.clear()
+                dataset.clear()
                 for (i in 0 until FullBookList.getInstance().lstFullBook.size-1)
                 {
                     dataset.add(FullBookList.getInstance().lstFullBook[i].Name!!)
                     adapter.add(FullBookList.getInstance().lstFullBook[i].Name!!)
                 }
                 adapter.notifyDataSetChanged()
+                var newString: String = searchBar.query.toString()
+                searchBar.setQuery(searchBar.query.toString() + "a", false)
+                searchBar.setQuery(newString, false)
             }
         })
     }
